@@ -1,0 +1,18 @@
+# ── Generated output (rebuilt by build.py / render.py) ────────────────
+viewer.html
+shortcuts.json
+btt_export.json
+
+# ── Personal data — YOUR shortcuts. Never commit. ─────────────────────
+vscode_default_keybindings.json
+raycast_manual.json
+manual_globals.json
+
+# ── Compiled binary (rebuild from axmenudump.swift) ───────────────────
+axmenudump
+*.o
+
+# ── Python / macOS cruft ──────────────────────────────────────────────
+__pycache__/
+*.pyc
+.DS_Store

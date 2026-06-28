@@ -1,0 +1,6 @@
+{
+  "_comment": "App-registered OS-global hotkeys that no auto-collector can read (e.g. Google Drive desktop search). Copy this file to manual_globals.json and edit. combo: 'hyper+g', 'cmd+opt+g'. scope 'global' = works anywhere, or set an app name.",
+  "hotkeys": [
+    {"combo": "hyper+g", "action": "Google Drive desktop search", "scope": "global"}
+  ]
+}

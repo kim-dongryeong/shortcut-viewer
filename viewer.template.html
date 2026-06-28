@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ultimate Shortcut Viewer</title>
+<style>
+  :root{ --bg:#0f1115; --panel:#171a21; --line:#262b36; --txt:#e6e9ef; --dim:#8b93a3; --U:62px; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);font:14px/1.4 -apple-system,BlinkMacSystemFont,"SF Pro",Segoe UI,sans-serif}
+  header{padding:14px 20px;border-bottom:1px solid var(--line);display:flex;gap:18px;align-items:baseline;flex-wrap:wrap}
+  h1{font-size:16px;margin:0;font-weight:600}
+  .meta{color:var(--dim);font-size:12px}
+  .wrap{padding:18px 20px;max-width:1480px}
+  .controls{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+  .chip{padding:8px 13px;border:1px solid var(--line);border-radius:9px;background:var(--panel);cursor:pointer;user-select:none;font-size:15px}
+  .chip.on{background:#2563eb;border-color:#2563eb;color:#fff}
+  .chip.alt.on{background:#7c3aed;border-color:#7c3aed}
+  .chip.held{box-shadow:0 0 0 2px #22d3ee inset}
+  #ctxchips .chip{padding:5px 9px;font-size:12px}
+  #ctxchips .chip.on{background:#0d9488;border-color:#0d9488}
+  select,input,button{background:var(--panel);color:var(--txt);border:1px solid var(--line);border-radius:9px;padding:8px 11px;font-size:14px}
+  button{cursor:pointer}
+  button.on{background:#2563eb;border-color:#2563eb}
+  input{min-width:200px}
+  .combo{font-size:14px;color:var(--dim)}
+  .combo b{color:var(--txt)}
+  .hint{color:var(--dim);font-size:12px;margin:-2px 0 12px}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;margin:6px 0 14px;font-size:12px;color:var(--dim)}
+  .dot{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+  .kb{display:flex;align-items:flex-start;gap:28px;flex-wrap:wrap}
+  .kbmain{display:flex;flex-direction:column}
+  .kbright{display:flex;flex-direction:column}
+  .krow{display:flex;align-items:flex-start}
+  .cap{position:relative;height:54px;margin:3px;border:1px solid var(--line);border-radius:8px;background:var(--panel);
+       padding:4px 6px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;transition:transform .04s;flex:none}
+  .cap:hover{transform:translateY(-1px);border-color:#3a4252}
+  .cap .lab{font-size:10.5px;color:var(--dim);font-weight:700;white-space:nowrap}
+  .cap .cnt{position:absolute;top:3px;right:5px;font-size:9px;color:var(--dim)}
+  .cap .foot{display:flex;gap:3px;margin-top:2px;min-height:6px}
+  .cap .fdot{width:6px;height:6px;border-radius:2px}
+  .cap .act{font-size:9px;line-height:1.1;margin-top:auto;max-height:22px;overflow:hidden;color:#cdd3df}
+  .cap.taken{border-color:#3a4252}
+  .ov{font-size:8px;color:var(--dim);padding:0 3px;border-radius:4px;background:#222732;margin-left:2px}
+  .ov.dup{color:#f59e0b;background:#3a2a12}
+  .cap.busy:not(.taken){border-color:#33405e}
+  .cap.dim{opacity:.3}
+  .cap .bar{position:absolute;left:0;bottom:0;height:3px;width:100%}
+  .cap.mod{align-items:center;justify-content:center;color:var(--dim);background:#12151b}
+  .cap.mod.on{background:#2563eb;border-color:#2563eb;color:#fff}
+  .cap.mod.held{box-shadow:0 0 0 2px #22d3ee inset}
+  .cap.gap{border:none;background:none;cursor:default}
+  .cap.sel{border-color:#7dd3fc!important;box-shadow:0 0 0 2px #38bdf8, 0 0 16px rgba(56,189,248,.55);z-index:3;transform:translateY(-1px)}
+  .cap.sel .lab{color:#7dd3fc}
+  .cap.sel .act{color:#e6f6ff}
+  .arrows{display:flex;align-items:flex-end;margin-left:4px}
+  .updown{display:flex;flex-direction:column}
+  .sec{color:var(--dim);font-size:11px;text-transform:uppercase;letter-spacing:.06em;margin:16px 0 6px}
+  .panel{margin-top:18px;border-top:1px solid var(--line);padding-top:14px}
+  .row{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-bottom:1px solid var(--line)}
+  .row.hi{background:#0b2a45;box-shadow:inset 3px 0 0 #38bdf8;border-radius:4px}
+  .row .src{font-size:11px;padding:2px 7px;border-radius:6px;color:#0b0d11;font-weight:700;white-space:nowrap}
+  .row .kc{font-weight:700;white-space:nowrap;min-width:66px}
+  .row.hi .kc{color:#7dd3fc}
+  .row .scope{color:var(--dim);font-size:12px;white-space:nowrap}
+  .muted{color:var(--dim)}
+  #results .row,#overview .row{cursor:pointer}
+  #results .row:hover,#overview .row:hover{background:#1b1f28}
+  .empty{color:var(--dim);padding:14px 0}
+  .tip{position:fixed;z-index:60;background:#0b0d11;border:1px solid var(--line);border-radius:9px;padding:9px 11px;
+       max-width:360px;font-size:12px;pointer-events:none;box-shadow:0 10px 30px rgba(0,0,0,.55);display:none}
+  .tip .tl{display:flex;gap:8px;padding:2px 0}
+  .tip .tl b{min-width:58px;color:#cfe}
+  .grp{margin:10px 0 4px;font-weight:700}
+</style>
+</head>
+<body>
+<header>
+  <h1>⌨️ Ultimate Shortcut Viewer</h1>
+  <span class="meta" id="metaline"></span>
+</header>
+
+<div class="wrap">
+  <div class="controls">
+    <span id="modchips"></span>
+    <span class="chip alt" data-special="hyper">Hyper</span>
+    <span class="chip alt" data-special="meh">Meh</span>
+    <span class="meta" style="align-self:center">컨텍스트:</span><span id="ctxchips" style="display:inline-flex;flex-wrap:wrap;gap:5px"></span>
+    <select id="filtersel">
+      <option value="all">전체 표시</option>
+      <option value="taken">현재 레이어 점유만</option>
+      <option value="free">현재 레이어 빈 키만</option>
+    </select>
+    <input id="search" placeholder="검색: 동작/키/조합">
+    <button id="ovbtn">📋 전체 목록</button>
+  </div>
+  <div class="hint">키를 <b>물리적으로 hold</b> 하면 레이어 ON(놓으면 복귀) · 수식키 키캡/칩 클릭=고정 · 각 키 숫자=전 조합 수, 점=소스 ·
+    키 클릭→하단에 그 키의 <b>전 조합</b>, 수식키 누르면 해당 조합 <b style="color:#7dd3fc">하이라이트</b> · hover=미리보기 ·
+    <span id="comboline"></span></div>
+
+  <div class="legend" id="legend"></div>
+  <div class="kb" id="kb"></div>
+  <div id="extras"></div>
+
+  <div class="panel">
+    <div id="detail"><div class="empty">키를 클릭하면 그 키에 걸린 <b>모든 수식키 조합</b>이 여기에 표시되고, 수식키를 누르면 해당 조합이 강조됩니다.</div></div>
+    <div id="overview"></div>
+    <div id="results"></div>
+  </div>
+</div>
+<div class="tip" id="tip"></div>
+
+<script>
+const DB = /*__DATA__*/;
+const COLORS = {system:'#3b82f6','app menu':'#9ca3af','app config':'#14b8a6',Karabiner:'#22c55e',BTT:'#f59e0b',Raycast:'#a855f7'};
+const MODS = ['ctrl','opt','shift','cmd'];
+const MODSYM = {ctrl:'⌃',opt:'⌥',shift:'⇧',cmd:'⌘',fn:'🌐'};
+const U = 56;
+// physical-ish ANSI Mac layout. t:'key' = shortcut key, t:'mod' = modifier toggle, t:'gap' = spacer.
+const LAYOUT = [
+  [['key','Escape',1,'esc'],['gap',0,0.4],['key','F1',1],['key','F2',1],['key','F3',1],['key','F4',1],['gap',0,0.3],
+   ['key','F5',1],['key','F6',1],['key','F7',1],['key','F8',1],['gap',0,0.3],['key','F9',1],['key','F10',1],['key','F11',1],['key','F12',1]],
+  [['key','`',1],['key','1',1],['key','2',1],['key','3',1],['key','4',1],['key','5',1],['key','6',1],['key','7',1],['key','8',1],
+   ['key','9',1],['key','0',1],['key','-',1],['key','=',1],['key','Delete',2,'⌫ delete']],
+  [['key','Tab',1.5,'⇥ tab'],['key','Q',1],['key','W',1],['key','E',1],['key','R',1],['key','T',1],['key','Y',1],['key','U',1],
+   ['key','I',1],['key','O',1],['key','P',1],['key','[',1],['key',']',1],['key','\\',1.5]],
+  [['key','CapsLock',1.75,'⇪ caps'],['key','A',1],['key','S',1],['key','D',1],['key','F',1],['key','G',1],['key','H',1],['key','J',1],
+   ['key','K',1],['key','L',1],['key',';',1],['key',"'",1],['key','Return',2.25,'⏎ return']],
+  [['mod','shift',2.25,'⇧ shift'],['key','Z',1],['key','X',1],['key','C',1],['key','V',1],['key','B',1],['key','N',1],['key','M',1],
+   ['key',',',1],['key','.',1],['key','/',1],['mod','shift',2.75,'⇧ shift']],
+  [['mod','fn',1,'fn'],['mod','ctrl',1.1,'⌃ ctrl'],['mod','opt',1.1,'⌥ opt'],['mod','cmd',1.25,'⌘ cmd'],['key','Space',6.5,''],
+   ['mod','cmd',1.25,'⌘ cmd'],['mod','opt',1.1,'⌥ opt']],
+];
+const NAV = ['Home','End','PageUp','PageDown','ForwardDelete'];
+const FEXT = ['F13','F14','F15','F16','F17','F18','F19','F20'];
+
+let sticky=new Set(), held=new Set(), heldStr='', ctxSet=new Set(['Global']), filter='all', eff=new Set(), overview=false, selectedKey=null;
+
+function recompute(){ eff=new Set([...sticky,...held]); }
+function sameSet(arr,set){ if(arr.length!==set.size) return false; for(const m of arr) if(!set.has(m)) return false; return true; }
+function inCtx(e){ return (e.scope==='global' && ctxSet.has('Global')) || ctxSet.has(e.scope) || ctxSet.has(e.group) || (ctxSet.has('BTT (전체)') && e.source==='BTT'); }
+function keyAll(key){ return DB.entries.filter(e=>e.key===key && inCtx(e)); }
+function matchEff(key){ return keyAll(key).filter(e=>sameSet(e.mods,eff)); }
+function comboSym(mods){ return [...MODS,'fn'].filter(m=>mods.includes(m)).map(m=>MODSYM[m]).join(''); }
+function effSym(){ return [...MODS,'fn'].filter(m=>eff.has(m)).map(m=>MODSYM[m]).join(''); }
+
+function renderMeta(){
+  const c=DB.meta.counts;
+  document.getElementById('metaline').textContent =
+    `생성 ${DB.meta.generated} · 총 ${DB.meta.total}개 · `+Object.entries(c).map(([k,v])=>`${k} ${v}`).join(' · ');
+  document.getElementById('legend').innerHTML = Object.entries(COLORS)
+    .map(([k,v])=>`<span><span class="dot" style="background:${v}"></span>${k}</span>`).join('')
+    + `<span><span class="dot" style="background:#f59e0b"></span>같은 컨텍스트 겹침(+N)</span>`;
+}
+function renderChips(){
+  document.getElementById('modchips').innerHTML = ['ctrl','opt','shift','cmd','fn'].map(m=>`<span class="chip" data-mod="${m}">${MODSYM[m]} ${m}</span>`).join('');
+  document.querySelectorAll('[data-mod]').forEach(el=>el.onclick=()=>toggleMod(el.dataset.mod));
+  document.querySelectorAll('[data-special]').forEach(el=>el.onclick=()=>{
+    const set=el.dataset.special==='hyper'?['ctrl','opt','shift','cmd']:['ctrl','opt','shift'];
+    const all=set.every(m=>sticky.has(m)); set.forEach(m=>all?sticky.delete(m):sticky.add(m)); sync();
+  });
+}
+function toggleMod(m){ sticky.has(m)?sticky.delete(m):sticky.add(m); sync(); }
+function renderCtx(){
+  document.getElementById('ctxchips').innerHTML=['Global',...DB.meta.apps,'BTT (전체)',...(DB.meta.bttgroups||[])].map(a=>`<span class="chip" data-ctx="${a.replace(/"/g,'&quot;')}">${a}</span>`).join('');
+  document.querySelectorAll('[data-ctx]').forEach(el=>el.onclick=()=>{ const c=el.dataset.ctx; ctxSet.has(c)?ctxSet.delete(c):ctxSet.add(c); sync(); });
+  document.getElementById('filtersel').onchange=e=>{ filter=e.target.value; sync(); };
+  document.getElementById('ovbtn').onclick=()=>{ overview=!overview; document.getElementById('ovbtn').classList.toggle('on',overview); sync(); };
+}
+
+function widthPx(w){ return (w*U-6)+'px'; }
+function buildCap(spec){
+  const [t,k,w,label]=spec;
+  if(t==='gap'){ const g=document.createElement('div'); g.className='cap gap'; g.style.width=widthPx(w); return g; }
+  if(t==='mod'){
+    const el=document.createElement('div'); el.className='cap mod'; el.style.width=widthPx(w);
+    el.innerHTML=`<div class="lab">${label}</div>`;
+    el.classList.toggle('on',eff.has(k)); el.classList.toggle('held',held.has(k)&&!sticky.has(k));
+    el.onclick=()=>toggleMod(k); return el;
+  }
+  return cellKey(k,label!==undefined?label:k,widthPx(w));
+}
+function cellKey(key,label,wpx){
+  const all=keyAll(key), ms=matchEff(key);
+  const el=document.createElement('div'); el.className='cap'; el.style.width=wpx;
+  let h=`<div class="lab">${label.replace(/</g,'&lt;')}</div>`;
+  if(all.length) h+=`<span class="cnt">${all.length}</span>`;
+  const srcs=[...new Set(all.map(e=>e.source))];
+  h+=`<div class="foot">`+srcs.map(s=>`<span class="fdot" style="background:${COLORS[s]||'#666'}"></span>`).join('')+`</div>`;
+  if(all.length) el.classList.add('busy');
+  if(ms.length){
+    el.classList.add('taken');
+    const scc={}; ms.forEach(m=>scc[m.scope]=(scc[m.scope]||0)+1);
+    const dup=Object.values(scc).some(v=>v>=2);
+    h+=`<div class="act">${ms[0].action.replace(/</g,'&lt;')}`+(ms.length>1?` <span class="ov${dup?' dup':''}">+${ms.length-1}</span>`:``)+`</div>`;
+    h+=`<div class="bar" style="background:${COLORS[ms[0].source]||'#666'}"></div>`;
+    if(filter==='free') el.classList.add('dim');
+  } else { h+=`<div class="act muted">·</div>`; if(filter==='taken') el.classList.add('dim'); }
+  if(key===selectedKey) el.classList.add('sel');
+  el.innerHTML=h;
+  el.onclick=()=>{ selectedKey=key; sync(); };
+  el.onmouseenter=ev=>showTip(ev,key,all); el.onmousemove=moveTip; el.onmouseleave=hideTip;
+  return el;
+}
+function arrowsCluster(){
+  const wrap=document.createElement('div'); wrap.style.marginTop='20px';
+  const top=document.createElement('div'); top.className='krow';
+  const usp=document.createElement('div'); usp.className='cap gap'; usp.style.width=widthPx(1); top.appendChild(usp);
+  top.appendChild(cellKey('Up','▲',widthPx(1)));
+  const bot=document.createElement('div'); bot.className='krow';
+  bot.appendChild(cellKey('Left','◀',widthPx(1)));
+  bot.appendChild(cellKey('Down','▼',widthPx(1)));
+  bot.appendChild(cellKey('Right','▶',widthPx(1)));
+  wrap.appendChild(top); wrap.appendChild(bot);
+  return wrap;
+}
+function navBlock(){
+  const wrap=document.createElement('div'); wrap.style.marginTop='12px';
+  const r1=document.createElement('div'); r1.className='krow';
+  const sp=document.createElement('div'); sp.className='cap gap'; sp.style.width=widthPx(1.1); r1.appendChild(sp);
+  r1.appendChild(cellKey('Home','Home',widthPx(1.3)));
+  r1.appendChild(cellKey('PageUp','PgUp',widthPx(1.3)));
+  const r2=document.createElement('div'); r2.className='krow';
+  r2.appendChild(cellKey('ForwardDelete','⌦',widthPx(1.1)));
+  r2.appendChild(cellKey('End','End',widthPx(1.3)));
+  r2.appendChild(cellKey('PageDown','PgDn',widthPx(1.3)));
+  wrap.appendChild(r1); wrap.appendChild(r2);
+  return wrap;
+}
+function renderKB(){
+  const kb=document.getElementById('kb'); kb.innerHTML='';
+  const main=document.createElement('div'); main.className='kbmain';
+  LAYOUT.forEach(row=>{ const d=document.createElement('div'); d.className='krow'; row.forEach(s=>d.appendChild(buildCap(s))); main.appendChild(d); });
+  kb.appendChild(main);
+  const right=document.createElement('div'); right.className='kbright';
+  const fr=document.createElement('div'); fr.className='krow'; FEXT.forEach(k=>fr.appendChild(cellKey(k,k,widthPx(1)))); right.appendChild(fr);
+  right.appendChild(navBlock());
+  right.appendChild(arrowsCluster());
+  kb.appendChild(right);
+  document.getElementById('extras').innerHTML='';
+}
+
+const tip=document.getElementById('tip');
+function showTip(ev,key,all){
+  if(!all.length){ hideTip(); return; }
+  const sorted=[...all].sort((a,b)=>a.mods.length-b.mods.length);
+  tip.innerHTML=`<div style="margin-bottom:4px"><b>${key}</b> · ${all.length}개</div>`+
+    sorted.map(e=>`<div class="tl"><b>${comboSym(e.mods)}${key}</b><span style="color:${COLORS[e.source]||'#999'}">${e.source}</span><span>${e.action.replace(/</g,'&lt;')}</span></div>`).join('');
+  tip.style.display='block'; moveTip(ev);
+}
+function moveTip(ev){ tip.style.left=Math.min(ev.clientX+14,innerWidth-370)+'px'; tip.style.top=Math.min(ev.clientY+14,innerHeight-tip.offsetHeight-10)+'px'; }
+function hideTip(){ tip.style.display='none'; }
+
+function rowHTML(e,hi){
+  return `<div class="row${hi?' hi':''}"><span class="src" style="background:${COLORS[e.source]||'#666'}">${e.source}</span>`+
+    `<span class="kc">${comboSym(e.mods)}${e.key}</span>`+
+    `<div style="flex:1"><div>${e.action.replace(/</g,'&lt;')}</div>`+
+    `<div class="muted" style="font-size:11px">${(e.detail||'').replace(/</g,'&lt;')}</div></div>`+
+    `<span class="scope">${e.scope}</span></div>`;
+}
+function allModSubsets(){
+  const M=['ctrl','opt','shift','cmd']; const out=[[]];
+  for(let mask=1; mask<16; mask++){ const s=[]; for(let i=0;i<4;i++) if(mask&(1<<i)) s.push(M[i]); out.push(s); }
+  out.sort((a,b)=> a.length-b.length || a.join().localeCompare(b.join()));
+  return out;
+}
+function showDetail(key){
+  const all=keyAll(key), d=document.getElementById('detail');
+  const byCombo={};
+  all.forEach(e=>{ const k=[...e.mods].sort().join(','); (byCombo[k]=byCombo[k]||[]).push(e); });
+  let rows='';
+  for(const mods of allModSubsets()){
+    const k=[...mods].sort().join(','), hit=sameSet(mods,eff), matches=byCombo[k]||[];
+    if(matches.length){ rows+=matches.map(e=>rowHTML(e,hit)).join(''); }
+    else { rows+=`<div class="row${hit?' hi':''}"><span class="src" style="background:#1b2430;color:var(--dim)">빈칸</span>`+
+      `<span class="kc">${comboSym(mods)||'(무수식)'}${key}</span>`+
+      `<div style="flex:1" class="muted">— 비어 있음 (할당 가능)</div><span class="scope muted">free</span></div>`; }
+    delete byCombo[k];
+  }
+  const extra=Object.values(byCombo).flat();
+  const extraHTML = extra.length ? `<div class="grp">기타(fn 등 포함)</div>`+
+    extra.sort((a,b)=>a.mods.length-b.mods.length).map(e=>rowHTML(e,sameSet(e.mods,eff))).join('') : '';
+  d.innerHTML=`<div style="margin-bottom:6px"><b>${key}</b> 키 · 수식키 조합 16개 전부 (현재 레이어 <b style="color:#7dd3fc">${effSym()||'(무수식)'}</b> 강조) · 점유 ${all.length}개</div>`+rows+extraHTML;
+}
+function renderOverview(){
+  const o=document.getElementById('overview');
+  if(!overview){ o.innerHTML=''; return; }
+  const ent=DB.entries.filter(inCtx).slice().sort((a,b)=>a.key.localeCompare(b.key)||a.mods.length-b.mods.length);
+  const byKey={}; ent.forEach(e=>{(byKey[e.key]=byKey[e.key]||[]).push(e);});
+  o.innerHTML=`<div class="sec">전체 목록 — ${[...ctxSet].join(', ')||'(없음)'} · ${ent.length}개</div>`+
+    Object.keys(byKey).map(k=>`<div class="grp">${k}</div>`+byKey[k].map(e=>rowHTML(e,sameSet(e.mods,eff))).join('')).join('');
+  o.querySelectorAll('.row').forEach((el,i)=>el.onclick=()=>jumpTo(ent[i]));
+}
+function renderSearch(q){
+  const r=document.getElementById('results');
+  if(!q){ r.innerHTML=''; return; }
+  const ql=q.toLowerCase(), combo=parseQueryCombo(q);
+  const hits=DB.entries.filter(e=>combo?(e.key.toLowerCase()===combo.key.toLowerCase()&&sameSet(e.mods,new Set(combo.mods))):(e.action.toLowerCase().includes(ql)||e.key.toLowerCase()===ql)).slice(0,100);
+  r.innerHTML=`<div class="sec">검색결과 ${hits.length}</div>`+hits.map(e=>rowHTML(e,false)).join('');
+  r.querySelectorAll('.row').forEach((el,i)=>el.onclick=()=>jumpTo(hits[i]));
+}
+function parseQueryCombo(q){
+  const p=q.replace(/\s/g,'').split('+').filter(Boolean); if(p.length<2) return null;
+  const map={cmd:'cmd','⌘':'cmd',command:'cmd',opt:'opt',option:'opt',alt:'opt','⌥':'opt',ctrl:'ctrl',control:'ctrl','⌃':'ctrl',shift:'shift','⇧':'shift',hyper:'HYPER',meh:'MEH'};
+  let mods=[]; for(const m of p.slice(0,-1)){const v=map[m.toLowerCase()];if(v==='HYPER')mods.push('ctrl','opt','shift','cmd');else if(v==='MEH')mods.push('ctrl','opt','shift');else if(v)mods.push(v);}
+  let key=p[p.length-1]; key=key.length===1?key.toUpperCase():(key.charAt(0).toUpperCase()+key.slice(1));
+  return {mods:[...new Set(mods)],key};
+}
+function jumpTo(e){
+  sticky=new Set(e.mods); held=new Set(); selectedKey=e.key;
+  ctxSet=new Set(['Global', e.scope==='global'?'Global':e.scope]);
+  sync(); window.scrollTo({top:0,behavior:'smooth'});
+}
+function sync(){
+  recompute();
+  document.querySelectorAll('[data-mod]').forEach(el=>{el.classList.toggle('on',eff.has(el.dataset.mod));el.classList.toggle('held',held.has(el.dataset.mod)&&!sticky.has(el.dataset.mod));});
+  document.querySelectorAll('[data-special]').forEach(el=>{const set=el.dataset.special==='hyper'?['ctrl','opt','shift','cmd']:['ctrl','opt','shift'];el.classList.toggle('on',set.every(m=>eff.has(m)));});
+  document.querySelectorAll('[data-ctx]').forEach(el=>el.classList.toggle('on',ctxSet.has(el.dataset.ctx)));
+  document.getElementById('comboline').innerHTML = eff.size? `현재: <b>${effSym()}</b>` : `수식키 없음`;
+  renderKB(); renderOverview();
+  if(selectedKey) showDetail(selectedKey);
+}
+function readHeld(e){ const h=new Set(); if(e.metaKey)h.add('cmd'); if(e.ctrlKey)h.add('ctrl'); if(e.altKey)h.add('opt'); if(e.shiftKey)h.add('shift'); return h; }
+const CODEMAP={Backquote:'`',Minus:'-',Equal:'=',BracketLeft:'[',BracketRight:']',Semicolon:';',Quote:"'",Comma:',',Period:'.',Slash:'/',Space:'Space',Enter:'Return',Tab:'Tab',Escape:'Escape',Backspace:'Delete',Delete:'ForwardDelete',ArrowLeft:'Left',ArrowRight:'Right',ArrowUp:'Up',ArrowDown:'Down',Home:'Home',End:'End',PageUp:'PageUp',PageDown:'PageDown',CapsLock:'CapsLock'};
+function codeToKey(code){ if(!code)return null; if(code==='Backslash')return String.fromCharCode(92); if(code.startsWith('Key'))return code.slice(3); if(code.startsWith('Digit'))return code.slice(5); if(code[0]==='F'&&code.length<=3&&!isNaN(parseInt(code.slice(1),10)))return code; return CODEMAP[code]||null; }
+document.addEventListener('keydown',e=>{ if(e.target.tagName==='INPUT')return; const h=readHeld(e); const s=[...h].sort().join(); const mapped=codeToKey(e.code); let changed=false; if(s!==heldStr){heldStr=s;held=h;changed=true;} if(mapped){ e.preventDefault(); if(mapped!==selectedKey){selectedKey=mapped;changed=true;} } if(changed) sync(); });
+document.addEventListener('keyup',e=>{ const h=readHeld(e); const s=[...h].sort().join(); if(s!==heldStr){heldStr=s;held=h;sync();} });
+window.addEventListener('blur',()=>{ if(heldStr){heldStr='';held=new Set();sync();} });
+
+renderMeta(); renderChips(); renderCtx(); sync();
+document.getElementById('search').oninput=e=>renderSearch(e.target.value.trim());
+</script>
+</body>
+</html>

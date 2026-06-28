@@ -1,0 +1,6 @@
+{
+  "_comment": "Raycast's local DB is encrypted, so list your Raycast hotkeys here by hand. Copy this file to raycast_manual.json and edit. combo examples: 'opt+space', 'cmd+shift+k', 'hyper+j'.",
+  "hotkeys": [
+    {"combo": "opt+space", "action": "Open Raycast"}
+  ]
+}
