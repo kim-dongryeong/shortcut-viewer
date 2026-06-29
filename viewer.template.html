@@ -59,10 +59,11 @@
   .panel{margin-top:18px;border-top:1px solid var(--line);padding-top:14px}
   .row{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-bottom:1px solid var(--line)}
   .row.hi{background:#0b2a45;box-shadow:inset 3px 0 0 #38bdf8;border-radius:4px}
-  .row .src{font-size:11px;padding:2px 7px;border-radius:6px;color:#0b0d11;font-weight:700;white-space:nowrap}
+  .row .src,.drow .src{font-size:11px;padding:2px 7px;border-radius:6px;color:#0b0d11;font-weight:700;white-space:nowrap}
+  .dent+.dent{margin-top:4px}
   .row .kc{font-weight:700;white-space:nowrap;min-width:66px}
   .row.hi .kc{color:#7dd3fc}
-  .row .scope{color:var(--dim);font-size:12px;white-space:nowrap}
+  .row .scope,.drow .scope{color:var(--dim);font-size:12px;white-space:nowrap}
   .muted{color:var(--dim)}
   #results .row,#overview .row{cursor:pointer}
   #results .row:hover,#overview .row:hover{background:#1b1f28}
@@ -73,6 +74,11 @@
   .tip .tl b{min-width:58px;color:#cfe}
   .grp{margin:10px 0 4px;font-weight:700}
   .annm{position:absolute;top:3px;right:17px;font-size:9px;line-height:1}
+  .chord{color:#7dd3fc;font-weight:700;white-space:nowrap}
+  .chordm{font-size:8px;color:#7dd3fc;font-weight:700;margin-left:auto}
+  .chordbtn{font-size:11px;padding:2px 7px;border:1px solid #38bdf8;border-radius:6px;background:#0b2a45;color:#7dd3fc;cursor:pointer;font-weight:700;white-space:nowrap}
+  #chordbar{background:#0b2a45;border:1px solid #38bdf8;border-radius:9px;padding:10px 14px;margin:8px 0;color:#cfe;font-size:14px}
+  #chordbar .x{text-decoration:underline;cursor:pointer;color:#7dd3fc;font-weight:700}
   .drow{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-bottom:1px solid var(--line)}
   .drow.hi{background:#0b2a45;box-shadow:inset 3px 0 0 #38bdf8;border-radius:4px}
   .drow .kc{font-weight:700;white-space:nowrap;min-width:62px}
@@ -104,6 +110,7 @@
     <input id="search" placeholder="검색: 동작/키/조합">
     <button id="ovbtn">📋 전체 목록</button>
     <button id="favview">⭐ 즐겨찾기</button>
+    <button id="scopepos" title="상세 패널에서 스코프(global/chrome 등) 위치를 오른쪽 ⇄ 왼쪽으로 토글">스코프 ⇄</button>
     <button id="annexport" title="즐겨찾기·노트 파일로 내보내기">⬇︎</button>
     <label class="impbtn" title="즐겨찾기·노트 가져오기">⬆︎<input id="annimport" type="file" accept="application/json" style="display:none"></label>
   </div>
@@ -112,6 +119,7 @@
     <span id="comboline"></span></div>
 
   <div class="legend" id="legend"></div>
+  <div id="chordbar" style="display:none"></div>
   <div class="kb" id="kb"></div>
   <div id="extras"></div>
 
@@ -131,6 +139,7 @@ try { const base=DB.ann||{}; Object.assign(ANN.fav, base.fav||{}); Object.assign
 try { const s=JSON.parse(localStorage.getItem('SVann')||'null'); if(s){ Object.assign(ANN.fav,s.fav||{}); Object.assign(ANN.note,s.note||{}); } } catch(e){}  // live localStorage overlay
 function saveAnn(){ try { localStorage.setItem('SVann', JSON.stringify(ANN)); } catch(e){} }
 function annKey(mods, key){ return [...mods].sort().join('+') + '|' + key; }
+let prefScopeRight = localStorage.getItem('SVscopeRight')!=='0';  // 상세 패널 스코프(global/chrome 등) 위치: 오른쪽 정렬(기본) vs 왼쪽 인라인
 const COLORS = {system:'#3b82f6','app menu':'#9ca3af','app config':'#14b8a6',Karabiner:'#22c55e',BTT:'#f59e0b',Raycast:'#a855f7'};
 const MODS = ['ctrl','opt','shift','cmd'];
 const MODSYM = {ctrl:'⌃',opt:'⌥',shift:'⇧',cmd:'⌘',fn:'🌐'};
@@ -154,13 +163,22 @@ const NAV = ['Home','End','PageUp','PageDown','ForwardDelete'];
 const FEXT = ['F13','F14','F15','F16','F17','F18','F19','F20'];
 
 let sticky=new Set(), held=new Set(), heldStr='', ctxSet=new Set(['Global']), filter='all', eff=new Set(), overview=false, selectedKey=null;
+let chordPrefix=null, chordReturn=null, CUR=null;   // which-key(연속) 모드: chordPrefix={mods,key}면 그리드가 그 prefix의 후속(2nd) 키 집합으로 바뀐다
 
-function recompute(){ eff=new Set([...sticky,...held]); }
+function recompute(){
+  eff=new Set([...sticky,...held]);
+  CUR = chordPrefix
+    ? DB.entries.filter(e=> e.ckey && e.key===chordPrefix.key && sameSet(e.mods,new Set(chordPrefix.mods)) && inCtx(e))
+                .map(e=>({mods:e.cmods||[], key:e.ckey, action:e.action, source:e.source, scope:e.scope, detail:e.detail}))  // 후속 누름을 일반 엔트리처럼 리매핑 → 그리드/상세 로직 재사용
+    : DB.entries.filter(inCtx);
+}
 function sameSet(arr,set){ if(arr.length!==set.size) return false; for(const m of arr) if(!set.has(m)) return false; return true; }
 function inCtx(e){ return (e.scope==='global' && ctxSet.has('Global')) || ctxSet.has(e.scope) || ctxSet.has(e.group) || (ctxSet.has('BTT (전체)') && e.source==='BTT'); }
-function keyAll(key){ return DB.entries.filter(e=>e.key===key && inCtx(e)); }
+function keyAll(key){ return (CUR||(CUR=DB.entries.filter(inCtx))).filter(e=>e.key===key); }
 function matchEff(key){ return keyAll(key).filter(e=>sameSet(e.mods,eff)); }
 function comboSym(mods){ return [...MODS,'fn'].filter(m=>mods.includes(m)).map(m=>MODSYM[m]).join(''); }
+function chordSym(e){ return e&&e.ckey ? (comboSym(e.cmods||[])+e.ckey) : ''; }                 // 2nd press, 예: ⌘I
+function chordTag(e){ return e&&e.ckey ? `<span class="chord">▸ ${chordSym(e)}</span>` : ''; }   // 리더 메뉴 배지
 function effSym(){ return [...MODS,'fn'].filter(m=>eff.has(m)).map(m=>MODSYM[m]).join(''); }
 
 function renderMeta(){
@@ -186,6 +204,19 @@ function renderCtx(){
   document.getElementById('filtersel').onchange=e=>{ filter=e.target.value; sync(); };
   document.getElementById('ovbtn').onclick=()=>{ overview=!overview; document.getElementById('ovbtn').classList.toggle('on',overview); sync(); };
 }
+function enterChord(mods,key){          // ⌘K ▸ … 로 들어가 후속 키를 그리드에서 고르는 모드
+  chordReturn={sticky:new Set(sticky), key:selectedKey, overview};
+  chordPrefix={mods:[...mods], key};
+  sticky=new Set(); held=new Set(); heldStr=''; selectedKey=null; overview=false;
+  document.getElementById('ovbtn').classList.remove('on');
+  sync(); window.scrollTo({top:0,behavior:'smooth'});
+}
+function exitChord(){
+  if(!chordPrefix) return;
+  const r=chordReturn; chordPrefix=null; chordReturn=null; held=new Set(); heldStr='';
+  if(r){ sticky=r.sticky; selectedKey=r.key; overview=r.overview; document.getElementById('ovbtn').classList.toggle('on',overview); }
+  sync();
+}
 
 function widthPx(w){ return (w*U-6)+'px'; }
 function buildCap(spec){
@@ -205,7 +236,9 @@ function cellKey(key,label,wpx){
   let h=`<div class="lab">${label.replace(/</g,'&lt;')}</div>`;
   if(all.length) h+=`<span class="cnt">${all.length}</span>`;
   const srcs=[...new Set(all.map(e=>e.source))];
-  h+=`<div class="foot">`+srcs.map(s=>`<span class="fdot" style="background:${COLORS[s]||'#666'}"></span>`).join('')+`</div>`;
+  const chc=all.filter(e=>e.ckey).length;   // chord 시작(연속) 개수
+  h+=`<div class="foot">`+srcs.map(s=>`<span class="fdot" style="background:${COLORS[s]||'#666'}"></span>`).join('')
+    +(chc?`<span class="chordm" title="${chc}개 연속(chord) 시작">▸${chc}</span>`:'')+`</div>`;
   if(all.length) el.classList.add('busy');
   if(ms.length){
     el.classList.add('taken');
@@ -263,10 +296,13 @@ function renderKB(){
 
 const tip=document.getElementById('tip');
 function showTip(ev,key,all){
-  if(!all.length){ hideTip(); return; }
+  const noteKeys=Object.keys(ANN.note).filter(k=>k.endsWith('|'+key));   // 이 키에 달린 노트들 — hover하면 내용까지 바로 표시
+  if(!all.length && !noteKeys.length){ hideTip(); return; }
   const sorted=[...all].sort((a,b)=>a.mods.length-b.mods.length);
-  tip.innerHTML=`<div style="margin-bottom:4px"><b>${key}</b> · ${all.length}개</div>`+
-    sorted.map(e=>`<div class="tl"><b>${comboSym(e.mods)}${key}</b><span style="color:${COLORS[e.source]||'#999'}">${e.source}</span><span>${e.action.replace(/</g,'&lt;')}</span></div>`).join('');
+  const notesHTML=noteKeys.sort().map(k=>{ const i=k.indexOf('|'), ms=k.slice(0,i)?k.slice(0,i).split('+'):[];
+    return `<div class="tl" style="color:#fde68a"><b>📝 ${comboSym(ms)}${key}</b><span>${ANN.note[k].replace(/</g,'&lt;')}</span></div>`; }).join('');
+  tip.innerHTML=`<div style="margin-bottom:4px"><b>${key}</b>${all.length?` · ${all.length}개`:''}</div>`+notesHTML+
+    sorted.map(e=>`<div class="tl"><b>${comboSym(e.mods)}${key}${e.ckey?' '+chordTag(e):''}</b><span style="color:${COLORS[e.source]||'#999'}">${e.source}</span><span>${e.action.replace(/</g,'&lt;')}</span></div>`).join('');
   tip.style.display='block'; moveTip(ev);
 }
 function moveTip(ev){ tip.style.left=Math.min(ev.clientX+14,innerWidth-370)+'px'; tip.style.top=Math.min(ev.clientY+14,innerHeight-tip.offsetHeight-10)+'px'; }
@@ -274,7 +310,7 @@ function hideTip(){ tip.style.display='none'; }
 
 function rowHTML(e,hi){
   return `<div class="row${hi?' hi':''}"><span class="src" style="background:${COLORS[e.source]||'#666'}">${e.source}</span>`+
-    `<span class="kc">${comboSym(e.mods)}${e.key}</span>`+
+    `<span class="kc">${comboSym(e.mods)}${e.key}${e.ckey?' '+chordTag(e):''}</span>`+
     `<div style="flex:1"><div>${e.action.replace(/</g,'&lt;')}</div>`+
     `<div class="muted" style="font-size:11px">${(e.detail||'').replace(/</g,'&lt;')}</div></div>`+
     `<span class="scope">${e.scope}</span></div>`;
@@ -287,12 +323,23 @@ function allModSubsets(){
 }
 function detailRow(mods, key, matches, hit){
   const ak=annKey(mods,key), fav=!!ANN.fav[ak], note=ANN.note[ak]||'';
+  matches=[...matches].sort((a,b)=>(a.ckey?1:0)-(b.ckey?1:0)||chordSym(a).localeCompare(chordSym(b))||a.action.localeCompare(b.action));
+  const nch=matches.filter(e=>e.ckey).length;
   const body = matches.length
-    ? matches.map(e=>`<span class="src" style="background:${COLORS[e.source]||'#666'}">${e.source}</span> ${e.action.replace(/</g,'&lt;')} <span class="scope">${e.scope}</span>`).join('<br>')
+    ? matches.map(e=>{
+        const src=`<span class="src" style="background:${COLORS[e.source]||'#666'}">${e.source}</span>`;
+        const scope=`<span class="scope">${e.scope}</span>`;
+        const det=e.detail?`<div class="muted" style="font-size:11px">${e.detail.replace(/</g,'&lt;')}</div>`:'';
+        const act=(e.ckey?chordTag(e)+' ':'')+e.action.replace(/</g,'&lt;');
+        return prefScopeRight
+          ? `<div class="dent" style="display:flex;gap:6px;align-items:flex-start">${src}<span style="flex:1">${act}${det}</span>${scope}</div>`
+          : `<div class="dent">${src} ${act} ${scope}${det}</div>`;
+      }).join('')
     : `<span class="muted">— 비어 있음 (할당 가능)</span>`;
   return `<div class="drow${hit?' hi':''}">`
     +`<button class="favbtn${fav?' on':''}" data-fav="${ak}" title="즐겨찾기">${fav?'⭐':'☆'}</button>`
-    +`<span class="kc">${comboSym(mods)||'(무수식)'}${key}</span>`
+    +`<span class="kc">${comboSym(mods)||'(무수식)'}${key}${nch?` <span class="chord" title="이 조합으로 시작하는 연속(chord) ${nch}개">▸${nch}</span>`:''}</span>`
+    +(nch?`<button class="chordbtn" data-chord="${[...mods].join('+')}|${key}" title="이 조합으로 시작하는 연속 입력을 키보드에서 골라보기">▸ 연속 입력</button>`:'')
     +`<div class="dbody">${body}`+(note?`<div class="noteshow">📝 ${note.replace(/</g,'&lt;')}</div>`:'')+`</div>`
     +`<button class="notebtn" data-note="${ak}" title="노트">${note?'✎ 노트':'+ 노트'}</button></div>`;
 }
@@ -308,8 +355,9 @@ function showDetail(key){
   const extra=Object.values(byCombo).flat();
   const extraHTML = extra.length ? `<div class="grp">기타(fn 등 포함)</div>`+
     extra.sort((a,b)=>a.mods.length-b.mods.length).map(e=>detailRow(e.mods,key,[e],sameSet(e.mods,eff))).join('') : '';
-  d.innerHTML=`<div style="margin-bottom:6px"><b>${key}</b> 키 · 수식키 조합 16개 전부 (현재 레이어 <b style="color:#7dd3fc">${effSym()||'(무수식)'}</b> 강조) · ☆=즐겨찾기 · +노트</div>`+rows+extraHTML;
+  d.innerHTML=`<div style="margin-bottom:6px">${chordPrefix?`<span class="chord">${comboSym(chordPrefix.mods)}${chordPrefix.key} ▸</span> `:''}<b>${key}</b> 키 · 수식키 조합 16개 전부 (현재 레이어 <b style="color:#7dd3fc">${effSym()||'(무수식)'}</b> 강조) · ☆=즐겨찾기 · +노트</div>`+rows+extraHTML;
   d.querySelectorAll('[data-fav]').forEach(b=>b.onclick=()=>{ const ak=b.dataset.fav; ANN.fav[ak]?delete ANN.fav[ak]:ANN.fav[ak]=1; saveAnn(); sync(); });
+  d.querySelectorAll('[data-chord]').forEach(b=>b.onclick=()=>{ const [ms,k]=b.dataset.chord.split('|'); enterChord(ms?ms.split('+'):[], k); });
   d.querySelectorAll('[data-note]').forEach(b=>b.onclick=()=>{ const ak=b.dataset.note; const t=prompt('이 단축키에 노트 (예: cmd+opt+V는 엑셀과 충돌이라 opt+V로 변경):', ANN.note[ak]||''); if(t!==null){ const tt=t.trim(); tt?ANN.note[ak]=tt:delete ANN.note[ak]; saveAnn(); sync(); showDetail(selectedKey); } });
 }
 function renderOverview(){
@@ -337,6 +385,7 @@ function parseQueryCombo(q){
   return {mods:[...new Set(mods)],key};
 }
 function jumpTo(e){
+  chordPrefix=null; chordReturn=null;
   sticky=new Set(e.mods); held=new Set(); selectedKey=e.key;
   ctxSet=new Set(['Global', e.scope==='global'?'Global':e.scope]);
   sync(); window.scrollTo({top:0,behavior:'smooth'});
@@ -347,35 +396,43 @@ function sync(){
   document.querySelectorAll('[data-special]').forEach(el=>{const set=el.dataset.special==='hyper'?['ctrl','opt','shift','cmd']:['ctrl','opt','shift'];el.classList.toggle('on',set.every(m=>eff.has(m)));});
   document.querySelectorAll('[data-ctx]').forEach(el=>el.classList.toggle('on',ctxSet.has(el.dataset.ctx)));
   document.getElementById('comboline').innerHTML = eff.size? `현재: <b>${effSym()}</b>` : `수식키 없음`;
+  const cb=document.getElementById('chordbar');
+  if(chordPrefix){ const n=(CUR||[]).length;
+    cb.style.display='block';
+    cb.innerHTML=`🔗 연속(chord) 모드 — <b>${comboSym(chordPrefix.mods)}${chordPrefix.key}</b> 다음에 누를 <b>두 번째 키</b>를 고르세요 (후속 ${n}개, 현재 2nd 레이어 <b style="color:#7dd3fc">${effSym()||'(무수식)'}</b>) · <span class="x" id="chordexit">Esc · 일반 모드로</span>`;
+    cb.querySelector('#chordexit').onclick=exitChord;
+  } else cb.style.display='none';
   renderKB(); renderOverview();
   if(selectedKey) showDetail(selectedKey);
 }
 function readHeld(e){ const h=new Set(); if(e.metaKey)h.add('cmd'); if(e.ctrlKey)h.add('ctrl'); if(e.altKey)h.add('opt'); if(e.shiftKey)h.add('shift'); return h; }
 const CODEMAP={Backquote:'`',Minus:'-',Equal:'=',BracketLeft:'[',BracketRight:']',Semicolon:';',Quote:"'",Comma:',',Period:'.',Slash:'/',Space:'Space',Enter:'Return',Tab:'Tab',Escape:'Escape',Backspace:'Delete',Delete:'ForwardDelete',ArrowLeft:'Left',ArrowRight:'Right',ArrowUp:'Up',ArrowDown:'Down',Home:'Home',End:'End',PageUp:'PageUp',PageDown:'PageDown',CapsLock:'CapsLock'};
 function codeToKey(code){ if(!code)return null; if(code==='Backslash')return String.fromCharCode(92); if(code.startsWith('Key'))return code.slice(3); if(code.startsWith('Digit'))return code.slice(5); if(code[0]==='F'&&code.length<=3&&!isNaN(parseInt(code.slice(1),10)))return code; return CODEMAP[code]||null; }
-document.addEventListener('keydown',e=>{ if(e.target.tagName==='INPUT')return; const h=readHeld(e); const s=[...h].sort().join(); const mapped=codeToKey(e.code); let changed=false; if(s!==heldStr){heldStr=s;held=h;changed=true;} if(mapped){ e.preventDefault(); if(mapped!==selectedKey){selectedKey=mapped;changed=true;} } if(changed) sync(); });
+document.addEventListener('keydown',e=>{ if(e.target.tagName==='INPUT')return; if(e.key==='Escape'&&chordPrefix){ e.preventDefault(); exitChord(); return; } const h=readHeld(e); const s=[...h].sort().join(); const mapped=codeToKey(e.code); let changed=false; if(s!==heldStr){heldStr=s;held=h;changed=true;} if(mapped){ e.preventDefault(); if(mapped!==selectedKey){selectedKey=mapped;changed=true;} } if(changed) sync(); });
 document.addEventListener('keyup',e=>{ const h=readHeld(e); const s=[...h].sort().join(); if(s!==heldStr){heldStr=s;held=h;sync();} });
 window.addEventListener('blur',()=>{ if(heldStr){heldStr='';held=new Set();sync();} });
 
 function renderFavs(){
   const r=document.getElementById('results');
   const keys=Object.keys(ANN.fav);
-  if(!keys.length){ r.innerHTML='<div class="sec">⭐ 즐겨찾기 — 아직 없음. 키 클릭 → 하단 상세에서 ☆를 눌러 추가하세요.</div>'; return; }
+  if(!keys.length){ r.innerHTML='<div class="sec">⭐ 즐겨찾기 — 아직 없음. 키 클릭 → 하단 상세에서 ☆를 눌러 추가하세요.</div>'; r.scrollIntoView({behavior:'smooth',block:'start'}); return; }
   let html=`<div class="sec">⭐ 즐겨찾기 ${keys.length}개 — 외울 단축키 모음</div>`;
   keys.sort().forEach(ak=>{
     const i=ak.indexOf('|'), modstr=ak.slice(0,i), key=ak.slice(i+1), mods=modstr?modstr.split('+'):[];
     const matches=DB.entries.filter(e=>e.key===key && sameSet(e.mods,new Set(mods)));
-    const act=matches.length?matches.map(e=>e.action).join(' / '):'(빈 조합)', note=ANN.note[ak]||'';
+    const act=matches.length?matches.map(e=>(e.ckey?'▸'+chordSym(e)+' ':'')+e.action).join(' / '):'(빈 조합)', note=ANN.note[ak]||'';
     html+=`<div class="row" data-jump="${ak}"><span class="kc">${comboSym(mods)||'(무수식)'}${key}</span>`
       +`<div style="flex:1">${act.replace(/</g,'&lt;')}${note?`<div class="noteshow">📝 ${note.replace(/</g,'&lt;')}</div>`:''}</div>`
       +`<span class="scope">${matches[0]?matches[0].scope:'free'}</span></div>`;
   });
   r.innerHTML=html;
-  r.querySelectorAll('[data-jump]').forEach(el=>el.onclick=()=>{ const ak=el.dataset.jump,i=ak.indexOf('|'); sticky=new Set(ak.slice(0,i)?ak.slice(0,i).split('+'):[]); held=new Set(); selectedKey=ak.slice(i+1); sync(); window.scrollTo({top:0,behavior:'smooth'}); });
+  r.querySelectorAll('[data-jump]').forEach(el=>el.onclick=()=>{ const ak=el.dataset.jump,i=ak.indexOf('|'); chordPrefix=null; chordReturn=null; sticky=new Set(ak.slice(0,i)?ak.slice(0,i).split('+'):[]); held=new Set(); selectedKey=ak.slice(i+1); sync(); window.scrollTo({top:0,behavior:'smooth'}); });
+  r.scrollIntoView({behavior:'smooth',block:'start'});
 }
 renderMeta(); renderChips(); renderCtx(); sync();
 document.getElementById('search').oninput=e=>renderSearch(e.target.value.trim());
 document.getElementById('favview').onclick=renderFavs;
+document.getElementById('scopepos').onclick=()=>{ prefScopeRight=!prefScopeRight; localStorage.setItem('SVscopeRight',prefScopeRight?'1':'0'); if(selectedKey)showDetail(selectedKey); };
 document.getElementById('annexport').onclick=()=>{ const b=new Blob([JSON.stringify(ANN,null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download='shortcut-annotations.json'; a.click(); };
 document.getElementById('annimport').onchange=e=>{ const f=e.target.files[0]; if(!f)return; const rd=new FileReader(); rd.onload=()=>{ try{ const j=JSON.parse(rd.result); Object.assign(ANN.fav,j.fav||{}); Object.assign(ANN.note,j.note||{}); saveAnn(); sync(); alert('가져왔습니다 ✓'); }catch(_){ alert('JSON 파싱 실패'); } }; rd.readAsText(f); };
 </script>

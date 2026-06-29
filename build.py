@@ -128,12 +128,17 @@ entries = []
 # macOS sets NSEvent's Function flag (0x800000) automatically on these keys — it does NOT mean
 # the physical fn/Globe key was pressed — so strip 'fn' from their combos.
 FN_INTRINSIC = {f"F{i}" for i in range(1, 21)} | {"Left","Right","Up","Down","Home","End","PageUp","PageDown","ForwardDelete"}
-def add(mods, key, action, source, scope, detail="", group=None):
+def add(mods, key, action, source, scope, detail="", group=None, cmods=None, ckey=None):
     if not key: return
     m = norm_mods(mods)
     if key in FN_INTRINSIC and "fn" in m: m = [x for x in m if x != "fn"]
-    entries.append({"mods": m, "key": str(key), "action": (action or "").strip() or "(untitled)",
-                    "source": source, "scope": scope, "detail": detail, "group": group or source})
+    e = {"mods": m, "key": str(key), "action": (action or "").strip() or "(untitled)",
+         "source": source, "scope": scope, "detail": detail, "group": group or source}
+    if ckey:                                   # chord: 2nd press (예: ⌘K ⌘I) — only stored when present
+        cm = norm_mods(cmods or [])
+        if ckey in FN_INTRINSIC and "fn" in cm: cm = [x for x in cm if x != "fn"]
+        e["cmods"] = cm; e["ckey"] = str(ckey)
+    entries.append(e)
 
 def norm_keytoken(tok):
     if not tok: return None
@@ -491,11 +496,17 @@ def _strip_jsonc(s):
     return s
 def vsc_key(combo):
     chords = combo.split(' ')
-    parts = chords[0].split('+')
     mmap = {'cmd':'cmd','meta':'cmd','win':'cmd','ctrl':'ctrl','control':'ctrl',
             'alt':'opt','option':'opt','shift':'shift'}
-    mods = [mmap[p] for p in parts[:-1] if p in mmap]
-    return mods, norm_keytoken(parts[-1]), (len(chords) > 1)
+    def seg(s):
+        parts = s.split('+')
+        return [mmap[p] for p in parts[:-1] if p in mmap], norm_keytoken(parts[-1])
+    m1, k1 = seg(chords[0])
+    if len(chords) > 1:                        # ⌘K ⌘I → first press lives on grid, second press = chord
+        m2, k2 = seg(chords[1])
+        rest = ' '.join(chords[2:])            # 3+ presses (예: ctrl+k ctrl+j ctrl+l): 2nd press is NOT terminal
+        return m1, k1, m2, k2, rest
+    return m1, k1, None, None, ''
 
 def collect_vscode():
     files = []
@@ -516,11 +527,12 @@ def collect_vscode():
             cmd = it.get("command", "")
             combo = it.get("key", "")
             if not cmd or cmd.startswith("-") or not combo: continue
-            mods, key, chord = vsc_key(combo)
+            mods, key, cmods, ckey, rest = vsc_key(combo)
             if not key: continue
             when = (it.get("when") or "").strip()
             det = f"vscode {kind} · {combo}" + (f" · when: {when}" if when else "")
-            add(mods, key, ("[chord] " if chord else "") + cmd, "app config", "Code", det); n += 1
+            action = cmd + (f"  (그다음 {rest})" if rest else "")   # 3+ 연속이면 2nd가 끝이 아님을 명시
+            add(mods, key, action, "app config", "Code", det, cmods=cmods, ckey=ckey); n += 1
     return n
 
 def decode_ax_mods(m):
