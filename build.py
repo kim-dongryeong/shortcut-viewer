@@ -608,13 +608,13 @@ def collect_codex():                            # in-app shortcuts (Settings ▸
     if ents: save_app_defaults("Codex", app_ver(CODEX_APP), ents)   # all Codex shortcuts are app defaults
     return n
 def collect_codex_gestures():
-    # Appshots: reverse-engineered from Codex app.asar — `var y3=`DoubleCommand`` is the default for the
-    # stored `appshotHotkey` (options ⌘⌘ / ⌥⌥ / ⇧⇧ / off); macOS-only; command id `capture-appshot`,
-    # label "Attach Appshot", "Take an appshot to show Codex your frontmost window". Double-tap ⌘ (or L+R ⌘).
+    # Appshots: reverse-engineered from Codex app.asar. The default for stored `appshotHotkey` is `DoubleCommand`,
+    # and the input map is `leftcommand+rightcommand`→`DoubleCommand` (label "⌘ + ⌘") — i.e. press BOTH ⌘ keys
+    # together (NOT a double-tap). Options ⌥+⌥ / ⇧+⇧ / off; macOS-only; command id `capture-appshot`.
     if not os.path.exists(CODEX_APP): return 0
     addg("cmd", "Appshots — 최상위 창을 캡처해 Codex에 첨부", "app config", "Codex",
-         "codex · capture-appshot · app.asar 기본값 DoubleCommand (설정에서 ⌥⌥/⇧⇧/끄기)",
-         side="either", count=2, hold=False, group="Codex")
+         "codex · capture-appshot · app.asar DoubleCommand = 좌·우 ⌘ 동시 (설정에서 ⌥+⌥/⇧+⇧/끄기)",
+         side="both", count=1, hold=False, group="Codex")
     return 1
 def collect_manual_gestures():
     # User-listed non-static triggers across apps (Claude Desktop / KeyClu / their AutoHotKey CapsLock multi-tap…).

@@ -395,15 +395,19 @@ function showDetail(key){
   d.querySelectorAll('[data-chord]').forEach(b=>b.onclick=()=>{ const [ms,k]=b.dataset.chord.split('|'); enterChord(ms?ms.split('+'):[], k); });
   d.querySelectorAll('[data-note]').forEach(b=>b.onclick=()=>{ const ak=b.dataset.note; const t=prompt('이 단축키에 노트 (예: cmd+opt+V는 엑셀과 충돌이라 opt+V로 변경):', ANN.note[ak]||''); if(t!==null){ const tt=t.trim(); tt?ANN.note[ak]=tt:delete ANN.note[ak]; saveAnn(); sync(); showDetail(selectedKey); } });
 }
-function gestureSym(g){   // 비-정적 트리거 표기: ⌘⌘ / ⌥×3 / ⇪×4 + hold/(L|R)
+function gestureSym(g){   // 비-정적 트리거 표기: ⌘+⌘(좌우 동시) / ⌥×3(멀티탭) / ⇪ hold / (L|R)
   const s = g.mod==='caps' ? '⇪' : (MODSYM[g.mod]||g.mod);
-  const c = g.count<=1 ? s : (g.count===2 ? s+s : s+'×'+g.count);
-  return c + (g.hold?` <span class="gtag">hold</span>`:'') + (g.side&&g.side!=='either'?` <span class="gtag">${g.side==='left'?'L':'R'}</span>`:'');
+  const both = g.side==='both';
+  const c = both ? s+'+'+s : (g.count<=1 ? s : (g.count===2 ? s+s : s+'×'+g.count));
+  const tag = (both?` <span class="gtag">L+R</span>`:'')
+    + (g.hold?` <span class="gtag">hold</span>`:'')
+    + (g.side==='left'||g.side==='right'?` <span class="gtag">${g.side==='left'?'L':'R'}</span>`:'');
+  return c + tag;
 }
 function renderGestures(){
   const el=document.getElementById('gestures');
   const gs=(DB.gestures||[]).filter(inCtx);
-  if(!gs.length){ el.innerHTML=''; return; }
+  if(overview || !gs.length){ el.innerHTML=''; return; }   // 전체 단축키(overview) 켜지면 치트시트가 대신 보여줌
   el.innerHTML=`<div class="sec">수식키 제스처 · 특수 트리거 — ${gs.length}개 <span class="muted" style="text-transform:none;letter-spacing:0;font-size:11px">(더블·멀티탭 / 홀드 / 좌우 — 그리드로 표현 불가한 트리거)</span></div>`
     +`<div class="gwrap">`+gs.map(g=>
       `<div class="gcard" title="${(g.detail||'').replace(/"/g,'&quot;')}"><span class="gsym">${gestureSym(g)}</span>`
@@ -438,10 +442,14 @@ function renderOverview(){   // KeyCue 식: 선택 컨텍스트의 모든 단축
     const gl=label==='(무수식)'?'(수식키 없음)':label;
     return `<div class="ovgrp"><div class="gh">${gl} <span class="muted" style="font-weight:400;font-size:11px">${items.length}</span></div>${rows}</div>`;
   }).join('');
-  o.innerHTML=`<div class="sec">전체 단축키 — ${[...ctxSet].join(', ')||'(없음)'} · ${ent.length}개`
+  const gst=(DB.gestures||[]).filter(inCtx);   // 제스처(좌우 동시·홀드·멀티탭)도 치트시트에 포함
+  const gbody = gst.length ? `<div class="ovgrp"><div class="gh">제스처 · 특수 트리거 <span class="muted" style="font-weight:400;font-size:11px">${gst.length}</span></div>`
+    + gst.map(g=>`<div class="cs"><span class="csk">${gestureSym(g)}</span><span class="csa" title="${(g.detail||'').replace(/"/g,'&quot;')}">${g.action.replace(/</g,'&lt;')}</span><span class="csd" style="background:${COLORS[g.source]||'#888'}" title="${(g.source||'').replace(/</g,'&lt;')}"></span></div>`).join('')
+    + `</div>` : '';
+  o.innerHTML=`<div class="sec">전체 단축키 — ${[...ctxSet].join(', ')||'(없음)'} · ${ent.length}개${gst.length?` + 제스처 ${gst.length}`:''}`
     +`<span class="muted" style="text-transform:none;letter-spacing:0;margin-left:8px;font-size:11px">수식키/키를 누르면 해당 조합 하이라이트</span>`
     +`<span class="ovtab">`+[['mod','수식키별'],['key','키별'],['source','소스별']].map(([g,l])=>`<button data-ovg="${g}" class="${ovGroup===g?'on':''}">${l}</button>`).join('')+`</span></div>`
-    +`<div class="ovwrap">${body}</div>`;
+    +`<div class="ovwrap">${body}${gbody}</div>`;
   o.querySelectorAll('[data-ov]').forEach(el=>el.onclick=()=>{ const e=flat[+el.dataset.ov]; chordPrefix=null; chordReturn=null; sticky=new Set(e.mods); held=new Set(); selectedKey=e.key; sync(); if(!overview) window.scrollTo({top:0,behavior:'smooth'}); });
   o.querySelectorAll('[data-ovg]').forEach(b=>b.onclick=()=>{ ovGroup=b.dataset.ovg; localStorage.setItem('SVovGroup',ovGroup); renderOverview(); });
 }
