@@ -646,6 +646,8 @@ def web_key(spec):
     rest = s[i:].strip()
     seq = rest if (' then ' in rest or 'press' in rest or ',' in rest) else None
     if seq: rest = re.split(r'[ ,]', rest)[0]            # first key of the sequence drives grid placement
+    if ' or ' in rest: rest = rest.split(' or ')[0].strip()          # "Delete or #" → first alternative (full in detail)
+    if '/' in rest and rest != '/': rest = rest.split('/')[0].strip()  # "↑/↓" → first; keep bare "/"
     if rest in WEB_KEYNAME: return mods, WEB_KEYNAME[rest], seq
     if len(rest) == 1: return mods, (rest.upper() if rest.isalpha() else rest), seq
     return mods, norm_keytoken(rest), seq

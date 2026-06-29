@@ -1,128 +1,1161 @@
 {
-  "_comment": "웹앱 단축키 — 로컬 소스가 없어 제조사(Google) 공식 단축키 문서에서 추출한 macOS(⌘) 기준 목록. 추측 아님(공식 원본). build.py의 collect_web()가 keys 기호열을 파싱한다. keys: ⌘⌥⌃⇧ + Fn + 키(→←↑↓, Space/Enter/Esc/Tab/F1..). 'then'/'press'/',' 가 들어가면 시퀀스(전체는 detail에 보존). 출처: support.google.com/docs/answer/181110 (Sheets).",
-  "Google Sheets": [
-    {"keys": "⌃ Space", "action": "Select column"},
-    {"keys": "⇧ Space", "action": "Select row"},
-    {"keys": "⌘a", "action": "Select all"},
-    {"keys": "⌘⇧ Space", "action": "Select all"},
-    {"keys": "⌘z", "action": "Undo"},
-    {"keys": "⌘y", "action": "Redo"},
-    {"keys": "⌘⇧z", "action": "Redo"},
-    {"keys": "Fn F4", "action": "Redo"},
-    {"keys": "⌘f", "action": "Find"},
-    {"keys": "⌘⇧h", "action": "Find and replace"},
-    {"keys": "⌘ Enter", "action": "Fill range"},
-    {"keys": "⌘d", "action": "Fill down"},
-    {"keys": "⌘r", "action": "Fill right"},
-    {"keys": "⌘s", "action": "Save"},
-    {"keys": "⌘o", "action": "Open"},
-    {"keys": "⌘p", "action": "Print"},
-    {"keys": "⌘c", "action": "Copy"},
-    {"keys": "⌘x", "action": "Cut"},
-    {"keys": "⌘v", "action": "Paste"},
-    {"keys": "⌘⇧v", "action": "Paste values only"},
-    {"keys": "⌘/", "action": "Show common keyboard shortcuts"},
-    {"keys": "⇧ Fn F11", "action": "Insert new sheet"},
-    {"keys": "⌃⇧f", "action": "Compact controls"},
-    {"keys": "⌘⇧k", "action": "Input tools on/off"},
-    {"keys": "⌘⌥⇧k", "action": "Select input tools"},
-    {"keys": "⌥/", "action": "Tool finder"},
-    {"keys": "⌘⇧*", "action": "Select current region around selected cell"},
-    {"keys": "⌘⌥R", "action": "Displays or hides the menus"},
-    {"keys": "⌘⌥T", "action": "Convert range to table"},
-    {"keys": "⌘b", "action": "Bold"},
-    {"keys": "⌘2", "action": "Bold"},
-    {"keys": "⌘u", "action": "Underline"},
-    {"keys": "⌘4", "action": "Underline"},
-    {"keys": "⌘i", "action": "Italic"},
-    {"keys": "⌘3", "action": "Italic"},
-    {"keys": "⌘⇧x", "action": "Strikethrough"},
-    {"keys": "⌘5", "action": "Strikethrough"},
-    {"keys": "⌘⇧e", "action": "Center align"},
-    {"keys": "⌘⇧l", "action": "Left align"},
-    {"keys": "⌘⇧r", "action": "Right align"},
-    {"keys": "⌥⇧1", "action": "Apply top border"},
-    {"keys": "⌥⇧2", "action": "Apply right border"},
-    {"keys": "⌥⇧3", "action": "Apply bottom border"},
-    {"keys": "⌥⇧4", "action": "Apply left border"},
-    {"keys": "⌥⇧6", "action": "Remove borders"},
-    {"keys": "⌥⇧7", "action": "Apply outer border"},
-    {"keys": "⌘k", "action": "Insert link"},
-    {"keys": "⌘⇧;", "action": "Insert time"},
-    {"keys": "⌘;", "action": "Insert date"},
-    {"keys": "⌘⌥⇧;", "action": "Insert date and time"},
-    {"keys": "⌃⇧1", "action": "Format as decimal"},
-    {"keys": "⌃⇧2", "action": "Format as time"},
-    {"keys": "⌃⇧3", "action": "Format as date"},
-    {"keys": "⌃⇧4", "action": "Format as currency"},
-    {"keys": "⌃⇧5", "action": "Format as percentage"},
-    {"keys": "⌃⇧6", "action": "Format as exponent"},
-    {"keys": "⌘\\", "action": "Clear formatting"},
-    {"keys": "Fn ←", "action": "Move to beginning of row"},
-    {"keys": "⌘ Fn ←", "action": "Move to beginning of sheet"},
-    {"keys": "Fn →", "action": "Move to end of row"},
-    {"keys": "⌘ Fn →", "action": "Move to end of sheet"},
-    {"keys": "⌘ Backspace", "action": "Scroll to active cell"},
-    {"keys": "⌥ ↓", "action": "Move to next sheet"},
-    {"keys": "⌥ ↑", "action": "Move to previous sheet"},
-    {"keys": "⌥⇧k", "action": "Display list of sheets"},
-    {"keys": "⌥ Enter", "action": "Open hyperlink"},
-    {"keys": "⌘⌥⇧i", "action": "Open Explore"},
-    {"keys": "⌘⌥.", "action": "Go to side panel"},
-    {"keys": "⌃⌘⇧m", "action": "Move focus out of spreadsheet"},
-    {"keys": "⌥⇧q", "action": "Move to quicksum"},
-    {"keys": "⌃⌘ e then p", "action": "Move focus to popup"},
-    {"keys": "⌃⌘r", "action": "Open drop-down menu on filtered cell"},
-    {"keys": "⌘⌥⇧h", "action": "Open revision history"},
-    {"keys": "⌘ Esc", "action": "Close drawing editor"},
-    {"keys": "⌃G", "action": "Show \"Go to range\" dialog"},
-    {"keys": "⌃F", "action": "Find and replace with Find tab selected"},
-    {"keys": "⇧ F2", "action": "Insert/edit note"},
-    {"keys": "⌘⌥m", "action": "Insert/edit comment"},
-    {"keys": "⌘⌥⇧a", "action": "Open comment discussion thread"},
-    {"keys": "⌃⌘ e then c", "action": "Enter current comment"},
-    {"keys": "⌃⌘ n then c", "action": "Move to next comment"},
-    {"keys": "⌃⌘ p then c", "action": "Move to previous comment"},
-    {"keys": "R", "action": "Reply to current comment (in comment)"},
-    {"keys": "J", "action": "Move to next comment (in comment)"},
-    {"keys": "K", "action": "Move to previous comment (in comment)"},
-    {"keys": "E", "action": "Resolve current comment (in comment)"},
-    {"keys": "U", "action": "Exit current comment (in comment)"},
-    {"keys": "⌃⌥f", "action": "File menu"},
-    {"keys": "⌃⌥e", "action": "Edit menu"},
-    {"keys": "⌃⌥v", "action": "View menu"},
-    {"keys": "⌃⌥i", "action": "Insert menu"},
-    {"keys": "⌃⌥o", "action": "Format menu"},
-    {"keys": "⌃⌥d", "action": "Data menu"},
-    {"keys": "⌃⌥t", "action": "Tools menu"},
-    {"keys": "⌘⌥=", "action": "Open insert menu"},
-    {"keys": "⌘⌥-", "action": "Open delete menu"},
-    {"keys": "⌃⌥m", "action": "Form menu"},
-    {"keys": "⌃⌥n", "action": "Add-ons menu"},
-    {"keys": "⌃⌥h", "action": "Help menu"},
-    {"keys": "⌃⌥a", "action": "Accessibility menu"},
-    {"keys": "⌥⇧s", "action": "Sheet menu"},
-    {"keys": "⌘⇧\\", "action": "Context menu"},
-    {"keys": "⌘⌥\\", "action": "Table column menu"},
-    {"keys": "⌘⌥9", "action": "Hide row"},
-    {"keys": "⌘⇧9", "action": "Unhide row"},
-    {"keys": "⌘⌥0", "action": "Hide column"},
-    {"keys": "⌘⇧0", "action": "Unhide column"},
-    {"keys": "⌥⇧ →", "action": "Group rows or columns"},
-    {"keys": "⌥⇧ ←", "action": "Ungroup rows or columns"},
-    {"keys": "⌥⇧ ↓", "action": "Expand grouped rows or columns"},
-    {"keys": "⌥⇧ ↑", "action": "Collapse grouped rows or columns"},
-    {"keys": "⌃~", "action": "Show all formulas"},
-    {"keys": "⌘⇧ Enter", "action": "Insert array formula"},
-    {"keys": "⌘e", "action": "Collapse an expanded array formula"},
-    {"keys": "⇧ Fn F1", "action": "Show/hide formula help"},
-    {"keys": "Fn F9", "action": "Toggle formula result previews"},
-    {"keys": "⌃⌥ ↑", "action": "Resize formula bar (up)"},
-    {"keys": "⌃⌥ ↓", "action": "Resize formula bar (down)"},
-    {"keys": "F2", "action": "Toggle formula range selection"},
-    {"keys": "⌘⌥z", "action": "Turn on screen reader support"},
-    {"keys": "⌘⌥h", "action": "Enable braille support"},
-    {"keys": "⌘⌥⇧c", "action": "Read column (screen reader)"},
-    {"keys": "⌘⌥⇧r", "action": "Read row (screen reader)"}
-  ]
+ "_comment": "웹앱 단축키 — 로컬 소스가 없어 제조사(Google) 공식 단축키 문서에서 추출한 macOS(⌘) 기준 목록. 추측 아님(공식 원본). build.py의 collect_web()가 keys 기호열을 파싱한다. keys: ⌘⌥⌃⇧ + Fn + 키(→←↑↓, Space/Enter/Esc/Tab/F1..). 'then'/'press'/',' 가 들어가면 시퀀스(전체는 detail에 보존). 출처: support.google.com/docs/answer/181110 (Sheets).",
+ "Google Sheets": [
+  {
+   "keys": "⌃ Space",
+   "action": "Select column"
+  },
+  {
+   "keys": "⇧ Space",
+   "action": "Select row"
+  },
+  {
+   "keys": "⌘a",
+   "action": "Select all"
+  },
+  {
+   "keys": "⌘⇧ Space",
+   "action": "Select all"
+  },
+  {
+   "keys": "⌘z",
+   "action": "Undo"
+  },
+  {
+   "keys": "⌘y",
+   "action": "Redo"
+  },
+  {
+   "keys": "⌘⇧z",
+   "action": "Redo"
+  },
+  {
+   "keys": "Fn F4",
+   "action": "Redo"
+  },
+  {
+   "keys": "⌘f",
+   "action": "Find"
+  },
+  {
+   "keys": "⌘⇧h",
+   "action": "Find and replace"
+  },
+  {
+   "keys": "⌘ Enter",
+   "action": "Fill range"
+  },
+  {
+   "keys": "⌘d",
+   "action": "Fill down"
+  },
+  {
+   "keys": "⌘r",
+   "action": "Fill right"
+  },
+  {
+   "keys": "⌘s",
+   "action": "Save"
+  },
+  {
+   "keys": "⌘o",
+   "action": "Open"
+  },
+  {
+   "keys": "⌘p",
+   "action": "Print"
+  },
+  {
+   "keys": "⌘c",
+   "action": "Copy"
+  },
+  {
+   "keys": "⌘x",
+   "action": "Cut"
+  },
+  {
+   "keys": "⌘v",
+   "action": "Paste"
+  },
+  {
+   "keys": "⌘⇧v",
+   "action": "Paste values only"
+  },
+  {
+   "keys": "⌘/",
+   "action": "Show common keyboard shortcuts"
+  },
+  {
+   "keys": "⇧ Fn F11",
+   "action": "Insert new sheet"
+  },
+  {
+   "keys": "⌃⇧f",
+   "action": "Compact controls"
+  },
+  {
+   "keys": "⌘⇧k",
+   "action": "Input tools on/off"
+  },
+  {
+   "keys": "⌘⌥⇧k",
+   "action": "Select input tools"
+  },
+  {
+   "keys": "⌥/",
+   "action": "Tool finder"
+  },
+  {
+   "keys": "⌘⇧*",
+   "action": "Select current region around selected cell"
+  },
+  {
+   "keys": "⌘⌥R",
+   "action": "Displays or hides the menus"
+  },
+  {
+   "keys": "⌘⌥T",
+   "action": "Convert range to table"
+  },
+  {
+   "keys": "⌘b",
+   "action": "Bold"
+  },
+  {
+   "keys": "⌘2",
+   "action": "Bold"
+  },
+  {
+   "keys": "⌘u",
+   "action": "Underline"
+  },
+  {
+   "keys": "⌘4",
+   "action": "Underline"
+  },
+  {
+   "keys": "⌘i",
+   "action": "Italic"
+  },
+  {
+   "keys": "⌘3",
+   "action": "Italic"
+  },
+  {
+   "keys": "⌘⇧x",
+   "action": "Strikethrough"
+  },
+  {
+   "keys": "⌘5",
+   "action": "Strikethrough"
+  },
+  {
+   "keys": "⌘⇧e",
+   "action": "Center align"
+  },
+  {
+   "keys": "⌘⇧l",
+   "action": "Left align"
+  },
+  {
+   "keys": "⌘⇧r",
+   "action": "Right align"
+  },
+  {
+   "keys": "⌥⇧1",
+   "action": "Apply top border"
+  },
+  {
+   "keys": "⌥⇧2",
+   "action": "Apply right border"
+  },
+  {
+   "keys": "⌥⇧3",
+   "action": "Apply bottom border"
+  },
+  {
+   "keys": "⌥⇧4",
+   "action": "Apply left border"
+  },
+  {
+   "keys": "⌥⇧6",
+   "action": "Remove borders"
+  },
+  {
+   "keys": "⌥⇧7",
+   "action": "Apply outer border"
+  },
+  {
+   "keys": "⌘k",
+   "action": "Insert link"
+  },
+  {
+   "keys": "⌘⇧;",
+   "action": "Insert time"
+  },
+  {
+   "keys": "⌘;",
+   "action": "Insert date"
+  },
+  {
+   "keys": "⌘⌥⇧;",
+   "action": "Insert date and time"
+  },
+  {
+   "keys": "⌃⇧1",
+   "action": "Format as decimal"
+  },
+  {
+   "keys": "⌃⇧2",
+   "action": "Format as time"
+  },
+  {
+   "keys": "⌃⇧3",
+   "action": "Format as date"
+  },
+  {
+   "keys": "⌃⇧4",
+   "action": "Format as currency"
+  },
+  {
+   "keys": "⌃⇧5",
+   "action": "Format as percentage"
+  },
+  {
+   "keys": "⌃⇧6",
+   "action": "Format as exponent"
+  },
+  {
+   "keys": "⌘\\",
+   "action": "Clear formatting"
+  },
+  {
+   "keys": "Fn ←",
+   "action": "Move to beginning of row"
+  },
+  {
+   "keys": "⌘ Fn ←",
+   "action": "Move to beginning of sheet"
+  },
+  {
+   "keys": "Fn →",
+   "action": "Move to end of row"
+  },
+  {
+   "keys": "⌘ Fn →",
+   "action": "Move to end of sheet"
+  },
+  {
+   "keys": "⌘ Backspace",
+   "action": "Scroll to active cell"
+  },
+  {
+   "keys": "⌥ ↓",
+   "action": "Move to next sheet"
+  },
+  {
+   "keys": "⌥ ↑",
+   "action": "Move to previous sheet"
+  },
+  {
+   "keys": "⌥⇧k",
+   "action": "Display list of sheets"
+  },
+  {
+   "keys": "⌥ Enter",
+   "action": "Open hyperlink"
+  },
+  {
+   "keys": "⌘⌥⇧i",
+   "action": "Open Explore"
+  },
+  {
+   "keys": "⌘⌥.",
+   "action": "Go to side panel"
+  },
+  {
+   "keys": "⌃⌘⇧m",
+   "action": "Move focus out of spreadsheet"
+  },
+  {
+   "keys": "⌥⇧q",
+   "action": "Move to quicksum"
+  },
+  {
+   "keys": "⌃⌘ e then p",
+   "action": "Move focus to popup"
+  },
+  {
+   "keys": "⌃⌘r",
+   "action": "Open drop-down menu on filtered cell"
+  },
+  {
+   "keys": "⌘⌥⇧h",
+   "action": "Open revision history"
+  },
+  {
+   "keys": "⌘ Esc",
+   "action": "Close drawing editor"
+  },
+  {
+   "keys": "⌃G",
+   "action": "Show \"Go to range\" dialog"
+  },
+  {
+   "keys": "⌃F",
+   "action": "Find and replace with Find tab selected"
+  },
+  {
+   "keys": "⇧ F2",
+   "action": "Insert/edit note"
+  },
+  {
+   "keys": "⌘⌥m",
+   "action": "Insert/edit comment"
+  },
+  {
+   "keys": "⌘⌥⇧a",
+   "action": "Open comment discussion thread"
+  },
+  {
+   "keys": "⌃⌘ e then c",
+   "action": "Enter current comment"
+  },
+  {
+   "keys": "⌃⌘ n then c",
+   "action": "Move to next comment"
+  },
+  {
+   "keys": "⌃⌘ p then c",
+   "action": "Move to previous comment"
+  },
+  {
+   "keys": "R",
+   "action": "Reply to current comment (in comment)"
+  },
+  {
+   "keys": "J",
+   "action": "Move to next comment (in comment)"
+  },
+  {
+   "keys": "K",
+   "action": "Move to previous comment (in comment)"
+  },
+  {
+   "keys": "E",
+   "action": "Resolve current comment (in comment)"
+  },
+  {
+   "keys": "U",
+   "action": "Exit current comment (in comment)"
+  },
+  {
+   "keys": "⌃⌥f",
+   "action": "File menu"
+  },
+  {
+   "keys": "⌃⌥e",
+   "action": "Edit menu"
+  },
+  {
+   "keys": "⌃⌥v",
+   "action": "View menu"
+  },
+  {
+   "keys": "⌃⌥i",
+   "action": "Insert menu"
+  },
+  {
+   "keys": "⌃⌥o",
+   "action": "Format menu"
+  },
+  {
+   "keys": "⌃⌥d",
+   "action": "Data menu"
+  },
+  {
+   "keys": "⌃⌥t",
+   "action": "Tools menu"
+  },
+  {
+   "keys": "⌘⌥=",
+   "action": "Open insert menu"
+  },
+  {
+   "keys": "⌘⌥-",
+   "action": "Open delete menu"
+  },
+  {
+   "keys": "⌃⌥m",
+   "action": "Form menu"
+  },
+  {
+   "keys": "⌃⌥n",
+   "action": "Add-ons menu"
+  },
+  {
+   "keys": "⌃⌥h",
+   "action": "Help menu"
+  },
+  {
+   "keys": "⌃⌥a",
+   "action": "Accessibility menu"
+  },
+  {
+   "keys": "⌥⇧s",
+   "action": "Sheet menu"
+  },
+  {
+   "keys": "⌘⇧\\",
+   "action": "Context menu"
+  },
+  {
+   "keys": "⌘⌥\\",
+   "action": "Table column menu"
+  },
+  {
+   "keys": "⌘⌥9",
+   "action": "Hide row"
+  },
+  {
+   "keys": "⌘⇧9",
+   "action": "Unhide row"
+  },
+  {
+   "keys": "⌘⌥0",
+   "action": "Hide column"
+  },
+  {
+   "keys": "⌘⇧0",
+   "action": "Unhide column"
+  },
+  {
+   "keys": "⌥⇧ →",
+   "action": "Group rows or columns"
+  },
+  {
+   "keys": "⌥⇧ ←",
+   "action": "Ungroup rows or columns"
+  },
+  {
+   "keys": "⌥⇧ ↓",
+   "action": "Expand grouped rows or columns"
+  },
+  {
+   "keys": "⌥⇧ ↑",
+   "action": "Collapse grouped rows or columns"
+  },
+  {
+   "keys": "⌃~",
+   "action": "Show all formulas"
+  },
+  {
+   "keys": "⌘⇧ Enter",
+   "action": "Insert array formula"
+  },
+  {
+   "keys": "⌘e",
+   "action": "Collapse an expanded array formula"
+  },
+  {
+   "keys": "⇧ Fn F1",
+   "action": "Show/hide formula help"
+  },
+  {
+   "keys": "Fn F9",
+   "action": "Toggle formula result previews"
+  },
+  {
+   "keys": "⌃⌥ ↑",
+   "action": "Resize formula bar (up)"
+  },
+  {
+   "keys": "⌃⌥ ↓",
+   "action": "Resize formula bar (down)"
+  },
+  {
+   "keys": "F2",
+   "action": "Toggle formula range selection"
+  },
+  {
+   "keys": "⌘⌥z",
+   "action": "Turn on screen reader support"
+  },
+  {
+   "keys": "⌘⌥h",
+   "action": "Enable braille support"
+  },
+  {
+   "keys": "⌘⌥⇧c",
+   "action": "Read column (screen reader)"
+  },
+  {
+   "keys": "⌘⌥⇧r",
+   "action": "Read row (screen reader)"
+  }
+ ],
+ "Google Docs": [
+  {
+   "keys": "⌘C",
+   "action": "Copy"
+  },
+  {
+   "keys": "⌘X",
+   "action": "Cut"
+  },
+  {
+   "keys": "⌘V",
+   "action": "Paste"
+  },
+  {
+   "keys": "⌘⇧V",
+   "action": "Paste without formatting"
+  },
+  {
+   "keys": "⌘Z",
+   "action": "Undo"
+  },
+  {
+   "keys": "⌘⇧Z",
+   "action": "Redo"
+  },
+  {
+   "keys": "⌘K",
+   "action": "Insert or edit link"
+  },
+  {
+   "keys": "⌥Enter",
+   "action": "Open link"
+  },
+  {
+   "keys": "⌘/",
+   "action": "Show common keyboard shortcuts"
+  },
+  {
+   "keys": "⌘S",
+   "action": "Save"
+  },
+  {
+   "keys": "⌘P",
+   "action": "Print"
+  },
+  {
+   "keys": "⌘O",
+   "action": "Open"
+  },
+  {
+   "keys": "⌘F",
+   "action": "Find"
+  },
+  {
+   "keys": "⌘⇧H",
+   "action": "Find and replace"
+  },
+  {
+   "keys": "⌘G",
+   "action": "Find again"
+  },
+  {
+   "keys": "⌘⇧G",
+   "action": "Find previous"
+  },
+  {
+   "keys": "⌃⇧F",
+   "action": "Hide the menus (compact mode)"
+  },
+  {
+   "keys": "⌘Enter",
+   "action": "Insert page break"
+  },
+  {
+   "keys": "⌥/",
+   "action": "Tool finder"
+  },
+  {
+   "keys": "⌃⌥Z",
+   "action": "Tool finder"
+  },
+  {
+   "keys": "⌘Y",
+   "action": "Repeat last action"
+  },
+  {
+   "keys": "⌘⌥⇧Z",
+   "action": "Switch to editing"
+  },
+  {
+   "keys": "⌘⌥⇧X",
+   "action": "Switch to suggesting"
+  },
+  {
+   "keys": "⌘⌥⇧C",
+   "action": "Switch to viewing"
+  },
+  {
+   "keys": "⌘+",
+   "action": "Zoom in"
+  },
+  {
+   "keys": "⌘-",
+   "action": "Zoom out"
+  },
+  {
+   "keys": "⌘0",
+   "action": "Zoom 100%"
+  },
+  {
+   "keys": "⌘B",
+   "action": "Bold"
+  },
+  {
+   "keys": "⌘I",
+   "action": "Italicize"
+  },
+  {
+   "keys": "⌘U",
+   "action": "Underline"
+  },
+  {
+   "keys": "⌘⇧X",
+   "action": "Strikethrough"
+  },
+  {
+   "keys": "⌘.",
+   "action": "Superscript"
+  },
+  {
+   "keys": "⌘,",
+   "action": "Subscript"
+  },
+  {
+   "keys": "⌘⌥C",
+   "action": "Copy text formatting"
+  },
+  {
+   "keys": "⌘⌥V",
+   "action": "Paste text formatting"
+  },
+  {
+   "keys": "⌘\\",
+   "action": "Clear text formatting"
+  },
+  {
+   "keys": "⌘⇧.",
+   "action": "Increase font size"
+  },
+  {
+   "keys": "⌘⇧,",
+   "action": "Decrease font size"
+  },
+  {
+   "keys": "⌥⇧K",
+   "action": "Small caps"
+  },
+  {
+   "keys": "⌘]",
+   "action": "Increase paragraph indentation"
+  },
+  {
+   "keys": "⌘[",
+   "action": "Decrease paragraph indentation"
+  },
+  {
+   "keys": "⌘⌥0",
+   "action": "Apply normal text style"
+  },
+  {
+   "keys": "⌘⌥1",
+   "action": "Apply heading style 1"
+  },
+  {
+   "keys": "⌘⌥2",
+   "action": "Apply heading style 2"
+  },
+  {
+   "keys": "⌘⌥3",
+   "action": "Apply heading style 3"
+  },
+  {
+   "keys": "⌘⇧L",
+   "action": "Left align"
+  },
+  {
+   "keys": "⌘⇧E",
+   "action": "Center align"
+  },
+  {
+   "keys": "⌘⇧R",
+   "action": "Right align"
+  },
+  {
+   "keys": "⌘⇧J",
+   "action": "Justify"
+  },
+  {
+   "keys": "⌘⇧7",
+   "action": "Numbered list"
+  },
+  {
+   "keys": "⌘⇧8",
+   "action": "Bulleted list"
+  },
+  {
+   "keys": "⌘⇧9",
+   "action": "Checklist"
+  },
+  {
+   "keys": "⌃⇧↑",
+   "action": "Move paragraph up"
+  },
+  {
+   "keys": "⌃⇧↓",
+   "action": "Move paragraph down"
+  },
+  {
+   "keys": "⌘⌥Y",
+   "action": "Alt text"
+  },
+  {
+   "keys": "⌘Esc",
+   "action": "Close drawing editor"
+  },
+  {
+   "keys": "⌘⌥M",
+   "action": "Insert comment"
+  },
+  {
+   "keys": "⌘⌥⇧A",
+   "action": "Open discussion thread"
+  },
+  {
+   "keys": "⌃⌘ e then c",
+   "action": "Enter current comment"
+  },
+  {
+   "keys": "⌘⌥F",
+   "action": "Insert footnote"
+  },
+  {
+   "keys": "⌃⌘ e then f",
+   "action": "Move to current footnote"
+  },
+  {
+   "keys": "⌃⌘ n then f",
+   "action": "Move to next footnote"
+  },
+  {
+   "keys": "⌃⌘ p then f",
+   "action": "Move to previous footnote"
+  },
+  {
+   "keys": "⌃⌘ n then c",
+   "action": "Move to next comment"
+  },
+  {
+   "keys": "⌃⌘ p then c",
+   "action": "Move to previous comment"
+  },
+  {
+   "keys": "R",
+   "action": "Reply to current comment (in comment)"
+  },
+  {
+   "keys": "J",
+   "action": "Move to next comment (in comment)"
+  },
+  {
+   "keys": "K",
+   "action": "Move to previous comment (in comment)"
+  },
+  {
+   "keys": "E",
+   "action": "Resolve current comment (in comment)"
+  },
+  {
+   "keys": "U",
+   "action": "Exit current comment (in comment)"
+  },
+  {
+   "keys": "⌘⇧\\",
+   "action": "Context (right-click) menu"
+  },
+  {
+   "keys": "⌃⌥F",
+   "action": "File menu"
+  },
+  {
+   "keys": "⌃⌥E",
+   "action": "Edit menu"
+  },
+  {
+   "keys": "⌃⌥V",
+   "action": "View menu"
+  },
+  {
+   "keys": "⌃⌥I",
+   "action": "Insert menu"
+  },
+  {
+   "keys": "⌃⌥O",
+   "action": "Format menu"
+  },
+  {
+   "keys": "⌃⌥T",
+   "action": "Tools menu"
+  },
+  {
+   "keys": "⌃⌥H",
+   "action": "Help menu"
+  },
+  {
+   "keys": "⌃⌥A",
+   "action": "Accessibility menu"
+  },
+  {
+   "keys": "⌘⌥⇧K",
+   "action": "Input Tools menu"
+  },
+  {
+   "keys": "⌘⇧K",
+   "action": "Toggle input controls"
+  },
+  {
+   "keys": "⌘A",
+   "action": "Select all"
+  },
+  {
+   "keys": "⌃⌘ u then a",
+   "action": "Select none"
+  },
+  {
+   "keys": "⇧←",
+   "action": "Extend selection one character left"
+  },
+  {
+   "keys": "⇧↑",
+   "action": "Extend selection one line up"
+  },
+  {
+   "keys": "⌥⇧↑",
+   "action": "Extend selection one paragraph up"
+  },
+  {
+   "keys": "⌘⇧↑",
+   "action": "Extend selection to the beginning of the document"
+  },
+  {
+   "keys": "⌘⇧↓",
+   "action": "Extend selection to the end of the document"
+  },
+  {
+   "keys": "⌥⌘Z",
+   "action": "Enable screen reader support"
+  },
+  {
+   "keys": "⌘⌥H",
+   "action": "Enable braille support"
+  },
+  {
+   "keys": "⌘⌥⇧R",
+   "action": "Show live edits"
+  },
+  {
+   "keys": "⌃⌘ a then h",
+   "action": "Show outline"
+  },
+  {
+   "keys": "⌃⌘ n then h",
+   "action": "Move to next heading"
+  },
+  {
+   "keys": "⌃⌘ p then h",
+   "action": "Move to previous heading"
+  },
+  {
+   "keys": "⌃⌘ n then g",
+   "action": "Move to next media"
+  },
+  {
+   "keys": "⌃⌘ n then l",
+   "action": "Move to next link"
+  },
+  {
+   "keys": "⌃⌘ n then b",
+   "action": "Move to next bookmark"
+  },
+  {
+   "keys": "⌘⌥⇧H",
+   "action": "Open revision history"
+  },
+  {
+   "keys": "⌘⌥⇧I",
+   "action": "Open Explore tool"
+  },
+  {
+   "keys": "⌘⌥X",
+   "action": "Open spelling/grammar"
+  },
+  {
+   "keys": "⌘⇧Y",
+   "action": "Open dictionary"
+  },
+  {
+   "keys": "⌘⇧C",
+   "action": "Word count"
+  },
+  {
+   "keys": "⌘⇧S",
+   "action": "Start voice typing"
+  },
+  {
+   "keys": "⌘⌥.",
+   "action": "Go to side panel"
+  },
+  {
+   "keys": "Fn↑",
+   "action": "Page up"
+  },
+  {
+   "keys": "Fn↓",
+   "action": "Page down"
+  },
+  {
+   "keys": "⌘'",
+   "action": "Move to next misspelling"
+  },
+  {
+   "keys": "⌘;",
+   "action": "Move to previous misspelling"
+  },
+  {
+   "keys": "⌃⌘ o then h",
+   "action": "Insert or move to header"
+  },
+  {
+   "keys": "⌃⌘ o then f",
+   "action": "Insert or move to footer"
+  },
+  {
+   "keys": "⌃⌘ e then p",
+   "action": "Move focus to popup"
+  },
+  {
+   "keys": "⌘⌥⇧M",
+   "action": "Move focus out of document text"
+  },
+  {
+   "keys": "Esc",
+   "action": "Return focus to document text"
+  },
+  {
+   "keys": "⌘⌥Enter",
+   "action": "Toggle a checkbox"
+  }
+ ],
+ "Google Drive (웹)": [
+  {
+   "keys": "⌥ g then n",
+   "action": "Go to navigation panel (folders list)"
+  },
+  {
+   "keys": "⌥ g then f",
+   "action": "Go to items view"
+  },
+  {
+   "keys": "⌥ g then i",
+   "action": "Switch between grid and list in items view"
+  },
+  {
+   "keys": "⌥ v then l",
+   "action": "Go to page content"
+  },
+  {
+   "keys": "⌥ g then d",
+   "action": "Go to details pane"
+  },
+  {
+   "keys": "⌥ g then t",
+   "action": "Go to top of application"
+  },
+  {
+   "keys": "⌥ g then a",
+   "action": "Go to download status"
+  },
+  {
+   "keys": "⌥ g then u",
+   "action": "Go to upload status"
+  },
+  {
+   "keys": "⌥ v then d",
+   "action": "Show or hide details pane"
+  },
+  {
+   "keys": "⌥ v then a",
+   "action": "Show or hide activity pane"
+  },
+  {
+   "keys": "⇧ Space",
+   "action": "Select or deselect item"
+  },
+  {
+   "keys": "↓",
+   "action": "Select next item down"
+  },
+  {
+   "keys": "↑",
+   "action": "Select next item up"
+  },
+  {
+   "keys": "←",
+   "action": "Select next item to the left"
+  },
+  {
+   "keys": "→",
+   "action": "Select next item to the right"
+  },
+  {
+   "keys": "⌘ a",
+   "action": "Select all visible items"
+  },
+  {
+   "keys": "Esc",
+   "action": "Clear all selections"
+  },
+  {
+   "keys": "Enter",
+   "action": "Open selected items"
+  },
+  {
+   "keys": "⌘ Enter",
+   "action": "Open selected items in new tab"
+  },
+  {
+   "keys": "F2",
+   "action": "Rename selected items"
+  },
+  {
+   "keys": "⌘ ⌥ a",
+   "action": "Share selected items"
+  },
+  {
+   "keys": "⌘ ⌥ m",
+   "action": "Move selected items to new folder"
+  },
+  {
+   "keys": "⌘ ⌥ s",
+   "action": "Star or unstar selected items"
+  },
+  {
+   "keys": "⌘ ⌃ r",
+   "action": "Create shortcuts to selected items"
+  },
+  {
+   "keys": "Delete or #",
+   "action": "Remove selected items"
+  },
+  {
+   "keys": "⌘ ⌥ l",
+   "action": "Copy selected item URLs to the clipboard"
+  },
+  {
+   "keys": "⌘ ⇧ c",
+   "action": "Copy selected item titles to the clipboard"
+  },
+  {
+   "keys": "⌘ x",
+   "action": "Cut selected items to the clipboard"
+  },
+  {
+   "keys": "⌘ ⇧ v",
+   "action": "Paste items as a shortcut"
+  },
+  {
+   "keys": "⌘ y",
+   "action": "Redo last undone action"
+  },
+  {
+   "keys": "⌃ c then u",
+   "action": "Upload file"
+  },
+  {
+   "keys": "⌃ c then i",
+   "action": "Upload folder"
+  },
+  {
+   "keys": "⌃ c then t",
+   "action": "New Document"
+  },
+  {
+   "keys": "⌃ c then p",
+   "action": "New Presentation"
+  },
+  {
+   "keys": "⌃ c then s",
+   "action": "New Spreadsheet"
+  },
+  {
+   "keys": "⌃ c then d",
+   "action": "New Drawing"
+  },
+  {
+   "keys": "⌃ c then f",
+   "action": "New Folder"
+  },
+  {
+   "keys": "⌃ c then o",
+   "action": "New Form"
+  },
+  {
+   "keys": "⌃ n",
+   "action": "Create menu"
+  },
+  {
+   "keys": "⇧ F10 or ⌃ a",
+   "action": "More actions menu"
+  },
+  {
+   "keys": "⌃ ⇧ a",
+   "action": "Current folder actions menu"
+  },
+  {
+   "keys": "⌃ r",
+   "action": "Sort menu"
+  },
+  {
+   "keys": "⌘ ⇧ s",
+   "action": "Settings menu"
+  },
+  {
+   "keys": "⌘ /",
+   "action": "Display keyboard shortcuts list"
+  },
+  {
+   "keys": "⌘ f",
+   "action": "Find/find next"
+  },
+  {
+   "keys": "⌘ p",
+   "action": "Print"
+  },
+  {
+   "keys": "⌘ z",
+   "action": "Undo last action"
+  },
+  {
+   "keys": "/",
+   "action": "Search your Drive"
+  },
+  {
+   "keys": "⌘ ⌥ p",
+   "action": "Preview items"
+  },
+  {
+   "keys": "Space",
+   "action": "Play/pause (preview)"
+  },
+  {
+   "keys": "-",
+   "action": "Zoom out (preview)"
+  }
+ ]
 }
