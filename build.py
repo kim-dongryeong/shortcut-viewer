@@ -568,7 +568,7 @@ def collect_community():
         app = data.get("app") or data.get("scope")
         if not app or app in have: continue           # already have it from a local scan → skip (no dup)
         for e in data.get("entries", []):
-            e2 = dict(e); e2["detail"] = "공유 · 타 기기 메뉴 스캔"
+            e2 = dict(e); e2["detail"] = ("공유 · 타 기기 · " + (e2.get("detail") or "")).strip(" ·")  # keep original provenance (e.g. .kys commandname)
             entries.append(e2); n += 1
         have.add(app)
     return n
@@ -725,7 +725,8 @@ def collect_menus():
         if os.path.exists(prev):
             try:
                 old = [e for e in json.load(open(prev)).get("entries", [])
-                       if e.get("source") == "app menu" and not (not e.get("mods") and _is_globe_item(e.get("action")))]
+                       if e.get("source") == "app menu" and "공유" not in e.get("detail", "")   # don't re-absorb community seeds (collect_community re-adds them fresh)
+                       and not (not e.get("mods") and _is_globe_item(e.get("action")))]
                 for e in old:
                     e["group"] = e.get("group") or "app menu"; entries.append(e)
                 print(f"  app menus: no Accessibility this run — reused {len(old)} from last scan"); return len(old)
