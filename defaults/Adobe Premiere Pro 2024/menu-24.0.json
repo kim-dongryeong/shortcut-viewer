@@ -1,0 +1,35 @@
+{
+ "app": "Adobe Premiere Pro 2024",
+ "bundle": "com.adobe.PremierePro.24",
+ "entries": [
+  {
+   "action": "Premiere Pro ▸ Hide Premiere Pro",
+   "detail": "app menu (shared)",
+   "group": "Adobe Premiere Pro 2024",
+   "key": "H",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Premiere Pro 2024",
+   "source": "app menu"
+  },
+  {
+   "action": "Premiere Pro ▸ Hide Others",
+   "detail": "app menu (shared)",
+   "group": "Adobe Premiere Pro 2024",
+   "key": "H",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Premiere Pro 2024",
+   "source": "app menu"
+  }
+ ],
+ "provenance": {
+  "kind": "scanned-app-menu",
+  "note": "Apple menu dropped, PII-scrubbed"
+ },
+ "scope": "Adobe Premiere Pro 2024",
+ "version": "24.0"
+}

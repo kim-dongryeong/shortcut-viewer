@@ -1,0 +1,1055 @@
+{
+ "app": "Microsoft PowerPoint",
+ "bundle": "com.microsoft.Powerpoint",
+ "entries": [
+  {
+   "action": "View ▸ Enter Full Screen",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "F",
+   "mods": [],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Grid and Guides ▸ Gridlines",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "'",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Zoom ▸ Zoom In",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "+",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "PowerPoint ▸ Preferences...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": ",",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Zoom ▸ Zoom Out",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "-",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Normal",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "1",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Slide Sorter",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "2",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Notes Page",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "3",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Outline View",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "4",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Reading View",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "5",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Help ▸ PowerPoint Help",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "?",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Select All",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "A",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Copy",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "C",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Format ▸ Crop",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "C",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Center",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "C",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Duplicate",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "D",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Bottom",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "Down",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Format ▸ Alignment ▸ Center",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "E",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Find ▸ Advanced Find...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "F",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Find ▸ Find...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "F",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Fill",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "F",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Find ▸ Find Next",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "G",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Find ▸ Replace...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "H",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "PowerPoint ▸ Hide PowerPoint",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "H",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Insert ▸ Hyperlink...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Format ▸ Alignment ▸ Align Left",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "L",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Left",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "Left",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Minimize",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "M",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ New Presentation",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "N",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Open...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "O",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Print...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "P",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "PowerPoint ▸ Quit PowerPoint",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "Q",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Format ▸ Alignment ▸ Align Right",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "R",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Return to Previous Size",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "R",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Slide Show ▸ Play from Current Slide",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "Return",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Slide Show ▸ Presenter View",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "Return",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Presenter View",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "Return",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Right",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "Right",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Save",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "S",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Format ▸ Font...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "T",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Top",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "Up",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Paste",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "V",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Close",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "W",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Cut",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "X",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Can't Repeat",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "Y",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Can't Undo",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "Z",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Format ▸ Format Object...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "1",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Master ▸ Slide Master",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "1",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Format ▸ Slide Background...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "2",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Master ▸ Handout Master",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "2",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Master ▸ Notes Master",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "3",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Arrange ▸ Send to Back",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "B",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Format ▸ Pick Up Object Style",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "C",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Insert ▸ Duplicate Slide",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "D",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Bottom & Top",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "Down",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Arrange ▸ Bring to Front",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "F",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Arrange ▸ Group",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "G",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Find ▸ Find Previous",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "G",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "PowerPoint ▸ Hide Others",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "H",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Arrange ▸ Regroup",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "J",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Left & Right",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "Left",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Format ▸ Paragraph...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "M",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Insert ▸ Comment",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "M",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Insert ▸ New Slide",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "N",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Open Recent ▸ More...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "O",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Zoom ▸ Fit to Window",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "O",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ New from Template...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "P",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "PowerPoint ▸ Quit and Keep Windows",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "Q",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Ribbon",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "R",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Slide Show ▸ Play from Start",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "Return",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Slide Show",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "Return",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Right & Left",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "Right",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Save As...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "S",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Arrange ▸ Selection Pane...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "U",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Top & Bottom",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "Up",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Paste Special...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "V",
+   "mods": [
+    "ctrl",
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Format ▸ Apply To Defaults",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "V",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Toggle Drawing",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "Z",
+   "mods": [
+    "ctrl",
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Show Outline",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "⇥",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Arrange ▸ Send Backward",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "B",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Format ▸ Animation Painter",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "C",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Bottom & Quarters",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "Down",
+   "mods": [
+    "ctrl",
+    "opt",
+    "shift"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Arrange ▸ Bring Forward",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "F",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Arrange ▸ Ungroup",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "G",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Grid and Guides ▸ Guides",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "G",
+   "mods": [
+    "ctrl",
+    "opt",
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Left & Quarters",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "Left",
+   "mods": [
+    "ctrl",
+    "opt",
+    "shift"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Tools ▸ Thesaurus...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "R",
+   "mods": [
+    "ctrl",
+    "opt",
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Right & Quarters",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "Right",
+   "mods": [
+    "ctrl",
+    "opt",
+    "shift"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Top & Quarters",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "Up",
+   "mods": [
+    "ctrl",
+    "opt",
+    "shift"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Paste and Match Formatting",
+   "detail": "app menu (shared)",
+   "group": "Microsoft PowerPoint",
+   "key": "V",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Microsoft PowerPoint",
+   "source": "app menu"
+  }
+ ],
+ "provenance": {
+  "kind": "scanned-app-menu",
+  "note": "Apple menu dropped, PII-scrubbed"
+ },
+ "scope": "Microsoft PowerPoint",
+ "version": "16.110.1"
+}

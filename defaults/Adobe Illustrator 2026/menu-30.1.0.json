@@ -1,0 +1,1451 @@
+{
+ "app": "Adobe Illustrator 2026",
+ "bundle": "com.adobe.illustrator",
+ "entries": [
+  {
+   "action": "Help ▸ Illustrator Help...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Brushes",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Color",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Layers",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Show Grid",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "'",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Zoom In",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "+",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Illustrator ▸ Settings… ▸ Units...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": ",",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Zoom Out",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "-",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Fit Artboard in Window",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "0",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Actual Size",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "1",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Object ▸ Lock ▸ Selection",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "2",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Object ▸ Hide ▸ Selection",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "3",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Guides ▸ Make Guides",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "5",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Select ▸ Reselect",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "6",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Object ▸ Clipping Mask ▸ Make",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "7",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Object ▸ Compound Path ▸ Make",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "8",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Guides ▸ Hide Guides",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": ";",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Select ▸ All",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "A",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Paste in Back",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "B",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Copy",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "C",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Object ▸ Transform ▸ Transform Again",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "D",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ View using CPU",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "E",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Paste in Front",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "F",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Object ▸ Group",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "G",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Hide Edges",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "H",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Spelling ▸ Check Spelling...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "I",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Object ▸ Path ▸ Join",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "J",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Illustrator ▸ Settings… ▸ General...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Arrange ▸ Minimize Window",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "M",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ New...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "N",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Open...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "O",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Print...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "P",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Illustrator ▸ Quit Illustrator",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "Q",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Rulers ▸ Show Rulers",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "R",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Save",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "S",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Type ▸ Character",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "T",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Smart Guides",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "U",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Paste",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "V",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Close",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "W",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Cut",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "X",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Outline",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "Y",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Undo Rectangle",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "Z",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Object ▸ Arrange ▸ Send Backward",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "[",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Object ▸ Arrange ▸ Bring Forward",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "]",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Color Guide",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Graphic Styles",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Appearance",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Align",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Info",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Transform",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Gradient",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Stroke",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Attributes",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Scripts ▸ Other Script...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Snap to Grid",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "'",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Snap to Point",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "'",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Type ▸ Insert Special Character ▸ Hyphens And Dashes ▸ Discretionary Hyphen",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "-",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Fit All in Window",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "0",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Reset Rotate View",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "1",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Object ▸ Unlock All",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "2",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Object ▸ Show All",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "3",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Guides ▸ Release Guides",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "5",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Object ▸ Clipping Mask ▸ Release",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "7",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Guides ▸ Lock Guides",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": ";",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Select ▸ All on Active Artboard",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "A",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Select ▸ Deselect",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "A",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Object ▸ Blend ▸ Make",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "B",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Hide Bounding Box",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "B",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Object ▸ Envelope Distort ▸ Make with Top Object",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "C",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Show Transparency Grid",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "D",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Effect ▸ Apply Last Effect",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "E",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Export ▸ Export for Screens...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "E",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Object ▸ Ungroup",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "G",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Object ▸ Ungroup All",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "G",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Hide Gradient Annotator",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "G",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Illustrator ▸ Hide Others",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "H",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Hide Artboards",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "H",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Type ▸ Show Hidden Characters",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "I",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Perspective Grid ▸ Show Grid",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "I",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Object ▸ Path ▸ Average...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "J",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Color Settings...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "K",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Object ▸ Envelope Distort ▸ Make with Mesh...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "M",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Object ▸ Transform ▸ Move...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "M",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Type ▸ Insert WhiteSpace Character ▸ Em Space",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "M",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ New from Template...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "N",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Type ▸ Insert WhiteSpace Character ▸ En Space",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "N",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Browse in Bridge...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "O",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Type ▸ Create Outlines",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "O",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Document Setup...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "P",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Place...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "P",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Rulers ▸ Change to Global Rulers",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "R",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Save As...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "S",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Save a Copy...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "S",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Type ▸ Paragraph",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "T",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Type ▸ Tabs",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "T",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Paste in Place",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "V",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Paste without Formatting",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "V",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Close All",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "W",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Hide Template",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "W",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Object ▸ Live Paint ▸ Make",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "X",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Hide Text Threads",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "Y",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Pixel Preview",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "Y",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Redo",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "Z",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Object ▸ Arrange ▸ Send to Back",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "[",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Select ▸ Next Object Below",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "[",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Object ▸ Arrange ▸ Bring to Front",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "]",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Select ▸ Next Object Above",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "]",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Object ▸ Pattern ▸ Edit Pattern",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Pathfinder",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Transparency",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Symbols",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Object ▸ Compound Path ▸ Release",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "8",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Object ▸ Blend ▸ Release",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "B",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Object ▸ Transform ▸ Transform Each...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "D",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Effect ▸ Last Effect",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "E",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ File Info...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "I",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Keyboard Shortcuts...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "K",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Type ▸ Insert WhiteSpace Character ▸ Thin Space",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "M",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Package...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "P",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Export ▸ Save for Web (Legacy)...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "S",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Type ▸ OpenType",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "T",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Paste on All Artboards",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "V",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Object ▸ Envelope Distort ▸ Make with Warp...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "W",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Overprint Preview",
+   "detail": "app menu (shared)",
+   "group": "Adobe Illustrator 2026",
+   "key": "Y",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app menu"
+  }
+ ],
+ "provenance": {
+  "kind": "scanned-app-menu",
+  "note": "Apple menu dropped, PII-scrubbed"
+ },
+ "scope": "Adobe Illustrator 2026",
+ "version": "30.1.0"
+}

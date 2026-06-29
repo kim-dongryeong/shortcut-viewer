@@ -1,0 +1,1172 @@
+{
+ "app": "Adobe Photoshop 2026",
+ "bundle": "com.adobe.Photoshop",
+ "entries": [
+  {
+   "action": "Window ▸ Brush Settings",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Color",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Layers",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Info",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Revert",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Show ▸ Grid",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "'",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Zoom In",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "+",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Hide Layers",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": ",",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Zoom Out",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "-",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Lock Layers...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "/",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Fit on Screen",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "0",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ 100%",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "1",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Show ▸ Guides",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": ";",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Select ▸ All",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "A",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Image ▸ Adjustments ▸ Color Balance...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "B",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Copy",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "C",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Select ▸ Deselect",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "D",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Merge Layers",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "E",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Search",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "F",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Group Layers",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "G",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Extras",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "H",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Image ▸ Adjustments ▸ Invert",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "I",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ New ▸ Layer Via Copy",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "J",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Photoshop 2026 ▸ Settings… ▸ General...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Image ▸ Adjustments ▸ Levels...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "L",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Image ▸ Adjustments ▸ Curves...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "M",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ New...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "N",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Open...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "O",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Print...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "P",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Photoshop 2026 ▸ Quit Photoshop",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "Q",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Rulers",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "R",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Save",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "S",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Free Transform",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "T",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Image ▸ Adjustments ▸ Hue/Saturation...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "U",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Paste",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "V",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Close",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "W",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Cut",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "X",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Proof Colors",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "Y",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Undo Brush Tool",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "Z",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Arrange ▸ Send Backward",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "[",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Arrange ▸ Bring Forward",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "]",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Fill...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Select ▸ Modify ▸ Feather...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Actions",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Quick Export as PNG",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "'",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Guides ▸ Lock Guides",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": ";",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Snap",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": ";",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Select ▸ All Layers",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "A",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Image ▸ Auto Color",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "B",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Copy Merged",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "C",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Image ▸ Canvas Size...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "C",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Select ▸ Reselect",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "D",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Merge Visible",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "E",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Fade Brush Tool...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "F",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Filter ▸ Last Filter",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "F",
+   "mods": [
+    "ctrl",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Create Clipping Mask",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "G",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Ungroup Layers",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "G",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Photoshop 2026 ▸ Hide Others",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "H",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Photoshop 2026 ▸ Hide Photoshop",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "H",
+   "mods": [
+    "ctrl",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Show ▸ Target Path",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "H",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Image ▸ Image Size...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "I",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Select ▸ Inverse",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "I",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ New ▸ Layer Via Cut",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "J",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Color Settings...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "K",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Image ▸ Auto Tone",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "L",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Image ▸ Analysis ▸ Record Measurements",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "M",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Arrange ▸ Minimize",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "M",
+   "mods": [
+    "ctrl",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ New ▸ Layer...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "N",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Browse in Bridge...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "O",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Close Others",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "P",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Filter ▸ Lens Correction...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "R",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Select ▸ Select and Mask...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "R",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Save As...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "S",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Save a Copy...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "S",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Transform ▸ Again",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "T",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Image ▸ Adjustments ▸ Desaturate",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "U",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Paste Special ▸ Paste in Place",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "V",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Filter ▸ Vanishing Point...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "V",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Close All",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "W",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Close and Go to Bridge...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "W",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Filter ▸ Liquify...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "X",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Gamut Warning",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "Y",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Redo",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "Z",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Toggle Last State",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "Z",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Arrange ▸ Send to Back",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "[",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Arrange ▸ Bring to Front",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "]",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Export As...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "'",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Filter ▸ Adaptive Wide Angle...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "A",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Image ▸ Adjustments ▸ Black & White...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "B",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Content-Aware Scale",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "C",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Select ▸ Find Layers",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "F",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ File Info...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "I",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Keyboard Shortcuts...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "K",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Image ▸ Auto Contrast",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "L",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Menus...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "M",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Print One Copy",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "P",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Export ▸ Save for Web...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "S",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Image ▸ Generative Upscale...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "U",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Paste Special ▸ Paste Into",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "V",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Export ▸ Export As...",
+   "detail": "app menu (shared)",
+   "group": "Adobe Photoshop 2026",
+   "key": "W",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app menu"
+  }
+ ],
+ "provenance": {
+  "kind": "scanned-app-menu",
+  "note": "Apple menu dropped, PII-scrubbed"
+ },
+ "scope": "Adobe Photoshop 2026",
+ "version": "27.5.0"
+}

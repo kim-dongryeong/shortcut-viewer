@@ -1,0 +1,551 @@
+{
+ "app": "Notion",
+ "bundle": "notion.id",
+ "entries": [
+  {
+   "action": "View ▸ Toggle Full Screen",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "F",
+   "mods": [],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Zoom In",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "+",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "Notion ▸ Preferences…",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": ",",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Zoom Out",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "-",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Actual Size",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "0",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Select All",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "A",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Copy",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "C",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Center",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "C",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Bottom",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "Down",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Fill",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "F",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "Notion ▸ Hide Notion",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "H",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Copy Link to Current Page",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "L",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Left",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "Left",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Minimize",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "M",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "Notion ▸ Quit",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "Q",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Reload",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "R",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Return to Previous Size",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "R",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Right",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "Right",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ New Tab",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "T",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Show Next Tab",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "Tab",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Top",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "Up",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Paste",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "V",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Close Tab",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "W",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Cut",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "X",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Undo",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "Z",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "History ▸ Back",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "[",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Show/Hide Sidebar",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "\\",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "History ▸ Forward",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "]",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Bottom & Top",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "Down",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "Notion ▸ Hide Others",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "H",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Toggle Developer Tools",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "I",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Copy Name of Current Page",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "L",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Left & Right",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "Left",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Minimize All",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "M",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ New Window",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "N",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "Notion ▸ Quit and Keep Windows",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "Q",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Force Reload",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "R",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Right & Left",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "Right",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Reopen Last Closed Tab",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "T",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Show Previous Tab",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "Tab",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Top & Bottom",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "Up",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Redo",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "Z",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Bottom & Quarters",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "Down",
+   "mods": [
+    "ctrl",
+    "opt",
+    "shift"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Left & Quarters",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "Left",
+   "mods": [
+    "ctrl",
+    "opt",
+    "shift"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Right & Quarters",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "Right",
+   "mods": [
+    "ctrl",
+    "opt",
+    "shift"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Top & Quarters",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "Up",
+   "mods": [
+    "ctrl",
+    "opt",
+    "shift"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Paste and Match Style",
+   "detail": "app menu (shared)",
+   "group": "Notion",
+   "key": "V",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Notion",
+   "source": "app menu"
+  }
+ ],
+ "provenance": {
+  "kind": "scanned-app-menu",
+  "note": "Apple menu dropped, PII-scrubbed"
+ },
+ "scope": "Notion",
+ "version": "7.23.0"
+}

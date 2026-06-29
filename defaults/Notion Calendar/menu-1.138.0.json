@@ -1,0 +1,516 @@
+{
+ "app": "Notion Calendar",
+ "bundle": "com.cron.electron",
+ "entries": [
+  {
+   "action": "Edit ▸ Delete",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": "Delete",
+   "mods": [],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Toggle Full Screen",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": "F",
+   "mods": [],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Interface Scale ▸ Zoom In",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": "+",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "Notion Calendar ▸ Settings…",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": ",",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Interface Scale ▸ Zoom Out",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": "-",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Interface Scale ▸ Actual Size",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": "0",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Notion Calendar",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": "1",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Select All Visible",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": "A",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Copy",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": "C",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Center",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": "C",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Duplicate",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": "D",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Bottom",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": "Down",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Fill",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": "F",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "Notion Calendar ▸ Hide Notion Calendar",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": "H",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Left",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": "Left",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Minimize",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": "M",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "Notion Calendar ▸ Quit Notion Calendar",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": "Q",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Reload",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": "R",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Return to Previous Size",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": "R",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Right",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": "Right",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Top",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": "Up",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Paste",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": "V",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Close Window",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": "W",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Cut",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": "X",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Undo",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": "Z",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Zoom Hours Out",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": ",",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Zoom Hours In",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": ".",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Default Hour Size",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": "0",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Bottom & Top",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": "Down",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "Notion Calendar ▸ Hide Others",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": "H",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Toggle Developer Tools",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": "I",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Left & Right",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": "Left",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Minimize All",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": "M",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "Notion Calendar ▸ Quit and Keep Windows",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": "Q",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Force Reload",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": "R",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Right & Left",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": "Right",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Top & Bottom",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": "Up",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Close All",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": "W",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Redo",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": "Z",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Bottom & Quarters",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": "Down",
+   "mods": [
+    "ctrl",
+    "opt",
+    "shift"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Left & Quarters",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": "Left",
+   "mods": [
+    "ctrl",
+    "opt",
+    "shift"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Right & Quarters",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": "Right",
+   "mods": [
+    "ctrl",
+    "opt",
+    "shift"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Top & Quarters",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": "Up",
+   "mods": [
+    "ctrl",
+    "opt",
+    "shift"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Paste and Match Style",
+   "detail": "app menu (shared)",
+   "group": "Notion Calendar",
+   "key": "V",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Notion Calendar",
+   "source": "app menu"
+  }
+ ],
+ "provenance": {
+  "kind": "scanned-app-menu",
+  "note": "Apple menu dropped, PII-scrubbed"
+ },
+ "scope": "Notion Calendar",
+ "version": "1.138.0"
+}

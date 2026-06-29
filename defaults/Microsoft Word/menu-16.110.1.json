@@ -1,0 +1,647 @@
+{
+ "app": "Microsoft Word",
+ "bundle": "com.microsoft.Word",
+ "entries": [
+  {
+   "action": "View ▸ Enter Full Screen",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "F",
+   "mods": [],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Word ▸ Preferences...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": ",",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Insert ▸ Equation",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "=",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Help ▸ Word Help",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "?",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Select All",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "A",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Copy",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "C",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Center",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "C",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Format ▸ Font...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "D",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Bottom",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "Down",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Find ▸ Find...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "F",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Fill",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "F",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Find ▸ Find Next",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "G",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Word ▸ Hide Word",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "H",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Insert ▸ Hyperlink...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Left",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "Left",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Minimize",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "M",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ New Document",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "N",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Open...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "O",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Print...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "P",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Word ▸ Quit Word",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "Q",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Return to Previous Size",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "R",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Insert ▸ Break ▸ Page Break",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "Return",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Right",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "Right",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Save",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "S",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Top",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "Up",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Paste",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "V",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Close",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "W",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Cut",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "X",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Can't Repeat",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "Y",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Can't Undo",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "Z",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Bottom & Top",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "Down",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Find ▸ Find Previous",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "G",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Find ▸ Go To...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "G",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Word ▸ Hide Others",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "H",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Left & Right",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "Left",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Format ▸ Paragraph...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "M",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Open Recent ▸ More...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "O",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ New from Template...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "P",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Word ▸ Quit and Keep Windows",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "Q",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Ribbon",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "R",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Insert ▸ Break ▸ Column Break",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "Return",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Right & Left",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "Right",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Save As...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "S",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Format ▸ Selection Pane...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "U",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Top & Bottom",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "Up",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Paste Special...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "V",
+   "mods": [
+    "ctrl",
+    "cmd"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Table ▸ Delete ▸ Rows",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "X",
+   "mods": [
+    "ctrl",
+    "cmd"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Toggle Drawing",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "Z",
+   "mods": [
+    "ctrl",
+    "cmd"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Bottom & Quarters",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "Down",
+   "mods": [
+    "ctrl",
+    "opt",
+    "shift"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Focus",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "F",
+   "mods": [
+    "ctrl",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Left & Quarters",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "Left",
+   "mods": [
+    "ctrl",
+    "opt",
+    "shift"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Tools ▸ Thesaurus...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "R",
+   "mods": [
+    "ctrl",
+    "opt",
+    "cmd"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Right & Quarters",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "Right",
+   "mods": [
+    "ctrl",
+    "opt",
+    "shift"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Top & Quarters",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "Up",
+   "mods": [
+    "ctrl",
+    "opt",
+    "shift"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Paste and Match Formatting",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Word",
+   "key": "V",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Microsoft Word",
+   "source": "app menu"
+  }
+ ],
+ "provenance": {
+  "kind": "scanned-app-menu",
+  "note": "Apple menu dropped, PII-scrubbed"
+ },
+ "scope": "Microsoft Word",
+ "version": "16.110.1"
+}

@@ -1,0 +1,634 @@
+{
+ "app": "Microsoft Excel",
+ "bundle": "com.microsoft.Excel",
+ "entries": [
+  {
+   "action": "View ▸ Enter Full Screen",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "F",
+   "mods": [],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Excel ▸ Preferences...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": ",",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Format ▸ Cells...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "1",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Help ▸ Excel Help",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "?",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Select All",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "A",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Copy",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "C",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Center",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "C",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Bottom",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "Down",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Find ▸ Find...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "F",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Fill",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "F",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Find ▸ Find Next",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "G",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Find ▸ Go To...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "G",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Find ▸ Replace...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "H",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Excel ▸ Hide Excel",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "H",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Insert ▸ Hyperlink...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Left",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "Left",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Minimize",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "M",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ New",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "N",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Open...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "O",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Print...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "P",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Excel ▸ Quit Excel",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "Q",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Return to Previous Size",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "R",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Right",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "Right",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Save",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "S",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Top",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "Up",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Paste",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "V",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Close",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "W",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Cut",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "X",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Can't Repeat",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "Y",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Can't Undo",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "Z",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Insert ▸ Sheet ▸ Insert Sheet",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Bottom & Top",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "Down",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Find ▸ Find Previous",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "G",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Excel ▸ Hide Others",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "H",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Left & Right",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "Left",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Minimize All",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "M",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Open Recent ▸ More...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "O",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ New from Template...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "P",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Excel ▸ Quit and Keep Windows",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "Q",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Data ▸ Sort...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "R",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Ribbon",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "R",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Right & Left",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "Right",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Save As...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "S",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Format ▸ Selection Pane...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "U",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Top & Bottom",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "Up",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Paste Special...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "V",
+   "mods": [
+    "ctrl",
+    "cmd"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Toggle Drawing",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "Z",
+   "mods": [
+    "ctrl",
+    "cmd"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Bottom & Quarters",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "Down",
+   "mods": [
+    "ctrl",
+    "opt",
+    "shift"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Left & Quarters",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "Left",
+   "mods": [
+    "ctrl",
+    "opt",
+    "shift"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Tools ▸ Thesaurus...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "R",
+   "mods": [
+    "ctrl",
+    "opt",
+    "cmd"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Right & Quarters",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "Right",
+   "mods": [
+    "ctrl",
+    "opt",
+    "shift"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Tools ▸ Translate...",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "T",
+   "mods": [
+    "ctrl",
+    "opt",
+    "cmd"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Move & Resize ▸ Top & Quarters",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "Up",
+   "mods": [
+    "ctrl",
+    "opt",
+    "shift"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Paste and Match Formatting",
+   "detail": "app menu (shared)",
+   "group": "Microsoft Excel",
+   "key": "V",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Microsoft Excel",
+   "source": "app menu"
+  }
+ ],
+ "provenance": {
+  "kind": "scanned-app-menu",
+  "note": "Apple menu dropped, PII-scrubbed"
+ },
+ "scope": "Microsoft Excel",
+ "version": "16.110.1"
+}

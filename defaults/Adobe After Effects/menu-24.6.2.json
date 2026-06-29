@@ -1,0 +1,1610 @@
+{
+ "app": "Adobe After Effects",
+ "bundle": "com.adobe.AfterEffects",
+ "entries": [
+  {
+   "action": "View ▸ Zoom Out",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": ",",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Zoom In",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": ".",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Enter Full Screen",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "F",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Animation ▸ Reveal Properties with Keyframes",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "U",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Composition ▸ Composition Mini-Flowchart",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "⇥",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Clear",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "⌦",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Switch to Last 3D View",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "⎋",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Help ▸ After Effects Help...",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Effect ▸ Effect Controls",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Animation ▸ Keyframe Assistant ▸ Easy Ease",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Show Grid",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "'",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Previous Blending Mode",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "-",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Add Footage to Comp",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "/",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Project",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "0",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Tools",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "1",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Info",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "2",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Preview",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "3",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Audio",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "4",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Effects & Presets",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "5",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Character",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "6",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Paragraph",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "7",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Markers ▸ Add Marker",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "8",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Paint",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "8",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Brushes",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "9",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Show Guides",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": ";",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Next Blending Mode",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "=",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Select All",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "A",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Quality ▸ Bilinear",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "B",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Copy",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "C",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Duplicate",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "D",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Edit Original...",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "E",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Open Layer Source",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "Enter",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Find",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "F",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Mask and Shape Path ▸ Group Shapes",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "G",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "After Effects ▸ Hide After Effects",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "H",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Import ▸ File...",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "I",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Resolution ▸ Full",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "J",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Composition ▸ Composition Settings...",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Switches ▸ Lock",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "L",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Composition ▸ New Composition...",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "N",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Open Project...",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "O",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "After Effects ▸ Quit After Effects",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "Q",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Show Rulers",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "R",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Save",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "S",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Mask and Shape Path ▸ Free Transform Points",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "T",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Quality ▸ Best",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "U",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Paste",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "V",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Close",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "W",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Cut",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "X",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ New ▸ Solid...",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "Y",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Can’t Undo",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "Z",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Arrange ▸ Send Backward",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "[",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ New Comp from Selection...",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "\\",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Arrange ▸ Bring Forward",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "]",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Transform ▸ Center In View",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "↖",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Purge ▸ All Memory",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "⌦",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Animation ▸ Keyframe Assistant ▸ Easy Ease In",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Workspace ▸ Default",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Workspace ▸ Review",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Workspace ▸ Learn",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Keyboard Shortcuts",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "'",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Snap to Grid",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "'",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Window ▸ Render Queue",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "0",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "After Effects ▸ Settings… ▸ General...",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": ";",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Snap to Guides",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": ";",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Animation ▸ Add Expression",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "=",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Deselect All",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "A",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Quality ▸ Bicubic",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "B",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Copy with Property Links",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "C",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Interpret Footage ▸ Remember Interpretation",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "C",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Pre-compose...",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "C",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Split Layer",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "D",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Effect ▸ Remove All",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "E",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Mask ▸ Mask Feather...",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "F",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Transform ▸ Fit to Comp",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "F",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Interpret Footage ▸ Main...",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "G",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Mask and Shape Path ▸ Ungroup Shapes",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "G",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "After Effects ▸ Hide Others",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "H",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Replace Footage ▸ File...",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "H",
+   "mods": [
+    "ctrl",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Show Layer Controls",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "H",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Composition ▸ Preview ▸ Cache Frames When Idle",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "I",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Import ▸ Multiple Files...",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "I",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Mask ▸ Inverted",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "I",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Go to Time...",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "J",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Resolution ▸ Half",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "J",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Animation ▸ Keyframe Interpolation...",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "K",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Animation ▸ Keyframe Velocity...",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "K",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Reload Footage",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "L",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Switches ▸ Unlock All Layers",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "L",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Composition ▸ Add to Adobe Media Encoder Queue...",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "M",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Composition ▸ Add to Render Queue",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "M",
+   "mods": [
+    "ctrl",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Mask ▸ Mask Shape...",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "M",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ New ▸ New Project",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "N",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Mask ▸ New Mask",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "N",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Transform ▸ Auto-Orient...",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "O",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Transform ▸ Opacity...",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "O",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Set Proxy ▸ File...",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "P",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Transform ▸ Position...",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "P",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Time ▸ Time-Reverse Layer",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "R",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Transform ▸ Rotation...",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "R",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Composition ▸ Save Frame As ▸ File...",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "S",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Save As ▸ Save As...",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "S",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Time ▸ Enable Time Remapping",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "T",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Quality ▸ Draft",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "U",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ View Options...",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "U",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Paste Reversed Keyframes",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "V",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Interpret Footage ▸ Apply Interpretation",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "V",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Composition ▸ Trim Comp to Work Area",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "X",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Layer Settings...",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "Y",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ New ▸ Adjustment Layer",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "Y",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Edit ▸ Can’t Redo",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "Z",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Arrange ▸ Send to Back",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "[",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Arrange ▸ Bring to Front",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "]",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Transform ▸ Center Anchor Point in Layer Content",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "↖",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Animation ▸ Keyframe Assistant ▸ Easy Ease Out",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Composition ▸ Composition Flowchart",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Lock Guides",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": ";",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ New ▸ Camera...",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "C",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Scripts ▸ Recent Script Files ▸ dummy",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "D",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Effect ▸ Last Effect",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "E",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Animation ▸ Recent Animation Presets ▸ Recent Favorites List",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "F",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Transform ▸ Fit to Comp Height",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "G",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Animation ▸ Toggle Hold Keyframe",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "H",
+   "mods": [
+    "ctrl",
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Transform ▸ Fit to Comp Width",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "H",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Resolution ▸ Quarter",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "J",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Project Settings...",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "K",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ New ▸ Light...",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "L",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ New ▸ New Folder",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "N",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ New Viewer",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "N",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Browse in Bridge...",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "O",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Open Recent ▸ Recent Project List",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "P",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Transform ▸ Orientation...",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "R",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "File ▸ Increment and Save",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "S",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ New ▸ Text",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "T",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Quality ▸ Wireframe",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "U",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ Switches ▸ Video",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "V",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "Layer ▸ New ▸ Null Object",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "Y",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  },
+  {
+   "action": "View ▸ Look at Selected Layers",
+   "detail": "app menu (shared)",
+   "group": "Adobe After Effects",
+   "key": "\\",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app menu"
+  }
+ ],
+ "provenance": {
+  "kind": "scanned-app-menu",
+  "note": "Apple menu dropped, PII-scrubbed"
+ },
+ "scope": "Adobe After Effects",
+ "version": "24.6.2"
+}
