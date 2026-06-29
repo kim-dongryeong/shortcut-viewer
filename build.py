@@ -128,7 +128,9 @@ entries = []
 gestures = []   # non-static triggers (no regular key): tap-count/hold modifier gestures, L/R-specific.
 def addg(mod, action, source, scope, detail="", side="either", count=1, hold=False, group=None):
     # mod: cmd|opt|ctrl|shift|fn|caps · side: either|left|right · count: tap count · hold: hold final press
-    gestures.append({"mod": mod, "side": side, "count": int(count), "hold": bool(hold),
+    try: count = int(count)
+    except Exception: count = 1   # tolerate a bad hand-edited manual_gestures.json without aborting the whole build
+    gestures.append({"mod": mod, "side": side, "count": count, "hold": bool(hold),
                      "action": (action or "").strip() or "(untitled)", "source": source,
                      "scope": scope, "detail": detail, "group": group or source})
 # macOS sets NSEvent's Function flag (0x800000) automatically on these keys — it does NOT mean

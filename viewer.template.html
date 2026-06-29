@@ -97,6 +97,7 @@
   .gsym .gtag{font-size:10px;color:var(--dim);font-weight:700;border:1px solid var(--line);border-radius:4px;padding:0 3px;vertical-align:middle}
   .gact{font-size:13px;color:#cdd3df}
   .gsrc{font-size:11px;color:var(--dim);display:inline-flex;align-items:center;gap:4px}
+  .gsrc .fdot{display:inline-block;width:6px;height:6px;border-radius:2px}
   #chordbar{background:#0b2a45;border:1px solid #38bdf8;border-radius:9px;padding:10px 14px;margin:8px 0;color:#cfe;font-size:14px}
   #chordbar .x{text-decoration:underline;cursor:pointer;color:#7dd3fc;font-weight:700}
   .drow{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-bottom:1px solid var(--line)}
@@ -407,7 +408,7 @@ function renderGestures(){
     +`<div class="gwrap">`+gs.map(g=>
       `<div class="gcard" title="${(g.detail||'').replace(/"/g,'&quot;')}"><span class="gsym">${gestureSym(g)}</span>`
       +`<span class="gact">${g.action.replace(/</g,'&lt;')}</span>`
-      +`<span class="gsrc"><span class="fdot" style="background:${COLORS[g.source]||'#888'}"></span>${g.source}${g.scope&&g.scope!=='global'&&g.scope!==g.source?' · '+g.scope:''}</span></div>`
+      +`<span class="gsrc"><span class="fdot" style="background:${COLORS[g.source]||'#888'}"></span>${g.source.replace(/</g,'&lt;')}${g.scope&&g.scope!=='global'&&g.scope!==g.source?' · '+g.scope.replace(/</g,'&lt;'):''}</span></div>`
     ).join('')+`</div>`;
 }
 function ovGroupKey(e){   // 치트시트 묶음 기준
