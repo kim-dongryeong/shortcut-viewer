@@ -561,7 +561,8 @@ def collect_community():
     # seed app-menu packs shared from OTHER machines (defaults/<app>/menu-*.json, made by share_menus.py)
     # for apps NOT scanned on this machine — so you see them without installing the app. Call LAST.
     n, have = 0, {e["scope"] for e in entries}
-    for path in sorted(glob.glob(os.path.join(DEFAULTS_DIR, "*", "menu-*.json"))):
+    packs = glob.glob(os.path.join(DEFAULTS_DIR, "*", "menu-*.json")) + glob.glob(os.path.join(DEFAULTS_DIR, "*", "keymap-*.json"))
+    for path in sorted(packs):
         try: data = json.load(open(path))
         except Exception: continue
         app = data.get("app") or data.get("scope")
