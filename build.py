@@ -664,7 +664,7 @@ def collect_web():
         for it in (items or []):
             mods, key, seq = web_key(it.get("keys", ""))
             if not key: continue
-            det = f"web · {scope} · {it.get('keys','')}" + (" (시퀀스)" if seq else "")
+            det = f"공식문서 웹 fetch·파싱 (로컬 스캔 아님) · {it.get('keys','')}" + (" (시퀀스)" if seq else "")
             add(mods, key, it.get("action", ""), "web", scope, det); n += 1
     return n
 

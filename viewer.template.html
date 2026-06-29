@@ -222,7 +222,7 @@ function renderMeta(){
   document.getElementById('metaline').textContent =
     `생성 ${DB.meta.generated} · 총 ${DB.meta.total}개 · `+Object.entries(c).map(([k,v])=>`${k} ${v}`).join(' · ');
   document.getElementById('legend').innerHTML = Object.entries(COLORS)
-    .map(([k,v])=>`<span><span class="dot" style="background:${v}"></span>${k}</span>`).join('')
+    .map(([k,v])=>`<span title="${k==='web'?'제조사 공식문서에서 fetch·파싱 (로컬 스캔 아님)':''}"><span class="dot" style="background:${v}"></span>${k==='web'?'web=공식문서 fetch(스캔 아님)':k}</span>`).join('')
     + `<span><span class="dot" style="background:#f59e0b"></span>같은 컨텍스트 겹침(+N)</span>`;
 }
 function renderChips(){
