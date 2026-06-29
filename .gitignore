@@ -5,6 +5,7 @@ btt_export.json
 
 # ── Personal data — YOUR shortcuts. Never commit. ─────────────────────
 vscode_default_keybindings.json
+codex_keybindings.json
 raycast_manual.json
 manual_globals.json
 annotations.json

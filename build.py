@@ -535,6 +535,30 @@ def collect_vscode():
             add(mods, key, action, "app config", "Code", det, cmods=cmods, ckey=ckey); n += 1
     return n
 
+CODEX_MODS = {'cmdorctrl':'cmd','commandorcontrol':'cmd','cmd':'cmd','command':'cmd','super':'cmd','meta':'cmd',
+              'ctrl':'ctrl','control':'ctrl','alt':'opt','option':'opt','altgr':'opt','shift':'shift'}
+def codex_accel(accel):                         # Electron accelerator → (mods, key); CmdOrCtrl=⌘ on macOS, Alt=⌥
+    mods, key = [], None
+    for p in accel.split('+'):
+        lp = p.lower()
+        if lp in CODEX_MODS: mods.append(CODEX_MODS[lp])
+        elif p: key = p
+    return mods, norm_keytoken(key)
+def collect_codex():                            # in-app shortcuts (Settings ▸ Keyboard Shortcuts), not in the menu bar
+    path = os.path.join(PROJ, "codex_keybindings.json")
+    if not os.path.exists(path):
+        print("  Codex: no codex_keybindings.json — run ./dump_codex.sh to extract in-app shortcuts")
+        return 0
+    try: data = json.load(open(path))
+    except Exception as e: print("  Codex: parse fail", e); return 0
+    n = 0
+    for it in data:
+        mods, key = codex_accel(it.get("key", ""))
+        if not key: continue
+        label = (it.get("title") or it.get("id") or "").strip()
+        add(mods, key, label, "app config", "Codex", "codex · " + it.get("id", ""), group="Codex"); n += 1
+    return n
+
 def decode_ax_mods(m):
     m = int(m)
     if m < 0: return []
@@ -599,11 +623,11 @@ sys_n = collect_system() + collect_defaults() + collect_zoom()
 kara_n = collect_karabiner(); btt_n = collect_btt(); ray_n = collect_raycast()
 mg_n = collect_manual_globals()
 sb_n = collect_shottr() + collect_screenbrush()
-obs_n = collect_obsidian(); vsc_n = collect_vscode()
+obs_n = collect_obsidian(); vsc_n = collect_vscode(); cdx_n = collect_codex()
 menu_n = collect_menus(); appd_n = collect_app_defaults()   # menus first so curated defaults dedup against them
 counts = {"system": sys_n, "Karabiner": kara_n, "BTT": btt_n, "Raycast": ray_n, "수동": mg_n,
           "Shottr/ScreenBrush": sb_n,
-          "Obsidian": obs_n, "VS Code": vsc_n, "app menu": menu_n, "app 기본": appd_n}
+          "Obsidian": obs_n, "VS Code": vsc_n, "Codex": cdx_n, "app menu": menu_n, "app 기본": appd_n}
 for k, v in counts.items(): print(f"  {k:12s} {v}")
 
 apps = sorted({e["scope"] for e in entries if e["scope"] != "global"})

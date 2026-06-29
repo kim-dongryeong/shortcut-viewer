@@ -13,7 +13,7 @@ collectors (build.py + axmenudump) → shortcuts.json → viewer.html  (from vie
 - `axmenudump.swift` → `axmenudump` (compiled binary) — reads running apps' menu shortcuts via the Accessibility API.
 - `viewer.template.html` — the interactive grid UI; data is injected at the `/*__DATA__*/` marker.
 - `render.py` — re-renders `viewer.html` from the existing `shortcuts.json` only (no scan).
-- `refresh.sh` — (re)compile axmenudump + run build.py (full scan). `dump_vscode.sh` — export VS Code default keybindings.
+- `refresh.sh` — (re)compile axmenudump + run build.py (full scan). `dump_vscode.sh` — export VS Code default keybindings. `dump_codex.sh` — extract Codex in-app shortcuts from its app.asar.
 
 ## ⚠️ The build-vs-render rule (most important)
 
@@ -41,7 +41,8 @@ Read the PNG to confirm. To screenshot a specific state, `sed`-replace the defau
 
 - **BTT 6.x** = Core Data SQLite at `~/Library/Application Support/BetterTouchTool/btt_data_store.version_*` (+`-wal`/`-shm`). Keyboard shortcuts read **directly, no socket server**. `ZMODIFIERKEYS` = standard NSEvent mask (cmd `0x100000`, opt `0x80000`, ctrl `0x40000`, shift `0x20000`, fn `0x800000`). App-scoping is via the **`Z_2APPS_GESTURES` junction** (NOT `ZBELONGSTOAPP`; `BT.*` bundles = global). Preset name = `ZNAME3` of the entity at `ZBELONGSTOPRESET2` (`ZACTIVATED>0` = active). The real action lives in **child rows** (`ZPARENT`=trigger); the child `ZACTION` = `BTTPredefinedActionType` (map in `BTT_ACTIONS`); the trigger row's own `ZACTION` is generic (366). Full param labels (window coords) are in `ZACTIONDATA` bplist blobs — not reconstructed.
 - **macOS Function flag**: NSEvent sets bit `0x800000` intrinsically on F-keys / arrows / nav keys — it does NOT mean the Globe key was pressed. Strip `fn` from those (`FN_INTRINSIC`); keep `fn` only for real 🌐+letter combos.
-- **VS Code**: defaults aren't a file — export via `dump_vscode.sh` (osascript) or `keybindings.json`. `when` clauses are captured into `detail`.
+- **VS Code**: defaults aren't a file — export via `dump_vscode.sh` (osascript) or `keybindings.json`. `when` clauses are captured into `detail`. **Chords** (`cmd+k cmd+i`): 1st press lives on the grid; 2nd press stored per-entry as `cmods`/`ckey` and rendered as a "▸" leader menu + which-key mode. 3+ presses get a `(그다음 …)` action marker (only the 2nd is structured).
+- **Codex** (OpenAI desktop, Electron `Codex.app`): in-app shortcuts (Settings ▸ Keyboard Shortcuts) are **not in the menu bar**, so the AX scan misses them. Defaults are compiled into `Contents/Resources/app.asar` as `{id, electron:{menuTitle}, defaultKeybindings:[{key:CmdOrCtrl+…}]}`; **multiple keys in the array = ALTERNATIVE bindings, not a chord**. `dump_codex.sh` greps the asar → `codex_keybindings.json` (gitignored); `collect_codex()` maps Electron accelerators (`CmdOrCtrl`=⌘, `Alt`=⌥) → schema, source `app config`, scope `Codex`. Menu-bar Codex items still come from the AX scan separately (a few overlap). Its leveldb localStorage is Snappy-compressed (no plain-text keymap).
 - **Raycast**: local DB is encrypted → unreadable; user lists hotkeys in `raycast_manual.json`. App-registered OS-global hotkeys (e.g. Google Drive `hyper+g`) go in `manual_globals.json`.
 - **symbolichotkeys**: only stores *customized* combos; common macOS defaults are seeded in `build.py`'s `DEFAULTS`.
 
