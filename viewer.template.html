@@ -73,6 +73,17 @@
   .tip .tl{display:flex;gap:8px;padding:2px 0}
   .tip .tl b{min-width:58px;color:#cfe}
   .grp{margin:10px 0 4px;font-weight:700}
+  .ovwrap{column-width:310px;column-gap:20px;margin-top:6px}
+  .ovgrp{break-inside:avoid;-webkit-column-break-inside:avoid;margin:0 0 14px}
+  .ovgrp .gh{font-weight:700;color:#7dd3fc;border-bottom:1px solid var(--line);padding-bottom:3px;margin-bottom:3px;font-size:13px}
+  .cs{display:flex;gap:8px;align-items:baseline;padding:2px 4px;border-radius:5px;cursor:pointer}
+  .cs:hover{background:#1b1f28}
+  .cs .csk{font-weight:700;min-width:72px;white-space:nowrap}
+  .cs .csa{flex:1;min-width:0;color:#cdd3df;font-size:12.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .cs .csd{width:7px;height:7px;border-radius:50%;flex:none;align-self:center}
+  .ovtab{display:inline-flex;gap:4px;margin-left:10px;text-transform:none;letter-spacing:0}
+  .ovtab button{font-size:11px;padding:2px 9px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--dim);cursor:pointer}
+  .ovtab button.on{background:#0b2a45;border-color:#38bdf8;color:#7dd3fc}
   .annm{position:absolute;top:3px;right:17px;font-size:9px;line-height:1}
   .chord{color:#7dd3fc;font-weight:700;white-space:nowrap}
   .chordm{font-size:8px;color:#7dd3fc;font-weight:700;margin-left:auto}
@@ -108,7 +119,7 @@
       <option value="free">현재 레이어 빈 키만</option>
     </select>
     <input id="search" placeholder="검색: 동작/키/조합">
-    <button id="ovbtn">📋 전체 목록</button>
+    <button id="ovbtn" title="선택한 컨텍스트의 모든 단축키를 한 번에 (KeyCue 식 치트시트)">📋 전체 단축키</button>
     <button id="favview">⭐ 즐겨찾기</button>
     <button id="scopepos" title="상세 패널에서 스코프(global/chrome 등) 위치를 오른쪽 ⇄ 왼쪽으로 토글">스코프 ⇄</button>
     <button id="annexport" title="즐겨찾기·노트 파일로 내보내기">⬇︎</button>
@@ -140,6 +151,7 @@ try { const s=JSON.parse(localStorage.getItem('SVann')||'null'); if(s){ Object.a
 function saveAnn(){ try { localStorage.setItem('SVann', JSON.stringify(ANN)); } catch(e){} }
 function annKey(mods, key){ return [...mods].sort().join('+') + '|' + key; }
 let prefScopeRight = localStorage.getItem('SVscopeRight')!=='0';  // 상세 패널 스코프(global/chrome 등) 위치: 오른쪽 정렬(기본) vs 왼쪽 인라인
+let ovGroup = localStorage.getItem('SVovGroup')||'mod';           // 전체 단축키 치트시트 묶음 기준: 'mod'|'key'|'source'
 const COLORS = {system:'#3b82f6','app menu':'#9ca3af','app config':'#14b8a6',Karabiner:'#22c55e',BTT:'#f59e0b',Raycast:'#a855f7'};
 const MODS = ['ctrl','opt','shift','cmd'];
 const MODSYM = {ctrl:'⌃',opt:'⌥',shift:'⇧',cmd:'⌘',fn:'🌐'};
@@ -202,7 +214,7 @@ function renderCtx(){
   document.getElementById('ctxchips').innerHTML=['Global',...DB.meta.apps,'BTT (전체)',...(DB.meta.bttgroups||[])].map(a=>`<span class="chip" data-ctx="${a.replace(/"/g,'&quot;')}">${a}</span>`).join('');
   document.querySelectorAll('[data-ctx]').forEach(el=>el.onclick=()=>{ const c=el.dataset.ctx; ctxSet.has(c)?ctxSet.delete(c):ctxSet.add(c); sync(); });
   document.getElementById('filtersel').onchange=e=>{ filter=e.target.value; sync(); };
-  document.getElementById('ovbtn').onclick=()=>{ overview=!overview; document.getElementById('ovbtn').classList.toggle('on',overview); sync(); };
+  document.getElementById('ovbtn').onclick=()=>{ overview=!overview; document.getElementById('ovbtn').classList.toggle('on',overview); sync(); if(overview) document.getElementById('overview').scrollIntoView({behavior:'smooth',block:'start'}); };
 }
 function enterChord(mods,key){          // ⌘K ▸ … 로 들어가 후속 키를 그리드에서 고르는 모드
   chordReturn={sticky:new Set(sticky), key:selectedKey, overview};
@@ -360,14 +372,36 @@ function showDetail(key){
   d.querySelectorAll('[data-chord]').forEach(b=>b.onclick=()=>{ const [ms,k]=b.dataset.chord.split('|'); enterChord(ms?ms.split('+'):[], k); });
   d.querySelectorAll('[data-note]').forEach(b=>b.onclick=()=>{ const ak=b.dataset.note; const t=prompt('이 단축키에 노트 (예: cmd+opt+V는 엑셀과 충돌이라 opt+V로 변경):', ANN.note[ak]||''); if(t!==null){ const tt=t.trim(); tt?ANN.note[ak]=tt:delete ANN.note[ak]; saveAnn(); sync(); showDetail(selectedKey); } });
 }
-function renderOverview(){
+function ovGroupKey(e){   // 치트시트 묶음 기준
+  if(ovGroup==='key') return {label:e.key, ord:0};
+  if(ovGroup==='source') return {label:e.source, ord:0};
+  return {label:comboSym(e.mods)||'(무수식)', ord:e.mods.length};   // 'mod'
+}
+function renderOverview(){   // KeyCue 식: 선택 컨텍스트의 모든 단축키를, 묶음 기준대로 다단 치트시트로
   const o=document.getElementById('overview');
   if(!overview){ o.innerHTML=''; return; }
-  const ent=DB.entries.filter(inCtx).slice().sort((a,b)=>a.key.localeCompare(b.key)||a.mods.length-b.mods.length);
-  const byKey={}; ent.forEach(e=>{(byKey[e.key]=byKey[e.key]||[]).push(e);});
-  o.innerHTML=`<div class="sec">전체 목록 — ${[...ctxSet].join(', ')||'(없음)'} · ${ent.length}개</div>`+
-    Object.keys(byKey).map(k=>`<div class="grp">${k}</div>`+byKey[k].map(e=>rowHTML(e,sameSet(e.mods,eff))).join('')).join('');
-  o.querySelectorAll('.row').forEach((el,i)=>el.onclick=()=>jumpTo(ent[i]));
+  const ent=DB.entries.filter(inCtx);
+  const groups={};
+  ent.forEach(e=>{ const g=ovGroupKey(e); (groups[g.label]=groups[g.label]||{ord:g.ord,items:[]}).items.push(e); });
+  const order=Object.keys(groups).sort((a,b)=>(groups[a].ord-groups[b].ord)||a.localeCompare(b));
+  const multi=([...ctxSet].filter(c=>c!=='Global').length + (ctxSet.has('Global')?1:0)) > 1;
+  const flat=[];
+  const body=order.map(label=>{
+    const items=groups[label].items.slice().sort((a,b)=>a.mods.length-b.mods.length||a.key.localeCompare(b.key)||a.action.localeCompare(b.action));
+    const rows=items.map(e=>{
+      const ix=flat.push(e)-1;
+      const combo = ovGroup==='mod' ? `${e.key}${e.ckey?' '+chordTag(e):''}` : `${comboSym(e.mods)||''}${e.key}${e.ckey?' '+chordTag(e):''}`;
+      return `<div class="cs" data-ov="${ix}"><span class="csk">${combo}</span><span class="csa" title="${e.action.replace(/"/g,'&quot;')}">${e.action.replace(/</g,'&lt;')}</span>`
+        +`<span class="csd" style="background:${COLORS[e.source]||'#666'}" title="${e.source}${multi?' · '+e.scope:''}"></span></div>`;
+    }).join('');
+    const gl=label==='(무수식)'?'(수식키 없음)':label;
+    return `<div class="ovgrp"><div class="gh">${gl} <span class="muted" style="font-weight:400;font-size:11px">${items.length}</span></div>${rows}</div>`;
+  }).join('');
+  o.innerHTML=`<div class="sec">전체 단축키 — ${[...ctxSet].join(', ')||'(없음)'} · ${ent.length}개`
+    +`<span class="ovtab">`+[['mod','수식키별'],['key','키별'],['source','소스별']].map(([g,l])=>`<button data-ovg="${g}" class="${ovGroup===g?'on':''}">${l}</button>`).join('')+`</span></div>`
+    +`<div class="ovwrap">${body}</div>`;
+  o.querySelectorAll('[data-ov]').forEach(el=>el.onclick=()=>{ const e=flat[+el.dataset.ov]; chordPrefix=null; chordReturn=null; sticky=new Set(e.mods); held=new Set(); selectedKey=e.key; sync(); window.scrollTo({top:0,behavior:'smooth'}); });
+  o.querySelectorAll('[data-ovg]').forEach(b=>b.onclick=()=>{ ovGroup=b.dataset.ovg; localStorage.setItem('SVovGroup',ovGroup); renderOverview(); });
 }
 function renderSearch(q){
   const r=document.getElementById('results');
