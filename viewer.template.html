@@ -164,7 +164,7 @@ function saveAnn(){ try { localStorage.setItem('SVann', JSON.stringify(ANN)); } 
 function annKey(mods, key){ return [...mods].sort().join('+') + '|' + key; }
 let prefScopeRight = localStorage.getItem('SVscopeRight')!=='0';  // 상세 패널 스코프(global/chrome 등) 위치: 오른쪽 정렬(기본) vs 왼쪽 인라인
 let ovGroup = ['mod','key','source'].includes(localStorage.getItem('SVovGroup')) ? localStorage.getItem('SVovGroup') : 'mod';  // 전체 단축키 치트시트 묶음 기준 (잘못된 저장값은 'mod'로)
-const COLORS = {system:'#3b82f6','app menu':'#9ca3af','app config':'#14b8a6',Karabiner:'#22c55e',BTT:'#f59e0b',Raycast:'#a855f7'};
+const COLORS = {system:'#3b82f6','app menu':'#9ca3af','app config':'#14b8a6',Karabiner:'#22c55e',BTT:'#f59e0b',Raycast:'#a855f7',web:'#06b6d4'};
 const MODS = ['ctrl','opt','shift','cmd'];
 const MODSYM = {ctrl:'⌃',opt:'⌥',shift:'⇧',cmd:'⌘',fn:'🌐',caps:'⇪'};
 const U = 56;

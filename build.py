@@ -630,6 +630,42 @@ def collect_manual_gestures():
         n += 1
     return n
 
+WEB_MODSYM = {'⌘':'cmd','⌥':'opt','⌃':'ctrl','⇧':'shift'}
+WEB_KEYNAME = {'Space':'Space','Enter':'Return','Return':'Return','Esc':'Escape','Tab':'Tab',
+               'Backspace':'Delete','Delete':'ForwardDelete','→':'Right','←':'Left','↑':'Up','↓':'Down',
+               'Home':'Home','End':'End','PageUp':'PageUp','PageDown':'PageDown'}
+def web_key(spec):
+    # parse a Google-style mac shortcut string "⌘⇧ Space" / "⌃⌘ e then p" → (mods, key, sequence_or_None)
+    s = (spec or "").strip(); mods = []; i = 0
+    while i < len(s):
+        c = s[i]
+        if c in WEB_MODSYM: mods.append(WEB_MODSYM[c]); i += 1
+        elif c == ' ': i += 1
+        elif s[i:i+2] == 'Fn': mods.append('fn'); i += 2
+        else: break
+    rest = s[i:].strip()
+    seq = rest if (' then ' in rest or 'press' in rest or ',' in rest) else None
+    if seq: rest = re.split(r'[ ,]', rest)[0]            # first key of the sequence drives grid placement
+    if rest in WEB_KEYNAME: return mods, WEB_KEYNAME[rest], seq
+    if len(rest) == 1: return mods, (rest.upper() if rest.isalpha() else rest), seq
+    return mods, norm_keytoken(rest), seq
+def collect_web():
+    # Web-app shortcuts (Google Sheets/Docs/Drive…) — no local source, so pulled from the vendor's OFFICIAL
+    # shortcut docs into web_shortcuts.json (authoritative, not guessed). These apply only inside the browser tab.
+    path = os.path.join(PROJ, "web_shortcuts.json")
+    if not os.path.exists(path): return 0
+    try: data = json.load(open(path))
+    except Exception as e: print("  web: parse fail", e); return 0
+    n = 0
+    for scope, items in data.items():
+        if scope.startswith("_"): continue
+        for it in (items or []):
+            mods, key, seq = web_key(it.get("keys", ""))
+            if not key: continue
+            det = f"web · {scope} · {it.get('keys','')}" + (" (시퀀스)" if seq else "")
+            add(mods, key, it.get("action", ""), "web", scope, det); n += 1
+    return n
+
 def decode_ax_mods(m):
     m = int(m)
     if m < 0: return []
@@ -724,9 +760,10 @@ sb_n = collect_shottr() + collect_screenbrush()
 obs_n = collect_obsidian(); vsc_n = collect_vscode(); cdx_n = collect_codex()
 menu_n = collect_menus(); appd_n = collect_app_defaults()   # menus first so curated defaults dedup against them
 gst_n = collect_codex_gestures() + collect_manual_gestures()   # non-static triggers (double/hold/multi-tap)
+web_n = collect_web()                                          # web-app shortcuts (Google Sheets/Docs/Drive…)
 counts = {"system": sys_n, "Karabiner": kara_n, "BTT": btt_n, "Raycast": ray_n, "수동": mg_n,
           "Shottr/ScreenBrush": sb_n,
-          "Obsidian": obs_n, "VS Code": vsc_n, "Codex": cdx_n, "app menu": menu_n, "app 기본": appd_n,
+          "Obsidian": obs_n, "VS Code": vsc_n, "Codex": cdx_n, "web": web_n, "app menu": menu_n, "app 기본": appd_n,
           "제스처": gst_n}
 for k, v in counts.items(): print(f"  {k:12s} {v}")
 
