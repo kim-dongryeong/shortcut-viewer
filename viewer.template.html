@@ -78,6 +78,8 @@
   .ovgrp .gh{font-weight:700;color:#7dd3fc;border-bottom:1px solid var(--line);padding-bottom:3px;margin-bottom:3px;font-size:13px}
   .cs{display:flex;gap:8px;align-items:baseline;padding:2px 4px;border-radius:5px;cursor:pointer}
   .cs:hover{background:#1b1f28}
+  .cs.hi{background:#0b2a45;box-shadow:inset 3px 0 0 #38bdf8}
+  .cs.hi .csk{color:#7dd3fc}
   .cs .csk{font-weight:700;min-width:72px;white-space:nowrap}
   .cs .csa{flex:1;min-width:0;color:#cdd3df;font-size:12.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .cs .csd{width:7px;height:7px;border-radius:50%;flex:none;align-self:center}
@@ -182,15 +184,27 @@ function recompute(){
   CUR = chordPrefix
     ? DB.entries.filter(e=> e.ckey && e.key===chordPrefix.key && sameSet(e.mods,new Set(chordPrefix.mods)) && inCtx(e))
                 .map(e=>({mods:e.cmods||[], key:e.ckey, action:e.action, source:e.source, scope:e.scope, detail:e.detail}))  // 후속 누름을 일반 엔트리처럼 리매핑 → 그리드/상세 로직 재사용
-    : DB.entries.filter(inCtx);
+    : dedupeDisplay(DB.entries.filter(inCtx));
 }
 function sameSet(arr,set){ if(arr.length!==set.size) return false; for(const m of arr) if(!set.has(m)) return false; return true; }
 function inCtx(e){ return (e.scope==='global' && ctxSet.has('Global')) || ctxSet.has(e.scope) || ctxSet.has(e.group) || (ctxSet.has('BTT (전체)') && e.source==='BTT'); }
-function keyAll(key){ return (CUR||(CUR=DB.entries.filter(inCtx))).filter(e=>e.key===key); }
+function keyAll(key){ return (CUR||(CUR=dedupeDisplay(DB.entries.filter(inCtx)))).filter(e=>e.key===key); }
 function matchEff(key){ return keyAll(key).filter(e=>sameSet(e.mods,eff)); }
 function comboSym(mods){ return [...MODS,'fn'].filter(m=>mods.includes(m)).map(m=>MODSYM[m]).join(''); }
 function chordSym(e){ return e&&e.ckey ? (comboSym(e.cmods||[])+e.ckey) : ''; }                 // 2nd press, 예: ⌘I
 function chordTag(e){ return e&&e.ckey ? `<span class="chord">▸ ${chordSym(e)}</span>` : ''; }   // 리더 메뉴 배지
+// 표시용 중복 제거: 같은 스코프·조합에서 'app menu' 항목이 다른 소스(app config 등)와 동일 동작이면 화면에선 숨긴다(데이터엔 그대로).
+function ovNorm(a){ return String(a||'').split('▸').pop().trim().replace(/[.…\s]+$/,'').toLowerCase(); }
+function dedupeDisplay(ents){
+  const byCombo={};
+  ents.forEach(e=>{ const k=e.scope+'|'+[...e.mods].sort().join(',')+'|'+e.key+'|'+(e.ckey||''); (byCombo[k]=byCombo[k]||[]).push(e); });
+  const drop=new Set();
+  for(const k in byCombo){ const g=byCombo[k]; if(g.length<2) continue;
+    const canon=new Set(g.filter(e=>e.source!=='app menu').map(e=>ovNorm(e.action)));  // 비-메뉴 소스가 가진 동작들
+    if(canon.size) g.forEach(e=>{ if(e.source==='app menu' && canon.has(ovNorm(e.action))) drop.add(e); });
+  }
+  return drop.size ? ents.filter(e=>!drop.has(e)) : ents;
+}
 function effSym(){ return [...MODS,'fn'].filter(m=>eff.has(m)).map(m=>MODSYM[m]).join(''); }
 
 function renderMeta(){
@@ -380,27 +394,30 @@ function ovGroupKey(e){   // 치트시트 묶음 기준
 function renderOverview(){   // KeyCue 식: 선택 컨텍스트의 모든 단축키를, 묶음 기준대로 다단 치트시트로
   const o=document.getElementById('overview');
   if(!overview){ o.innerHTML=''; return; }
-  const ent=DB.entries.filter(inCtx);
+  const ent=dedupeDisplay(DB.entries.filter(inCtx));
   const groups={};
   ent.forEach(e=>{ const g=ovGroupKey(e); (groups[g.label]=groups[g.label]||{ord:g.ord,items:[]}).items.push(e); });
   const order=Object.keys(groups).sort((a,b)=>(groups[a].ord-groups[b].ord)||a.localeCompare(b));
   const multi=([...ctxSet].filter(c=>c!=='Global').length + (ctxSet.has('Global')?1:0)) > 1;
+  const inputActive = eff.size>0 || selectedKey;   // 수식키/일반키 입력 시 해당 조합 하이라이트 (KeyClu 식)
   const flat=[];
   const body=order.map(label=>{
     const items=groups[label].items.slice().sort((a,b)=>a.mods.length-b.mods.length||a.key.localeCompare(b.key)||a.action.localeCompare(b.action));
     const rows=items.map(e=>{
       const ix=flat.push(e)-1;
+      const hot = inputActive && sameSet(e.mods,eff) && (selectedKey ? e.key===selectedKey : true);
       const combo = ovGroup==='mod' ? `${e.key}${e.ckey?' '+chordTag(e):''}` : `${comboSym(e.mods)||''}${e.key}${e.ckey?' '+chordTag(e):''}`;
-      return `<div class="cs" data-ov="${ix}"><span class="csk">${combo}</span><span class="csa" title="${e.action.replace(/"/g,'&quot;')}">${e.action.replace(/</g,'&lt;')}</span>`
+      return `<div class="cs${hot?' hi':''}" data-ov="${ix}"><span class="csk">${combo}</span><span class="csa" title="${e.action.replace(/"/g,'&quot;')}">${e.action.replace(/</g,'&lt;')}</span>`
         +`<span class="csd" style="background:${COLORS[e.source]||'#666'}" title="${e.source}${multi?' · '+e.scope:''}"></span></div>`;
     }).join('');
     const gl=label==='(무수식)'?'(수식키 없음)':label;
     return `<div class="ovgrp"><div class="gh">${gl} <span class="muted" style="font-weight:400;font-size:11px">${items.length}</span></div>${rows}</div>`;
   }).join('');
   o.innerHTML=`<div class="sec">전체 단축키 — ${[...ctxSet].join(', ')||'(없음)'} · ${ent.length}개`
+    +`<span class="muted" style="text-transform:none;letter-spacing:0;margin-left:8px;font-size:11px">수식키/키를 누르면 해당 조합 하이라이트</span>`
     +`<span class="ovtab">`+[['mod','수식키별'],['key','키별'],['source','소스별']].map(([g,l])=>`<button data-ovg="${g}" class="${ovGroup===g?'on':''}">${l}</button>`).join('')+`</span></div>`
     +`<div class="ovwrap">${body}</div>`;
-  o.querySelectorAll('[data-ov]').forEach(el=>el.onclick=()=>{ const e=flat[+el.dataset.ov]; chordPrefix=null; chordReturn=null; sticky=new Set(e.mods); held=new Set(); selectedKey=e.key; sync(); window.scrollTo({top:0,behavior:'smooth'}); });
+  o.querySelectorAll('[data-ov]').forEach(el=>el.onclick=()=>{ const e=flat[+el.dataset.ov]; chordPrefix=null; chordReturn=null; sticky=new Set(e.mods); held=new Set(); selectedKey=e.key; sync(); if(!overview) window.scrollTo({top:0,behavior:'smooth'}); });
   o.querySelectorAll('[data-ovg]').forEach(b=>b.onclick=()=>{ ovGroup=b.dataset.ovg; localStorage.setItem('SVovGroup',ovGroup); renderOverview(); });
 }
 function renderSearch(q){
@@ -437,7 +454,9 @@ function sync(){
     cb.querySelector('#chordexit').onclick=exitChord;
   } else cb.style.display='none';
   renderKB(); renderOverview();
-  if(selectedKey) showDetail(selectedKey);
+  const det=document.getElementById('detail');      // 전체 단축키(overview)가 켜지면 키별 상세는 숨기고 치트시트만
+  if(overview){ det.style.display='none'; }
+  else { det.style.display=''; if(selectedKey) showDetail(selectedKey); }
 }
 function readHeld(e){ const h=new Set(); if(e.metaKey)h.add('cmd'); if(e.ctrlKey)h.add('ctrl'); if(e.altKey)h.add('opt'); if(e.shiftKey)h.add('shift'); return h; }
 const CODEMAP={Backquote:'`',Minus:'-',Equal:'=',BracketLeft:'[',BracketRight:']',Semicolon:';',Quote:"'",Comma:',',Period:'.',Slash:'/',Space:'Space',Enter:'Return',Tab:'Tab',Escape:'Escape',Backspace:'Delete',Delete:'ForwardDelete',ArrowLeft:'Left',ArrowRight:'Right',ArrowUp:'Up',ArrowDown:'Down',Home:'Home',End:'End',PageUp:'PageUp',PageDown:'PageDown',CapsLock:'CapsLock'};
