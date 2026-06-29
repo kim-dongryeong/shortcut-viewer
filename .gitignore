@@ -7,6 +7,7 @@ btt_export.json
 vscode_default_keybindings.json
 raycast_manual.json
 manual_globals.json
+annotations.json
 
 # ── Compiled binary (rebuild from axmenudump.swift) ───────────────────
 axmenudump

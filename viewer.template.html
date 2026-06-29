@@ -72,6 +72,16 @@
   .tip .tl{display:flex;gap:8px;padding:2px 0}
   .tip .tl b{min-width:58px;color:#cfe}
   .grp{margin:10px 0 4px;font-weight:700}
+  .annm{position:absolute;top:3px;right:17px;font-size:9px;line-height:1}
+  .drow{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-bottom:1px solid var(--line)}
+  .drow.hi{background:#0b2a45;box-shadow:inset 3px 0 0 #38bdf8;border-radius:4px}
+  .drow .kc{font-weight:700;white-space:nowrap;min-width:62px}
+  .drow .dbody{flex:1}
+  .favbtn{background:none;border:none;color:#f59f00;cursor:pointer;font-size:14px;padding:0 2px;line-height:1.3}
+  .favbtn.on{filter:drop-shadow(0 0 3px #ffd43b)}
+  .notebtn{background:var(--panel);border:1px solid var(--line);border-radius:6px;color:var(--dim);cursor:pointer;font-size:11px;padding:2px 7px;white-space:nowrap}
+  .noteshow{color:#ffd8a8;font-size:11px;margin-top:2px}
+  .impbtn{display:inline-flex;align-items:center;padding:8px 11px;border:1px solid var(--line);border-radius:9px;background:var(--panel);cursor:pointer;font-size:14px}
 </style>
 </head>
 <body>
@@ -93,6 +103,9 @@
     </select>
     <input id="search" placeholder="검색: 동작/키/조합">
     <button id="ovbtn">📋 전체 목록</button>
+    <button id="favview">⭐ 즐겨찾기</button>
+    <button id="annexport" title="즐겨찾기·노트 파일로 내보내기">⬇︎</button>
+    <label class="impbtn" title="즐겨찾기·노트 가져오기">⬆︎<input id="annimport" type="file" accept="application/json" style="display:none"></label>
   </div>
   <div class="hint">키를 <b>물리적으로 hold</b> 하면 레이어 ON(놓으면 복귀) · 수식키 키캡/칩 클릭=고정 · 각 키 숫자=전 조합 수, 점=소스 ·
     키 클릭→하단에 그 키의 <b>전 조합</b>, 수식키 누르면 해당 조합 <b style="color:#7dd3fc">하이라이트</b> · hover=미리보기 ·
@@ -112,6 +125,12 @@
 
 <script>
 const DB = /*__DATA__*/;
+// ── favorites + notes, persisted in localStorage (survives rebuilds at the same file path) ──
+let ANN = {fav:{}, note:{}};
+try { const base=DB.ann||{}; Object.assign(ANN.fav, base.fav||{}); Object.assign(ANN.note, base.note||{}); } catch(e){}  // baked-in (annotations.json)
+try { const s=JSON.parse(localStorage.getItem('SVann')||'null'); if(s){ Object.assign(ANN.fav,s.fav||{}); Object.assign(ANN.note,s.note||{}); } } catch(e){}  // live localStorage overlay
+function saveAnn(){ try { localStorage.setItem('SVann', JSON.stringify(ANN)); } catch(e){} }
+function annKey(mods, key){ return [...mods].sort().join('+') + '|' + key; }
 const COLORS = {system:'#3b82f6','app menu':'#9ca3af','app config':'#14b8a6',Karabiner:'#22c55e',BTT:'#f59e0b',Raycast:'#a855f7'};
 const MODS = ['ctrl','opt','shift','cmd'];
 const MODSYM = {ctrl:'⌃',opt:'⌥',shift:'⇧',cmd:'⌘',fn:'🌐'};
@@ -197,6 +216,8 @@ function cellKey(key,label,wpx){
     if(filter==='free') el.classList.add('dim');
   } else { h+=`<div class="act muted">·</div>`; if(filter==='taken') el.classList.add('dim'); }
   if(key===selectedKey) el.classList.add('sel');
+  const _ak=annKey([...eff],key);
+  if(ANN.fav[_ak]||ANN.note[_ak]) h+=`<span class="annm">${ANN.fav[_ak]?'⭐':''}${ANN.note[_ak]?'📝':''}</span>`;
   el.innerHTML=h;
   el.onclick=()=>{ selectedKey=key; sync(); };
   el.onmouseenter=ev=>showTip(ev,key,all); el.onmousemove=moveTip; el.onmouseleave=hideTip;
@@ -264,23 +285,32 @@ function allModSubsets(){
   out.sort((a,b)=> a.length-b.length || a.join().localeCompare(b.join()));
   return out;
 }
+function detailRow(mods, key, matches, hit){
+  const ak=annKey(mods,key), fav=!!ANN.fav[ak], note=ANN.note[ak]||'';
+  const body = matches.length
+    ? matches.map(e=>`<span class="src" style="background:${COLORS[e.source]||'#666'}">${e.source}</span> ${e.action.replace(/</g,'&lt;')} <span class="scope">${e.scope}</span>`).join('<br>')
+    : `<span class="muted">— 비어 있음 (할당 가능)</span>`;
+  return `<div class="drow${hit?' hi':''}">`
+    +`<button class="favbtn${fav?' on':''}" data-fav="${ak}" title="즐겨찾기">${fav?'⭐':'☆'}</button>`
+    +`<span class="kc">${comboSym(mods)||'(무수식)'}${key}</span>`
+    +`<div class="dbody">${body}`+(note?`<div class="noteshow">📝 ${note.replace(/</g,'&lt;')}</div>`:'')+`</div>`
+    +`<button class="notebtn" data-note="${ak}" title="노트">${note?'✎ 노트':'+ 노트'}</button></div>`;
+}
 function showDetail(key){
   const all=keyAll(key), d=document.getElementById('detail');
   const byCombo={};
   all.forEach(e=>{ const k=[...e.mods].sort().join(','); (byCombo[k]=byCombo[k]||[]).push(e); });
   let rows='';
   for(const mods of allModSubsets()){
-    const k=[...mods].sort().join(','), hit=sameSet(mods,eff), matches=byCombo[k]||[];
-    if(matches.length){ rows+=matches.map(e=>rowHTML(e,hit)).join(''); }
-    else { rows+=`<div class="row${hit?' hi':''}"><span class="src" style="background:#1b2430;color:var(--dim)">빈칸</span>`+
-      `<span class="kc">${comboSym(mods)||'(무수식)'}${key}</span>`+
-      `<div style="flex:1" class="muted">— 비어 있음 (할당 가능)</div><span class="scope muted">free</span></div>`; }
-    delete byCombo[k];
+    const k=[...mods].sort().join(','), hit=sameSet(mods,eff);
+    rows += detailRow(mods, key, byCombo[k]||[], hit); delete byCombo[k];
   }
   const extra=Object.values(byCombo).flat();
   const extraHTML = extra.length ? `<div class="grp">기타(fn 등 포함)</div>`+
-    extra.sort((a,b)=>a.mods.length-b.mods.length).map(e=>rowHTML(e,sameSet(e.mods,eff))).join('') : '';
-  d.innerHTML=`<div style="margin-bottom:6px"><b>${key}</b> 키 · 수식키 조합 16개 전부 (현재 레이어 <b style="color:#7dd3fc">${effSym()||'(무수식)'}</b> 강조) · 점유 ${all.length}개</div>`+rows+extraHTML;
+    extra.sort((a,b)=>a.mods.length-b.mods.length).map(e=>detailRow(e.mods,key,[e],sameSet(e.mods,eff))).join('') : '';
+  d.innerHTML=`<div style="margin-bottom:6px"><b>${key}</b> 키 · 수식키 조합 16개 전부 (현재 레이어 <b style="color:#7dd3fc">${effSym()||'(무수식)'}</b> 강조) · ☆=즐겨찾기 · +노트</div>`+rows+extraHTML;
+  d.querySelectorAll('[data-fav]').forEach(b=>b.onclick=()=>{ const ak=b.dataset.fav; ANN.fav[ak]?delete ANN.fav[ak]:ANN.fav[ak]=1; saveAnn(); sync(); });
+  d.querySelectorAll('[data-note]').forEach(b=>b.onclick=()=>{ const ak=b.dataset.note; const t=prompt('이 단축키에 노트 (예: cmd+opt+V는 엑셀과 충돌이라 opt+V로 변경):', ANN.note[ak]||''); if(t!==null){ const tt=t.trim(); tt?ANN.note[ak]=tt:delete ANN.note[ak]; saveAnn(); sync(); showDetail(selectedKey); } });
 }
 function renderOverview(){
   const o=document.getElementById('overview');
@@ -327,8 +357,27 @@ document.addEventListener('keydown',e=>{ if(e.target.tagName==='INPUT')return; c
 document.addEventListener('keyup',e=>{ const h=readHeld(e); const s=[...h].sort().join(); if(s!==heldStr){heldStr=s;held=h;sync();} });
 window.addEventListener('blur',()=>{ if(heldStr){heldStr='';held=new Set();sync();} });
 
+function renderFavs(){
+  const r=document.getElementById('results');
+  const keys=Object.keys(ANN.fav);
+  if(!keys.length){ r.innerHTML='<div class="sec">⭐ 즐겨찾기 — 아직 없음. 키 클릭 → 하단 상세에서 ☆를 눌러 추가하세요.</div>'; return; }
+  let html=`<div class="sec">⭐ 즐겨찾기 ${keys.length}개 — 외울 단축키 모음</div>`;
+  keys.sort().forEach(ak=>{
+    const i=ak.indexOf('|'), modstr=ak.slice(0,i), key=ak.slice(i+1), mods=modstr?modstr.split('+'):[];
+    const matches=DB.entries.filter(e=>e.key===key && sameSet(e.mods,new Set(mods)));
+    const act=matches.length?matches.map(e=>e.action).join(' / '):'(빈 조합)', note=ANN.note[ak]||'';
+    html+=`<div class="row" data-jump="${ak}"><span class="kc">${comboSym(mods)||'(무수식)'}${key}</span>`
+      +`<div style="flex:1">${act.replace(/</g,'&lt;')}${note?`<div class="noteshow">📝 ${note.replace(/</g,'&lt;')}</div>`:''}</div>`
+      +`<span class="scope">${matches[0]?matches[0].scope:'free'}</span></div>`;
+  });
+  r.innerHTML=html;
+  r.querySelectorAll('[data-jump]').forEach(el=>el.onclick=()=>{ const ak=el.dataset.jump,i=ak.indexOf('|'); sticky=new Set(ak.slice(0,i)?ak.slice(0,i).split('+'):[]); held=new Set(); selectedKey=ak.slice(i+1); sync(); window.scrollTo({top:0,behavior:'smooth'}); });
+}
 renderMeta(); renderChips(); renderCtx(); sync();
 document.getElementById('search').oninput=e=>renderSearch(e.target.value.trim());
+document.getElementById('favview').onclick=renderFavs;
+document.getElementById('annexport').onclick=()=>{ const b=new Blob([JSON.stringify(ANN,null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download='shortcut-annotations.json'; a.click(); };
+document.getElementById('annimport').onchange=e=>{ const f=e.target.files[0]; if(!f)return; const rd=new FileReader(); rd.onload=()=>{ try{ const j=JSON.parse(rd.result); Object.assign(ANN.fav,j.fav||{}); Object.assign(ANN.note,j.note||{}); saveAnn(); sync(); alert('가져왔습니다 ✓'); }catch(_){ alert('JSON 파싱 실패'); } }; rd.readAsText(f); };
 </script>
 </body>
 </html>

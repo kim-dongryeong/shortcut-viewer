@@ -8,7 +8,7 @@
 #   BTT        BetterTouchTool (bttcli export_preset — needs Socket Server enabled)
 #   Raycast    raycast_manual.json (Raycast's DB is encrypted; list hotkeys here by hand)
 #   app menu   ./axmenudump (Accessibility API; per-app menu shortcuts of running apps)
-import json, subprocess, os, plistlib, datetime, re, sqlite3, glob, tempfile, shutil
+import json, subprocess, os, plistlib, datetime, re, sqlite3, glob, tempfile, shutil, base64
 
 HOME = os.path.expanduser("~")
 PROJ = os.path.dirname(os.path.abspath(__file__))
@@ -235,15 +235,38 @@ def collect_karabiner():
 
 # BTTPredefinedActionType (ZACTION on the child action row) → human name. Partial enum
 # (BTT-internal; from the developer's community list). Unknown codes shown as "#<code>".
+# BTTPredefinedActionType (child row's ZACTION) → name. From the official action-definitions doc
+# + forum thread 14116 + this user's live-DB key inference (codex/agy cross-check). Unknown → "#code".
 BTT_ACTIONS = {
-    49:"Launch App / Open File / AppleScript", 57:"Open BTT Preferences", 59:"Open URL",
-    105:"Show BTT Preferences", 128:"Send Shortcut to Specific App", 172:"Run AppleScript",
-    206:"Execute Shell Script/Task", 248:"Trigger Named Trigger", 251:"Custom Move/Resize Window",
-    264:"Send Keyboard Shortcut", 446:"Move Window to Size/Position",
-    17:"Move Window Left", 18:"Move Window Right", 19:"Maximize Left Half", 20:"Maximize Right Half",
-    21:"Maximize Window", 90:"Top-Left Quarter", 91:"Top-Right Quarter",
-    92:"Bottom-Left Quarter", 93:"Bottom-Right Quarter",
+    3:"Left Click", 17:"Move Window Left", 18:"Move Window Right", 19:"Maximize Left Half",
+    20:"Maximize Right Half", 21:"Maximize Window", 49:"Launch / Open", 54:"Double Left Click",
+    57:"Open BTT Preferences", 59:"Open URL", 61:"Page Down", 90:"Top-Left Quarter",
+    91:"Top-Right Quarter", 92:"Bottom-Left Quarter", 93:"Bottom-Right Quarter", 105:"Show BTT Preferences",
+    128:"Send Shortcut to Specific App", 139:"Switch To Preset", 153:"Move Mouse To Position",
+    154:"Save Mouse Position", 155:"Restore Mouse Position", 172:"Run AppleScript", 193:"Type / Paste Text",
+    206:"Execute Shell Script", 216:"Move Window to Desktop 1", 217:"Move Window to Desktop 2",
+    218:"Move Window to Desktop 3", 248:"Trigger Named Trigger", 251:"Custom Move/Resize Window",
+    254:"Show HUD", 258:"Toggle Preset", 264:"Send Keyboard Shortcut", 281:"Run JavaScript",
+    329:"Start Repeat / For Loop", 332:"If Condition", 337:"Pin/Unpin Window",
+    345:"Delay Next Action", 364:"Activate Specific Window", 403:"Ask For Input, Save To Variable",
+    421:"Left Click", 446:"Move Window to Size/Position", 522:"Window Action",
 }
+def btt_param(code, ad, launchpath):
+    # pull the salient parameter BTT shows after the action name (ZACTIONDATA is JSON, not bplist)
+    j = {}
+    if ad:
+        try: j = json.loads(ad.decode("utf-8", "replace") if isinstance(ad, bytes) else ad)
+        except Exception: j = {}
+    if code == 49 and launchpath:
+        return os.path.basename(str(launchpath).rstrip("/")) or str(launchpath)
+    if code == 403: return j.get("BTTActionAskForInputVariableName", "")
+    if code == 329: return j.get("BTTActionForLoopRepeatVariable", "")
+    if code == 153 and ("BTTMouseMoveX" in j or "BTTMouseMoveY" in j):
+        rnd = lambda v: (str(round(float(v))) if str(v).replace('.', '', 1).lstrip('-').isdigit() else str(v))
+        return f"X:{rnd(j.get('BTTMouseMoveX', 0))} Y:{rnd(j.get('BTTMouseMoveY', 0))}"
+    if launchpath and str(launchpath).startswith("/"):
+        return os.path.basename(str(launchpath).rstrip("/"))
+    return ""
 def collect_btt():
     # BTT 6+ stores everything in a Core Data SQLite store — read keyboard-shortcut triggers
     # directly (no Socket Server / bttcli needed). ZMODIFIERKEYS is the standard NSEvent mask.
@@ -269,10 +292,14 @@ def collect_btt():
             if abundle and not str(abundle).startswith("BT."):
                 appmap[tpk] = aname or abundle
         # The real action(s) live in CHILD rows (ZPARENT=trigger); the trigger's own ZACTION is generic.
-        childacts = {}
-        for ppk, zact in con.execute("SELECT ZPARENT, ZACTION FROM ZBTTBASEENTITY "
-                "WHERE ZPARENT IS NOT NULL AND ZACTION IS NOT NULL AND ZACTION > 0 ORDER BY ZPARENT, Z_PK"):
-            childacts.setdefault(ppk, []).append(zact)
+        # Primary = the lowest-ZORDER child; also count the chain for "and N more".
+        primary, chaincnt = {}, {}
+        for ppk, zact, ad, lp in con.execute(
+                "SELECT ZPARENT, ZACTION, ZACTIONDATA, ZLAUNCHPATH FROM ZBTTBASEENTITY "
+                "WHERE ZPARENT IS NOT NULL AND ZACTION IS NOT NULL AND ZACTION > 0 "
+                "ORDER BY ZPARENT, COALESCE(ZORDER, ZORDER1, 0), Z_PK"):
+            chaincnt[ppk] = chaincnt.get(ppk, 0) + 1
+            if ppk not in primary: primary[ppk] = (zact, ad, lp)
         rows = con.execute("""
             SELECT t.Z_PK, t.ZKEYCODE, t.ZMODIFIERKEYS,
                    COALESCE(NULLIF(t.ZDESC,''), NULLIF(t.ZTRIGGERLABEL,''), NULLIF(t.ZACTIONLABEL,''), '') AS label,
@@ -293,11 +320,15 @@ def collect_btt():
     for pk, kc, mod, label, preset, activ in rows:
         key = KEYCODE.get(int(kc), f"kc{kc}")
         scope = appmap.get(pk, "global")
-        if not label:  # no user description → reconstruct from the child action row(s)
-            acts = childacts.get(pk, [])
-            if acts:
-                base = BTT_ACTIONS.get(acts[0], f"#{acts[0]}")
-                label = "Action: " + base + (f" (+{len(acts)-1} more)" if len(acts) > 1 else "")
+        if not label:  # no user description → reconstruct a BTT-style action label
+            prim = primary.get(pk)
+            if prim:
+                code, ad, lp = prim
+                name = BTT_ACTIONS.get(code, f"#{code}")
+                p = btt_param(code, ad, lp)
+                cnt = chaincnt.get(pk, 1)
+                more = f" and {cnt - 1} more" if cnt > 1 else ""
+                label = "Action: " + name + (f": {p}" if p else "") + more
             else:
                 label = "BTT 단축키"
         det = (f"BTT 프리셋: {preset}" + (" ✓활성" if (activ or 0) > 0 else " (비활성)")) if preset else "BTT 단축키 (DB 직접 읽음)"
@@ -358,6 +389,70 @@ def collect_manual_globals():
         mods, key = parse_combo(h.get("combo", ""))
         add(mods, key, h.get("action", "manual"), "app config", h.get("scope", "global"),
             "수동 등록(manual_globals.json)"); n += 1
+    return n
+
+# Carbon modifier mask (cmdKey/shiftKey/optionKey/controlKey) — used by the KeyboardShortcuts library (Shottr).
+CARBON_MODS = [(0x100, 'cmd'), (0x200, 'shift'), (0x800, 'opt'), (0x1000, 'ctrl')]
+def decode_carbon(m):
+    m = int(m or 0)
+    return [name for bit, name in CARBON_MODS if m & bit]
+
+def collect_zoom():
+    # macOS Accessibility ▸ Zoom shortcuts are DEFAULTS (not stored in symbolichotkeys) — seed when enabled.
+    try:
+        ua = plistlib.loads(subprocess.run(["defaults", "export", "com.apple.universalaccess", "-"],
+                                            capture_output=True).stdout)
+    except Exception: return 0
+    if not ua.get("closeViewHotkeysEnabled"): return 0
+    have = {(frozenset(e["mods"]), e["key"]) for e in entries if e["source"] == "system"}
+    n = 0
+    for mods, key, name in [(['cmd','opt'],'8','확대/축소 켜기·끄기 (Zoom)'),
+                            (['cmd','opt'],'=','확대 (Zoom in)'),
+                            (['cmd','opt'],'-','축소 (Zoom out)')]:
+        if (frozenset(norm_mods(mods)), key) in have: continue
+        add(mods, key, name, "system", "global", "macOS 손쉬운 사용 ▸ 확대/축소"); n += 1
+    return n
+
+SHOTTR_NAMES = {"area":"영역 캡처","fullscreen":"전체 화면 캡처","window":"창 캡처","anyWindow":"임의 창 캡처",
+                "scrolling":"스크롤 캡처","ocr":"OCR 텍스트 인식","repeatArea":"직전 영역 다시 캡처",
+                "color":"색 추출","selfTimer":"타이머 캡처"}
+def collect_shottr():
+    try:
+        d = plistlib.loads(subprocess.run(["defaults", "export", "cc.ffitch.shottr", "-"],
+                                          capture_output=True).stdout)
+    except Exception: return 0
+    n = 0
+    for k, v in d.items():
+        if not k.startswith("KeyboardShortcuts_"): continue
+        try: cfg = json.loads(v) if isinstance(v, str) else v
+        except Exception: continue
+        kc = cfg.get("carbonKeyCode")
+        if kc is None: continue
+        fn = k[len("KeyboardShortcuts_"):]
+        add(decode_carbon(cfg.get("carbonModifiers")), KEYCODE.get(int(kc), f"kc{kc}"),
+            "Shottr: " + SHOTTR_NAMES.get(fn, fn), "app config", "global",
+            "Shottr 글로벌 핫키 (cc.ffitch.shottr)", group="Shottr"); n += 1
+    return n
+
+def collect_screenbrush():
+    try:
+        d = plistlib.loads(subprocess.run(["defaults", "export", "com.imagestudiopro.ScreenBrush", "-"],
+                                          capture_output=True).stdout)
+    except Exception: return 0
+    labels = {"runScreenBrush":"켜기", "runScreenBrushWithoutToolbar":"툴바 없이 켜기"}
+    n = 0
+    for k, v in d.items():
+        if not k.startswith("Shortcut"): continue
+        try: parts = base64.b64decode(v).decode("utf-8", "replace").split(",")
+        except Exception: continue
+        if len(parts) < 4: continue
+        name = parts[0].rstrip(":")
+        try: nsmask, kc, enabled = int(parts[1]), int(parts[2]), int(parts[3])
+        except Exception: continue
+        if not enabled: continue
+        add(decode_modmask(nsmask), KEYCODE.get(kc, f"kc{kc}"),
+            "ScreenBrush: " + labels.get(name, name), "app config", "global",
+            "ScreenBrush 글로벌 핫키 (com.imagestudiopro.ScreenBrush)", group="ScreenBrush"); n += 1
     return n
 
 # ----- per-app keymap collectors (the full keymaps that the menu-bar scan can't see) -----
@@ -448,6 +543,13 @@ def ax_key(m):
     if isinstance(g, int) and g in GLYPH: return GLYPH[g]
     return None
 
+# Standard AppKit Edit-menu items whose REAL shortcut is a Globe/fn key that the Accessibility
+# menu API can't encode (no Globe bit) — so they surface as a bare letter in EVERY app. Drop them;
+# the system source already carries them correctly (🌐E / ⌃⌘Space, 🌐 Dictation).
+_AX_GLOBE_ITEMS = ("Emoji & Symbols", "Start Dictation", "이모지 및 기호", "받아쓰기 시작")
+def _is_globe_item(text):
+    return any(g in (text or "") for g in _AX_GLOBE_ITEMS)
+
 def collect_menus():
     binp = os.path.join(PROJ, "axmenudump")
     if not os.path.exists(binp): print("  app menus: axmenudump not compiled"); return 0
@@ -458,7 +560,8 @@ def collect_menus():
         prev = os.path.join(PROJ, "shortcuts.json")
         if os.path.exists(prev):
             try:
-                old = [e for e in json.load(open(prev)).get("entries", []) if e.get("source") == "app menu"]
+                old = [e for e in json.load(open(prev)).get("entries", [])
+                       if e.get("source") == "app menu" and not (not e.get("mods") and _is_globe_item(e.get("action")))]
                 for e in old:
                     e["group"] = e.get("group") or "app menu"; entries.append(e)
                 print(f"  app menus: no Accessibility this run — reused {len(old)} from last scan"); return len(old)
@@ -472,19 +575,22 @@ def collect_menus():
     for m in arr:
         key = ax_key(m)
         if not key: continue
-        add(decode_ax_mods(m.get("cmdModifiers", -1)), key,
-            m.get("path") or m.get("title"), "app menu", m.get("app", "?"),
-            m.get("bundle", "")); n += 1
+        mods = decode_ax_mods(m.get("cmdModifiers", -1))
+        action = m.get("path") or m.get("title")
+        if not mods and _is_globe_item(action): continue  # AX can't encode the Globe/fn key → bare-letter artifact
+        add(mods, key, action, "app menu", m.get("app", "?"), m.get("bundle", "")); n += 1
     return n
 
 # ---------- run ----------
 print("Collecting…")
-sys_n = collect_system() + collect_defaults()
+sys_n = collect_system() + collect_defaults() + collect_zoom()
 kara_n = collect_karabiner(); btt_n = collect_btt(); ray_n = collect_raycast()
 mg_n = collect_manual_globals()
+sb_n = collect_shottr() + collect_screenbrush()
 obs_n = collect_obsidian(); vsc_n = collect_vscode()
 menu_n = collect_menus(); appd_n = collect_app_defaults()   # menus first so curated defaults dedup against them
 counts = {"system": sys_n, "Karabiner": kara_n, "BTT": btt_n, "Raycast": ray_n, "수동": mg_n,
+          "Shottr/ScreenBrush": sb_n,
           "Obsidian": obs_n, "VS Code": vsc_n, "app menu": menu_n, "app 기본": appd_n}
 for k, v in counts.items(): print(f"  {k:12s} {v}")
 
@@ -493,11 +599,21 @@ bttgroups = sorted({e["group"] for e in entries if e["source"] == "BTT" and e["g
 meta = {"generated": datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
         "counts": counts, "apps": apps, "bttgroups": bttgroups, "total": len(entries)}
 
-json.dump({"meta": meta, "entries": entries}, open(os.path.join(PROJ, "shortcuts.json"), "w"),
-          ensure_ascii=False, indent=1)
+# Favorites/notes: bake annotations.json (exported from the viewer) into the data so they survive
+# even if the browser's localStorage is cleared/blocked, and are portable across machines.
+ann = {"fav": {}, "note": {}}
+_ap = os.path.join(PROJ, "annotations.json")
+if os.path.exists(_ap):
+    try:
+        _a = json.load(open(_ap)); ann = {"fav": _a.get("fav", {}), "note": _a.get("note", {})}
+        print(f"  annotations  fav {len(ann['fav'])} · note {len(ann['note'])} (from annotations.json)")
+    except Exception: pass
+
+data = {"meta": meta, "entries": entries, "ann": ann}
+json.dump(data, open(os.path.join(PROJ, "shortcuts.json"), "w"), ensure_ascii=False, indent=1)
 
 html = open(os.path.join(PROJ, "viewer.template.html")).read()
-html = html.replace("/*__DATA__*/", json.dumps({"meta": meta, "entries": entries}, ensure_ascii=False))
+html = html.replace("/*__DATA__*/", json.dumps(data, ensure_ascii=False))
 open(os.path.join(PROJ, "viewer.html"), "w").write(html)
 print(f"\nWrote shortcuts.json and viewer.html  ({len(entries)} shortcuts, {len(apps)} apps)")
-print("Open: open ~/shortcut-viewer/viewer.html")
+print(f"Open: open {os.path.join(PROJ, 'viewer.html')}")
