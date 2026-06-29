@@ -139,6 +139,7 @@ def add(mods, key, action, source, scope, detail="", group=None, cmods=None, cke
         if ckey in FN_INTRINSIC and "fn" in cm: cm = [x for x in cm if x != "fn"]
         e["cmods"] = cm; e["ckey"] = str(ckey)
     entries.append(e)
+    return e
 
 def norm_keytoken(tok):
     if not tok: return None
@@ -508,18 +509,50 @@ def vsc_key(combo):
         return m1, k1, m2, k2, rest
     return m1, k1, None, None, ''
 
+# ---------- shared default-keybinding corpus: defaults/<app>/<version>.json ----------
+# The ASSET: app DEFAULTS (not user customizations, no PII) keyed by app+version. A scan with the
+# app installed SAVES its defaults here (grows the DB); a machine WITHOUT the app SEEDS from the DB
+# so the viewer still shows that app's shortcuts. This dir is committed (open dataset).
+DEFAULTS_DIR = os.path.join(PROJ, "defaults")
+VSCODE_APP = "/Applications/Visual Studio Code.app"
+CODEX_APP = "/Applications/Codex.app"
+def app_ver(bundle):
+    try:
+        d = plistlib.load(open(os.path.join(bundle, "Contents/Info.plist"), "rb"))
+        return d.get("CFBundleShortVersionString") or d.get("CFBundleVersion")
+    except Exception: return None
+def _verkey(v): return tuple(int(x) for x in re.findall(r"\d+", v or ""))
+def save_app_defaults(app, version, ents):
+    if not version or not ents: return
+    d = os.path.join(DEFAULTS_DIR, app); os.makedirs(d, exist_ok=True)
+    path = os.path.join(d, str(version) + ".json")
+    new = json.dumps({"app": app, "version": str(version), "scope": ents[0]["scope"], "entries": ents},
+                     ensure_ascii=False, indent=1, sort_keys=True)
+    if os.path.exists(path) and open(path).read() == new: return   # unchanged → no git churn
+    open(path, "w").write(new)
+def seed_app_defaults(app):
+    files = glob.glob(os.path.join(DEFAULTS_DIR, app, "*.json"))
+    if not files: return [], None
+    path = max(files, key=lambda p: _verkey(os.path.basename(p)[:-5]))   # newest known version
+    try:
+        data = json.load(open(path)); return data.get("entries", []), data.get("version")
+    except Exception: return [], None
+def seed_into(app):   # app not installed/scanned on this machine → fill in from the shared DB
+    ents, ver = seed_app_defaults(app)
+    if not ents: return 0
+    for e in ents:
+        e2 = dict(e); e2["detail"] = (e2.get("detail", "") + " · seed").strip(" ·")
+        entries.append(e2)
+    print(f"  {app}: not installed here → seeded {len(ents)} from defaults/{app}/{ver}.json")
+    return len(ents)
+
 def collect_vscode():
     files = []
     user = os.path.join(HOME, "Library/Application Support/Code/User/keybindings.json")
     if os.path.exists(user): files.append((user, "user"))
     dump = os.path.join(PROJ, "vscode_default_keybindings.json")
     if os.path.exists(dump): files.append((dump, "default"))
-    if not files:
-        print("  VS Code: no keybindings.json and no exported defaults — "
-              "in VS Code run ⇧⌘P ▸ 'Preferences: Open Default Keyboard Shortcuts (JSON)' "
-              "and save it to ~/shortcut-viewer/vscode_default_keybindings.json")
-        return 0
-    n = 0
+    n = 0; def_ents = []
     for path, kind in files:
         try: data = json.loads(_strip_jsonc(open(path).read()))
         except Exception as e: print("  VS Code: parse fail", kind, e); continue
@@ -532,7 +565,14 @@ def collect_vscode():
             when = (it.get("when") or "").strip()
             det = f"vscode {kind} · {combo}" + (f" · when: {when}" if when else "")
             action = cmd + (f"  (그다음 {rest})" if rest else "")   # 3+ 연속이면 2nd가 끝이 아님을 명시
-            add(mods, key, action, "app config", "Code", det, cmods=cmods, ckey=ckey); n += 1
+            e = add(mods, key, action, "app config", "Code", det, cmods=cmods, ckey=ckey)
+            if e:
+                n += 1
+                if kind == "default": def_ents.append(e)   # only DEFAULTS feed the shared DB (user customs stay local)
+    if def_ents:
+        save_app_defaults("VS Code", app_ver(VSCODE_APP), def_ents)
+    elif not any(k == "default" for _, k in files):        # no local defaults → seed from the shared DB
+        n += seed_into("VS Code")
     return n
 
 CODEX_MODS = {'cmdorctrl':'cmd','commandorcontrol':'cmd','cmd':'cmd','command':'cmd','super':'cmd','meta':'cmd',
@@ -547,16 +587,17 @@ def codex_accel(accel):                         # Electron accelerator → (mods
 def collect_codex():                            # in-app shortcuts (Settings ▸ Keyboard Shortcuts), not in the menu bar
     path = os.path.join(PROJ, "codex_keybindings.json")
     if not os.path.exists(path):
-        print("  Codex: no codex_keybindings.json — run ./dump_codex.sh to extract in-app shortcuts")
-        return 0
+        return seed_into("Codex")               # not installed / not dumped → seed from the shared DB
     try: data = json.load(open(path))
     except Exception as e: print("  Codex: parse fail", e); return 0
-    n = 0
+    n = 0; ents = []
     for it in data:
         mods, key = codex_accel(it.get("key", ""))
         if not key: continue
         label = (it.get("title") or it.get("id") or "").strip()
-        add(mods, key, label, "app config", "Codex", "codex · " + it.get("id", ""), group="Codex"); n += 1
+        e = add(mods, key, label, "app config", "Codex", "codex · " + it.get("id", ""), group="Codex")
+        if e: n += 1; ents.append(e)
+    if ents: save_app_defaults("Codex", app_ver(CODEX_APP), ents)   # all Codex shortcuts are app defaults
     return n
 
 def decode_ax_mods(m):

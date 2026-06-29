@@ -23,8 +23,10 @@ collectors (build.py + axmenudump) → shortcuts.json → viewer.html  (from vie
 ## 🔒 Never commit personal data
 
 These are gitignored and hold the user's ACTUAL shortcuts — never `git add -f` them:
-`shortcuts.json`, `viewer.html`, `vscode_default_keybindings.json`, `raycast_manual.json`, `manual_globals.json`, `axmenudump`.
+`shortcuts.json`, `viewer.html`, `vscode_default_keybindings.json`, `codex_keybindings.json`, `raycast_manual.json`, `manual_globals.json`, `axmenudump`.
 Only source files + `*.example.json` + `screenshot.png` are tracked.
+
+**Exception — `defaults/` IS committed.** `defaults/<app>/<version>.json` is the shared default-keybinding corpus (app **defaults** only — VS Code's `default` export, Codex's compiled `defaultKeybindings` — no PII). A scan with the app installed *saves* its defaults there; a machine without it *seeds* from the newest version (entries marked `· seed`). `meta.env` records OS/app versions + locale per scan (no host/user/serial). Never put user customizations there. See `defaults/README.md`.
 
 ## Verifying viewer changes (don't rely on the user to eyeball)
 

@@ -1,0 +1,634 @@
+{
+ "app": "Codex",
+ "entries": [
+  {
+   "action": "Copy conversation path",
+   "detail": "codex · copyConversationPath",
+   "group": "Codex",
+   "key": "C",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Copy deeplink",
+   "detail": "codex · copyDeeplink",
+   "group": "Codex",
+   "key": "L",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Copy session id",
+   "detail": "codex · copySessionId",
+   "group": "Codex",
+   "key": "C",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Copy working directory",
+   "detail": "codex · copyWorkingDirectory",
+   "group": "Codex",
+   "key": "C",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Close Tab",
+   "detail": "codex · closeTab",
+   "group": "Codex",
+   "key": "W",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Close",
+   "detail": "codex · closeWindow",
+   "group": "Codex",
+   "key": "W",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Reload Browser Page",
+   "detail": "codex · reloadBrowserPage",
+   "group": "Codex",
+   "key": "R",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Force Reload Browser Page",
+   "detail": "codex · hardReloadBrowserPage",
+   "group": "Codex",
+   "key": "R",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "New Window",
+   "detail": "codex · newWindow",
+   "group": "Codex",
+   "key": "N",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Open command menu",
+   "detail": "codex · openCommandMenu",
+   "group": "Codex",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Open command menu",
+   "detail": "codex · openCommandMenu",
+   "group": "Codex",
+   "key": "P",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Search Chats",
+   "detail": "codex · searchChats",
+   "group": "Codex",
+   "key": "G",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Search Files",
+   "detail": "codex · searchFiles",
+   "group": "Codex",
+   "key": "P",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Rename chat",
+   "detail": "codex · renameThread",
+   "group": "Codex",
+   "key": "R",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle File Tree",
+   "detail": "codex · toggleFileTreePanel",
+   "group": "Codex",
+   "key": "E",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Start Trace Recording",
+   "detail": "codex · toggleTraceRecording",
+   "group": "Codex",
+   "key": "S",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "New Chat",
+   "detail": "codex · newThread",
+   "group": "Codex",
+   "key": "N",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "New Chat",
+   "detail": "codex · newThread",
+   "group": "Codex",
+   "key": "O",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Quick Chat",
+   "detail": "codex · quickChat",
+   "group": "Codex",
+   "key": "N",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Archive chat",
+   "detail": "codex · archiveThread",
+   "group": "Codex",
+   "key": "A",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Pin/unpin chat",
+   "detail": "codex · toggleThreadPin",
+   "group": "Codex",
+   "key": "P",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Pin/unpin chat",
+   "detail": "codex · openSideChat",
+   "group": "Codex",
+   "key": "S",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "composer.openModelPicker",
+   "detail": "codex · composer.openModelPicker",
+   "group": "Codex",
+   "key": "M",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "composer.startVoiceMode",
+   "detail": "codex · composer.startVoiceMode",
+   "group": "Codex",
+   "key": "V",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Dictation",
+   "detail": "codex · composer.startDictation",
+   "group": "Codex",
+   "key": "D",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "approval.approve",
+   "detail": "codex · approval.approve",
+   "group": "Codex",
+   "key": "Return",
+   "mods": [],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "approval.decline",
+   "detail": "codex · approval.decline",
+   "group": "Codex",
+   "key": "Escape",
+   "mods": [],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Wake Pet",
+   "detail": "codex · previousTab",
+   "group": "Codex",
+   "key": "[",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Previous Chat",
+   "detail": "codex · previousThread",
+   "group": "Codex",
+   "key": "[",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Previous Chat",
+   "detail": "codex · previousRecentThread",
+   "group": "Codex",
+   "key": "Tab",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Next Chat",
+   "detail": "codex · nextRecentThread",
+   "group": "Codex",
+   "key": "Tab",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Settings",
+   "detail": "codex · settings",
+   "group": "Codex",
+   "key": ",",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Keyboard Shortcuts",
+   "detail": "codex · showKeyboardShortcuts",
+   "group": "Codex",
+   "key": "/",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Process Manager",
+   "detail": "codex · openProcessManager",
+   "group": "Codex",
+   "key": "M",
+   "mods": [
+    "ctrl",
+    "opt"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Open Folder",
+   "detail": "codex · openFolder",
+   "group": "Codex",
+   "key": "O",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Sidebar",
+   "detail": "codex · toggleSidebar",
+   "group": "Codex",
+   "key": "B",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Bottom Panel",
+   "detail": "codex · toggleBottomPanel",
+   "group": "Codex",
+   "key": "J",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Open Browser Tab",
+   "detail": "codex · openBrowserTab",
+   "group": "Codex",
+   "key": "T",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Browser Panel",
+   "detail": "codex · toggleBrowserPanel",
+   "group": "Codex",
+   "key": "B",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Browser Panel",
+   "detail": "codex · openReviewTab",
+   "group": "Codex",
+   "key": "G",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Side Panel",
+   "detail": "codex · toggleSidePanel",
+   "group": "Codex",
+   "key": "B",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Find",
+   "detail": "codex · findInThread",
+   "group": "Codex",
+   "key": "F",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Focus Browser Address Bar",
+   "detail": "codex · focusBrowserAddressBar",
+   "group": "Codex",
+   "key": "L",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Back",
+   "detail": "codex · navigateBack",
+   "group": "Codex",
+   "key": "[",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Back",
+   "detail": "codex · navigateBack",
+   "group": "Codex",
+   "key": "MouseBack",
+   "mods": [],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "environmentAction1",
+   "detail": "codex · environmentAction1",
+   "group": "Codex",
+   "key": "D",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Go to Chat 1",
+   "detail": "codex · thread1",
+   "group": "Codex",
+   "key": "1",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Go to Chat 2",
+   "detail": "codex · thread2",
+   "group": "Codex",
+   "key": "2",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Go to Chat 3",
+   "detail": "codex · thread3",
+   "group": "Codex",
+   "key": "3",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Go to Chat 4",
+   "detail": "codex · thread4",
+   "group": "Codex",
+   "key": "4",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Go to Chat 5",
+   "detail": "codex · thread5",
+   "group": "Codex",
+   "key": "5",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Go to Chat 6",
+   "detail": "codex · thread6",
+   "group": "Codex",
+   "key": "6",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Go to Chat 7",
+   "detail": "codex · thread7",
+   "group": "Codex",
+   "key": "7",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Go to Chat 8",
+   "detail": "codex · thread8",
+   "group": "Codex",
+   "key": "8",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  },
+  {
+   "action": "Go to Chat 9",
+   "detail": "codex · thread9",
+   "group": "Codex",
+   "key": "9",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Codex",
+   "source": "app config"
+  }
+ ],
+ "scope": "Codex",
+ "version": "26.623.61825"
+}
