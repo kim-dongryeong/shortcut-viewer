@@ -8,7 +8,7 @@
 #   BTT        BetterTouchTool (bttcli export_preset — needs Socket Server enabled)
 #   Raycast    raycast_manual.json (Raycast's DB is encrypted; list hotkeys here by hand)
 #   app menu   ./axmenudump (Accessibility API; per-app menu shortcuts of running apps)
-import json, subprocess, os, plistlib, datetime, re, sqlite3, glob, tempfile, shutil, base64
+import json, subprocess, os, plistlib, datetime, re, sqlite3, glob, tempfile, shutil, base64, platform
 
 HOME = os.path.expanduser("~")
 PROJ = os.path.dirname(os.path.abspath(__file__))
@@ -617,6 +617,33 @@ def collect_menus():
         add(mods, key, action, "app menu", m.get("app", "?"), m.get("bundle", "")); n += 1
     return n
 
+def collect_env():   # provenance: OS/app versions + locale, so each scan is a versioned datapoint. NO PII (no host/user/serial).
+    env = {"macos": platform.mac_ver()[0], "arch": platform.machine()}
+    def sh(*a):
+        try: return subprocess.check_output(a, text=True, stderr=subprocess.DEVNULL).strip()
+        except Exception: return None
+    for k, v in (("build", sh("sw_vers", "-buildVersion")),
+                 ("model", sh("sysctl", "-n", "hw.model")),
+                 ("locale", sh("defaults", "read", "-g", "AppleLocale"))):
+        if v: env[k] = v
+    apps, cand = {}, {
+        "BTT": "/Applications/BetterTouchTool.app", "VS Code": "/Applications/Visual Studio Code.app",
+        "Codex": "/Applications/Codex.app", "Google Chrome": "/Applications/Google Chrome.app",
+        "Safari": "/Applications/Safari.app", "Obsidian": "/Applications/Obsidian.app",
+        "Shottr": "/Applications/Shottr.app", "ScreenBrush": "/Applications/ScreenBrush.app",
+        "Karabiner-Elements": "/Applications/Karabiner-Elements.app", "Raycast": "/Applications/Raycast.app",
+    }
+    for name, p in cand.items():
+        pl = os.path.join(p, "Contents/Info.plist")
+        if not os.path.exists(pl): continue
+        try:
+            d = plistlib.load(open(pl, "rb"))
+            v = d.get("CFBundleShortVersionString") or d.get("CFBundleVersion")
+            if v: apps[name] = str(v)
+        except Exception: pass
+    env["apps"] = apps
+    return env
+
 # ---------- run ----------
 print("Collecting…")
 sys_n = collect_system() + collect_defaults() + collect_zoom()
@@ -633,7 +660,8 @@ for k, v in counts.items(): print(f"  {k:12s} {v}")
 apps = sorted({e["scope"] for e in entries if e["scope"] != "global"})
 bttgroups = sorted({e["group"] for e in entries if e["source"] == "BTT" and e["group"] != "BTT"})
 meta = {"generated": datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
-        "counts": counts, "apps": apps, "bttgroups": bttgroups, "total": len(entries)}
+        "counts": counts, "apps": apps, "bttgroups": bttgroups, "total": len(entries),
+        "env": collect_env()}
 
 # Favorites/notes: bake annotations.json (exported from the viewer) into the data so they survive
 # even if the browser's localStorage is cleared/blocked, and are portable across machines.
