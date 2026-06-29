@@ -125,6 +125,12 @@ def decode_modmask(m):
     return [name for bit,name in MODMASK if m & bit]
 
 entries = []
+gestures = []   # non-static triggers (no regular key): tap-count/hold modifier gestures, L/R-specific.
+def addg(mod, action, source, scope, detail="", side="either", count=1, hold=False, group=None):
+    # mod: cmd|opt|ctrl|shift|fn|caps · side: either|left|right · count: tap count · hold: hold final press
+    gestures.append({"mod": mod, "side": side, "count": int(count), "hold": bool(hold),
+                     "action": (action or "").strip() or "(untitled)", "source": source,
+                     "scope": scope, "detail": detail, "group": group or source})
 # macOS sets NSEvent's Function flag (0x800000) automatically on these keys — it does NOT mean
 # the physical fn/Globe key was pressed — so strip 'fn' from their combos.
 FN_INTRINSIC = {f"F{i}" for i in range(1, 21)} | {"Left","Right","Up","Down","Home","End","PageUp","PageDown","ForwardDelete"}
@@ -599,6 +605,28 @@ def collect_codex():                            # in-app shortcuts (Settings ▸
         if e: n += 1; ents.append(e)
     if ents: save_app_defaults("Codex", app_ver(CODEX_APP), ents)   # all Codex shortcuts are app defaults
     return n
+def collect_codex_gestures():
+    # Appshots: reverse-engineered from Codex app.asar — `var y3=`DoubleCommand`` is the default for the
+    # stored `appshotHotkey` (options ⌘⌘ / ⌥⌥ / ⇧⇧ / off); macOS-only; command id `capture-appshot`,
+    # label "Attach Appshot", "Take an appshot to show Codex your frontmost window". Double-tap ⌘ (or L+R ⌘).
+    if not os.path.exists(CODEX_APP): return 0
+    addg("cmd", "Appshots — 최상위 창을 캡처해 Codex에 첨부", "app config", "Codex",
+         "codex · capture-appshot · app.asar 기본값 DoubleCommand (설정에서 ⌥⌥/⇧⇧/끄기)",
+         side="either", count=2, hold=False, group="Codex")
+    return 1
+def collect_manual_gestures():
+    # User-listed non-static triggers across apps (Claude Desktop / KeyClu / their AutoHotKey CapsLock multi-tap…).
+    path = os.path.join(PROJ, "manual_gestures.json")
+    if not os.path.exists(path): return 0
+    try: data = json.load(open(path))
+    except Exception as e: print("  gestures: parse fail", e); return 0
+    n = 0
+    for it in (data.get("gestures") or []):
+        if not it.get("mod"): continue
+        addg(it["mod"], it.get("action", ""), it.get("source", "수동"), it.get("scope", "global"),
+             it.get("detail", ""), it.get("side", "either"), it.get("count", 1), it.get("hold", False), it.get("group"))
+        n += 1
+    return n
 
 def decode_ax_mods(m):
     m = int(m)
@@ -693,12 +721,14 @@ mg_n = collect_manual_globals()
 sb_n = collect_shottr() + collect_screenbrush()
 obs_n = collect_obsidian(); vsc_n = collect_vscode(); cdx_n = collect_codex()
 menu_n = collect_menus(); appd_n = collect_app_defaults()   # menus first so curated defaults dedup against them
+gst_n = collect_codex_gestures() + collect_manual_gestures()   # non-static triggers (double/hold/multi-tap)
 counts = {"system": sys_n, "Karabiner": kara_n, "BTT": btt_n, "Raycast": ray_n, "수동": mg_n,
           "Shottr/ScreenBrush": sb_n,
-          "Obsidian": obs_n, "VS Code": vsc_n, "Codex": cdx_n, "app menu": menu_n, "app 기본": appd_n}
+          "Obsidian": obs_n, "VS Code": vsc_n, "Codex": cdx_n, "app menu": menu_n, "app 기본": appd_n,
+          "제스처": gst_n}
 for k, v in counts.items(): print(f"  {k:12s} {v}")
 
-apps = sorted({e["scope"] for e in entries if e["scope"] != "global"})
+apps = sorted({e["scope"] for e in entries + gestures if e["scope"] != "global"})
 bttgroups = sorted({e["group"] for e in entries if e["source"] == "BTT" and e["group"] != "BTT"})
 meta = {"generated": datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
         "counts": counts, "apps": apps, "bttgroups": bttgroups, "total": len(entries),
@@ -714,7 +744,7 @@ if os.path.exists(_ap):
         print(f"  annotations  fav {len(ann['fav'])} · note {len(ann['note'])} (from annotations.json)")
     except Exception: pass
 
-data = {"meta": meta, "entries": entries, "ann": ann}
+data = {"meta": meta, "entries": entries, "gestures": gestures, "ann": ann}
 json.dump(data, open(os.path.join(PROJ, "shortcuts.json"), "w"), ensure_ascii=False, indent=1)
 
 html = open(os.path.join(PROJ, "viewer.template.html")).read()

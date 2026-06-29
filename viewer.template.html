@@ -90,6 +90,13 @@
   .chord{color:#7dd3fc;font-weight:700;white-space:nowrap}
   .chordm{font-size:8px;color:#7dd3fc;font-weight:700;margin-left:auto}
   .chordbtn{font-size:11px;padding:2px 7px;border:1px solid #38bdf8;border-radius:6px;background:#0b2a45;color:#7dd3fc;cursor:pointer;font-weight:700;white-space:nowrap}
+  #gestures{margin:6px 0 2px}
+  .gwrap{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+  .gcard{display:flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:10px;padding:7px 12px;background:var(--panel)}
+  .gsym{font-weight:800;font-size:16px;color:#7dd3fc;white-space:nowrap}
+  .gsym .gtag{font-size:10px;color:var(--dim);font-weight:700;border:1px solid var(--line);border-radius:4px;padding:0 3px;vertical-align:middle}
+  .gact{font-size:13px;color:#cdd3df}
+  .gsrc{font-size:11px;color:var(--dim);display:inline-flex;align-items:center;gap:4px}
   #chordbar{background:#0b2a45;border:1px solid #38bdf8;border-radius:9px;padding:10px 14px;margin:8px 0;color:#cfe;font-size:14px}
   #chordbar .x{text-decoration:underline;cursor:pointer;color:#7dd3fc;font-weight:700}
   .drow{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-bottom:1px solid var(--line)}
@@ -135,6 +142,7 @@
   <div id="chordbar" style="display:none"></div>
   <div class="kb" id="kb"></div>
   <div id="extras"></div>
+  <div id="gestures"></div>
 
   <div class="panel">
     <div id="detail"><div class="empty">키를 클릭하면 그 키에 걸린 <b>모든 수식키 조합</b>이 여기에 표시되고, 수식키를 누르면 해당 조합이 강조됩니다.</div></div>
@@ -156,7 +164,7 @@ let prefScopeRight = localStorage.getItem('SVscopeRight')!=='0';  // 상세 패�
 let ovGroup = ['mod','key','source'].includes(localStorage.getItem('SVovGroup')) ? localStorage.getItem('SVovGroup') : 'mod';  // 전체 단축키 치트시트 묶음 기준 (잘못된 저장값은 'mod'로)
 const COLORS = {system:'#3b82f6','app menu':'#9ca3af','app config':'#14b8a6',Karabiner:'#22c55e',BTT:'#f59e0b',Raycast:'#a855f7'};
 const MODS = ['ctrl','opt','shift','cmd'];
-const MODSYM = {ctrl:'⌃',opt:'⌥',shift:'⇧',cmd:'⌘',fn:'🌐'};
+const MODSYM = {ctrl:'⌃',opt:'⌥',shift:'⇧',cmd:'⌘',fn:'🌐',caps:'⇪'};
 const U = 56;
 // physical-ish ANSI Mac layout. t:'key' = shortcut key, t:'mod' = modifier toggle, t:'gap' = spacer.
 const LAYOUT = [
@@ -386,6 +394,22 @@ function showDetail(key){
   d.querySelectorAll('[data-chord]').forEach(b=>b.onclick=()=>{ const [ms,k]=b.dataset.chord.split('|'); enterChord(ms?ms.split('+'):[], k); });
   d.querySelectorAll('[data-note]').forEach(b=>b.onclick=()=>{ const ak=b.dataset.note; const t=prompt('이 단축키에 노트 (예: cmd+opt+V는 엑셀과 충돌이라 opt+V로 변경):', ANN.note[ak]||''); if(t!==null){ const tt=t.trim(); tt?ANN.note[ak]=tt:delete ANN.note[ak]; saveAnn(); sync(); showDetail(selectedKey); } });
 }
+function gestureSym(g){   // 비-정적 트리거 표기: ⌘⌘ / ⌥×3 / ⇪×4 + hold/(L|R)
+  const s = g.mod==='caps' ? '⇪' : (MODSYM[g.mod]||g.mod);
+  const c = g.count<=1 ? s : (g.count===2 ? s+s : s+'×'+g.count);
+  return c + (g.hold?` <span class="gtag">hold</span>`:'') + (g.side&&g.side!=='either'?` <span class="gtag">${g.side==='left'?'L':'R'}</span>`:'');
+}
+function renderGestures(){
+  const el=document.getElementById('gestures');
+  const gs=(DB.gestures||[]).filter(inCtx);
+  if(!gs.length){ el.innerHTML=''; return; }
+  el.innerHTML=`<div class="sec">수식키 제스처 · 특수 트리거 — ${gs.length}개 <span class="muted" style="text-transform:none;letter-spacing:0;font-size:11px">(더블·멀티탭 / 홀드 / 좌우 — 그리드로 표현 불가한 트리거)</span></div>`
+    +`<div class="gwrap">`+gs.map(g=>
+      `<div class="gcard" title="${(g.detail||'').replace(/"/g,'&quot;')}"><span class="gsym">${gestureSym(g)}</span>`
+      +`<span class="gact">${g.action.replace(/</g,'&lt;')}</span>`
+      +`<span class="gsrc"><span class="fdot" style="background:${COLORS[g.source]||'#888'}"></span>${g.source}${g.scope&&g.scope!=='global'&&g.scope!==g.source?' · '+g.scope:''}</span></div>`
+    ).join('')+`</div>`;
+}
 function ovGroupKey(e){   // 치트시트 묶음 기준
   if(ovGroup==='key') return {label:e.key, ord:0};
   if(ovGroup==='source') return {label:e.source, ord:0};
@@ -453,7 +477,7 @@ function sync(){
     cb.innerHTML=`🔗 연속(chord) 모드 — <b>${comboSym(chordPrefix.mods)}${chordPrefix.key}</b> 다음에 누를 <b>두 번째 키</b>를 고르세요 (후속 ${n}개, 현재 2nd 레이어 <b style="color:#7dd3fc">${effSym()||'(무수식)'}</b>) · <span class="x" id="chordexit">Esc · 일반 모드로</span>`;
     cb.querySelector('#chordexit').onclick=exitChord;
   } else cb.style.display='none';
-  renderKB(); renderOverview();
+  renderKB(); renderGestures(); renderOverview();
   const det=document.getElementById('detail');      // 전체 단축키(overview)가 켜지면 키별 상세는 숨기고 치트시트만
   if(overview){ det.style.display='none'; }
   else { det.style.display=''; if(selectedKey) showDetail(selectedKey); }
