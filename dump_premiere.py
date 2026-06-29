@@ -10,7 +10,11 @@ import os, re, sys, glob, json
 import xml.etree.ElementTree as ET
 PROJ = os.path.dirname(os.path.abspath(__file__))
 FLAG = 0x80000000
-SPECIAL = {}   # Adobe special-key code -> our key name (run once, then fill from the printed "미매핑" list)
+SPECIAL = {   # Adobe special-key code -> our key name (decoded from Premiere default command bindings)
+    1: "Space", 2: "Delete", 3: "Tab", 4: "Return", 7: "F1", 11: "F5", 12: "F6",
+    35: "ForwardDelete", 36: "Home", 37: "End", 38: "PageUp", 39: "PageDown",
+    42: "Left", 43: "Right", 44: "Up", 45: "Down",
+}
 
 def humanize(cmd):
     out = []
