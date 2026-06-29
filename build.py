@@ -12,6 +12,10 @@ import json, subprocess, os, plistlib, datetime, re, sqlite3, glob, tempfile, sh
 
 HOME = os.path.expanduser("~")
 PROJ = os.path.dirname(os.path.abspath(__file__))
+def _scrub(s):   # strip home/username paths so action/detail (and the shared defaults/ + web corpus) carry no PII
+    if not s: return s
+    s = s.replace(HOME, "~")
+    return re.sub(r"/Users/[^/\s'\"]+", "/Users/USER", s)
 
 # ---------- lookup tables ----------
 # Carbon/HID virtual key code -> label (kVK_*). Shared by symbolichotkeys & AX virtual keys.
@@ -140,8 +144,8 @@ def add(mods, key, action, source, scope, detail="", group=None, cmods=None, cke
     if not key: return
     m = norm_mods(mods)
     if key in FN_INTRINSIC and "fn" in m: m = [x for x in m if x != "fn"]
-    e = {"mods": m, "key": str(key), "action": (action or "").strip() or "(untitled)",
-         "source": source, "scope": scope, "detail": detail, "group": group or source}
+    e = {"mods": m, "key": str(key), "action": _scrub((action or "").strip()) or "(untitled)",
+         "source": source, "scope": scope, "detail": _scrub(detail), "group": group or source}
     if ckey:                                   # chord: 2nd press (예: ⌘K ⌘I) — only stored when present
         cm = norm_mods(cmods or [])
         if ckey in FN_INTRINSIC and "fn" in cm: cm = [x for x in cm if x != "fn"]

@@ -4995,7 +4995,7 @@
    "cmods": [
     "cmd"
    ],
-   "detail": "vscode default · cmd+k cmd+k · when: resource == 'vscode-userdata:/Users/kimdongryeong/Library/Application%20Support/Code/User/keybindings.json'",
+   "detail": "vscode default · cmd+k cmd+k · when: resource == 'vscode-userdata:~/Library/Application%20Support/Code/User/keybindings.json'",
    "group": "app config",
    "key": "K",
    "mods": [
