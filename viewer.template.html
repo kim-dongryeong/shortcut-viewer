@@ -287,7 +287,7 @@ function cellKey(key,label,wpx){
   const _ak=annKey([...eff],key);
   if(ANN.fav[_ak]||ANN.note[_ak]) h+=`<span class="annm">${ANN.fav[_ak]?'⭐':''}${ANN.note[_ak]?'📝':''}</span>`;
   el.innerHTML=h;
-  el.onclick=()=>{ selectedKey=key; sync(); };
+  el.onclick=()=>{ selectedKey = (key===selectedKey ? null : key); sync(); };   // 같은 키 다시 클릭하면 해제
   el.onmouseenter=ev=>showTip(ev,key,all); el.onmousemove=moveTip; el.onmouseleave=hideTip;
   return el;
 }
@@ -395,14 +395,14 @@ function showDetail(key){
   d.querySelectorAll('[data-chord]').forEach(b=>b.onclick=()=>{ const [ms,k]=b.dataset.chord.split('|'); enterChord(ms?ms.split('+'):[], k); });
   d.querySelectorAll('[data-note]').forEach(b=>b.onclick=()=>{ const ak=b.dataset.note; const t=prompt('이 단축키에 노트 (예: cmd+opt+V는 엑셀과 충돌이라 opt+V로 변경):', ANN.note[ak]||''); if(t!==null){ const tt=t.trim(); tt?ANN.note[ak]=tt:delete ANN.note[ak]; saveAnn(); sync(); showDetail(selectedKey); } });
 }
-function gestureSym(g){   // 비-정적 트리거 표기: ⌘+⌘(좌우 동시) / ⌥×3(멀티탭) / ⇪ hold / (L|R)
+function gestureSym(g){   // 비-정적 트리거 표기: L⌘+R⌘(좌우 동시) / ⌘⌘·⌥×3(멀티탭) / L⌘·R⌘ + hold
   const s = g.mod==='caps' ? '⇪' : (MODSYM[g.mod]||g.mod);
-  const both = g.side==='both';
-  const c = both ? s+'+'+s : (g.count<=1 ? s : (g.count===2 ? s+s : s+'×'+g.count));
-  const tag = (both?` <span class="gtag">L+R</span>`:'')
-    + (g.hold?` <span class="gtag">hold</span>`:'')
-    + (g.side==='left'||g.side==='right'?` <span class="gtag">${g.side==='left'?'L':'R'}</span>`:'');
-  return c + tag;
+  let core;
+  if(g.side==='both') core = 'L'+s+'+R'+s;                      // 좌·우 키를 동시에
+  else if(g.side==='left') core = 'L'+s;
+  else if(g.side==='right') core = 'R'+s;
+  else core = g.count<=1 ? s : (g.count===2 ? s+s : s+'×'+g.count);   // 더블/멀티탭
+  return core + (g.hold?` <span class="gtag">hold</span>`:'');
 }
 function renderGestures(){
   const el=document.getElementById('gestures');
@@ -489,12 +489,13 @@ function sync(){
   renderKB(); renderGestures(); renderOverview();
   const det=document.getElementById('detail');      // 전체 단축키(overview)가 켜지면 키별 상세는 숨기고 치트시트만
   if(overview){ det.style.display='none'; }
-  else { det.style.display=''; if(selectedKey) showDetail(selectedKey); }
+  else { det.style.display=''; if(selectedKey) showDetail(selectedKey);
+    else det.innerHTML='<div class="empty">키를 클릭하면 그 키에 걸린 <b>모든 수식키 조합</b>이 여기에 표시되고, 수식키를 누르면 해당 조합이 강조됩니다.</div>'; }
 }
 function readHeld(e){ const h=new Set(); if(e.metaKey)h.add('cmd'); if(e.ctrlKey)h.add('ctrl'); if(e.altKey)h.add('opt'); if(e.shiftKey)h.add('shift'); return h; }
 const CODEMAP={Backquote:'`',Minus:'-',Equal:'=',BracketLeft:'[',BracketRight:']',Semicolon:';',Quote:"'",Comma:',',Period:'.',Slash:'/',Space:'Space',Enter:'Return',Tab:'Tab',Escape:'Escape',Backspace:'Delete',Delete:'ForwardDelete',ArrowLeft:'Left',ArrowRight:'Right',ArrowUp:'Up',ArrowDown:'Down',Home:'Home',End:'End',PageUp:'PageUp',PageDown:'PageDown',CapsLock:'CapsLock'};
 function codeToKey(code){ if(!code)return null; if(code==='Backslash')return String.fromCharCode(92); if(code.startsWith('Key'))return code.slice(3); if(code.startsWith('Digit'))return code.slice(5); if(code[0]==='F'&&code.length<=3&&!isNaN(parseInt(code.slice(1),10)))return code; return CODEMAP[code]||null; }
-document.addEventListener('keydown',e=>{ if(e.target.tagName==='INPUT')return; if(e.key==='Escape'&&chordPrefix){ e.preventDefault(); exitChord(); return; } const h=readHeld(e); const s=[...h].sort().join(); const mapped=codeToKey(e.code); let changed=false; if(s!==heldStr){heldStr=s;held=h;changed=true;} if(mapped){ e.preventDefault(); if(mapped!==selectedKey){selectedKey=mapped;changed=true;} } if(changed) sync(); });
+document.addEventListener('keydown',e=>{ if(e.target.tagName==='INPUT')return; if(e.key==='Escape'&&chordPrefix){ e.preventDefault(); exitChord(); return; } const h=readHeld(e); const s=[...h].sort().join(); const mapped=codeToKey(e.code); let changed=false; if(s!==heldStr){heldStr=s;held=h;changed=true;} if(mapped){ e.preventDefault(); if(!e.repeat){ selectedKey = (mapped===selectedKey ? null : mapped); changed=true; } } if(changed) sync(); });   // 같은 키 다시 누르면 해제(토글)
 document.addEventListener('keyup',e=>{ const h=readHeld(e); const s=[...h].sort().join(); if(s!==heldStr){heldStr=s;held=h;sync();} });
 window.addEventListener('blur',()=>{ if(heldStr){heldStr='';held=new Set();sync();} });
 
