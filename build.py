@@ -557,6 +557,20 @@ def seed_into(app):   # app not installed/scanned on this machine → fill in fr
         entries.append(e2)
     print(f"  {app}: not installed here → seeded {len(ents)} from defaults/{app}/{ver}.json")
     return len(ents)
+def collect_community():
+    # seed app-menu packs shared from OTHER machines (defaults/<app>/menu-*.json, made by share_menus.py)
+    # for apps NOT scanned on this machine — so you see them without installing the app. Call LAST.
+    n, have = 0, {e["scope"] for e in entries}
+    for path in sorted(glob.glob(os.path.join(DEFAULTS_DIR, "*", "menu-*.json"))):
+        try: data = json.load(open(path))
+        except Exception: continue
+        app = data.get("app") or data.get("scope")
+        if not app or app in have: continue           # already have it from a local scan → skip (no dup)
+        for e in data.get("entries", []):
+            e2 = dict(e); e2["detail"] = "공유 · 타 기기 메뉴 스캔"
+            entries.append(e2); n += 1
+        have.add(app)
+    return n
 
 def collect_vscode():
     files = []
@@ -767,8 +781,9 @@ obs_n = collect_obsidian(); vsc_n = collect_vscode(); cdx_n = collect_codex()
 menu_n = collect_menus(); appd_n = collect_app_defaults()   # menus first so curated defaults dedup against them
 gst_n = collect_codex_gestures() + collect_manual_gestures()   # non-static triggers (double/hold/multi-tap)
 web_n = collect_web()                                          # web-app shortcuts (Google Sheets/Docs/Drive…)
+com_n = collect_community()                                    # menu packs shared from other machines (last → knows local scopes)
 counts = {"system": sys_n, "Karabiner": kara_n, "BTT": btt_n, "Raycast": ray_n, "수동": mg_n,
-          "Shottr/ScreenBrush": sb_n,
+          "Shottr/ScreenBrush": sb_n, "공유": com_n,
           "Obsidian": obs_n, "VS Code": vsc_n, "Codex": cdx_n, "web": web_n, "app menu": menu_n, "app 기본": appd_n,
           "제스처": gst_n}
 for k, v in counts.items(): print(f"  {k:12s} {v}")

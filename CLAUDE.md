@@ -26,7 +26,9 @@ These are gitignored and hold the user's ACTUAL shortcuts — never `git add -f`
 `shortcuts.json`, `viewer.html`, `vscode_default_keybindings.json`, `codex_keybindings.json`, `raycast_manual.json`, `manual_globals.json`, `axmenudump`.
 Only source files + `*.example.json` + `screenshot.png` are tracked.
 
-**Exception — `defaults/` IS committed.** `defaults/<app>/<version>.json` is the shared default-keybinding corpus (app **defaults** only — VS Code's `default` export, Codex's compiled `defaultKeybindings` — no PII). A scan with the app installed *saves* its defaults there; a machine without it *seeds* from the newest version (entries marked `· seed`). `meta.env` records OS/app versions + locale per scan (no host/user/serial). Never put user customizations there. See `defaults/README.md`.
+**Exception — `defaults/` IS committed.** `defaults/<app>/<version>.json` is the shared default-keybinding corpus (app **defaults** only — VS Code's `default` export, Codex's compiled `defaultKeybindings` — no PII).
+
+**Cross-machine sharing.** Scan on a Mac that has more apps, share the *app's own* shortcuts (not your BTT/Raycast config) via the tracked `defaults/` corpus + git: `share_menus.py "<App>" …` promotes that app's **menu-bar** shortcuts into `defaults/<app>/menu-<ver>.json` — but **drops the system "Apple ▸" menu** (which holds `Log Out <your name>`) and scrubs name/username/home (aborts if any PII survives). `collect_community()` (runs last in build.py) seeds those `menu-*.json` packs for apps NOT scanned locally (marked `공유 · 타 기기`), so you see another machine's app shortcuts without installing the app. Raw `shortcuts.json` (the menu scan) is gitignored because it contains the Apple-menu name; only the scrubbed `defaults/` packs are shared. A scan with the app installed *saves* its defaults there; a machine without it *seeds* from the newest version (entries marked `· seed`). `meta.env` records OS/app versions + locale per scan (no host/user/serial). Never put user customizations there. See `defaults/README.md`.
 
 ## Verifying viewer changes (don't rely on the user to eyeball)
 
