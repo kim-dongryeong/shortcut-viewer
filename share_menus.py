@@ -63,8 +63,10 @@ def main(apps):
         if re.search(r"/Users/(?!USER\b)[A-Za-z]", out): leaks.append("/Users/<name>")
         if leaks: sys.exit(f"‼️ PII 잔존({app}): {leaks} — 중단(코드 점검 필요).")
         open(path, "w").write(out)
-        print(f"  → {os.path.relpath(path, PROJ)}  ({len(p['items'])}건 · Apple메뉴 제외 · PII 스크럽 · v{ver})")
-    print("검토 후:  git add defaults/ && git commit -m 'share <app> menus' && git push")
+        emails = sorted(set(re.findall(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}", out)))
+        warn = f"  ⚠️ 이메일 의심: {emails} — 리뷰하세요" if emails else ""
+        print(f"  → {os.path.relpath(path, PROJ)}  ({len(p['items'])}건 · Apple메뉴 제외 · PII 스크럽 · v{ver}){warn}")
+    print("⚠️ 푸시 전 반드시 검토:  git diff -- defaults/   그 다음:  git add defaults/ && git commit -m 'share <app> menus' && git push")
 
 if __name__ == "__main__":
     if len(sys.argv) < 2: sys.exit('usage: python3 share_menus.py "Microsoft Excel" "Notion" ...')
