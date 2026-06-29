@@ -40,7 +40,17 @@ def version_of(bundle):
 def main(apps):
     sj = os.path.join(PROJ, "shortcuts.json")
     if not os.path.exists(sj): sys.exit("shortcuts.json 없음 — 먼저 ./refresh.sh 로 스캔하세요.")
-    data = json.load(open(sj)); pii = pii_set(); want = set(apps)
+    data = json.load(open(sj)); pii = pii_set()
+    all_scopes = sorted({e["scope"] for e in data.get("entries", []) if e.get("source") == "app menu"})
+    def match(term):   # fuzzy: case-insensitive substring either direction (so "Premiere Pro" hits "Adobe Premiere Pro 2025")
+        tl = term.lower(); return [s for s in all_scopes if tl in s.lower() or s.lower() in tl]
+    want = set()
+    print("매칭 (스캔된 앱 이름):")
+    for term in apps:
+        hits = match(term); want.update(hits)
+        print(f"  '{term}' → {hits if hits else '⚠️ 매칭 없음'}")
+    if not want:
+        sys.exit("매칭된 앱 없음. 스캔된 앱(앱들을 켜고 ./refresh.sh 했는지 확인):\n  " + "\n  ".join(all_scopes))
     packs = {}
     for e in data.get("entries", []):
         if e.get("source") != "app menu" or e.get("scope") not in want: continue
@@ -49,8 +59,7 @@ def main(apps):
         p["items"].append({"mods": e["mods"], "key": e["key"], "action": scrub(e.get("action", ""), pii),
                            "source": "app menu", "scope": e["scope"], "detail": "app menu (shared)", "group": e["scope"]})
     if not packs:
-        avail = sorted({e["scope"] for e in data.get("entries", []) if e.get("source") == "app menu"})
-        sys.exit("해당 앱의 메뉴 항목 없음. 스캔된 앱(정확한 이름):\n  " + "\n  ".join(avail))
+        sys.exit("매칭은 됐지만 단축키 있는 메뉴 항목이 없음 (예: 렌더 엔진은 메뉴 단축키가 없음).")
     for app, p in packs.items():
         ver = version_of(p["bundle"])
         d = os.path.join(PROJ, "defaults", app); os.makedirs(d, exist_ok=True)
