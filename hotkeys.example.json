@@ -16,7 +16,7 @@
     {"id":"email",    "title":"내 이메일 주소 붙여넣기",                "mods":["opt"],        "key":"E",     "action":{"type":"paste_text","value":"me@example.com"}},
     {"id":"dark",     "title":"다크 모드 켜기/끄기",                    "mods":["ctrl","opt"], "key":"D",     "enabled":false, "action":{"type":"applescript","value":"tell application \"System Events\" to tell appearance preferences to set dark mode to not dark mode"}},
     {"id":"newnote",  "title":"새 메모",                               "mods":["opt"],        "key":"N",     "action":{"type":"applescript","value":"tell application \"Notes\" to make new note"}},
-    {"id":"emptytrash","title":"휴지통 비우기",                        "mods":["ctrl","opt"], "key":"Delete","action":{"type":"applescript","value":"tell application \"Finder\" to empty trash"}},
+    {"id":"emptytrash","title":"휴지통 비우기 (안전상 기본 꺼짐)",       "mods":["ctrl","opt"], "key":"Delete","enabled":false, "action":{"type":"applescript","value":"tell application \"Finder\" to empty trash"}},
     {"id":"spotify",  "title":"Spotify 재생/일시정지 (anyCombo 예시)",  "mods":["ctrl","opt"], "key":"P",     "anyCombo":false, "action":{"type":"applescript","value":"tell application \"Spotify\" to playpause"}}
   ]
 }
