@@ -708,8 +708,10 @@ function renderGHK(){ const el=document.getElementById('modepanel');
     </div>
     <div class="ghklist">${list}</div>
     <div class="ghkbackends"><b>내보내기 / 설치</b> · <button id="ghkExport">⤓ hotkeys.json 내보내기</button>
-      <span class="muted" style="font-size:11px">저장 → <code>~/.config/shortcut-viewer/hotkeys.json</code> · 데몬: <code>./install_hotkeys.sh</code> (또는 <code>hotkeys/build.sh run</code>)</span>
-      <div class="ghktabs">${['daemon','karabiner','skhd','hammerspoon'].map(b=>`<button data-gb="${b}" class="${ghkBackend===b?'on':''}">${b==='daemon'?'네이티브 데몬':b}</button>`).join('')}</div>
+      <span class="muted" style="font-size:11px">저장 → <code>~/.config/shortcut-viewer/hotkeys.json</code></span>
+      <div style="margin:8px 0 3px;font-size:12px"><b style="color:#c4b5fd">우리 앱으로 실행 (설치 1줄, 권장):</b> <code>./install_hotkeys.sh</code> — SV Hotkeys 메뉴바 앱이 이 파일을 읽어 실행합니다. 아무것도 안 깔아도 됩니다.</div>
+      <div class="ghktabs"><span class="muted" style="font-size:11px;align-self:center">미리보기:</span>${[['daemon','⭐ SV Hotkeys (우리 앱)'],['karabiner','Karabiner'],['skhd','skhd'],['hammerspoon','Hammerspoon']].map(([b,l])=>`<button data-gb="${b}" class="${ghkBackend===b?'on':''}">${l}</button>`).join('')}</div>
+      <div class="muted" style="font-size:11px;margin:2px 0">Karabiner·skhd·Hammerspoon은 <b>이미 그 도구를 쓰는 사람용 선택 내보내기</b>입니다 (우리 앱을 대신하는 게 아니라, 원하면 그쪽으로도 낼 수 있음).</div>
       <pre id="ghkPre"></pre></div>`;
   el.querySelectorAll('[data-gm]').forEach(b=>b.onclick=()=>{ const m=b.dataset.gm; ghkDraftMods.has(m)?ghkDraftMods.delete(m):ghkDraftMods.add(m); b.classList.toggle('on'); ghkUpdateStatus(); });
   const ki=el.querySelector('#ghkKey'); ki.oninput=()=>ghkUpdateStatus();
