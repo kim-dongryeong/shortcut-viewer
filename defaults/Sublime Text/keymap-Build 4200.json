@@ -1,0 +1,3956 @@
+{
+ "app": "Sublime Text",
+ "entries": [
+  {
+   "action": "Insert Snippet",
+   "detail": "sublime default · \" · insert_snippet",
+   "group": "Sublime Text",
+   "key": "\"",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Insert Snippet",
+   "detail": "sublime default · \" · insert_snippet",
+   "group": "Sublime Text",
+   "key": "\"",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Move (characters)",
+   "detail": "sublime default · \" · move",
+   "group": "Sublime Text",
+   "key": "\"",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Insert Snippet",
+   "detail": "sublime default · ' · insert_snippet",
+   "group": "Sublime Text",
+   "key": "'",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Insert Snippet",
+   "detail": "sublime default · ' · insert_snippet",
+   "group": "Sublime Text",
+   "key": "'",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Move (characters)",
+   "detail": "sublime default · ' · move",
+   "group": "Sublime Text",
+   "key": "'",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Insert Snippet",
+   "detail": "sublime default · ( · insert_snippet",
+   "group": "Sublime Text",
+   "key": "(",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Insert Snippet",
+   "detail": "sublime default · ( · insert_snippet",
+   "group": "Sublime Text",
+   "key": "(",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Move (characters)",
+   "detail": "sublime default · ) · move",
+   "group": "Sublime Text",
+   "key": ")",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Close Tag",
+   "detail": "sublime default · / · close_tag",
+   "group": "Sublime Text",
+   "key": "/",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Run Macro File",
+   "detail": "sublime default · backspace · run_macro_file",
+   "group": "Sublime Text",
+   "key": "Delete",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Run Macro File",
+   "detail": "sublime default · backspace · run_macro_file",
+   "group": "Sublime Text",
+   "key": "Delete",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Run Macro File",
+   "detail": "sublime default · backspace · run_macro_file",
+   "group": "Sublime Text",
+   "key": "Delete",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Run Macro File",
+   "detail": "sublime default · backspace · run_macro_file",
+   "group": "Sublime Text",
+   "key": "Delete",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Run Macro File",
+   "detail": "sublime default · backspace · run_macro_file",
+   "group": "Sublime Text",
+   "key": "Delete",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Clear Fields",
+   "detail": "sublime default · escape · clear_fields",
+   "group": "Sublime Text",
+   "key": "Escape",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Clear Fields",
+   "detail": "sublime default · escape · clear_fields",
+   "group": "Sublime Text",
+   "key": "Escape",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Hide Auto Complete",
+   "detail": "sublime default · escape · hide_auto_complete",
+   "group": "Sublime Text",
+   "key": "Escape",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Hide Overlay",
+   "detail": "sublime default · escape · hide_overlay",
+   "group": "Sublime Text",
+   "key": "Escape",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Hide Overlay",
+   "detail": "sublime default · escape · hide_overlay",
+   "group": "Sublime Text",
+   "key": "Escape",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Hide Panel",
+   "detail": "sublime default · escape · hide_panel",
+   "group": "Sublime Text",
+   "key": "Escape",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Hide Popup",
+   "detail": "sublime default · escape · hide_popup",
+   "group": "Sublime Text",
+   "key": "Escape",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Single Selection",
+   "detail": "sublime default · escape · single_selection",
+   "group": "Sublime Text",
+   "key": "Escape",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Auto Complete Open Link",
+   "detail": "sublime default · f12 · auto_complete_open_link",
+   "group": "Sublime Text",
+   "key": "F12",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Goto Definition",
+   "detail": "sublime default · f12 · goto_definition",
+   "group": "Sublime Text",
+   "key": "F12",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Next Bookmark",
+   "detail": "sublime default · f2 · next_bookmark",
+   "group": "Sublime Text",
+   "key": "F2",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Next Result",
+   "detail": "sublime default · f4 · next_result",
+   "group": "Sublime Text",
+   "key": "F4",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Sort Lines",
+   "detail": "sublime default · f5 · sort_lines",
+   "group": "Sublime Text",
+   "key": "F5",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Setting",
+   "detail": "sublime default · f6 · toggle_setting",
+   "group": "Sublime Text",
+   "key": "F6",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Build",
+   "detail": "sublime default · f7 · build",
+   "group": "Sublime Text",
+   "key": "F7",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Auto Indent Tag",
+   "detail": "sublime default · enter · auto_indent_tag",
+   "group": "Sublime Text",
+   "key": "Return",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Commit Completion",
+   "detail": "sublime default · enter · commit_completion",
+   "group": "Sublime Text",
+   "key": "Return",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Find All",
+   "detail": "sublime default · enter · find_all",
+   "group": "Sublime Text",
+   "key": "Return",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Find Next",
+   "detail": "sublime default · enter · find_next",
+   "group": "Sublime Text",
+   "key": "Return",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Find Next",
+   "detail": "sublime default · enter · find_next",
+   "group": "Sublime Text",
+   "key": "Return",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Hide Panel",
+   "detail": "sublime default · enter · hide_panel",
+   "group": "Sublime Text",
+   "key": "Return",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Insert (\n * )",
+   "detail": "sublime default · enter · insert",
+   "group": "Sublime Text",
+   "key": "Return",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Insert (\n* )",
+   "detail": "sublime default · enter · insert",
+   "group": "Sublime Text",
+   "key": "Return",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Run Macro File",
+   "detail": "sublime default · enter · run_macro_file",
+   "group": "Sublime Text",
+   "key": "Return",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Select",
+   "detail": "sublime default · enter · select",
+   "group": "Sublime Text",
+   "key": "Return",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Select",
+   "detail": "sublime default · enter · select",
+   "group": "Sublime Text",
+   "key": "Return",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Auto Complete",
+   "detail": "sublime default · tab · auto_complete",
+   "group": "Sublime Text",
+   "key": "Tab",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Auto Complete",
+   "detail": "sublime default · tab · auto_complete",
+   "group": "Sublime Text",
+   "key": "Tab",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Commit Completion",
+   "detail": "sublime default · tab · commit_completion",
+   "group": "Sublime Text",
+   "key": "Tab",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Expand Snippet",
+   "detail": "sublime default · tab · expand_snippet",
+   "group": "Sublime Text",
+   "key": "Tab",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Indent",
+   "detail": "sublime default · tab · indent",
+   "group": "Sublime Text",
+   "key": "Tab",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Insert (\t)",
+   "detail": "sublime default · tab · insert",
+   "group": "Sublime Text",
+   "key": "Tab",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Move (lines)",
+   "detail": "sublime default · tab · move",
+   "group": "Sublime Text",
+   "key": "Tab",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Next Field",
+   "detail": "sublime default · tab · next_field",
+   "group": "Sublime Text",
+   "key": "Tab",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Reindent",
+   "detail": "sublime default · tab · reindent",
+   "group": "Sublime Text",
+   "key": "Tab",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Insert Snippet",
+   "detail": "sublime default · [ · insert_snippet",
+   "group": "Sublime Text",
+   "key": "[",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Insert Snippet",
+   "detail": "sublime default · [ · insert_snippet",
+   "group": "Sublime Text",
+   "key": "[",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Move (characters)",
+   "detail": "sublime default · ] · move",
+   "group": "Sublime Text",
+   "key": "]",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Commit Completion",
+   "detail": "sublime default · keypad_enter · commit_completion",
+   "group": "Sublime Text",
+   "key": "keypad_enter",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Find All",
+   "detail": "sublime default · keypad_enter · find_all",
+   "group": "Sublime Text",
+   "key": "keypad_enter",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Find Next",
+   "detail": "sublime default · keypad_enter · find_next",
+   "group": "Sublime Text",
+   "key": "keypad_enter",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Find Next",
+   "detail": "sublime default · keypad_enter · find_next",
+   "group": "Sublime Text",
+   "key": "keypad_enter",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Hide Panel",
+   "detail": "sublime default · keypad_enter · hide_panel",
+   "group": "Sublime Text",
+   "key": "keypad_enter",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Select",
+   "detail": "sublime default · keypad_enter · select",
+   "group": "Sublime Text",
+   "key": "keypad_enter",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Select",
+   "detail": "sublime default · keypad_enter · select",
+   "group": "Sublime Text",
+   "key": "keypad_enter",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Insert Snippet",
+   "detail": "sublime default · { · insert_snippet",
+   "group": "Sublime Text",
+   "key": "{",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Insert Snippet",
+   "detail": "sublime default · { · insert_snippet",
+   "group": "Sublime Text",
+   "key": "{",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Wrap Block",
+   "detail": "sublime default · { · wrap_block",
+   "group": "Sublime Text",
+   "key": "{",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Move (characters)",
+   "detail": "sublime default · } · move",
+   "group": "Sublime Text",
+   "key": "}",
+   "mods": [],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Edit Settings",
+   "detail": "sublime default · super+, · edit_settings",
+   "group": "Sublime Text",
+   "key": ",",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Prev Modification",
+   "detail": "sublime default · ctrl+, · prev_modification",
+   "group": "Sublime Text",
+   "key": ",",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Decrease Font Size",
+   "detail": "sublime default · super+minus · decrease_font_size",
+   "group": "Sublime Text",
+   "key": "-",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Jump Back",
+   "detail": "sublime default · ctrl+minus · jump_back",
+   "group": "Sublime Text",
+   "key": "-",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Next Modification",
+   "detail": "sublime default · ctrl+. · next_modification",
+   "group": "Sublime Text",
+   "key": ".",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Comment",
+   "detail": "sublime default · super+forward_slash · toggle_comment",
+   "group": "Sublime Text",
+   "key": "/",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Focus By Index",
+   "detail": "sublime default · super+0 · focus_by_index",
+   "group": "Sublime Text",
+   "key": "0",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Focus Side Bar",
+   "detail": "sublime default · ctrl+0 · focus_side_bar",
+   "group": "Sublime Text",
+   "key": "0",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Focus By Index",
+   "detail": "sublime default · super+1 · focus_by_index",
+   "group": "Sublime Text",
+   "key": "1",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Focus Group",
+   "detail": "sublime default · ctrl+1 · focus_group",
+   "group": "Sublime Text",
+   "key": "1",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Select By Index",
+   "detail": "sublime default · super+1 · select_by_index",
+   "group": "Sublime Text",
+   "key": "1",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Focus By Index",
+   "detail": "sublime default · super+2 · focus_by_index",
+   "group": "Sublime Text",
+   "key": "2",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Focus Group",
+   "detail": "sublime default · ctrl+2 · focus_group",
+   "group": "Sublime Text",
+   "key": "2",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Select By Index",
+   "detail": "sublime default · super+2 · select_by_index",
+   "group": "Sublime Text",
+   "key": "2",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Focus By Index",
+   "detail": "sublime default · super+3 · focus_by_index",
+   "group": "Sublime Text",
+   "key": "3",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Focus Group",
+   "detail": "sublime default · ctrl+3 · focus_group",
+   "group": "Sublime Text",
+   "key": "3",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Select By Index",
+   "detail": "sublime default · super+3 · select_by_index",
+   "group": "Sublime Text",
+   "key": "3",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Focus By Index",
+   "detail": "sublime default · super+4 · focus_by_index",
+   "group": "Sublime Text",
+   "key": "4",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Focus Group",
+   "detail": "sublime default · ctrl+4 · focus_group",
+   "group": "Sublime Text",
+   "key": "4",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Select By Index",
+   "detail": "sublime default · super+4 · select_by_index",
+   "group": "Sublime Text",
+   "key": "4",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Focus By Index",
+   "detail": "sublime default · super+5 · focus_by_index",
+   "group": "Sublime Text",
+   "key": "5",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Focus Group",
+   "detail": "sublime default · ctrl+5 · focus_group",
+   "group": "Sublime Text",
+   "key": "5",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Select By Index",
+   "detail": "sublime default · super+5 · select_by_index",
+   "group": "Sublime Text",
+   "key": "5",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Focus By Index",
+   "detail": "sublime default · super+6 · focus_by_index",
+   "group": "Sublime Text",
+   "key": "6",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Focus Group",
+   "detail": "sublime default · ctrl+6 · focus_group",
+   "group": "Sublime Text",
+   "key": "6",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Select By Index",
+   "detail": "sublime default · super+6 · select_by_index",
+   "group": "Sublime Text",
+   "key": "6",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Focus By Index",
+   "detail": "sublime default · super+7 · focus_by_index",
+   "group": "Sublime Text",
+   "key": "7",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Focus Group",
+   "detail": "sublime default · ctrl+7 · focus_group",
+   "group": "Sublime Text",
+   "key": "7",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Select By Index",
+   "detail": "sublime default · super+7 · select_by_index",
+   "group": "Sublime Text",
+   "key": "7",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Focus By Index",
+   "detail": "sublime default · super+8 · focus_by_index",
+   "group": "Sublime Text",
+   "key": "8",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Focus Group",
+   "detail": "sublime default · ctrl+8 · focus_group",
+   "group": "Sublime Text",
+   "key": "8",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Select By Index",
+   "detail": "sublime default · super+8 · select_by_index",
+   "group": "Sublime Text",
+   "key": "8",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Focus By Index",
+   "detail": "sublime default · super+9 · focus_by_index",
+   "group": "Sublime Text",
+   "key": "9",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Focus Group",
+   "detail": "sublime default · ctrl+9 · focus_group",
+   "group": "Sublime Text",
+   "key": "9",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Select Last Tab",
+   "detail": "sublime default · super+9 · select_last_tab",
+   "group": "Sublime Text",
+   "key": "9",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Increase Font Size",
+   "detail": "sublime default · super+equals · increase_font_size",
+   "group": "Sublime Text",
+   "key": "=",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Increase Font Size",
+   "detail": "sublime default · super+plus · increase_font_size",
+   "group": "Sublime Text",
+   "key": "=",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Select All",
+   "detail": "sublime default · super+a · select_all",
+   "group": "Sublime Text",
+   "key": "A",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Build",
+   "detail": "sublime default · super+b · build",
+   "group": "Sublime Text",
+   "key": "B",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Cancel Build",
+   "detail": "sublime default · ctrl+c · cancel_build",
+   "group": "Sublime Text",
+   "key": "C",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Copy",
+   "detail": "sublime default · super+c · copy",
+   "group": "Sublime Text",
+   "key": "C",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Find Under Expand",
+   "detail": "sublime default · super+d · find_under_expand",
+   "group": "Sublime Text",
+   "key": "D",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Delete Word",
+   "detail": "sublime default · ctrl+backspace · delete_word",
+   "group": "Sublime Text",
+   "key": "Delete",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Run Macro File",
+   "detail": "sublime default · super+backspace · run_macro_file",
+   "group": "Sublime Text",
+   "key": "Delete",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Slurp Find String",
+   "detail": "sublime default · super+e · slurp_find_string",
+   "group": "Sublime Text",
+   "key": "E",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Show Panel (output.exec)",
+   "detail": "sublime default · shift+escape · show_panel",
+   "group": "Sublime Text",
+   "key": "Escape",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Show Panel (find)",
+   "detail": "sublime default · super+f · show_panel",
+   "group": "Sublime Text",
+   "key": "F",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Goto Definition",
+   "detail": "sublime default · super+f12 · goto_definition",
+   "group": "Sublime Text",
+   "key": "F12",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Goto Reference",
+   "detail": "sublime default · shift+f12 · goto_reference",
+   "group": "Sublime Text",
+   "key": "F12",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Context Menu",
+   "detail": "sublime default · alt+f2 · context_menu",
+   "group": "Sublime Text",
+   "key": "F2",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Prev Bookmark",
+   "detail": "sublime default · shift+f2 · prev_bookmark",
+   "group": "Sublime Text",
+   "key": "F2",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Select All Bookmarks",
+   "detail": "sublime default · alt+f2 · select_all_bookmarks",
+   "group": "Sublime Text",
+   "key": "F2",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Bookmark",
+   "detail": "sublime default · super+f2 · toggle_bookmark",
+   "group": "Sublime Text",
+   "key": "F2",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Prev Result",
+   "detail": "sublime default · shift+f4 · prev_result",
+   "group": "Sublime Text",
+   "key": "F4",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Sort Lines",
+   "detail": "sublime default · ctrl+f5 · sort_lines",
+   "group": "Sublime Text",
+   "key": "F5",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Next Misspelling",
+   "detail": "sublime default · ctrl+f6 · next_misspelling",
+   "group": "Sublime Text",
+   "key": "F6",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Delete Word",
+   "detail": "sublime default · ctrl+delete · delete_word",
+   "group": "Sublime Text",
+   "key": "ForwardDelete",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Run Macro File",
+   "detail": "sublime default · super+delete · run_macro_file",
+   "group": "Sublime Text",
+   "key": "ForwardDelete",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Find Next",
+   "detail": "sublime default · super+g · find_next",
+   "group": "Sublime Text",
+   "key": "G",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Show Overlay",
+   "detail": "sublime default · ctrl+g · show_overlay",
+   "group": "Sublime Text",
+   "key": "G",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Show Panel (incremental_find)",
+   "detail": "sublime default · super+i · show_panel",
+   "group": "Sublime Text",
+   "key": "I",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Focus To Left",
+   "ckey": "[",
+   "cmods": [
+    "cmd",
+    "shift"
+   ],
+   "detail": "sublime default · super+j super+shift+[ · focus_to_left",
+   "group": "Sublime Text",
+   "key": "J",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Focus To Right",
+   "ckey": "]",
+   "cmods": [
+    "cmd",
+    "shift"
+   ],
+   "detail": "sublime default · super+j super+shift+] · focus_to_right",
+   "group": "Sublime Text",
+   "key": "J",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Primary J Changed",
+   "ckey": "J",
+   "cmods": [
+    "cmd"
+   ],
+   "detail": "sublime default · super+j super+j · primary_j_changed",
+   "group": "Sublime Text",
+   "key": "J",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Select To Left",
+   "ckey": "Left",
+   "cmods": [
+    "cmd",
+    "shift"
+   ],
+   "detail": "sublime default · super+j super+shift+left · select_to_left",
+   "group": "Sublime Text",
+   "key": "J",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Select To Right",
+   "ckey": "Right",
+   "cmods": [
+    "cmd",
+    "shift"
+   ],
+   "detail": "sublime default · super+j super+shift+right · select_to_right",
+   "group": "Sublime Text",
+   "key": "J",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Unselect Others",
+   "ckey": "Up",
+   "cmods": [
+    "cmd"
+   ],
+   "detail": "sublime default · super+j super+up · unselect_others",
+   "group": "Sublime Text",
+   "key": "J",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Unselect To Left",
+   "ckey": "Left",
+   "cmods": [
+    "cmd"
+   ],
+   "detail": "sublime default · super+j super+left · unselect_to_left",
+   "group": "Sublime Text",
+   "key": "J",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Unselect To Right",
+   "ckey": "Right",
+   "cmods": [
+    "cmd"
+   ],
+   "detail": "sublime default · super+j super+right · unselect_to_right",
+   "group": "Sublime Text",
+   "key": "J",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Clear Bookmarks (mark)",
+   "ckey": "G",
+   "cmods": [
+    "cmd"
+   ],
+   "detail": "sublime default · super+k super+g · clear_bookmarks",
+   "group": "Sublime Text",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Close Pane",
+   "ckey": "Down",
+   "cmods": [
+    "cmd"
+   ],
+   "detail": "sublime default · super+k super+down · close_pane",
+   "group": "Sublime Text",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Delete To Mark",
+   "ckey": "W",
+   "cmods": [
+    "cmd"
+   ],
+   "detail": "sublime default · super+k super+w · delete_to_mark",
+   "group": "Sublime Text",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Find Under Expand Skip",
+   "ckey": "D",
+   "cmods": [
+    "cmd"
+   ],
+   "detail": "sublime default · super+k super+d · find_under_expand_skip",
+   "group": "Sublime Text",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Focus Neighboring Group",
+   "ckey": "Left",
+   "cmods": [
+    "cmd"
+   ],
+   "detail": "sublime default · super+k super+left · focus_neighboring_group",
+   "group": "Sublime Text",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Focus Neighboring Group",
+   "ckey": "Right",
+   "cmods": [
+    "cmd"
+   ],
+   "detail": "sublime default · super+k super+right · focus_neighboring_group",
+   "group": "Sublime Text",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Fold By Level",
+   "ckey": "1",
+   "cmods": [
+    "cmd"
+   ],
+   "detail": "sublime default · super+k super+1 · fold_by_level",
+   "group": "Sublime Text",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Fold By Level",
+   "ckey": "2",
+   "cmods": [
+    "cmd"
+   ],
+   "detail": "sublime default · super+k super+2 · fold_by_level",
+   "group": "Sublime Text",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Fold By Level",
+   "ckey": "3",
+   "cmods": [
+    "cmd"
+   ],
+   "detail": "sublime default · super+k super+3 · fold_by_level",
+   "group": "Sublime Text",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Fold By Level",
+   "ckey": "4",
+   "cmods": [
+    "cmd"
+   ],
+   "detail": "sublime default · super+k super+4 · fold_by_level",
+   "group": "Sublime Text",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Fold By Level",
+   "ckey": "5",
+   "cmods": [
+    "cmd"
+   ],
+   "detail": "sublime default · super+k super+5 · fold_by_level",
+   "group": "Sublime Text",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Fold By Level",
+   "ckey": "6",
+   "cmods": [
+    "cmd"
+   ],
+   "detail": "sublime default · super+k super+6 · fold_by_level",
+   "group": "Sublime Text",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Fold By Level",
+   "ckey": "7",
+   "cmods": [
+    "cmd"
+   ],
+   "detail": "sublime default · super+k super+7 · fold_by_level",
+   "group": "Sublime Text",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Fold By Level",
+   "ckey": "8",
+   "cmods": [
+    "cmd"
+   ],
+   "detail": "sublime default · super+k super+8 · fold_by_level",
+   "group": "Sublime Text",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Fold By Level",
+   "ckey": "9",
+   "cmods": [
+    "cmd"
+   ],
+   "detail": "sublime default · super+k super+9 · fold_by_level",
+   "group": "Sublime Text",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Fold Tag Attributes",
+   "ckey": "T",
+   "cmods": [
+    "cmd"
+   ],
+   "detail": "sublime default · super+k super+t · fold_tag_attributes",
+   "group": "Sublime Text",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Lower Case",
+   "ckey": "L",
+   "cmods": [
+    "cmd"
+   ],
+   "detail": "sublime default · super+k super+l · lower_case",
+   "group": "Sublime Text",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Move To Neighboring Group",
+   "ckey": "Left",
+   "cmods": [
+    "cmd",
+    "shift"
+   ],
+   "detail": "sublime default · super+k super+shift+left · move_to_neighboring_group",
+   "group": "Sublime Text",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Move To Neighboring Group",
+   "ckey": "Right",
+   "cmods": [
+    "cmd",
+    "shift"
+   ],
+   "detail": "sublime default · super+k super+shift+right · move_to_neighboring_group",
+   "group": "Sublime Text",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "New Pane",
+   "ckey": "Up",
+   "cmods": [
+    "cmd"
+   ],
+   "detail": "sublime default · super+k super+up · new_pane",
+   "group": "Sublime Text",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "New Pane",
+   "ckey": "Up",
+   "cmods": [
+    "cmd",
+    "shift"
+   ],
+   "detail": "sublime default · super+k super+shift+up · new_pane",
+   "group": "Sublime Text",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Paste From History",
+   "ckey": "V",
+   "cmods": [
+    "cmd"
+   ],
+   "detail": "sublime default · super+k super+v · paste_from_history",
+   "group": "Sublime Text",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Reindent",
+   "ckey": "]",
+   "cmods": [
+    "cmd"
+   ],
+   "detail": "sublime default · super+k super+] · reindent",
+   "group": "Sublime Text",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Revert Hunk",
+   "ckey": "Z",
+   "cmods": [
+    "cmd"
+   ],
+   "detail": "sublime default · super+k super+z · revert_hunk",
+   "group": "Sublime Text",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Revert Modification",
+   "ckey": "Z",
+   "cmods": [
+    "cmd",
+    "shift"
+   ],
+   "detail": "sublime default · super+k super+shift+z · revert_modification",
+   "group": "Sublime Text",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Run Macro File",
+   "ckey": "K",
+   "cmods": [
+    "cmd"
+   ],
+   "detail": "sublime default · super+k super+k · run_macro_file",
+   "group": "Sublime Text",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Run Macro File",
+   "ckey": "Delete",
+   "cmods": [
+    "cmd"
+   ],
+   "detail": "sublime default · super+k super+backspace · run_macro_file",
+   "group": "Sublime Text",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Run Macro File",
+   "detail": "sublime default · ctrl+k · run_macro_file",
+   "group": "Sublime Text",
+   "key": "K",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Select To Mark",
+   "ckey": "A",
+   "cmods": [
+    "cmd"
+   ],
+   "detail": "sublime default · super+k super+a · select_to_mark",
+   "group": "Sublime Text",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Set Mark",
+   "ckey": "M",
+   "cmods": [
+    "cmd"
+   ],
+   "detail": "sublime default · super+k super+m · set_mark",
+   "group": "Sublime Text",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Show At Center",
+   "ckey": "C",
+   "cmods": [
+    "cmd"
+   ],
+   "detail": "sublime default · super+k super+c · show_at_center",
+   "group": "Sublime Text",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Swap With Mark",
+   "ckey": "X",
+   "cmods": [
+    "cmd"
+   ],
+   "detail": "sublime default · super+k super+x · swap_with_mark",
+   "group": "Sublime Text",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Inline Diff",
+   "ckey": "/",
+   "cmods": [
+    "cmd"
+   ],
+   "detail": "sublime default · super+k super+forward_slash · toggle_inline_diff",
+   "group": "Sublime Text",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Inline Diff",
+   "ckey": ";",
+   "cmods": [
+    "cmd"
+   ],
+   "detail": "sublime default · super+k super+; · toggle_inline_diff",
+   "group": "Sublime Text",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Side Bar",
+   "ckey": "B",
+   "cmods": [
+    "cmd"
+   ],
+   "detail": "sublime default · super+k super+b · toggle_side_bar",
+   "group": "Sublime Text",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Unfold All",
+   "ckey": "0",
+   "cmods": [
+    "cmd"
+   ],
+   "detail": "sublime default · super+k super+0 · unfold_all",
+   "group": "Sublime Text",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Unfold All",
+   "ckey": "J",
+   "cmods": [
+    "cmd"
+   ],
+   "detail": "sublime default · super+k super+j · unfold_all",
+   "group": "Sublime Text",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Upper Case",
+   "ckey": "U",
+   "cmods": [
+    "cmd"
+   ],
+   "detail": "sublime default · super+k super+u · upper_case",
+   "group": "Sublime Text",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Yank",
+   "ckey": "Y",
+   "cmods": [
+    "cmd"
+   ],
+   "detail": "sublime default · super+k super+y · yank",
+   "group": "Sublime Text",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Expand Selection (line)",
+   "detail": "sublime default · super+l · expand_selection",
+   "group": "Sublime Text",
+   "key": "L",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Show At Center",
+   "detail": "sublime default · ctrl+l · show_at_center",
+   "group": "Sublime Text",
+   "key": "L",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Move (subwords)",
+   "detail": "sublime default · ctrl+left · move",
+   "group": "Sublime Text",
+   "key": "Left",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Move To (brackets)",
+   "detail": "sublime default · ctrl+m · move_to",
+   "group": "Sublime Text",
+   "key": "M",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "New File",
+   "detail": "sublime default · super+n · new_file",
+   "group": "Sublime Text",
+   "key": "N",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Insert Snippet",
+   "detail": "sublime default · ctrl+o · insert_snippet",
+   "group": "Sublime Text",
+   "key": "O",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Prompt Open",
+   "detail": "sublime default · super+o · prompt_open",
+   "group": "Sublime Text",
+   "key": "O",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Show Overlay",
+   "detail": "sublime default · super+p · show_overlay",
+   "group": "Sublime Text",
+   "key": "P",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Next View",
+   "detail": "sublime default · ctrl+pagedown · next_view",
+   "group": "Sublime Text",
+   "key": "PageDown",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Prev View",
+   "detail": "sublime default · ctrl+pageup · prev_view",
+   "group": "Sublime Text",
+   "key": "PageUp",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Record Macro",
+   "detail": "sublime default · ctrl+q · toggle_record_macro",
+   "group": "Sublime Text",
+   "key": "Q",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Next Bookmark",
+   "detail": "sublime default · ctrl+r · next_bookmark",
+   "group": "Sublime Text",
+   "key": "R",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Show Overlay",
+   "detail": "sublime default · super+r · show_overlay",
+   "group": "Sublime Text",
+   "key": "R",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Auto Indent Tag",
+   "detail": "sublime default · shift+enter · auto_indent_tag",
+   "group": "Sublime Text",
+   "key": "Return",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Chain",
+   "detail": "sublime default · shift+enter · chain",
+   "group": "Sublime Text",
+   "key": "Return",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Find All",
+   "detail": "sublime default · alt+enter · find_all",
+   "group": "Sublime Text",
+   "key": "Return",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Find All",
+   "detail": "sublime default · alt+enter · find_all",
+   "group": "Sublime Text",
+   "key": "Return",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Find All",
+   "detail": "sublime default · alt+enter · find_all",
+   "group": "Sublime Text",
+   "key": "Return",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Find All",
+   "detail": "sublime default · alt+enter · find_all",
+   "group": "Sublime Text",
+   "key": "Return",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Find Prev",
+   "detail": "sublime default · shift+enter · find_prev",
+   "group": "Sublime Text",
+   "key": "Return",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Find Prev",
+   "detail": "sublime default · shift+enter · find_prev",
+   "group": "Sublime Text",
+   "key": "Return",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Run Macro File",
+   "detail": "sublime default · super+enter · run_macro_file",
+   "group": "Sublime Text",
+   "key": "Return",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Run Macro File",
+   "detail": "sublime default · shift+enter · run_macro_file",
+   "group": "Sublime Text",
+   "key": "Return",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Select",
+   "detail": "sublime default · super+enter · select",
+   "group": "Sublime Text",
+   "key": "Return",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Select",
+   "detail": "sublime default · shift+enter · select",
+   "group": "Sublime Text",
+   "key": "Return",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Select",
+   "detail": "sublime default · alt+enter · select",
+   "group": "Sublime Text",
+   "key": "Return",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Move (subword_ends)",
+   "detail": "sublime default · ctrl+right · move",
+   "group": "Sublime Text",
+   "key": "Right",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Save",
+   "detail": "sublime default · super+s · save",
+   "group": "Sublime Text",
+   "key": "S",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Auto Complete",
+   "detail": "sublime default · ctrl+space · auto_complete",
+   "group": "Sublime Text",
+   "key": "Space",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Move (lines)",
+   "detail": "sublime default · ctrl+space · move",
+   "group": "Sublime Text",
+   "key": "Space",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Show Overlay",
+   "detail": "sublime default · super+t · show_overlay",
+   "group": "Sublime Text",
+   "key": "T",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Transpose",
+   "detail": "sublime default · ctrl+t · transpose",
+   "group": "Sublime Text",
+   "key": "T",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Insert (\t)",
+   "detail": "sublime default · shift+tab · insert",
+   "group": "Sublime Text",
+   "key": "Tab",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Move (lines)",
+   "detail": "sublime default · shift+tab · move",
+   "group": "Sublime Text",
+   "key": "Tab",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Next View In Stack",
+   "detail": "sublime default · ctrl+tab · next_view_in_stack",
+   "group": "Sublime Text",
+   "key": "Tab",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Prev Field",
+   "detail": "sublime default · shift+tab · prev_field",
+   "group": "Sublime Text",
+   "key": "Tab",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Unindent",
+   "detail": "sublime default · shift+tab · unindent",
+   "group": "Sublime Text",
+   "key": "Tab",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Unindent",
+   "detail": "sublime default · shift+tab · unindent",
+   "group": "Sublime Text",
+   "key": "Tab",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Unindent",
+   "detail": "sublime default · shift+tab · unindent",
+   "group": "Sublime Text",
+   "key": "Tab",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Soft Undo",
+   "detail": "sublime default · super+u · soft_undo",
+   "group": "Sublime Text",
+   "key": "U",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Paste",
+   "detail": "sublime default · super+v · paste",
+   "group": "Sublime Text",
+   "key": "V",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Close",
+   "detail": "sublime default · super+w · close",
+   "group": "Sublime Text",
+   "key": "W",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Close Transient",
+   "detail": "sublime default · super+w · close_transient",
+   "group": "Sublime Text",
+   "key": "W",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Cut",
+   "detail": "sublime default · super+x · cut",
+   "group": "Sublime Text",
+   "key": "X",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Redo Or Repeat",
+   "detail": "sublime default · super+y · redo_or_repeat",
+   "group": "Sublime Text",
+   "key": "Y",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Yank",
+   "detail": "sublime default · ctrl+y · yank",
+   "group": "Sublime Text",
+   "key": "Y",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Undo",
+   "detail": "sublime default · super+z · undo",
+   "group": "Sublime Text",
+   "key": "Z",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Unindent",
+   "detail": "sublime default · super+[ · unindent",
+   "group": "Sublime Text",
+   "key": "[",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Indent",
+   "detail": "sublime default · super+] · indent",
+   "group": "Sublime Text",
+   "key": "]",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Show Panel (console)",
+   "detail": "sublime default · ctrl+backquote · show_panel",
+   "group": "Sublime Text",
+   "key": "`",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Chain",
+   "detail": "sublime default · shift+keypad_enter · chain",
+   "group": "Sublime Text",
+   "key": "keypad_enter",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Find All",
+   "detail": "sublime default · alt+keypad_enter · find_all",
+   "group": "Sublime Text",
+   "key": "keypad_enter",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Find All",
+   "detail": "sublime default · alt+keypad_enter · find_all",
+   "group": "Sublime Text",
+   "key": "keypad_enter",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Find All",
+   "detail": "sublime default · alt+keypad_enter · find_all",
+   "group": "Sublime Text",
+   "key": "keypad_enter",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Find All",
+   "detail": "sublime default · alt+keypad_enter · find_all",
+   "group": "Sublime Text",
+   "key": "keypad_enter",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Find Prev",
+   "detail": "sublime default · shift+keypad_enter · find_prev",
+   "group": "Sublime Text",
+   "key": "keypad_enter",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Find Prev",
+   "detail": "sublime default · shift+keypad_enter · find_prev",
+   "group": "Sublime Text",
+   "key": "keypad_enter",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Run Macro File",
+   "detail": "sublime default · super+keypad_enter · run_macro_file",
+   "group": "Sublime Text",
+   "key": "keypad_enter",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Select",
+   "detail": "sublime default · super+keypad_enter · select",
+   "group": "Sublime Text",
+   "key": "keypad_enter",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Select",
+   "detail": "sublime default · shift+keypad_enter · select",
+   "group": "Sublime Text",
+   "key": "keypad_enter",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Select",
+   "detail": "sublime default · alt+keypad_enter · select",
+   "group": "Sublime Text",
+   "key": "keypad_enter",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Decrease Font Size",
+   "detail": "sublime default · super+keypad_minus · decrease_font_size",
+   "group": "Sublime Text",
+   "key": "keypad_minus",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Jump Back",
+   "detail": "sublime default · ctrl+keypad_minus · jump_back",
+   "group": "Sublime Text",
+   "key": "keypad_minus",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Increase Font Size",
+   "detail": "sublime default · super+keypad_plus · increase_font_size",
+   "group": "Sublime Text",
+   "key": "keypad_plus",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Jump Forward",
+   "detail": "sublime default · ctrl+shift+minus · jump_forward",
+   "group": "Sublime Text",
+   "key": "-",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Close Tag",
+   "detail": "sublime default · super+alt+. · close_tag",
+   "group": "Sublime Text",
+   "key": ".",
+   "mods": [
+    "cmd",
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Comment",
+   "detail": "sublime default · super+alt+forward_slash · toggle_comment",
+   "group": "Sublime Text",
+   "key": "/",
+   "mods": [
+    "cmd",
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Move To Group",
+   "detail": "sublime default · ctrl+shift+1 · move_to_group",
+   "group": "Sublime Text",
+   "key": "1",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Set Layout",
+   "detail": "sublime default · super+alt+1 · set_layout",
+   "group": "Sublime Text",
+   "key": "1",
+   "mods": [
+    "cmd",
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Move To Group",
+   "detail": "sublime default · ctrl+shift+2 · move_to_group",
+   "group": "Sublime Text",
+   "key": "2",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Set Layout",
+   "detail": "sublime default · super+alt+2 · set_layout",
+   "group": "Sublime Text",
+   "key": "2",
+   "mods": [
+    "cmd",
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Move To Group",
+   "detail": "sublime default · ctrl+shift+3 · move_to_group",
+   "group": "Sublime Text",
+   "key": "3",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Set Layout",
+   "detail": "sublime default · super+alt+3 · set_layout",
+   "group": "Sublime Text",
+   "key": "3",
+   "mods": [
+    "cmd",
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Move To Group",
+   "detail": "sublime default · ctrl+shift+4 · move_to_group",
+   "group": "Sublime Text",
+   "key": "4",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Set Layout",
+   "detail": "sublime default · super+alt+4 · set_layout",
+   "group": "Sublime Text",
+   "key": "4",
+   "mods": [
+    "cmd",
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Move To Group",
+   "detail": "sublime default · ctrl+shift+5 · move_to_group",
+   "group": "Sublime Text",
+   "key": "5",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Set Layout",
+   "detail": "sublime default · super+alt+5 · set_layout",
+   "group": "Sublime Text",
+   "key": "5",
+   "mods": [
+    "cmd",
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Move To Group",
+   "detail": "sublime default · ctrl+shift+6 · move_to_group",
+   "group": "Sublime Text",
+   "key": "6",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Move To Group",
+   "detail": "sublime default · ctrl+shift+7 · move_to_group",
+   "group": "Sublime Text",
+   "key": "7",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Move To Group",
+   "detail": "sublime default · ctrl+shift+8 · move_to_group",
+   "group": "Sublime Text",
+   "key": "8",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Move To Group",
+   "detail": "sublime default · ctrl+shift+9 · move_to_group",
+   "group": "Sublime Text",
+   "key": "9",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Expand Selection (smart)",
+   "detail": "sublime default · super+shift+a · expand_selection",
+   "group": "Sublime Text",
+   "key": "A",
+   "mods": [
+    "cmd",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Expand Selection (tag)",
+   "detail": "sublime default · super+shift+a · expand_selection",
+   "group": "Sublime Text",
+   "key": "A",
+   "mods": [
+    "cmd",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Preserve Case",
+   "detail": "sublime default · super+alt+a · toggle_preserve_case",
+   "group": "Sublime Text",
+   "key": "A",
+   "mods": [
+    "cmd",
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Build",
+   "detail": "sublime default · super+shift+b · build",
+   "group": "Sublime Text",
+   "key": "B",
+   "mods": [
+    "cmd",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Case Sensitive",
+   "detail": "sublime default · super+alt+c · toggle_case_sensitive",
+   "group": "Sublime Text",
+   "key": "C",
+   "mods": [
+    "cmd",
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Duplicate Line",
+   "detail": "sublime default · super+shift+d · duplicate_line",
+   "group": "Sublime Text",
+   "key": "D",
+   "mods": [
+    "cmd",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Noop",
+   "detail": "sublime default · ctrl+super+d · noop",
+   "group": "Sublime Text",
+   "key": "D",
+   "mods": [
+    "ctrl",
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Auto Complete Open Link",
+   "detail": "sublime default · super+alt+down · auto_complete_open_link",
+   "group": "Sublime Text",
+   "key": "Down",
+   "mods": [
+    "cmd",
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Goto Definition",
+   "detail": "sublime default · super+alt+down · goto_definition",
+   "group": "Sublime Text",
+   "key": "Down",
+   "mods": [
+    "cmd",
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Scroll Lines",
+   "detail": "sublime default · ctrl+alt+down · scroll_lines",
+   "group": "Sublime Text",
+   "key": "Down",
+   "mods": [
+    "ctrl",
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Select Lines",
+   "detail": "sublime default · ctrl+shift+down · select_lines",
+   "group": "Sublime Text",
+   "key": "Down",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Swap Line Down",
+   "detail": "sublime default · ctrl+super+down · swap_line_down",
+   "group": "Sublime Text",
+   "key": "Down",
+   "mods": [
+    "ctrl",
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Replace Next",
+   "detail": "sublime default · super+alt+e · replace_next",
+   "group": "Sublime Text",
+   "key": "E",
+   "mods": [
+    "cmd",
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Slurp Replace String",
+   "detail": "sublime default · super+shift+e · slurp_replace_string",
+   "group": "Sublime Text",
+   "key": "E",
+   "mods": [
+    "cmd",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Show Panel (find_in_files)",
+   "detail": "sublime default · super+shift+f · show_panel",
+   "group": "Sublime Text",
+   "key": "F",
+   "mods": [
+    "cmd",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Show Panel (replace)",
+   "detail": "sublime default · super+alt+f · show_panel",
+   "group": "Sublime Text",
+   "key": "F",
+   "mods": [
+    "cmd",
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Full Screen",
+   "detail": "sublime default · super+ctrl+f · toggle_full_screen",
+   "group": "Sublime Text",
+   "key": "F",
+   "mods": [
+    "cmd",
+    "ctrl"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Goto Reference",
+   "detail": "sublime default · super+shift+f12 · goto_reference",
+   "group": "Sublime Text",
+   "key": "F12",
+   "mods": [
+    "cmd",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Clear Bookmarks",
+   "detail": "sublime default · super+shift+f2 · clear_bookmarks",
+   "group": "Sublime Text",
+   "key": "F2",
+   "mods": [
+    "cmd",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Prev Misspelling",
+   "detail": "sublime default · ctrl+shift+f6 · prev_misspelling",
+   "group": "Sublime Text",
+   "key": "F6",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Find All Under",
+   "detail": "sublime default · ctrl+super+g · find_all_under",
+   "group": "Sublime Text",
+   "key": "G",
+   "mods": [
+    "ctrl",
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Find Prev",
+   "detail": "sublime default · super+shift+g · find_prev",
+   "group": "Sublime Text",
+   "key": "G",
+   "mods": [
+    "cmd",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Find Under",
+   "detail": "sublime default · alt+super+g · find_under",
+   "group": "Sublime Text",
+   "key": "G",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Show Panel (incremental_find)",
+   "detail": "sublime default · super+shift+i · show_panel",
+   "group": "Sublime Text",
+   "key": "I",
+   "mods": [
+    "cmd",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Join Lines",
+   "detail": "sublime default · super+shift+j · join_lines",
+   "group": "Sublime Text",
+   "key": "J",
+   "mods": [
+    "cmd",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Run Macro File",
+   "detail": "sublime default · ctrl+shift+k · run_macro_file",
+   "group": "Sublime Text",
+   "key": "K",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Expand Selection (line_prev)",
+   "detail": "sublime default · super+alt+l · expand_selection",
+   "group": "Sublime Text",
+   "key": "L",
+   "mods": [
+    "cmd",
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Split Selection Into Lines",
+   "detail": "sublime default · super+shift+l · split_selection_into_lines",
+   "group": "Sublime Text",
+   "key": "L",
+   "mods": [
+    "cmd",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Move (subwords)",
+   "detail": "sublime default · ctrl+alt+left · move",
+   "group": "Sublime Text",
+   "key": "Left",
+   "mods": [
+    "ctrl",
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Move (subwords)",
+   "detail": "sublime default · ctrl+shift+left · move",
+   "group": "Sublime Text",
+   "key": "Left",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Prev View",
+   "detail": "sublime default · super+alt+left · prev_view",
+   "group": "Sublime Text",
+   "key": "Left",
+   "mods": [
+    "cmd",
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Expand Selection (brackets)",
+   "detail": "sublime default · ctrl+shift+m · expand_selection",
+   "group": "Sublime Text",
+   "key": "M",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "New Window",
+   "detail": "sublime default · super+shift+n · new_window",
+   "group": "Sublime Text",
+   "key": "N",
+   "mods": [
+    "cmd",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Overwrite",
+   "detail": "sublime default · super+alt+o · toggle_overwrite",
+   "group": "Sublime Text",
+   "key": "O",
+   "mods": [
+    "cmd",
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Prompt Select Workspace",
+   "detail": "sublime default · super+ctrl+p · prompt_select_workspace",
+   "group": "Sublime Text",
+   "key": "P",
+   "mods": [
+    "cmd",
+    "ctrl"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Show Overlay",
+   "detail": "sublime default · super+shift+p · show_overlay",
+   "group": "Sublime Text",
+   "key": "P",
+   "mods": [
+    "cmd",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Show Scope Name",
+   "detail": "sublime default · super+alt+p · show_scope_name",
+   "group": "Sublime Text",
+   "key": "P",
+   "mods": [
+    "cmd",
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Show Scope Name",
+   "detail": "sublime default · ctrl+shift+p · show_scope_name",
+   "group": "Sublime Text",
+   "key": "P",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Next View",
+   "detail": "sublime default · ctrl+shift+pagedown · next_view",
+   "group": "Sublime Text",
+   "key": "PageDown",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Prev View",
+   "detail": "sublime default · ctrl+shift+pageup · prev_view",
+   "group": "Sublime Text",
+   "key": "PageUp",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Run Macro",
+   "detail": "sublime default · ctrl+shift+q · run_macro",
+   "group": "Sublime Text",
+   "key": "Q",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Wrap Lines",
+   "detail": "sublime default · super+alt+q · wrap_lines",
+   "group": "Sublime Text",
+   "key": "Q",
+   "mods": [
+    "cmd",
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Goto Symbol In Project",
+   "detail": "sublime default · super+shift+r · goto_symbol_in_project",
+   "group": "Sublime Text",
+   "key": "R",
+   "mods": [
+    "cmd",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Bookmark",
+   "detail": "sublime default · ctrl+shift+r · toggle_bookmark",
+   "group": "Sublime Text",
+   "key": "R",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Regex",
+   "detail": "sublime default · super+alt+r · toggle_regex",
+   "group": "Sublime Text",
+   "key": "R",
+   "mods": [
+    "cmd",
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Replace All",
+   "detail": "sublime default · ctrl+alt+enter · replace_all",
+   "group": "Sublime Text",
+   "key": "Return",
+   "mods": [
+    "ctrl",
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Replace All",
+   "detail": "sublime default · ctrl+alt+enter · replace_all",
+   "group": "Sublime Text",
+   "key": "Return",
+   "mods": [
+    "ctrl",
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Run Macro File",
+   "detail": "sublime default · super+shift+enter · run_macro_file",
+   "group": "Sublime Text",
+   "key": "Return",
+   "mods": [
+    "cmd",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Move (subword_ends)",
+   "detail": "sublime default · ctrl+alt+right · move",
+   "group": "Sublime Text",
+   "key": "Right",
+   "mods": [
+    "ctrl",
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Move (subword_ends)",
+   "detail": "sublime default · ctrl+shift+right · move",
+   "group": "Sublime Text",
+   "key": "Right",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Next View",
+   "detail": "sublime default · super+alt+right · next_view",
+   "group": "Sublime Text",
+   "key": "Right",
+   "mods": [
+    "cmd",
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Prompt Save As",
+   "detail": "sublime default · super+shift+s · prompt_save_as",
+   "group": "Sublime Text",
+   "key": "S",
+   "mods": [
+    "cmd",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Save All",
+   "detail": "sublime default · super+alt+s · save_all",
+   "group": "Sublime Text",
+   "key": "S",
+   "mods": [
+    "cmd",
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Expand Selection (scope)",
+   "detail": "sublime default · super+shift+space · expand_selection",
+   "group": "Sublime Text",
+   "key": "Space",
+   "mods": [
+    "cmd",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Reopen Last File",
+   "detail": "sublime default · super+shift+t · reopen_last_file",
+   "group": "Sublime Text",
+   "key": "T",
+   "mods": [
+    "cmd",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Next Os Tab",
+   "detail": "sublime default · ctrl+alt+tab · next_os_tab",
+   "group": "Sublime Text",
+   "key": "Tab",
+   "mods": [
+    "ctrl",
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Prev View In Stack",
+   "detail": "sublime default · ctrl+shift+tab · prev_view_in_stack",
+   "group": "Sublime Text",
+   "key": "Tab",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Soft Redo",
+   "detail": "sublime default · super+shift+u · soft_redo",
+   "group": "Sublime Text",
+   "key": "U",
+   "mods": [
+    "cmd",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Scroll Lines",
+   "detail": "sublime default · ctrl+alt+up · scroll_lines",
+   "group": "Sublime Text",
+   "key": "Up",
+   "mods": [
+    "ctrl",
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Select Lines",
+   "detail": "sublime default · ctrl+shift+up · select_lines",
+   "group": "Sublime Text",
+   "key": "Up",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Swap Line Up",
+   "detail": "sublime default · ctrl+super+up · swap_line_up",
+   "group": "Sublime Text",
+   "key": "Up",
+   "mods": [
+    "ctrl",
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Switch File",
+   "detail": "sublime default · super+alt+up · switch_file",
+   "group": "Sublime Text",
+   "key": "Up",
+   "mods": [
+    "cmd",
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Paste And Indent",
+   "detail": "sublime default · super+shift+v · paste_and_indent",
+   "group": "Sublime Text",
+   "key": "V",
+   "mods": [
+    "cmd",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Paste From History",
+   "detail": "sublime default · super+option+v · paste_from_history",
+   "group": "Sublime Text",
+   "key": "V",
+   "mods": [
+    "cmd",
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Close Window",
+   "detail": "sublime default · super+shift+w · close_window",
+   "group": "Sublime Text",
+   "key": "W",
+   "mods": [
+    "cmd",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Insert Snippet (Packages/XML/Snippets/xml-long-tag.sublime-snippet)",
+   "detail": "sublime default · ctrl+shift+w · insert_snippet",
+   "group": "Sublime Text",
+   "key": "W",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Whole Word",
+   "detail": "sublime default · super+alt+w · toggle_whole_word",
+   "group": "Sublime Text",
+   "key": "W",
+   "mods": [
+    "cmd",
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Redo",
+   "detail": "sublime default · super+shift+z · redo",
+   "group": "Sublime Text",
+   "key": "Z",
+   "mods": [
+    "cmd",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Fold",
+   "detail": "sublime default · super+alt+[ · fold",
+   "group": "Sublime Text",
+   "key": "[",
+   "mods": [
+    "cmd",
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Prev View",
+   "detail": "sublime default · super+shift+[ · prev_view",
+   "group": "Sublime Text",
+   "key": "[",
+   "mods": [
+    "cmd",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Next View",
+   "detail": "sublime default · super+shift+] · next_view",
+   "group": "Sublime Text",
+   "key": "]",
+   "mods": [
+    "cmd",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Unfold",
+   "detail": "sublime default · super+alt+] · unfold",
+   "group": "Sublime Text",
+   "key": "]",
+   "mods": [
+    "cmd",
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Replace All",
+   "detail": "sublime default · ctrl+alt+keypad_enter · replace_all",
+   "group": "Sublime Text",
+   "key": "keypad_enter",
+   "mods": [
+    "ctrl",
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Replace All",
+   "detail": "sublime default · ctrl+alt+keypad_enter · replace_all",
+   "group": "Sublime Text",
+   "key": "keypad_enter",
+   "mods": [
+    "ctrl",
+    "opt"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Run Macro File",
+   "detail": "sublime default · super+shift+keypad_enter · run_macro_file",
+   "group": "Sublime Text",
+   "key": "keypad_enter",
+   "mods": [
+    "cmd",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Jump Forward",
+   "detail": "sublime default · ctrl+shift+keypad_minus · jump_forward",
+   "group": "Sublime Text",
+   "key": "keypad_minus",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Set Layout",
+   "detail": "sublime default · super+alt+shift+2 · set_layout",
+   "group": "Sublime Text",
+   "key": "2",
+   "mods": [
+    "cmd",
+    "opt",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Set Layout",
+   "detail": "sublime default · super+alt+shift+3 · set_layout",
+   "group": "Sublime Text",
+   "key": "3",
+   "mods": [
+    "cmd",
+    "opt",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Noop",
+   "detail": "sublime default · ctrl+super+shift+d · noop",
+   "group": "Sublime Text",
+   "key": "D",
+   "mods": [
+    "ctrl",
+    "cmd",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Goto Reference",
+   "detail": "sublime default · super+alt+shift+down · goto_reference",
+   "group": "Sublime Text",
+   "key": "Down",
+   "mods": [
+    "cmd",
+    "opt",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Distraction Free",
+   "detail": "sublime default · super+ctrl+shift+f · toggle_distraction_free",
+   "group": "Sublime Text",
+   "key": "F",
+   "mods": [
+    "cmd",
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Find Under Prev",
+   "detail": "sublime default · shift+alt+super+g · find_under_prev",
+   "group": "Sublime Text",
+   "key": "G",
+   "mods": [
+    "shift",
+    "opt",
+    "cmd"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Move (subwords)",
+   "detail": "sublime default · ctrl+alt+shift+left · move",
+   "group": "Sublime Text",
+   "key": "Left",
+   "mods": [
+    "ctrl",
+    "opt",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Prev View",
+   "detail": "sublime default · super+alt+shift+left · prev_view",
+   "group": "Sublime Text",
+   "key": "Left",
+   "mods": [
+    "cmd",
+    "opt",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "New Os Tab",
+   "detail": "sublime default · super+alt+shift+n · new_os_tab",
+   "group": "Sublime Text",
+   "key": "N",
+   "mods": [
+    "cmd",
+    "opt",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Move (subword_ends)",
+   "detail": "sublime default · ctrl+alt+shift+right · move",
+   "group": "Sublime Text",
+   "key": "Right",
+   "mods": [
+    "ctrl",
+    "opt",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Next View",
+   "detail": "sublime default · super+alt+shift+right · next_view",
+   "group": "Sublime Text",
+   "key": "Right",
+   "mods": [
+    "cmd",
+    "opt",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Prev Os Tab",
+   "detail": "sublime default · ctrl+alt+shift+tab · prev_os_tab",
+   "group": "Sublime Text",
+   "key": "Tab",
+   "mods": [
+    "ctrl",
+    "opt",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  },
+  {
+   "action": "Switch File",
+   "detail": "sublime default · super+alt+shift+up · switch_file",
+   "group": "Sublime Text",
+   "key": "Up",
+   "mods": [
+    "cmd",
+    "opt",
+    "shift"
+   ],
+   "scope": "Sublime Text",
+   "source": "app config"
+  }
+ ],
+ "provenance": {
+  "kind": "app-bundle",
+  "source": "Default.sublime-package!Default (OSX).sublime-keymap"
+ },
+ "scope": "Sublime Text",
+ "version": "Build 4200"
+}
