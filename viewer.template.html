@@ -158,6 +158,7 @@
   .ghkadd{background:#7c3aed;border-color:#7c3aed;color:#fff;font-weight:700}
   .ghklist{margin-top:6px}
   .ghkitem{display:flex;gap:10px;align-items:center;padding:8px 10px;border:1px solid var(--line);border-radius:9px;margin:5px 0;background:var(--panel)}
+  .ghkicon{width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:13px;flex:none;filter:saturate(1.1)}
   .ghkitem .gk{font-weight:800;min-width:78px;color:#c4b5fd}
   html[data-theme="light"] .ghkitem .gk{color:#6d28d9}
   .ghkitem .gt{flex:1}
@@ -643,7 +644,9 @@ function gradeQuiz(pressed){
   renderQuiz();
 }
 // ══════ 글로벌 핫키 빌더 (충돌 없는 빈 조합 → 진짜 글로벌 단축키) ══════
-const GHK_ACTIONS = [['open_app','앱 열기','예: Finder · Calculator · Safari'],['open_url','웹사이트 열기','예: https://google.com'],['open_folder','폴더 열기','예: ~/Downloads'],['run_shell','명령 실행 (zsh)','예: screencapture -i -c'],['applescript','AppleScript','예: tell application "Notes" to make new note'],['paste_text','텍스트 붙여넣기','예: kdr@namouli.com'],['show_viewer','단축키 뷰어 열기','(비워둬도 됨)']];
+const GHK_ACTIONS = [['open_app','앱 열기','예: Finder · Calculator · Safari'],['open_url','웹사이트 열기','예: https://google.com'],['open_folder','폴더 열기','예: ~/Downloads'],['run_shell','명령 실행 (zsh)','예: screencapture -i -c'],['applescript','AppleScript','예: tell application "Notes" to make new note'],['paste_text','텍스트 붙여넣기','예: me@example.com'],['show_viewer','단축키 뷰어 열기','(비워둬도 됨)']];
+const GHK_ICON = {open_app:['📱','#3b82f6'],open_url:['🌐','#14b8a6'],open_folder:['📁','#f59e0b'],open_file:['📄','#9ca3af'],run_shell:['⌨','#6366f1'],applescript:['✨','#a855f7'],paste_text:['📋','#ec4899'],show_viewer:['⌨️','#22c55e']};
+function ghkLabel(t){ const a=GHK_ACTIONS.find(x=>x[0]===t); return a?a[1]:t; }
 let ghkDraftMods=new Set(), ghkBackend='daemon';
 function ghkNormKey(v){ v=(v||'').trim(); if(!v) return ''; const up=v.toUpperCase();
   if(/^F([1-9]|1[0-9]|20)$/.test(up)) return up;
@@ -697,7 +700,7 @@ function ghkBackendText(){ const hks=(ANN.ghk||[]).filter(g=>g.enabled!==false);
 function ghkRenderBackend(){ const p=document.getElementById('ghkPre'); if(p) p.textContent=(ANN.ghk||[]).length?ghkBackendText():'(핫키를 추가하면 여기에 설정이 생성됩니다)'; }
 function renderGHK(){ const el=document.getElementById('modepanel');
   const opts=GHK_ACTIONS.map(a=>`<option value="${a[0]}">${a[1]}</option>`).join('');
-  const list=(ANN.ghk||[]).map((g,i)=>`<div class="ghkitem"><span class="gk">${comboSym(g.mods)}${g.key}</span><span class="gt">${((g.title||'')||'(제목 없음)').replace(/</g,'&lt;')}</span><span class="gy">${g.action.type}: ${(g.action.value||'').replace(/</g,'&lt;').slice(0,42)}</span><span class="delx" data-delg="${i}" title="삭제">✕</span></div>`).join('')||'<div class="muted" style="padding:6px 0">아직 없음 — 위 폼에서 추가하세요.</div>';
+  const list=(ANN.ghk||[]).map((g,i)=>{ const ic=GHK_ICON[g.action.type]||['•','#888']; return `<div class="ghkitem"><span class="gk">${comboSym(g.mods)}${g.key}</span><span class="ghkicon" style="background:${ic[1]}">${ic[0]}</span><span class="gt">${((g.title||'')||'(제목 없음)').replace(/</g,'&lt;')}<div class="muted" style="font-size:11px">${g.action.value?(g.action.value.replace(/</g,'&lt;').slice(0,52)):ghkLabel(g.action.type)}</div></span><span class="gy">${ghkLabel(g.action.type)}</span><span class="delx" data-delg="${i}" title="삭제">✕</span></div>`; }).join('')||'<div class="muted" style="padding:6px 0">아직 없음 — 위 폼에서 추가하세요.</div>';
   el.innerHTML=`<div class="sec">🌐 글로벌 핫키 만들기 <span class="muted" style="text-transform:none;letter-spacing:0;font-size:11px">— 충돌 없는 빈 조합을 골라 앱 열기·명령 실행 등을 어디서나. 내보낸 hotkeys.json을 데몬/Karabiner/skhd/Hammerspoon 중 하나가 실행.</span></div>
     <div class="ghkform">
       <div class="ghkrow"><label>제목</label><input type="text" id="ghkTitle" placeholder="예: Finder 열기"></div>

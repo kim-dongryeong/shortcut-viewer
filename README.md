@@ -67,13 +67,17 @@ open viewer.html
 
 Shortcut Viewer doesn't just *show* shortcuts — it can **set real global hotkeys**. Because it already
 knows every shortcut from every source, it uniquely lets you **find a conflict-free combo and bind it in one place**
-(open an app, run a command, paste text — from anywhere). The viewer's **🌐 글로벌 핫키** tab builds a `hotkeys.json`;
-run it with any of four backends:
+(open an app, run a command, paste text — from anywhere).
+
+The product is our **own** app — **SV Hotkeys** (a native menu-bar app with a visual editor:
+record a combo, pick an app, conflict-aware) plus the viewer's **🌐 글로벌 핫키** builder. No third-party tool required:
 
 ```sh
-./install_hotkeys.sh          # ① native menu-bar daemon (no Accessibility for ⌘/⌥/⌃) — easiest
-python3 gen_hotkeys.py        # ②③④ export for Karabiner / skhd / Hammerspoon (if you already run one)
+./install_hotkeys.sh          # build + install SV Hotkeys.app, auto-start at login (no Accessibility for ⌘/⌥/⌃)
 ```
+
+*(Optional)* if you already run **Karabiner / skhd / Hammerspoon**, `python3 gen_hotkeys.py` exports the same
+`hotkeys.json` to those tools too — a convenience, not a dependency.
 
 Full guide + 15+ ready-to-use scenarios: **[HOTKEYS.md](HOTKEYS.md)**. Hotkey mechanism adapted from `~/dev/maverything` (Carbon `RegisterEventHotKey` + `CGEventTap`).
 
