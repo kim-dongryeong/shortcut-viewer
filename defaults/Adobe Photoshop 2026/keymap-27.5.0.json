@@ -2,6 +2,253 @@
  "app": "Adobe Photoshop 2026",
  "entries": [
   {
+   "action": "Previous Brush",
+   "detail": "photoshop summarize · Tools · Previous Brush · ,",
+   "group": "Adobe Photoshop 2026",
+   "key": ",",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Next Brush",
+   "detail": "photoshop summarize · Tools · Next Brush · .",
+   "group": "Adobe Photoshop 2026",
+   "key": ".",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Preserve Transparency",
+   "detail": "photoshop summarize · Tools · Toggle Preserve Transparency · /",
+   "group": "Adobe Photoshop 2026",
+   "key": "/",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "First Brush",
+   "detail": "photoshop summarize · Tools · First Brush · <",
+   "group": "Adobe Photoshop 2026",
+   "key": ",",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Last Brush",
+   "detail": "photoshop summarize · Tools · Last Brush · >",
+   "group": "Adobe Photoshop 2026",
+   "key": ".",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Alignment Tool",
+   "detail": "photoshop summarize · Taskspace · Content-Aware Fill ▸ Tools ▸ Alignment Tool · A",
+   "group": "Adobe Photoshop 2026",
+   "key": "A",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Direct Selection Tool",
+   "detail": "photoshop summarize · Tools · Direct Selection Tool · A",
+   "group": "Adobe Photoshop 2026",
+   "key": "A",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "On Black",
+   "detail": "photoshop summarize · Taskspace · Select and Mask ▸ Properties and Tool Options ▸ On Black · A",
+   "group": "Adobe Photoshop 2026",
+   "key": "A",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Path Selection Tool",
+   "detail": "photoshop summarize · Tools · Path Selection Tool · A",
+   "group": "Adobe Photoshop 2026",
+   "key": "A",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Brush Tool",
+   "detail": "photoshop summarize · Tools · Brush Tool · B",
+   "group": "Adobe Photoshop 2026",
+   "key": "B",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Color Replacement Tool",
+   "detail": "photoshop summarize · Tools · Color Replacement Tool · B",
+   "group": "Adobe Photoshop 2026",
+   "key": "B",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Mixer Brush Tool",
+   "detail": "photoshop summarize · Tools · Mixer Brush Tool · B",
+   "group": "Adobe Photoshop 2026",
+   "key": "B",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Pencil Tool",
+   "detail": "photoshop summarize · Tools · Pencil Tool · B",
+   "group": "Adobe Photoshop 2026",
+   "key": "B",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Sampling Brush Tool",
+   "detail": "photoshop summarize · Taskspace · Content-Aware Fill ▸ Tools ▸ Sampling Brush Tool · B",
+   "group": "Adobe Photoshop 2026",
+   "key": "B",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Selection Brush Tool",
+   "detail": "photoshop summarize · Taskspace · Neural Filters ▸ Tools ▸ Selection Brush Tool · B",
+   "group": "Adobe Photoshop 2026",
+   "key": "B",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Crop Tool",
+   "detail": "photoshop summarize · Tools · Crop Tool · C",
+   "group": "Adobe Photoshop 2026",
+   "key": "C",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Perspective Crop Tool",
+   "detail": "photoshop summarize · Tools · Perspective Crop Tool · C",
+   "group": "Adobe Photoshop 2026",
+   "key": "C",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Slice Select Tool",
+   "detail": "photoshop summarize · Tools · Slice Select Tool · C",
+   "group": "Adobe Photoshop 2026",
+   "key": "C",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Slice Tool",
+   "detail": "photoshop summarize · Tools · Slice Tool · C",
+   "group": "Adobe Photoshop 2026",
+   "key": "C",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Default Foreground/Background Colors",
+   "detail": "photoshop summarize · Tools · Default Foreground/Background Colors · D",
+   "group": "Adobe Photoshop 2026",
+   "key": "D",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Background Eraser Tool",
+   "detail": "photoshop summarize · Tools · Background Eraser Tool · E",
+   "group": "Adobe Photoshop 2026",
+   "key": "E",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Cycle Tool Mode",
+   "detail": "photoshop summarize · Taskspace · Select and Mask ▸ Properties and Tool Options ▸ Cycle Tool Mode · E",
+   "group": "Adobe Photoshop 2026",
+   "key": "E",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Eraser Tool",
+   "detail": "photoshop summarize · Tools · Eraser Tool · E",
+   "group": "Adobe Photoshop 2026",
+   "key": "E",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Magic Eraser Tool",
+   "detail": "photoshop summarize · Tools · Magic Eraser Tool · E",
+   "group": "Adobe Photoshop 2026",
+   "key": "E",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Selection Removal Brush Tool",
+   "detail": "photoshop summarize · Taskspace · Neural Filters ▸ Tools ▸ Selection Removal Brush Tool · E",
+   "group": "Adobe Photoshop 2026",
+   "key": "E",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Cycle View Mode",
+   "detail": "photoshop summarize · Taskspace · Select and Mask ▸ Properties and Tool Options ▸ Cycle View Mode · F",
+   "group": "Adobe Photoshop 2026",
+   "key": "F",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Screen Modes",
+   "detail": "photoshop summarize · Tools · Toggle Screen Modes · F",
+   "group": "Adobe Photoshop 2026",
+   "key": "F",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
    "action": "Toggle Last State",
    "detail": "photoshop .kys default · F1 · alt",
    "group": "Adobe Photoshop 2026",
@@ -56,6 +303,15 @@
    "source": "app config"
   },
   {
+   "action": "Brush Settings",
+   "detail": "photoshop summarize · Application Menus · Window ▸ Brush Settings · F5",
+   "group": "Adobe Photoshop 2026",
+   "key": "F5",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
    "action": "Color",
    "detail": "photoshop .kys default · F6",
    "group": "Adobe Photoshop 2026",
@@ -79,6 +335,631 @@
    "group": "Adobe Photoshop 2026",
    "key": "F8",
    "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Gradient Tool",
+   "detail": "photoshop summarize · Tools · Gradient Tool · G",
+   "group": "Adobe Photoshop 2026",
+   "key": "G",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Paint Bucket Tool",
+   "detail": "photoshop summarize · Tools · Paint Bucket Tool · G",
+   "group": "Adobe Photoshop 2026",
+   "key": "G",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Hand Tool",
+   "detail": "photoshop summarize · Tools · Hand Tool · H",
+   "group": "Adobe Photoshop 2026",
+   "key": "H",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Color Sampler Tool",
+   "detail": "photoshop summarize · Tools · Color Sampler Tool · I",
+   "group": "Adobe Photoshop 2026",
+   "key": "I",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Count Tool",
+   "detail": "photoshop summarize · Tools · Count Tool · I",
+   "group": "Adobe Photoshop 2026",
+   "key": "I",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Eyedropper Tool",
+   "detail": "photoshop summarize · Tools · Eyedropper Tool · I",
+   "group": "Adobe Photoshop 2026",
+   "key": "I",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Note Tool",
+   "detail": "photoshop summarize · Tools · Note Tool · I",
+   "group": "Adobe Photoshop 2026",
+   "key": "I",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Ruler Tool",
+   "detail": "photoshop summarize · Tools · Ruler Tool · I",
+   "group": "Adobe Photoshop 2026",
+   "key": "I",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Content-Aware Move Tool",
+   "detail": "photoshop summarize · Tools · Content-Aware Move Tool · J",
+   "group": "Adobe Photoshop 2026",
+   "key": "J",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Healing Brush Tool",
+   "detail": "photoshop summarize · Tools · Healing Brush Tool · J",
+   "group": "Adobe Photoshop 2026",
+   "key": "J",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Patch Tool",
+   "detail": "photoshop summarize · Tools · Patch Tool · J",
+   "group": "Adobe Photoshop 2026",
+   "key": "J",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Red Eye Tool",
+   "detail": "photoshop summarize · Tools · Red Eye Tool · J",
+   "group": "Adobe Photoshop 2026",
+   "key": "J",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Remove Tool",
+   "detail": "photoshop summarize · Tools · Remove Tool · J",
+   "group": "Adobe Photoshop 2026",
+   "key": "J",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Show Edge",
+   "detail": "photoshop summarize · Taskspace · Select and Mask ▸ Properties and Tool Options ▸ Show Edge · J",
+   "group": "Adobe Photoshop 2026",
+   "key": "J",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Spot Healing Brush Tool",
+   "detail": "photoshop summarize · Tools · Spot Healing Brush Tool · J",
+   "group": "Adobe Photoshop 2026",
+   "key": "J",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Black & White",
+   "detail": "photoshop summarize · Taskspace · Select and Mask ▸ Properties and Tool Options ▸ Black & White · K",
+   "group": "Adobe Photoshop 2026",
+   "key": "K",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Frame Tool",
+   "detail": "photoshop summarize · Tools · Frame Tool · K",
+   "group": "Adobe Photoshop 2026",
+   "key": "K",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Lasso Tool",
+   "detail": "photoshop summarize · Tools · Lasso Tool · L",
+   "group": "Adobe Photoshop 2026",
+   "key": "L",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Magnetic Lasso Tool",
+   "detail": "photoshop summarize · Tools · Magnetic Lasso Tool · L",
+   "group": "Adobe Photoshop 2026",
+   "key": "L",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Polygonal Lasso Tool",
+   "detail": "photoshop summarize · Tools · Polygonal Lasso Tool · L",
+   "group": "Adobe Photoshop 2026",
+   "key": "L",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Selection Brush Tool",
+   "detail": "photoshop summarize · Tools · Selection Brush Tool · L",
+   "group": "Adobe Photoshop 2026",
+   "key": "L",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Elliptical Marquee Tool",
+   "detail": "photoshop summarize · Tools · Elliptical Marquee Tool · M",
+   "group": "Adobe Photoshop 2026",
+   "key": "M",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Marching Ants",
+   "detail": "photoshop summarize · Taskspace · Select and Mask ▸ Properties and Tool Options ▸ Marching Ants · M",
+   "group": "Adobe Photoshop 2026",
+   "key": "M",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Rectangular Marquee Tool",
+   "detail": "photoshop summarize · Tools · Rectangular Marquee Tool · M",
+   "group": "Adobe Photoshop 2026",
+   "key": "M",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Preview Mode",
+   "detail": "photoshop summarize · Tools · Toggle Preview Mode · N",
+   "group": "Adobe Photoshop 2026",
+   "key": "N",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Burn Tool",
+   "detail": "photoshop summarize · Tools · Burn Tool · O",
+   "group": "Adobe Photoshop 2026",
+   "key": "O",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Dodge Tool",
+   "detail": "photoshop summarize · Tools · Dodge Tool · O",
+   "group": "Adobe Photoshop 2026",
+   "key": "O",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Onion Skin",
+   "detail": "photoshop summarize · Taskspace · Select and Mask ▸ Properties and Tool Options ▸ Onion Skin · O",
+   "group": "Adobe Photoshop 2026",
+   "key": "O",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Sponge Tool",
+   "detail": "photoshop summarize · Tools · Sponge Tool · O",
+   "group": "Adobe Photoshop 2026",
+   "key": "O",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Curvature Pen Tool",
+   "detail": "photoshop summarize · Tools · Curvature Pen Tool · P",
+   "group": "Adobe Photoshop 2026",
+   "key": "P",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Freeform Pen Tool",
+   "detail": "photoshop summarize · Tools · Freeform Pen Tool · P",
+   "group": "Adobe Photoshop 2026",
+   "key": "P",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Pen Tool",
+   "detail": "photoshop summarize · Tools · Pen Tool · P",
+   "group": "Adobe Photoshop 2026",
+   "key": "P",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Show Original",
+   "detail": "photoshop summarize · Taskspace · Select and Mask ▸ Properties and Tool Options ▸ Show Original · P",
+   "group": "Adobe Photoshop 2026",
+   "key": "P",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Standard/Quick Mask Modes",
+   "detail": "photoshop summarize · Tools · Toggle Standard/Quick Mask Modes · Q",
+   "group": "Adobe Photoshop 2026",
+   "key": "Q",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Refine Edge Brush Tool",
+   "detail": "photoshop summarize · Taskspace · Select and Mask ▸ Tools ▸ Refine Edge Brush Tool · R",
+   "group": "Adobe Photoshop 2026",
+   "key": "R",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Rotate View Tool",
+   "detail": "photoshop summarize · Tools · Rotate View Tool · R",
+   "group": "Adobe Photoshop 2026",
+   "key": "R",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Clone Stamp Tool",
+   "detail": "photoshop summarize · Tools · Clone Stamp Tool · S",
+   "group": "Adobe Photoshop 2026",
+   "key": "S",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Pattern Stamp Tool",
+   "detail": "photoshop summarize · Tools · Pattern Stamp Tool · S",
+   "group": "Adobe Photoshop 2026",
+   "key": "S",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Sampling Brush Tool",
+   "detail": "photoshop summarize · Taskspace · Neural Filters ▸ Tools ▸ Sampling Brush Tool · S",
+   "group": "Adobe Photoshop 2026",
+   "key": "S",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Horizontal Type Mask Tool",
+   "detail": "photoshop summarize · Tools · Horizontal Type Mask Tool · T",
+   "group": "Adobe Photoshop 2026",
+   "key": "T",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Horizontal Type Tool",
+   "detail": "photoshop summarize · Tools · Horizontal Type Tool · T",
+   "group": "Adobe Photoshop 2026",
+   "key": "T",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "On White",
+   "detail": "photoshop summarize · Taskspace · Select and Mask ▸ Properties and Tool Options ▸ On White · T",
+   "group": "Adobe Photoshop 2026",
+   "key": "T",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Vertical Type Mask Tool",
+   "detail": "photoshop summarize · Tools · Vertical Type Mask Tool · T",
+   "group": "Adobe Photoshop 2026",
+   "key": "T",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Vertical Type Tool",
+   "detail": "photoshop summarize · Tools · Vertical Type Tool · T",
+   "group": "Adobe Photoshop 2026",
+   "key": "T",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Custom Shape Tool",
+   "detail": "photoshop summarize · Tools · Custom Shape Tool · U",
+   "group": "Adobe Photoshop 2026",
+   "key": "U",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Ellipse Tool",
+   "detail": "photoshop summarize · Tools · Ellipse Tool · U",
+   "group": "Adobe Photoshop 2026",
+   "key": "U",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Line Tool",
+   "detail": "photoshop summarize · Tools · Line Tool · U",
+   "group": "Adobe Photoshop 2026",
+   "key": "U",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Polygon Tool",
+   "detail": "photoshop summarize · Tools · Polygon Tool · U",
+   "group": "Adobe Photoshop 2026",
+   "key": "U",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Rectangle Tool",
+   "detail": "photoshop summarize · Tools · Rectangle Tool · U",
+   "group": "Adobe Photoshop 2026",
+   "key": "U",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Star Tool",
+   "detail": "photoshop summarize · Tools · Star Tool · U",
+   "group": "Adobe Photoshop 2026",
+   "key": "U",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Triangle Tool",
+   "detail": "photoshop summarize · Tools · Triangle Tool · U",
+   "group": "Adobe Photoshop 2026",
+   "key": "U",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Artboard Tool",
+   "detail": "photoshop summarize · Tools · Artboard Tool · V",
+   "group": "Adobe Photoshop 2026",
+   "key": "V",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Move Tool",
+   "detail": "photoshop summarize · Tools · Move Tool · V",
+   "group": "Adobe Photoshop 2026",
+   "key": "V",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Overlay",
+   "detail": "photoshop summarize · Taskspace · Select and Mask ▸ Properties and Tool Options ▸ Overlay · V",
+   "group": "Adobe Photoshop 2026",
+   "key": "V",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Magic Wand Tool",
+   "detail": "photoshop summarize · Tools · Magic Wand Tool · W",
+   "group": "Adobe Photoshop 2026",
+   "key": "W",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Object Selection Tool",
+   "detail": "photoshop summarize · Tools · Object Selection Tool · W",
+   "group": "Adobe Photoshop 2026",
+   "key": "W",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Quick Selection Tool",
+   "detail": "photoshop summarize · Tools · Quick Selection Tool · W",
+   "group": "Adobe Photoshop 2026",
+   "key": "W",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Disable Views",
+   "detail": "photoshop summarize · Taskspace · Select and Mask ▸ Properties and Tool Options ▸ Disable Views · X",
+   "group": "Adobe Photoshop 2026",
+   "key": "X",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Switch Foreground/Background Colors",
+   "detail": "photoshop summarize · Tools · Switch Foreground/Background Colors · X",
+   "group": "Adobe Photoshop 2026",
+   "key": "X",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Art History Brush Tool",
+   "detail": "photoshop summarize · Tools · Art History Brush Tool · Y",
+   "group": "Adobe Photoshop 2026",
+   "key": "Y",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "History Brush Tool",
+   "detail": "photoshop summarize · Tools · History Brush Tool · Y",
+   "group": "Adobe Photoshop 2026",
+   "key": "Y",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "On Layers",
+   "detail": "photoshop summarize · Taskspace · Select and Mask ▸ Properties and Tool Options ▸ On Layers · Y",
+   "group": "Adobe Photoshop 2026",
+   "key": "Y",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Zoom Tool",
+   "detail": "photoshop summarize · Tools · Zoom Tool · Z",
+   "group": "Adobe Photoshop 2026",
+   "key": "Z",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Decrease Brush Size",
+   "detail": "photoshop summarize · Tools · Decrease Brush Size · [",
+   "group": "Adobe Photoshop 2026",
+   "key": "[",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Show Next Layer Boundary",
+   "detail": "photoshop summarize · Tools · Show Next Layer Boundary · [",
+   "group": "Adobe Photoshop 2026",
+   "key": "[",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Increase Brush Size",
+   "detail": "photoshop summarize · Tools · Increase Brush Size · ]",
+   "group": "Adobe Photoshop 2026",
+   "key": "]",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Show Previous Layer Boundary",
+   "detail": "photoshop summarize · Tools · Show Previous Layer Boundary · ]",
+   "group": "Adobe Photoshop 2026",
+   "key": "]",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Decrease Brush Hardness",
+   "detail": "photoshop summarize · Tools · Decrease Brush Hardness · {",
+   "group": "Adobe Photoshop 2026",
+   "key": "[",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Increase Brush Hardness",
+   "detail": "photoshop summarize · Tools · Increase Brush Hardness · }",
+   "group": "Adobe Photoshop 2026",
+   "key": "]",
+   "mods": [
+    "shift"
+   ],
    "scope": "Adobe Photoshop 2026",
    "source": "app config"
   },
@@ -130,6 +1011,17 @@
   {
    "action": "Lock Layers",
    "detail": "photoshop .kys default · Cmd+/",
+   "group": "Adobe Photoshop 2026",
+   "key": "/",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Lock Layers...",
+   "detail": "photoshop summarize · Application Menus · Layer ▸ Lock Layers... · Cmd+/",
    "group": "Adobe Photoshop 2026",
    "key": "/",
    "mods": [
@@ -231,6 +1123,17 @@
    "detail": "photoshop .kys default · Cmd+E",
    "group": "Adobe Photoshop 2026",
    "key": "E",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Search",
+   "detail": "photoshop summarize · Application Menus · Edit ▸ Search · Cmd+F",
+   "group": "Adobe Photoshop 2026",
+   "key": "F",
    "mods": [
     "cmd"
    ],
@@ -547,6 +1450,18 @@
    "source": "app config"
   },
   {
+   "action": "Quick Export as PNG",
+   "detail": "photoshop summarize · Application Menus · Layer ▸ Quick Export as PNG · Shift+Cmd+'",
+   "group": "Adobe Photoshop 2026",
+   "key": "'",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
    "action": "Photoshop Online Help...",
    "detail": "photoshop .kys default · Shift+Cmd+/",
    "group": "Adobe Photoshop 2026",
@@ -715,6 +1630,18 @@
    "source": "app config"
   },
   {
+   "action": "Create/Release Clipping Mask",
+   "detail": "photoshop summarize · Application Menus · Layer ▸ Create/Release Clipping Mask · Opt+Cmd+G",
+   "group": "Adobe Photoshop 2026",
+   "key": "G",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
    "action": "Ungroup Layers",
    "detail": "photoshop .kys default · Shift+Cmd+G",
    "group": "Adobe Photoshop 2026",
@@ -859,6 +1786,18 @@
    "source": "app config"
   },
   {
+   "action": "New Layer...",
+   "detail": "photoshop summarize · Panel Menus · Layers ▸ New Layer... · Shift+Cmd+N",
+   "group": "Adobe Photoshop 2026",
+   "key": "N",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
    "action": "Browse in Bridge...",
    "detail": "photoshop .kys default · Opt+Cmd+O",
    "group": "Adobe Photoshop 2026",
@@ -907,8 +1846,32 @@
    "source": "app config"
   },
   {
+   "action": "Lens Correction...",
+   "detail": "photoshop summarize · Application Menus · Filter ▸ Lens Correction... · Shift+Cmd+R",
+   "group": "Adobe Photoshop 2026",
+   "key": "R",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
    "action": "Refine Edge...",
    "detail": "photoshop .kys default · Opt+Cmd+R",
+   "group": "Adobe Photoshop 2026",
+   "key": "R",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Select and Mask...",
+   "detail": "photoshop summarize · Application Menus · Select ▸ Select and Mask... · Opt+Cmd+R",
    "group": "Adobe Photoshop 2026",
    "key": "R",
    "mods": [
@@ -991,6 +1954,18 @@
    "source": "app config"
   },
   {
+   "action": "Vanishing Point...",
+   "detail": "photoshop summarize · Application Menus · Filter ▸ Vanishing Point... · Opt+Cmd+V",
+   "group": "Adobe Photoshop 2026",
+   "key": "V",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
    "action": "Close All",
    "detail": "photoshop .kys default · Opt+Cmd+W",
    "group": "Adobe Photoshop 2026",
@@ -1017,6 +1992,18 @@
   {
    "action": "Liquify",
    "detail": "photoshop .kys default · Shift+Cmd+X",
+   "group": "Adobe Photoshop 2026",
+   "key": "X",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Liquify...",
+   "detail": "photoshop summarize · Application Menus · Filter ▸ Liquify... · Shift+Cmd+X",
    "group": "Adobe Photoshop 2026",
    "key": "X",
    "mods": [
@@ -1099,10 +2086,36 @@
    "source": "app config"
   },
   {
+   "action": "Export As...",
+   "detail": "photoshop summarize · Application Menus · Layer ▸ Export As... · Opt+Shift+Cmd+'",
+   "group": "Adobe Photoshop 2026",
+   "key": "'",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
    "action": "Quick Export Selection PNG",
    "detail": "photoshop .kys default · Opt+Shift+Cmd+'",
    "group": "Adobe Photoshop 2026",
    "key": "'",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Adaptive Wide Angle...",
+   "detail": "photoshop summarize · Application Menus · Filter ▸ Adaptive Wide Angle... · Opt+Shift+Cmd+A",
+   "group": "Adobe Photoshop 2026",
+   "key": "A",
    "mods": [
     "opt",
     "shift",
@@ -1322,7 +2335,8 @@
  ],
  "provenance": {
   "file": "photoshop-default.kys",
-  "kind": "app-bundle"
+  "kind": "app-bundle",
+  "summarize": "Photoshop Defaults.htm"
  },
  "scope": "Adobe Photoshop 2026",
  "version": "27.5.0"
