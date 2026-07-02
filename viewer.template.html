@@ -141,6 +141,33 @@
   kbd{font:inherit;background:var(--bg);border:1px solid var(--line);border-radius:5px;padding:1px 6px}
   .delx{color:#ef4444;cursor:pointer;font-weight:700;padding:0 4px;font-size:12px}
   .delx:hover{color:#f87171}
+  /* 글로벌 핫키 빌더 */
+  .ghkform{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--panel);max-width:760px;margin:8px 0 14px}
+  .ghkrow{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:7px 0}
+  .ghkrow>label{min-width:52px;color:var(--dim);font-size:13px}
+  .ghkform input[type=text],.ghkform select{flex:1;min-width:140px}
+  .ghkmods{display:inline-flex;gap:5px}
+  .ghkmods .mb{padding:6px 11px;border:1px solid var(--line);border-radius:8px;background:var(--bg);cursor:pointer;font-size:15px;user-select:none}
+  .ghkmods .mb.on{background:#7c3aed;border-color:#7c3aed;color:#fff}
+  .ghkkey{width:64px!important;flex:none!important;text-align:center;font-weight:700;text-transform:uppercase}
+  .ghkstatus{font-size:13px;padding:8px 11px;border-radius:8px;margin:8px 0 0}
+  .ghkstatus.free{background:#0d2a18;color:#4ade80;border:1px solid #16643a}
+  .ghkstatus.taken{background:#2a1a0d;color:#fbbf24;border:1px solid #78450f}
+  html[data-theme="light"] .ghkstatus.free{background:#dcfce7;color:#166534;border-color:#86efac}
+  html[data-theme="light"] .ghkstatus.taken{background:#fef3c7;color:#92400e;border-color:#fcd34d}
+  .ghkadd{background:#7c3aed;border-color:#7c3aed;color:#fff;font-weight:700}
+  .ghklist{margin-top:6px}
+  .ghkitem{display:flex;gap:10px;align-items:center;padding:8px 10px;border:1px solid var(--line);border-radius:9px;margin:5px 0;background:var(--panel)}
+  .ghkitem .gk{font-weight:800;min-width:78px;color:#c4b5fd}
+  html[data-theme="light"] .ghkitem .gk{color:#6d28d9}
+  .ghkitem .gt{flex:1}
+  .ghkitem .gy{font-size:11px;color:var(--dim);padding:2px 7px;border:1px solid var(--line);border-radius:6px}
+  .ghkbackends{margin-top:14px;border-top:1px solid var(--line);padding-top:12px}
+  .ghkbackends pre{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px;overflow:auto;font-size:11.5px;max-height:200px}
+  .ghktabs{display:inline-flex;gap:5px;margin:6px 0}
+  .ghktabs button{font-size:12px;padding:3px 10px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--dim);cursor:pointer}
+  .ghktabs button.on{background:#2e1065;border-color:#7c3aed;color:#c4b5fd}
+  html[data-theme="light"] .ghktabs button.on{background:#ede9fe;color:#6d28d9}
   @media print{
     html{--bg:#fff;--panel:#fff;--line:#bbb;--txt:#000;--dim:#555}
     header,.controls,.hint,.vbar,#chordbar,#gestures,.tip,#kb,#detail,#results,#legend{display:none!important}
@@ -182,6 +209,7 @@
     <button class="vbtn" data-view="free" title="현재 수식키 레이어에서 비어 있는(할당 가능한) 키">✨ 빈 조합</button>
     <button class="vbtn" data-view="stats" title="앱별 개수·수식키 분포·바쁜 키 통계">📊 통계</button>
     <button class="vbtn" data-view="quiz" title="현재 컨텍스트/즐겨찾기 단축키로 플래시카드 연습">🎓 퀴즈</button>
+    <button class="vbtn" data-view="ghk" title="충돌 없는 빈 조합을 골라 그 자리에 진짜 글로벌 핫키(앱 열기·명령 실행 등)를 설정 → hotkeys.json 내보내기">🌐 글로벌 핫키</button>
     <span style="width:1px;height:20px;background:var(--line);margin:0 3px"></span>
     <button id="commonbtn" class="vbtn" title="누구나 아는 흔한 단축키(⌘C·⌘V·⌘Z…) 숨기기">🙈 흔한 키</button>
     <button id="themebtn" class="vbtn" title="밝은/어두운 테마">☾ 테마</button>
@@ -213,9 +241,9 @@
 <script>
 const DB = /*__DATA__*/;
 // ── favorites + notes, persisted in localStorage (survives rebuilds at the same file path) ──
-let ANN = {fav:{}, note:{}, custom:[]};
-try { const base=DB.ann||{}; Object.assign(ANN.fav, base.fav||{}); Object.assign(ANN.note, base.note||{}); if(Array.isArray(base.custom)) ANN.custom=base.custom; } catch(e){}  // baked-in (annotations.json)
-try { const s=JSON.parse(localStorage.getItem('SVann')||'null'); if(s){ Object.assign(ANN.fav,s.fav||{}); Object.assign(ANN.note,s.note||{}); if(Array.isArray(s.custom)) ANN.custom=s.custom; } } catch(e){}  // live localStorage overlay
+let ANN = {fav:{}, note:{}, custom:[], ghk:[]};
+try { const base=DB.ann||{}; Object.assign(ANN.fav, base.fav||{}); Object.assign(ANN.note, base.note||{}); if(Array.isArray(base.custom)) ANN.custom=base.custom; if(Array.isArray(base.ghk)) ANN.ghk=base.ghk; } catch(e){}  // baked-in (annotations.json)
+try { const s=JSON.parse(localStorage.getItem('SVann')||'null'); if(s){ Object.assign(ANN.fav,s.fav||{}); Object.assign(ANN.note,s.note||{}); if(Array.isArray(s.custom)) ANN.custom=s.custom; if(Array.isArray(s.ghk)) ANN.ghk=s.ghk; } } catch(e){}  // live localStorage overlay
 // ── 내 단축키(custom): 어떤 소스에도 없는 걸 직접 기록 → DB.entries에 병합 (localStorage에 저장·export 포함) ──
 function mergeCustom(){
   DB.entries = DB.entries.filter(e=>e.source!=='custom');
@@ -614,6 +642,83 @@ function gradeQuiz(pressed){
   quizState.correct=(pressed===want); if(quizState.correct) quizState.score++;
   renderQuiz();
 }
+// ══════ 글로벌 핫키 빌더 (충돌 없는 빈 조합 → 진짜 글로벌 단축키) ══════
+const GHK_ACTIONS = [['open_app','앱 열기','예: Finder · Calculator · Safari'],['open_url','웹사이트 열기','예: https://google.com'],['open_folder','폴더 열기','예: ~/Downloads'],['run_shell','명령 실행 (zsh)','예: screencapture -i -c'],['applescript','AppleScript','예: tell application "Notes" to make new note'],['paste_text','텍스트 붙여넣기','예: kdr@namouli.com'],['show_viewer','단축키 뷰어 열기','(비워둬도 됨)']];
+let ghkDraftMods=new Set(), ghkBackend='daemon';
+function ghkNormKey(v){ v=(v||'').trim(); if(!v) return ''; const up=v.toUpperCase();
+  if(/^F([1-9]|1[0-9]|20)$/.test(up)) return up;
+  const named={SPACE:'Space',RETURN:'Return',ENTER:'Return',TAB:'Tab',ESC:'Escape',ESCAPE:'Escape',DELETE:'Delete',BACKSPACE:'Delete',LEFT:'Left',RIGHT:'Right',UP:'Up',DOWN:'Down',HOME:'Home',END:'End',PAGEUP:'PageUp',PAGEDOWN:'PageDown'};
+  if(named[up]) return named[up]; return v.length===1?up:v; }
+function ghkComboState(mods,key){ if(!key) return null; const m=new Set(mods);
+  const hits=DB.entries.filter(e=>e.source!=='custom'&&e.key===key&&sameSet(e.mods,m));
+  const dup=(ANN.ghk||[]).some(g=>g.key===key&&sameSet(g.mods,m));
+  return {free:hits.length===0&&!dup, hits, dup}; }
+function ghkUpdateStatus(){ const el=document.getElementById('modepanel'); const ki=el.querySelector('#ghkKey'); const st=el.querySelector('#ghkStatus'); if(!ki||!st) return;
+  const key=ghkNormKey(ki.value); const s=ghkComboState([...ghkDraftMods],key);
+  if(!s){ st.style.display='none'; return; } st.style.display='block';
+  const combo=comboSym([...ghkDraftMods])+key;
+  if(s.dup){ st.className='ghkstatus taken'; st.innerHTML=`<b>${combo}</b> — 이미 내 글로벌 핫키 목록에 있어요.`; return; }
+  const glob=s.hits.filter(e=>e.scope==='global'); const apps=[...new Set(s.hits.filter(e=>e.scope!=='global').map(e=>e.scope))];
+  if(s.free) { st.className='ghkstatus free';  st.innerHTML=`<b>${combo}</b> — ✅ 완전히 빈 조합! 안전하게 쓸 수 있어요.`; }
+  else if(glob.length){ st.className='ghkstatus taken'; st.innerHTML=`<b>${combo}</b> — ⚠️ 시스템/글로벌에서 이미 사용 중: ${glob.map(e=>e.action).slice(0,3).join(', ')} — 충돌 위험, 다른 조합을 권장.`; }
+  else { st.className='ghkstatus taken'; st.innerHTML=`<b>${combo}</b> — ⚠️ 앱에서 사용: ${apps.slice(0,4).join(', ')}. 글로벌로 잡으면 그 앱에선 이 조합을 못 씁니다.`; } }
+function ghkPickFree(){ if(!ghkDraftMods.size) ghkDraftMods.add('opt');   // 기본 ⌥ 레이어(시스템·앱과 덜 겹침)
+  const taken=new Set(ctxEntries().filter(e=>sameSet(e.mods,ghkDraftMods)).map(e=>e.key));
+  (ANN.ghk||[]).filter(g=>sameSet(g.mods,ghkDraftMods)).forEach(g=>taken.add(g.key));
+  const pref=['J','K','L','U','I','O','H','N','Y','P','B','G','R','E',';','M'];
+  const cand=pref.find(k=>!taken.has(k))||ALLKEYS.find(k=>!taken.has(k));
+  const el=document.getElementById('modepanel'); if(cand){ el.querySelector('#ghkKey').value=cand; el.querySelectorAll('[data-gm]').forEach(b=>b.classList.toggle('on',ghkDraftMods.has(b.dataset.gm))); ghkUpdateStatus(); } }
+function ghkAdd(){ const el=document.getElementById('modepanel');
+  const key=ghkNormKey(el.querySelector('#ghkKey').value);
+  if(!key||!ALLKEYS.includes(key)){ alert('키를 입력하세요 (A~Z · 0~9 · F1~F20 · Space · 화살표 등)'); return; }
+  const type=el.querySelector('#ghkType').value, val=el.querySelector('#ghkVal').value.trim();
+  if(type!=='show_viewer'&&!val){ alert('동작 값을 입력하세요 (예: Finder · https://google.com)'); return; }
+  ANN.ghk.push({title:el.querySelector('#ghkTitle').value.trim(), mods:[...ghkDraftMods], key, action:{type,value:val}, anyCombo:el.querySelector('#ghkAny').checked, enabled:true});
+  saveAnn(); ghkDraftMods=new Set(); renderGHK(); }
+function exportHotkeysJSON(){ const data={version:1,hotkeys:(ANN.ghk||[]).map((g,i)=>({id:g.id||('g'+(i+1)),title:g.title||'',mods:g.mods,key:g.key,action:g.action,anyCombo:!!g.anyCombo,enabled:g.enabled!==false}))};
+  const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'})); a.download='hotkeys.json'; a.click(); }
+// 백엔드 설정 미리보기 (gen_hotkeys.py와 동일 규칙)
+const GHK_KMAP=(()=>{ const m={}; 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').forEach(c=>m[c]=[c.toLowerCase(),c.toLowerCase(),c.toLowerCase()]); '0123456789'.split('').forEach(d=>m[d]=[d,d,d]);
+  for(let n=1;n<=20;n++)m['F'+n]=['f'+n,'f'+n,'f'+n];
+  Object.assign(m,{Space:['spacebar','space','space'],Return:['return_or_enter','return','return'],Tab:['tab','tab','tab'],Escape:['escape','escape','escape'],Delete:['delete_or_backspace','backspace','delete'],ForwardDelete:['delete_forward','delete','forwarddelete'],Left:['left_arrow','left','left'],Right:['right_arrow','right','right'],Up:['up_arrow','up','up'],Down:['down_arrow','down','down'],Home:['home','home','home'],End:['end','end','end'],PageUp:['page_up','pageup','pageup'],PageDown:['page_down','pagedown','pagedown']}); return m; })();
+function ghkShell(a){ const t=a.type, v=a.value||''; const q=s=>"'"+String(s).replace(/'/g,"'\\''")+"'";
+  if(t==='open_app') return v.startsWith('/')?`open ${q(v)}`:(v.includes('.')&&!v.includes(' ')?`open -b ${q(v)}`:`open -a ${q(v)}`);
+  if(t==='open_url') return `open ${q(v)}`;
+  if(t==='open_folder'||t==='open_file') return `open ${q(v)}`;
+  if(t==='run_shell') return v;
+  if(t==='applescript') return `osascript -e ${q(v)}`;
+  if(t==='paste_text') return `printf %s ${q(v)} | pbcopy && osascript -e 'tell application "System Events" to keystroke "v" using command down'`;
+  if(t==='show_viewer') return `open ${q(v||'~/dev/shortcut-viewer/viewer.html')}`; return `echo unknown`; }
+function ghkBackendText(){ const hks=(ANN.ghk||[]).filter(g=>g.enabled!==false); const KM={cmd:['command','cmd','cmd'],opt:['option','alt','alt'],ctrl:['control','ctrl','ctrl'],shift:['shift','shift','shift']};
+  if(ghkBackend==='daemon') return JSON.stringify({version:1,hotkeys:hks.map((g,i)=>({id:'g'+(i+1),title:g.title||'',mods:g.mods,key:g.key,action:g.action,anyCombo:!!g.anyCombo,enabled:true}))},null,1);
+  if(ghkBackend==='karabiner'){ const manips=hks.map(g=>({type:'basic',from:{key_code:(GHK_KMAP[g.key]||[g.key])[0],modifiers:{mandatory:g.mods.map(m=>KM[m][0])}},to:[{shell_command:ghkShell(g.action)}],description:g.title||''})); return JSON.stringify({title:'Shortcut Viewer',rules:[{description:'Shortcut Viewer 글로벌 핫키',manipulators:manips}]},null,1); }
+  if(ghkBackend==='skhd') return '# skhdrc — Shortcut Viewer\n'+hks.map(g=>{ const mods=g.mods.map(m=>KM[m][1]).join(' + '); const k=(GHK_KMAP[g.key]||[,g.key])[1]; return `# ${g.title||''}\n${mods?mods+' - ':''}${k} : ${ghkShell(g.action)}`; }).join('\n');
+  return '-- Hammerspoon — Shortcut Viewer\n'+hks.map(g=>{ const mods='{'+g.mods.map(m=>'"'+KM[m][2]+'"').join(', ')+'}'; const k=(GHK_KMAP[g.key]||[,,g.key])[2]; const cmd=ghkShell(g.action).replace(/\\/g,'\\\\').replace(/"/g,'\\"'); return `hs.hotkey.bind(${mods}, "${k}", function() hs.execute("${cmd}", true) end)  -- ${(g.title||'').replace(/"/g,'')}`; }).join('\n'); }
+function ghkRenderBackend(){ const p=document.getElementById('ghkPre'); if(p) p.textContent=(ANN.ghk||[]).length?ghkBackendText():'(핫키를 추가하면 여기에 설정이 생성됩니다)'; }
+function renderGHK(){ const el=document.getElementById('modepanel');
+  const opts=GHK_ACTIONS.map(a=>`<option value="${a[0]}">${a[1]}</option>`).join('');
+  const list=(ANN.ghk||[]).map((g,i)=>`<div class="ghkitem"><span class="gk">${comboSym(g.mods)}${g.key}</span><span class="gt">${((g.title||'')||'(제목 없음)').replace(/</g,'&lt;')}</span><span class="gy">${g.action.type}: ${(g.action.value||'').replace(/</g,'&lt;').slice(0,42)}</span><span class="delx" data-delg="${i}" title="삭제">✕</span></div>`).join('')||'<div class="muted" style="padding:6px 0">아직 없음 — 위 폼에서 추가하세요.</div>';
+  el.innerHTML=`<div class="sec">🌐 글로벌 핫키 만들기 <span class="muted" style="text-transform:none;letter-spacing:0;font-size:11px">— 충돌 없는 빈 조합을 골라 앱 열기·명령 실행 등을 어디서나. 내보낸 hotkeys.json을 데몬/Karabiner/skhd/Hammerspoon 중 하나가 실행.</span></div>
+    <div class="ghkform">
+      <div class="ghkrow"><label>제목</label><input type="text" id="ghkTitle" placeholder="예: Finder 열기"></div>
+      <div class="ghkrow"><label>조합</label><span class="ghkmods">${['ctrl','opt','shift','cmd'].map(m=>`<span class="mb${ghkDraftMods.has(m)?' on':''}" data-gm="${m}">${MODSYM[m]}</span>`).join('')}</span><input type="text" id="ghkKey" class="ghkkey" maxlength="9" placeholder="키"><button id="ghkPick" title="현재 레이어의 빈 키 추천">✨ 빈 키 추천</button></div>
+      <div class="ghkrow"><label>동작</label><select id="ghkType">${opts}</select><input type="text" id="ghkVal" placeholder="${GHK_ACTIONS[0][2]}"></div>
+      <div class="ghkrow"><button class="ghkadd" id="ghkAdd">＋ 추가</button><span style="flex:1"></span><label style="min-width:auto;font-size:12px;color:var(--dim)"><input type="checkbox" id="ghkAny"> 다른 앱도 잡기 (anyCombo·Accessibility 필요)</label></div>
+      <div class="ghkstatus" id="ghkStatus" style="display:none"></div>
+    </div>
+    <div class="ghklist">${list}</div>
+    <div class="ghkbackends"><b>내보내기 / 설치</b> · <button id="ghkExport">⤓ hotkeys.json 내보내기</button>
+      <span class="muted" style="font-size:11px">저장 → <code>~/.config/shortcut-viewer/hotkeys.json</code> · 데몬: <code>./install_hotkeys.sh</code> (또는 <code>hotkeys/build.sh run</code>)</span>
+      <div class="ghktabs">${['daemon','karabiner','skhd','hammerspoon'].map(b=>`<button data-gb="${b}" class="${ghkBackend===b?'on':''}">${b==='daemon'?'네이티브 데몬':b}</button>`).join('')}</div>
+      <pre id="ghkPre"></pre></div>`;
+  el.querySelectorAll('[data-gm]').forEach(b=>b.onclick=()=>{ const m=b.dataset.gm; ghkDraftMods.has(m)?ghkDraftMods.delete(m):ghkDraftMods.add(m); b.classList.toggle('on'); ghkUpdateStatus(); });
+  const ki=el.querySelector('#ghkKey'); ki.oninput=()=>ghkUpdateStatus();
+  el.querySelector('#ghkType').onchange=e=>{ const a=GHK_ACTIONS.find(x=>x[0]===e.target.value); el.querySelector('#ghkVal').placeholder=a?a[2]:''; };
+  el.querySelector('#ghkPick').onclick=ghkPickFree; el.querySelector('#ghkAdd').onclick=ghkAdd; el.querySelector('#ghkExport').onclick=exportHotkeysJSON;
+  el.querySelectorAll('[data-delg]').forEach(b=>b.onclick=()=>{ ANN.ghk.splice(+b.dataset.delg,1); saveAnn(); renderGHK(); });
+  el.querySelectorAll('[data-gb]').forEach(b=>b.onclick=()=>{ ghkBackend=b.dataset.gb; el.querySelectorAll('[data-gb]').forEach(x=>x.classList.toggle('on',x.dataset.gb===ghkBackend)); ghkRenderBackend(); });
+  ghkRenderBackend();
+}
 function exportRows(fmt){
   const ents=ctxEntries().slice().sort((a,b)=>a.mods.length-b.mods.length||a.key.localeCompare(b.key)||a.action.localeCompare(b.action));
   const rows=ents.map(e=>[comboFull(e), e.action, e.scope, e.source]);
@@ -677,6 +782,7 @@ function sync(){
   else if(panelMode==='free') renderFree();
   else if(panelMode==='stats') renderStats();
   else if(panelMode==='quiz') renderQuiz();
+  else if(panelMode==='ghk'){ if(!mp.querySelector('.ghkform')) renderGHK(); }   // 폼 상태 보존: 최초 1회만
   else mp.innerHTML='';
   const det=document.getElementById('detail');      // 전체 단축키(overview)/전용 패널이 켜지면 키별 상세는 숨긴다
   if(overview||panelMode){ det.style.display='none'; }

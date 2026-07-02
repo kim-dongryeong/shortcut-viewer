@@ -61,6 +61,21 @@ open viewer.html
 - Click a key (or press it) → see **all 16 modifier combos** for it, taken *and* free.
 - Context chips filter by app (multi-select), plus `BTT (all)` and per-preset.
 - 📋 list view, search by action/key/combo, and a "free combos only" filter.
+- **⚠️ Conflicts · ✨ Free combos · 📊 Stats · 🎓 Quiz · 🖨 Print/PDF · ⤓ CSV/MD · ☾ theme · URL deep-links · ＋ My Shortcuts** — competitor-parity views (KeyCue/KeyClu/CheatSheet/KeyCombiner).
+
+## Set global hotkeys (SV Hotkeys) 🌐
+
+Shortcut Viewer doesn't just *show* shortcuts — it can **set real global hotkeys**. Because it already
+knows every shortcut from every source, it uniquely lets you **find a conflict-free combo and bind it in one place**
+(open an app, run a command, paste text — from anywhere). The viewer's **🌐 글로벌 핫키** tab builds a `hotkeys.json`;
+run it with any of four backends:
+
+```sh
+./install_hotkeys.sh          # ① native menu-bar daemon (no Accessibility for ⌘/⌥/⌃) — easiest
+python3 gen_hotkeys.py        # ②③④ export for Karabiner / skhd / Hammerspoon (if you already run one)
+```
+
+Full guide + 15+ ready-to-use scenarios: **[HOTKEYS.md](HOTKEYS.md)**. Hotkey mechanism adapted from `~/dev/maverything` (Carbon `RegisterEventHotKey` + `CGEventTap`).
 
 ## How it works
 

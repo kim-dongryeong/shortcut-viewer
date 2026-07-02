@@ -1,0 +1,22 @@
+{
+  "_readme": "SV Hotkeys 설정. 이 파일을 ~/.config/shortcut-viewer/hotkeys.json 으로 복사하면 데몬이 읽습니다(뷰어에서 '글로벌 핫키' 내보내기로 자동 생성 가능). mods=[cmd,opt,ctrl,shift], key=뷰어와 같은 이름(A~Z,0~9,Space,Return,F1…,Left…). anyCombo=true면 다른 앱도 잡는 조합까지 가로챔(Accessibility 필요). 초보자는 ⌥ 또는 ⌃⌥ 레이어를 추천 — 시스템·앱과 안 겹칩니다.",
+  "_action_types": "open_app(앱이름/경로/번들id) · open_url · open_folder(폴더경로) · open_file · run_shell(zsh 명령) · applescript · paste_text(클립보드+⌘V, Accessibility 필요) · show_viewer(Shortcut Viewer 열기)",
+  "version": 1,
+  "hotkeys": [
+    {"id":"viewer",   "title":"내 단축키 전체 보기 (Shortcut Viewer)", "mods":["opt"],        "key":"Space", "action":{"type":"show_viewer","value":""}},
+    {"id":"finder",   "title":"Finder(파인더) 열기",                   "mods":["opt"],        "key":"F",     "action":{"type":"open_app","value":"Finder"}},
+    {"id":"calc",     "title":"계산기 열기",                            "mods":["opt"],        "key":"C",     "action":{"type":"open_app","value":"Calculator"}},
+    {"id":"term",     "title":"터미널 열기",                            "mods":["ctrl","opt"], "key":"T",     "action":{"type":"open_app","value":"Terminal"}},
+    {"id":"home",     "title":"홈 폴더 열기",                           "mods":["opt"],        "key":"H",     "action":{"type":"open_folder","value":"~"}},
+    {"id":"downloads","title":"다운로드 폴더 열기",                     "mods":["opt"],        "key":"D",     "action":{"type":"open_folder","value":"~/Downloads"}},
+    {"id":"google",   "title":"Google 열기",                           "mods":["opt"],        "key":"G",     "action":{"type":"open_url","value":"https://www.google.com"}},
+    {"id":"gpt",      "title":"ChatGPT 열기",                          "mods":["opt"],        "key":"Return","action":{"type":"open_url","value":"https://chatgpt.com"}},
+    {"id":"lock",     "title":"화면 잠그고 절전",                       "mods":["ctrl","opt"], "key":"L",     "action":{"type":"run_shell","value":"pmset displaysleepnow"}},
+    {"id":"shot",     "title":"영역 스크린샷 (클립보드로)",             "mods":["ctrl","opt"], "key":"S",     "action":{"type":"run_shell","value":"screencapture -i -c"}},
+    {"id":"email",    "title":"내 이메일 주소 붙여넣기",                "mods":["opt"],        "key":"E",     "action":{"type":"paste_text","value":"me@example.com"}},
+    {"id":"dark",     "title":"다크 모드 켜기/끄기",                    "mods":["ctrl","opt"], "key":"D",     "enabled":false, "action":{"type":"applescript","value":"tell application \"System Events\" to tell appearance preferences to set dark mode to not dark mode"}},
+    {"id":"newnote",  "title":"새 메모",                               "mods":["opt"],        "key":"N",     "action":{"type":"applescript","value":"tell application \"Notes\" to make new note"}},
+    {"id":"emptytrash","title":"휴지통 비우기",                        "mods":["ctrl","opt"], "key":"Delete","action":{"type":"applescript","value":"tell application \"Finder\" to empty trash"}},
+    {"id":"spotify",  "title":"Spotify 재생/일시정지 (anyCombo 예시)",  "mods":["ctrl","opt"], "key":"P",     "anyCombo":false, "action":{"type":"applescript","value":"tell application \"Spotify\" to playpause"}}
+  ]
+}
