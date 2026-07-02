@@ -651,7 +651,7 @@ def collect_manual_gestures():
 
 WEB_MODSYM = {'⌘':'cmd','⌥':'opt','⌃':'ctrl','⇧':'shift'}
 WEB_KEYNAME = {'Space':'Space','Enter':'Return','Return':'Return','Esc':'Escape','Tab':'Tab',
-               'Backspace':'Delete','Delete':'ForwardDelete','→':'Right','←':'Left','↑':'Up','↓':'Down',
+               'Backspace':'Delete','Delete':'Delete','ForwardDelete':'ForwardDelete','→':'Right','←':'Left','↑':'Up','↓':'Down',
                'Home':'Home','End':'End','PageUp':'PageUp','PageDown':'PageDown'}
 def web_key(spec):
     # parse a Google-style mac shortcut string "⌘⇧ Space" / "⌃⌘ e then p" → (mods, key, sequence_or_None)
@@ -667,6 +667,8 @@ def web_key(spec):
     if seq: rest = re.split(r'[ ,]', rest)[0]            # first key of the sequence drives grid placement
     if ' or ' in rest: rest = rest.split(' or ')[0].strip()          # "Delete or #" → first alternative (full in detail)
     if '/' in rest and rest != '/': rest = rest.split('/')[0].strip()  # "↑/↓" → first; keep bare "/"
+    rest = re.sub(r'(?i)\bpage\s*up\b', 'PageUp', rest); rest = re.sub(r'(?i)\bpage\s*down\b', 'PageDown', rest)  # MS "Page down"
+    if ' ' in rest: rest = rest.split()[0]                           # "→ ← ↑ ↓" (multi-key for one action) → first
     if rest in WEB_KEYNAME: return mods, WEB_KEYNAME[rest], seq
     if len(rest) == 1: return mods, (rest.upper() if rest.isalpha() else rest), seq
     return mods, norm_keytoken(rest), seq

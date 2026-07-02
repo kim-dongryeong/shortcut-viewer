@@ -1157,5 +1157,495 @@
    "keys": "-",
    "action": "Zoom out (preview)"
   }
+ ],
+ "Microsoft Excel": [
+  {
+   "keys": "⌘V or ⌃V",
+   "action": "Paste selection"
+  },
+  {
+   "keys": "⌘C or ⌃C",
+   "action": "Copy selection"
+  },
+  {
+   "keys": "Delete",
+   "action": "Clear selection"
+  },
+  {
+   "keys": "⌘S or ⌃S",
+   "action": "Save workbook"
+  },
+  {
+   "keys": "⌘Z or ⌃Z",
+   "action": "Undo action"
+  },
+  {
+   "keys": "⌘Y or ⌃Y or ⌘⇧Z",
+   "action": "Redo action"
+  },
+  {
+   "keys": "⌘X or ⌃X or ⇧Delete",
+   "action": "Cut selection"
+  },
+  {
+   "keys": "⌘B or ⌃B",
+   "action": "Apply bold formatting"
+  },
+  {
+   "keys": "⌘P or ⌃P",
+   "action": "Print workbook"
+  },
+  {
+   "keys": "⌥F11",
+   "action": "Open Visual Basic"
+  },
+  {
+   "keys": "⌘D or ⌃D",
+   "action": "Fill cells down"
+  },
+  {
+   "keys": "⌘R or ⌃R",
+   "action": "Fill cells right"
+  },
+  {
+   "keys": "⌃⇧=",
+   "action": "Insert cells"
+  },
+  {
+   "keys": "⌘- or ⌃-",
+   "action": "Delete cells"
+  },
+  {
+   "keys": "⌘= or F9",
+   "action": "Calculate all open workbooks"
+  },
+  {
+   "keys": "⌘W or ⌃W",
+   "action": "Close window"
+  },
+  {
+   "keys": "⌘Q",
+   "action": "Quit Excel"
+  },
+  {
+   "keys": "⌃G or F5",
+   "action": "Display the Go To dialog box"
+  },
+  {
+   "keys": "⌘1 or ⌃1",
+   "action": "Display the Format Cells dialog box"
+  },
+  {
+   "keys": "⌃H or ⌘⇧H",
+   "action": "Display the Replace dialog box"
+  },
+  {
+   "keys": "⌘⌃V or ⌃⌥V or ⌘⌥V",
+   "action": "Use Paste Special"
+  },
+  {
+   "keys": "⌘U",
+   "action": "Apply underline formatting"
+  },
+  {
+   "keys": "⌘I or ⌃I",
+   "action": "Apply italic formatting"
+  },
+  {
+   "keys": "⌘N or ⌃N",
+   "action": "Open a new blank workbook"
+  },
+  {
+   "keys": "⌘⇧P",
+   "action": "Create a new workbook from template"
+  },
+  {
+   "keys": "⌘⇧S or F12",
+   "action": "Display the Save As dialog box"
+  },
+  {
+   "keys": "F1 or ⌘/",
+   "action": "Display the Help window"
+  },
+  {
+   "keys": "⌘A or ⌘⇧Space",
+   "action": "Select all"
+  },
+  {
+   "keys": "⌘⇧F or ⌃⇧L",
+   "action": "Add or remove a filter"
+  },
+  {
+   "keys": "⌘⌥R",
+   "action": "Minimize or maximize the ribbon tabs"
+  },
+  {
+   "keys": "⌘O or ⌃O",
+   "action": "Display the Open dialog box"
+  },
+  {
+   "keys": "F7",
+   "action": "Check spelling"
+  },
+  {
+   "keys": "⇧F7",
+   "action": "Open the thesaurus"
+  },
+  {
+   "keys": "⇧F3",
+   "action": "Display the Formula Builder"
+  },
+  {
+   "keys": "⌘F3",
+   "action": "Open the Define Name dialog box"
+  },
+  {
+   "keys": "⌘Return",
+   "action": "Insert or reply to a threaded comment"
+  },
+  {
+   "keys": "⌘⇧F3",
+   "action": "Open the Create names dialog box"
+  },
+  {
+   "keys": "⇧F11",
+   "action": "Insert a new sheet"
+  },
+  {
+   "keys": "⌘⌃F",
+   "action": "Switch to full screen view"
+  },
+  {
+   "keys": "⌘H",
+   "action": "Hide Excel"
+  },
+  {
+   "keys": "Tab",
+   "action": "Move to the next box, option, control, or command"
+  },
+  {
+   "keys": "⇧Tab",
+   "action": "Move to the previous box, option, control, or command"
+  },
+  {
+   "keys": "Esc",
+   "action": "Exit a dialog box or cancel an action"
+  },
+  {
+   "keys": "→ ← ↑ ↓",
+   "action": "Move one cell up, down, left, or right"
+  },
+  {
+   "keys": "⌘→ ⌘← ⌘↑ ⌘↓",
+   "action": "Move to the edge of the current data region"
+  },
+  {
+   "keys": "Home or Fn+←",
+   "action": "Move to the beginning of the row"
+  },
+  {
+   "keys": "⌃Home or ⌃Fn+←",
+   "action": "Move to the beginning of the sheet"
+  },
+  {
+   "keys": "⌃End or ⌃Fn+→",
+   "action": "Move to the last cell in use on the sheet"
+  },
+  {
+   "keys": "Page down or Fn+↓",
+   "action": "Move down one screen"
+  },
+  {
+   "keys": "Page up or Fn+↑",
+   "action": "Move up one screen"
+  },
+  {
+   "keys": "⌃Page down or ⌥→",
+   "action": "Move to the next sheet in the workbook"
+  },
+  {
+   "keys": "⌃Page up or ⌥←",
+   "action": "Move to the previous sheet in the workbook"
+  },
+  {
+   "keys": "⌃Delete",
+   "action": "Scroll to display the active cell"
+  },
+  {
+   "keys": "⌃F or ⇧F5",
+   "action": "Display the Find dialog box"
+  },
+  {
+   "keys": "F2",
+   "action": "Edit the selected cell"
+  },
+  {
+   "keys": "⌥Return or ⌃⌥Return",
+   "action": "Start a new line in the same cell"
+  },
+  {
+   "keys": "⌘Return or ⌃Return",
+   "action": "Fill the selected cell range with the text typed"
+  },
+  {
+   "keys": "⇧Return",
+   "action": "Complete a cell entry and move up"
+  },
+  {
+   "keys": "Esc",
+   "action": "Cancel a cell entry"
+  },
+  {
+   "keys": "Fn+Delete or ⌘⌫",
+   "action": "Delete the character to the right of insertion point"
+  },
+  {
+   "keys": "⌃Fn+Delete or ⌃⌘⌫",
+   "action": "Delete text to the end of the line"
+  },
+  {
+   "keys": "⇧F2",
+   "action": "Insert a note or open and edit a cell note"
+  },
+  {
+   "keys": "⌘⇧F2",
+   "action": "Insert a threaded comment or open and reply"
+  },
+  {
+   "keys": "⌃⌥P",
+   "action": "Turn on or off tooltips for checking formulas"
+  },
+  {
+   "keys": "⌃⇧U",
+   "action": "Expand or collapse the formula bar"
+  },
+  {
+   "keys": "⇧⌘Return or ⌃⇧Return",
+   "action": "Enter a formula as an array formula"
+  },
+  {
+   "keys": "⌘K or ⌃K",
+   "action": "Insert a hyperlink"
+  },
+  {
+   "keys": "⌃U",
+   "action": "Edit active cell and position insertion point at end"
+  },
+  {
+   "keys": "⇧F9",
+   "action": "Calculate the active sheet"
+  },
+  {
+   "keys": "=",
+   "action": "Start a formula"
+  },
+  {
+   "keys": "⌘T or F4",
+   "action": "Toggle formula reference style"
+  },
+  {
+   "keys": "⇧⌘T",
+   "action": "Insert the AutoSum formula"
+  },
+  {
+   "keys": "⌃;",
+   "action": "Enter the date"
+  },
+  {
+   "keys": "⌘;",
+   "action": "Enter the time"
+  },
+  {
+   "keys": "⌃⇧\"",
+   "action": "Copy the value from the cell above"
+  },
+  {
+   "keys": "⌃`",
+   "action": "Alternate between displaying cell values and formulas"
+  },
+  {
+   "keys": "⌃'",
+   "action": "Copy a formula from the cell above"
+  },
+  {
+   "keys": "⌥↓",
+   "action": "Display the AutoComplete list"
+  },
+  {
+   "keys": "⌃⌥⌘L",
+   "action": "Open the Smart Lookup pane"
+  },
+  {
+   "keys": "⌃⌥F9",
+   "action": "Calculate all worksheets in all open workbooks"
+  },
+  {
+   "keys": "⌘T or ⌃T",
+   "action": "Create a table"
+  },
+  {
+   "keys": "⌃⌘Space",
+   "action": "Insert special characters like symbols, including emoji"
+  },
+  {
+   "keys": "⇧⌘>",
+   "action": "Increase font size"
+  },
+  {
+   "keys": "⇧⌘<",
+   "action": "Decrease font size"
+  },
+  {
+   "keys": "⌘E",
+   "action": "Align center"
+  },
+  {
+   "keys": "⌘L",
+   "action": "Align left"
+  },
+  {
+   "keys": "⌃⇧~",
+   "action": "Apply the general number format"
+  },
+  {
+   "keys": "⌃⇧$",
+   "action": "Apply the currency format"
+  },
+  {
+   "keys": "⌃⇧%",
+   "action": "Apply the percentage format"
+  },
+  {
+   "keys": "⌃⇧#",
+   "action": "Apply the date format"
+  },
+  {
+   "keys": "⌃⇧@",
+   "action": "Apply the time format"
+  },
+  {
+   "keys": "⌘⌥0",
+   "action": "Apply the outline border around selected cells"
+  },
+  {
+   "keys": "⌘⌥-",
+   "action": "Remove outline borders"
+  },
+  {
+   "keys": "⇧⌘X",
+   "action": "Apply or remove strikethrough"
+  },
+  {
+   "keys": "⌘) or ⌃)",
+   "action": "Hide a column"
+  },
+  {
+   "keys": "⇧⌘) or ⌃⇧)",
+   "action": "Unhide a column"
+  },
+  {
+   "keys": "⌘( or ⌃(",
+   "action": "Hide a row"
+  },
+  {
+   "keys": "⇧⌘( or ⌃⇧(",
+   "action": "Unhide a row"
+  },
+  {
+   "keys": "⇧→",
+   "action": "Extend the selection by one cell"
+  },
+  {
+   "keys": "⇧⌘→",
+   "action": "Extend the selection to the last nonblank cell"
+  },
+  {
+   "keys": "⌃Space",
+   "action": "Select the entire column"
+  },
+  {
+   "keys": "⇧Space",
+   "action": "Select the entire row"
+  },
+  {
+   "keys": "⇧⌘*",
+   "action": "Select only visible cells"
+  },
+  {
+   "keys": "F8",
+   "action": "Turn on extend selection with arrow keys"
+  },
+  {
+   "keys": "⇧F8",
+   "action": "Add another range of cells to the selection"
+  },
+  {
+   "keys": "⌃/",
+   "action": "Select the current array"
+  },
+  {
+   "keys": "⌃⇧[",
+   "action": "Select cells directly referred to by formulas"
+  },
+  {
+   "keys": "⌃]",
+   "action": "Select cells with formulas referring to active cell"
+  },
+  {
+   "keys": "⌃.",
+   "action": "Move to the next corner of the selection"
+  },
+  {
+   "keys": "⌘⇧K",
+   "action": "Group selected cells"
+  },
+  {
+   "keys": "⌘⇧J",
+   "action": "Ungroup selected cells"
+  },
+  {
+   "keys": "F11",
+   "action": "Insert a new chart sheet"
+  },
+  {
+   "keys": "⌘⇧R",
+   "action": "Open the Sort dialog box"
+  },
+  {
+   "keys": "⌃8",
+   "action": "Display or hide outline symbols"
+  },
+  {
+   "keys": "⌃9",
+   "action": "Hide selected rows"
+  },
+  {
+   "keys": "⌃0",
+   "action": "Hide selected columns"
+  },
+  {
+   "keys": "⇧F10",
+   "action": "Display the context menu"
+  },
+  {
+   "keys": "F6 or ⇧F6",
+   "action": "Switch focus between worksheet, ribbon, task pane"
+  },
+  {
+   "keys": "⌥F8",
+   "action": "Display the Macro dialog box"
+  },
+  {
+   "keys": "⌘F11",
+   "action": "Insert an Excel 4.0 macro sheet"
+  },
+  {
+   "keys": "⌥F12",
+   "action": "Open the Power Query Editor"
+  },
+  {
+   "keys": "⌘⌃Z",
+   "action": "Toggle Drawing mode on and off"
+  }
  ]
 }
