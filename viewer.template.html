@@ -139,6 +139,8 @@
   .quiz .qok{color:#22c55e} .quiz .qng{color:#ef4444}
   .quiz button{margin:12px 6px 0}
   kbd{font:inherit;background:var(--bg);border:1px solid var(--line);border-radius:5px;padding:1px 6px}
+  .delx{color:#ef4444;cursor:pointer;font-weight:700;padding:0 4px;font-size:12px}
+  .delx:hover{color:#f87171}
   @media print{
     html{--bg:#fff;--panel:#fff;--line:#bbb;--txt:#000;--dim:#555}
     header,.controls,.hint,.vbar,#chordbar,#gestures,.tip,#kb,#detail,#results,#legend{display:none!important}
@@ -187,6 +189,7 @@
     <button id="printbtn" class="vbtn" title="전체 단축키를 인쇄/PDF (치트시트 포스터)">🖨 인쇄</button>
     <button id="csvbtn" class="vbtn" title="현재 컨텍스트 단축키를 CSV로 내보내기">⤓ CSV</button>
     <button id="mdbtn" class="vbtn" title="현재 컨텍스트 단축키를 Markdown 표로 내보내기">⤓ MD</button>
+    <button id="addbtn" class="vbtn" title="어떤 소스에도 없는 단축키를 직접 추가 (Raycast 등) — 이 브라우저에 저장">＋ 내 단축키</button>
   </div>
   <div class="hint">키를 <b>물리적으로 hold</b> 하면 레이어 ON(놓으면 복귀) · 수식키 키캡/칩 클릭=고정 · 각 키 숫자=전 조합 수, 점=소스 ·
     키 클릭→하단에 그 키의 <b>전 조합</b>, 수식키 누르면 해당 조합 <b style="color:#7dd3fc">하이라이트</b> · hover=미리보기 ·
@@ -210,14 +213,30 @@
 <script>
 const DB = /*__DATA__*/;
 // ── favorites + notes, persisted in localStorage (survives rebuilds at the same file path) ──
-let ANN = {fav:{}, note:{}};
-try { const base=DB.ann||{}; Object.assign(ANN.fav, base.fav||{}); Object.assign(ANN.note, base.note||{}); } catch(e){}  // baked-in (annotations.json)
-try { const s=JSON.parse(localStorage.getItem('SVann')||'null'); if(s){ Object.assign(ANN.fav,s.fav||{}); Object.assign(ANN.note,s.note||{}); } } catch(e){}  // live localStorage overlay
+let ANN = {fav:{}, note:{}, custom:[]};
+try { const base=DB.ann||{}; Object.assign(ANN.fav, base.fav||{}); Object.assign(ANN.note, base.note||{}); if(Array.isArray(base.custom)) ANN.custom=base.custom; } catch(e){}  // baked-in (annotations.json)
+try { const s=JSON.parse(localStorage.getItem('SVann')||'null'); if(s){ Object.assign(ANN.fav,s.fav||{}); Object.assign(ANN.note,s.note||{}); if(Array.isArray(s.custom)) ANN.custom=s.custom; } } catch(e){}  // live localStorage overlay
+// ── 내 단축키(custom): 어떤 소스에도 없는 걸 직접 기록 → DB.entries에 병합 (localStorage에 저장·export 포함) ──
+function mergeCustom(){
+  DB.entries = DB.entries.filter(e=>e.source!=='custom');
+  (ANN.custom||[]).forEach(c=>{ if(!c.id) c.id='c'+Math.random().toString(36).slice(2,9);
+    DB.entries.push({mods:c.mods||[], key:c.key, action:c.action||'(custom)', source:'custom', scope:c.scope||'global', detail:'내가 추가한 단축키', group:c.scope||'custom', _cid:c.id}); });
+}
+function addCustom(){
+  const combo=prompt('단축키 조합 (예: opt+shift+X · cmd+K · F13):'); if(!combo) return;
+  let pc=parseQueryCombo(combo); if(!pc){ const k=combo.trim().replace(/\s/g,''); pc={mods:[],key:k.length===1?k.toUpperCase():(k.charAt(0).toUpperCase()+k.slice(1))}; }
+  const action=prompt('이 단축키의 동작/설명 (예: Raycast 창 열기):'); if(action===null) return;
+  let scope=(prompt('앱/스코프 (비우면 Global — 예: Raycast, Figma):','')||'').trim();
+  if(!scope || scope.toLowerCase()==='global') scope='global';   // 'Global'/'global' → 정규화(중복 칩 방지)
+  ANN.custom.push({mods:pc.mods||[], key:pc.key, action:action.trim()||'(custom)', scope});
+  saveAnn(); mergeCustom(); renderCtx(); sync();
+}
+function delCustom(id){ ANN.custom=(ANN.custom||[]).filter(c=>c.id!==id); saveAnn(); mergeCustom(); renderCtx(); if(selectedKey) showDetail(selectedKey); sync(); }
 function saveAnn(){ try { localStorage.setItem('SVann', JSON.stringify(ANN)); } catch(e){} }
 function annKey(mods, key){ return [...mods].sort().join('+') + '|' + key; }
 let prefScopeRight = localStorage.getItem('SVscopeRight')!=='0';  // 상세 패널 스코프(global/chrome 등) 위치: 오른쪽 정렬(기본) vs 왼쪽 인라인
 let ovGroup = ['mod','key','source'].includes(localStorage.getItem('SVovGroup')) ? localStorage.getItem('SVovGroup') : 'mod';  // 전체 단축키 치트시트 묶음 기준 (잘못된 저장값은 'mod'로)
-const COLORS = {system:'#3b82f6','app menu':'#9ca3af','app config':'#14b8a6',Karabiner:'#22c55e',BTT:'#f59e0b',Raycast:'#a855f7',web:'#06b6d4'};
+const COLORS = {system:'#3b82f6','app menu':'#9ca3af','app config':'#14b8a6',Karabiner:'#22c55e',BTT:'#f59e0b',Raycast:'#a855f7',web:'#06b6d4',custom:'#ec4899'};
 const MODS = ['ctrl','opt','shift','cmd'];
 const MODSYM = {ctrl:'⌃',opt:'⌥',shift:'⇧',cmd:'⌘',fn:'🌐',caps:'⇪'};
 const KEY_SIZES=[46,56,68];   // 키보드 크기 3단계 (작게/보통/크게)
@@ -296,7 +315,8 @@ function renderChips(){
 }
 function toggleMod(m){ sticky.has(m)?sticky.delete(m):sticky.add(m); sync(); }
 function renderCtx(){
-  document.getElementById('ctxchips').innerHTML=['Global',...DB.meta.apps,'BTT (전체)',...(DB.meta.bttgroups||[])].map(a=>`<span class="chip" data-ctx="${a.replace(/"/g,'&quot;')}">${a}</span>`).join('');
+  const customScopes=[...new Set((ANN.custom||[]).map(c=>c.scope).filter(s=>s&&s.toLowerCase()!=='global'&&!DB.meta.apps.includes(s)))];
+  document.getElementById('ctxchips').innerHTML=['Global',...DB.meta.apps,...customScopes,'BTT (전체)',...(DB.meta.bttgroups||[])].map(a=>`<span class="chip" data-ctx="${a.replace(/"/g,'&quot;')}">${a}</span>`).join('');
   document.querySelectorAll('[data-ctx]').forEach(el=>el.onclick=()=>{ const c=el.dataset.ctx; ctxSet.has(c)?ctxSet.delete(c):ctxSet.add(c); sync(); });
   document.getElementById('filtersel').onchange=e=>{ filter=e.target.value; sync(); };
   document.getElementById('ovbtn').onclick=()=>{ overview=!overview; if(overview) panelMode=null; document.getElementById('ovbtn').classList.toggle('on',overview); sync(); if(overview) document.getElementById('overview').scrollIntoView({behavior:'smooth',block:'start'}); };
@@ -426,7 +446,7 @@ function detailRow(mods, key, matches, hit){
   const body = matches.length
     ? matches.map(e=>{
         const src=`<span class="src" style="background:${COLORS[e.source]||'#666'}">${e.source}</span>`;
-        const scope=`<span class="scope">${e.scope}</span>`;
+        const scope=`<span class="scope">${e.scope}</span>`+(e.source==='custom'?`<span class="delx" data-delc="${e._cid}" title="내 단축키 삭제">✕</span>`:'');
         const det=e.detail?`<div class="muted" style="font-size:11px">${e.detail.replace(/</g,'&lt;')}</div>`:'';
         const act=(e.ckey?chordTag(e)+' ':'')+e.action.replace(/</g,'&lt;');
         return prefScopeRight
@@ -457,6 +477,7 @@ function showDetail(key){
   d.querySelectorAll('[data-fav]').forEach(b=>b.onclick=()=>{ const ak=b.dataset.fav; ANN.fav[ak]?delete ANN.fav[ak]:ANN.fav[ak]=1; saveAnn(); sync(); });
   d.querySelectorAll('[data-chord]').forEach(b=>b.onclick=()=>{ const [ms,k]=b.dataset.chord.split('|'); enterChord(ms?ms.split('+'):[], k); });
   d.querySelectorAll('[data-note]').forEach(b=>b.onclick=()=>{ const ak=b.dataset.note; const t=prompt('이 단축키에 노트 (예: cmd+opt+V는 엑셀과 충돌이라 opt+V로 변경):', ANN.note[ak]||''); if(t!==null){ const tt=t.trim(); tt?ANN.note[ak]=tt:delete ANN.note[ak]; saveAnn(); sync(); showDetail(selectedKey); } });
+  d.querySelectorAll('[data-delc]').forEach(b=>b.onclick=()=>{ if(confirm('이 내 단축키를 삭제할까요?')) delCustom(b.dataset.delc); });
 }
 function gestureSym(g){   // 비-정적 트리거 표기: L⌘+R⌘(좌우 동시) / ⌘⌘·⌥×3(멀티탭) / L⌘·R⌘ + hold
   const s = g.mod==='caps' ? '⇪' : (MODSYM[g.mod]||g.mod);
@@ -691,7 +712,8 @@ function renderFavs(){
   r.querySelectorAll('[data-jump]').forEach(el=>el.onclick=()=>{ const ak=el.dataset.jump,i=ak.indexOf('|'); chordPrefix=null; chordReturn=null; sticky=new Set(ak.slice(0,i)?ak.slice(0,i).split('+'):[]); held=new Set(); selectedKey=ak.slice(i+1); sync(); window.scrollTo({top:0,behavior:'smooth'}); });
   r.scrollIntoView({behavior:'smooth',block:'start'});
 }
-restoreHash(); renderMeta(); renderChips(); renderCtx(); sync();
+mergeCustom(); restoreHash(); renderMeta(); renderChips(); renderCtx(); sync();
+document.getElementById('addbtn').onclick=addCustom;
 document.getElementById('search').oninput=e=>renderSearch(e.target.value.trim());
 document.getElementById('favview').onclick=renderFavs;
 document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>setView(b.dataset.view));
