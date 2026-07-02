@@ -1647,5 +1647,1141 @@
    "keys": "⌘⌃Z",
    "action": "Toggle Drawing mode on and off"
   }
+ ],
+ "Microsoft Word": [
+  {
+   "keys": "⌘Z",
+   "action": "Undo the previous action"
+  },
+  {
+   "keys": "⌘Y",
+   "action": "Redo the previous action, if possible"
+  },
+  {
+   "keys": "⌘X",
+   "action": "Cut the selected content to the Clipboard"
+  },
+  {
+   "keys": "⌘C",
+   "action": "Copy the selected content to the Clipboard"
+  },
+  {
+   "keys": "⌘V",
+   "action": "Paste the contents of the Clipboard"
+  },
+  {
+   "keys": "⌘⇧V",
+   "action": "Paste text only"
+  },
+  {
+   "keys": "⌘+",
+   "action": "Zoom in"
+  },
+  {
+   "keys": "⌘-",
+   "action": "Zoom out"
+  },
+  {
+   "keys": "⌘0",
+   "action": "Return back to 100% zoom"
+  },
+  {
+   "keys": "⌘`",
+   "action": "Switch to the next window"
+  },
+  {
+   "keys": "⌘⇧`",
+   "action": "Switch to the previous window"
+  },
+  {
+   "keys": "⌘⇧S",
+   "action": "Display the Save As dialog box"
+  },
+  {
+   "keys": "⌘F",
+   "action": "Find text (move focus to the Search in Document box)"
+  },
+  {
+   "keys": "⌃H",
+   "action": "Display the Find and Replace pane"
+  },
+  {
+   "keys": "⌘P",
+   "action": "Display the Print dialog box"
+  },
+  {
+   "keys": "⌘F4",
+   "action": "Close the current document"
+  },
+  {
+   "keys": "⌘⌥R",
+   "action": "Expand or minimize the ribbon"
+  },
+  {
+   "keys": "⌥F7",
+   "action": "Find the next spelling or grammatical error"
+  },
+  {
+   "keys": "⌥⇧F7",
+   "action": "Open the Dictionary"
+  },
+  {
+   "keys": "⌘⌥G",
+   "action": "Display the Go To dialog box"
+  },
+  {
+   "keys": "⌘⌥L",
+   "action": "Display the Spelling and Grammar dialog box"
+  },
+  {
+   "keys": "F8",
+   "action": "Enable extended selection mode"
+  },
+  {
+   "keys": "⌥←",
+   "action": "Move the cursor one word to the left"
+  },
+  {
+   "keys": "⌥→",
+   "action": "Move the cursor one word to the right"
+  },
+  {
+   "keys": "⌘↑",
+   "action": "Move the cursor up by one paragraph"
+  },
+  {
+   "keys": "⌘↓",
+   "action": "Move the cursor down by one paragraph"
+  },
+  {
+   "keys": "⌘←",
+   "action": "Move the cursor to the beginning of the current line"
+  },
+  {
+   "keys": "⌘→",
+   "action": "Move the cursor to the end of the current line"
+  },
+  {
+   "keys": "Home",
+   "action": "Move the cursor to the beginning of the current line"
+  },
+  {
+   "keys": "End",
+   "action": "Move the cursor to the end of the current line"
+  },
+  {
+   "keys": "⌘Page Up",
+   "action": "Move the cursor to the top of the previous page"
+  },
+  {
+   "keys": "⌘Page Down",
+   "action": "Move the cursor to the top of the next page"
+  },
+  {
+   "keys": "⌘Home",
+   "action": "Move the cursor to the beginning of the document"
+  },
+  {
+   "keys": "⌘End",
+   "action": "Move the cursor to the end of the document"
+  },
+  {
+   "keys": "⇧F5",
+   "action": "Move the cursor to the previous insertion point"
+  },
+  {
+   "keys": "Page Up",
+   "action": "Scroll the document view up by one screen"
+  },
+  {
+   "keys": "Page Down",
+   "action": "Scroll the document view down by one screen"
+  },
+  {
+   "keys": "⇧↑ ↓ ← →",
+   "action": "Select text"
+  },
+  {
+   "keys": "⇧⌥←",
+   "action": "Select the word to the left"
+  },
+  {
+   "keys": "⇧⌥→",
+   "action": "Select the word to the right"
+  },
+  {
+   "keys": "⌘⇧←",
+   "action": "Select from the current position to the beginning of the current line"
+  },
+  {
+   "keys": "⌘⇧→",
+   "action": "Select from the current position to the end of the current line"
+  },
+  {
+   "keys": "⌘⇧↑",
+   "action": "Select from the current position to the beginning of the current paragraph"
+  },
+  {
+   "keys": "⌘⇧↓",
+   "action": "Select from the current position to the end of the current paragraph"
+  },
+  {
+   "keys": "⇧Page Up",
+   "action": "Select from the current position to the top of the screen"
+  },
+  {
+   "keys": "⇧Page Down",
+   "action": "Select from the current position to the bottom of the screen"
+  },
+  {
+   "keys": "⌘⇧Home",
+   "action": "Select from the current position to the beginning of the document"
+  },
+  {
+   "keys": "⌘⇧End",
+   "action": "Select from the current position to the end of the document"
+  },
+  {
+   "keys": "⌘A",
+   "action": "Select all document content"
+  },
+  {
+   "keys": "⇧F8",
+   "action": "Reduce the selection"
+  },
+  {
+   "keys": "⌘⇧F8",
+   "action": "Select a vertical block of text"
+  },
+  {
+   "keys": "⌘⌃V",
+   "action": "Display the Paste Special dialog box"
+  },
+  {
+   "keys": "⌘F3",
+   "action": "Cut the selected content to the Spike"
+  },
+  {
+   "keys": "⌘⇧F3",
+   "action": "Paste the contents of the Spike"
+  },
+  {
+   "keys": "⌘⌥C",
+   "action": "Copy the selected text formatting"
+  },
+  {
+   "keys": "⌘⌥V",
+   "action": "Paste the selected text formatting"
+  },
+  {
+   "keys": "⌥F3",
+   "action": "Create an AutoText entry"
+  },
+  {
+   "keys": "⌘E",
+   "action": "Center the paragraph"
+  },
+  {
+   "keys": "⌘J",
+   "action": "Justify the paragraph"
+  },
+  {
+   "keys": "⌘L",
+   "action": "Align the paragraph to the left"
+  },
+  {
+   "keys": "⌘R",
+   "action": "Align the paragraph to the right"
+  },
+  {
+   "keys": "⌃⇧M",
+   "action": "Indent the paragraph"
+  },
+  {
+   "keys": "⌘⇧M",
+   "action": "Remove a paragraph indent"
+  },
+  {
+   "keys": "⌘T",
+   "action": "Create a hanging indent"
+  },
+  {
+   "keys": "⌘⇧T",
+   "action": "Remove a hanging indent"
+  },
+  {
+   "keys": "⌘1",
+   "action": "Apply single-spacing to the paragraph"
+  },
+  {
+   "keys": "⌘2",
+   "action": "Apply double-spacing to the paragraph"
+  },
+  {
+   "keys": "⌘5",
+   "action": "Apply 1.5-line spacing to the paragraph"
+  },
+  {
+   "keys": "⌘⌥K",
+   "action": "Enable AutoFormat"
+  },
+  {
+   "keys": "⌘⇧N",
+   "action": "Apply the Normal style"
+  },
+  {
+   "keys": "⌘⌥1",
+   "action": "Apply the Heading 1 style"
+  },
+  {
+   "keys": "⌘⌥2",
+   "action": "Apply the Heading 2 style"
+  },
+  {
+   "keys": "⌘⌥3",
+   "action": "Apply the Heading 3 style"
+  },
+  {
+   "keys": "⌘⇧L",
+   "action": "Apply the List style / Add a bulleted list"
+  },
+  {
+   "keys": "⌥Space",
+   "action": "Insert a nonbreaking space"
+  },
+  {
+   "keys": "⌘⇧>",
+   "action": "Increase the font size"
+  },
+  {
+   "keys": "⌘⇧<",
+   "action": "Decrease the font size"
+  },
+  {
+   "keys": "⌘]",
+   "action": "Increase the font size by 1 point"
+  },
+  {
+   "keys": "⌘[",
+   "action": "Decrease the font size by 1 point"
+  },
+  {
+   "keys": "⌘D",
+   "action": "Display the Font dialog box"
+  },
+  {
+   "keys": "⇧F3",
+   "action": "Switch the text between upper case, lower case, and title case"
+  },
+  {
+   "keys": "⌘⇧A",
+   "action": "Change the text to all upper case"
+  },
+  {
+   "keys": "⌘B",
+   "action": "Apply bold formatting"
+  },
+  {
+   "keys": "⌘U",
+   "action": "Apply underline formatting"
+  },
+  {
+   "keys": "⌘⇧W",
+   "action": "Apply underline formatting to the words, but not the spaces"
+  },
+  {
+   "keys": "⌘⇧D",
+   "action": "Apply double-underline formatting"
+  },
+  {
+   "keys": "⌘I",
+   "action": "Apply italics formatting"
+  },
+  {
+   "keys": "⌘⇧K",
+   "action": "Apply small caps formatting"
+  },
+  {
+   "keys": "⌘⇧X",
+   "action": "Apply strike-through formatting"
+  },
+  {
+   "keys": "⌘⇧-",
+   "action": "Apply subscript formatting"
+  },
+  {
+   "keys": "⌘F9",
+   "action": "Insert an empty field"
+  },
+  {
+   "keys": "⇧Return",
+   "action": "Insert a line break"
+  },
+  {
+   "keys": "⌘Return",
+   "action": "Insert a page break"
+  },
+  {
+   "keys": "⌘⇧Return",
+   "action": "Insert a column break"
+  },
+  {
+   "keys": "⌘⌥-",
+   "action": "Insert an optional hyphen"
+  },
+  {
+   "keys": "⇧⌥-",
+   "action": "Insert a nonbreaking hyphen"
+  },
+  {
+   "keys": "⌥R",
+   "action": "Insert a registered trademark symbol (®)"
+  },
+  {
+   "keys": "⌥2",
+   "action": "Insert a trademark symbol (™)"
+  },
+  {
+   "keys": "Tab",
+   "action": "Move to the next cell and select its content"
+  },
+  {
+   "keys": "⇧Tab",
+   "action": "Move to the previous cell and select its content"
+  },
+  {
+   "keys": "⌃Home",
+   "action": "Move to the first cell in the row"
+  },
+  {
+   "keys": "⌃End",
+   "action": "Move to the last cell in the row"
+  },
+  {
+   "keys": "⌃Page Up",
+   "action": "Move to the first cell in the column"
+  },
+  {
+   "keys": "⌃Page Down",
+   "action": "Move to the last cell in the column"
+  },
+  {
+   "keys": "⌘⌃I",
+   "action": "Insert a row"
+  },
+  {
+   "keys": "⌥Tab",
+   "action": "Insert a Tab character in a cell"
+  },
+  {
+   "keys": "⌘⌃Z",
+   "action": "Toggle drawing mode"
+  },
+  {
+   "keys": "⌃⇧D",
+   "action": "Insert a DATE field"
+  },
+  {
+   "keys": "⌘⌥⇧L",
+   "action": "Insert a LISTNUM field"
+  },
+  {
+   "keys": "⌃⇧P",
+   "action": "Insert a PAGE field"
+  },
+  {
+   "keys": "⌃⇧T",
+   "action": "Insert a TIME field"
+  },
+  {
+   "keys": "F9",
+   "action": "Update the selected fields"
+  },
+  {
+   "keys": "⇧F9",
+   "action": "Switch between a field code and its result"
+  },
+  {
+   "keys": "⌥F9",
+   "action": "Switch between all field codes and their results"
+  },
+  {
+   "keys": "⌘F11",
+   "action": "Lock a field"
+  },
+  {
+   "keys": "⌘⇧F11",
+   "action": "Unlock a field"
+  },
+  {
+   "keys": "⌃⇧←",
+   "action": "Promote a paragraph"
+  },
+  {
+   "keys": "⌃⇧→",
+   "action": "Demote a paragraph"
+  },
+  {
+   "keys": "⌃⇧↑",
+   "action": "Move the selected paragraphs up"
+  },
+  {
+   "keys": "⌃⇧↓",
+   "action": "Move the selected paragraphs down"
+  },
+  {
+   "keys": "⌃⇧+",
+   "action": "Expand the text under a heading"
+  },
+  {
+   "keys": "⌃⇧-",
+   "action": "Collapse text under a heading"
+  },
+  {
+   "keys": "⌃⇧A",
+   "action": "Expand all body text and headings, or collapse all body text"
+  },
+  {
+   "keys": "⌘⌥A",
+   "action": "Insert a comment"
+  },
+  {
+   "keys": "⌘⇧E",
+   "action": "Turn change tracking on or off"
+  },
+  {
+   "keys": "⌘⌥F",
+   "action": "Insert a footnote"
+  },
+  {
+   "keys": "⌘⌥E",
+   "action": "Insert an endnote"
+  },
+  {
+   "keys": "⌃⌘←",
+   "action": "Switch the writing direction to right-to-left"
+  },
+  {
+   "keys": "⌃⌘→",
+   "action": "Switch the writing direction to left-to-right"
+  },
+  {
+   "keys": "⇧F2",
+   "action": "Copy the selected text or graphic"
+  },
+  {
+   "keys": "F5",
+   "action": "Display the Go To dialog box"
+  },
+  {
+   "keys": "⌘⇧F5",
+   "action": "Display the Bookmark dialog"
+  },
+  {
+   "keys": "F6",
+   "action": "Switch between the document, task pane, status bar, and ribbon"
+  },
+  {
+   "keys": "⌘F6",
+   "action": "Switch to the next document window when more than one document is open"
+  },
+  {
+   "keys": "⌘⇧F6",
+   "action": "Switch to the previous document window"
+  },
+  {
+   "keys": "F7",
+   "action": "Display the Spelling and Grammar dialog box"
+  },
+  {
+   "keys": "⇧F7",
+   "action": "Display the Thesaurus task pane"
+  },
+  {
+   "keys": "⌘⇧F7",
+   "action": "Update the linked information in a Word source document"
+  },
+  {
+   "keys": "⌥F8",
+   "action": "Display the Macro dialog box to create, run, edit, or delete a macro"
+  },
+  {
+   "keys": "⇧F10",
+   "action": "Display the shortcut menu for the selected item"
+  },
+  {
+   "keys": "F11",
+   "action": "Move to the next field"
+  },
+  {
+   "keys": "⇧F11",
+   "action": "Move to the previous field"
+  },
+  {
+   "keys": "⌥F11",
+   "action": "Open the Microsoft Visual Basic for Applications editor"
+  }
+ ],
+ "Microsoft PowerPoint": [
+  {
+   "keys": "⌘N",
+   "action": "Create a new presentation"
+  },
+  {
+   "keys": "⌘⇧N",
+   "action": "Add a new slide"
+  },
+  {
+   "keys": "⌘B",
+   "action": "Apply bold formatting to selected text"
+  },
+  {
+   "keys": "⌘T",
+   "action": "Open the Font dialog box"
+  },
+  {
+   "keys": "⌘X",
+   "action": "Cut selected text, object, or slide"
+  },
+  {
+   "keys": "⌘C",
+   "action": "Copy selected text, object, or slide"
+  },
+  {
+   "keys": "⌘V",
+   "action": "Paste cut or copied text, object, or slide"
+  },
+  {
+   "keys": "⌘K",
+   "action": "Insert a hyperlink"
+  },
+  {
+   "keys": "⌘⇧M",
+   "action": "Insert a comment"
+  },
+  {
+   "keys": "⌘Z",
+   "action": "Undo the last action"
+  },
+  {
+   "keys": "⌘Y",
+   "action": "Redo the last action"
+  },
+  {
+   "keys": "Page Down",
+   "action": "Go to the next slide"
+  },
+  {
+   "keys": "Page Up",
+   "action": "Go to the previous slide"
+  },
+  {
+   "keys": "⌘⇧Return",
+   "action": "Start the slide show"
+  },
+  {
+   "keys": "⌘P",
+   "action": "Print a presentation"
+  },
+  {
+   "keys": "⌘S",
+   "action": "Save the presentation"
+  },
+  {
+   "keys": "⌘Q",
+   "action": "Close PowerPoint"
+  },
+  {
+   "keys": "⌘⇧P",
+   "action": "Create new presentation with template from gallery"
+  },
+  {
+   "keys": "⌘⇧2",
+   "action": "Format slide background"
+  },
+  {
+   "keys": "⌘-",
+   "action": "Zoom out"
+  },
+  {
+   "keys": "⌘+",
+   "action": "Zoom in"
+  },
+  {
+   "keys": "⌘⌥O",
+   "action": "Zoom to fit"
+  },
+  {
+   "keys": "⌘⇧D",
+   "action": "Make a copy of the selected slide"
+  },
+  {
+   "keys": "⌘O",
+   "action": "Open a presentation"
+  },
+  {
+   "keys": "⌘W",
+   "action": "Close a presentation"
+  },
+  {
+   "keys": "⌘⇧S",
+   "action": "Save presentation with different name, location, or format"
+  },
+  {
+   "keys": "⌘`",
+   "action": "Move through multiple open presentations"
+  },
+  {
+   "keys": "⌘⇧O",
+   "action": "Open a recent file"
+  },
+  {
+   "keys": "⌘⇧C",
+   "action": "Copy the formatting of selected object or text"
+  },
+  {
+   "keys": "⌘⇧V",
+   "action": "Paste copied formatting to selected object or text"
+  },
+  {
+   "keys": "⌘⌥⇧C",
+   "action": "Copy animation"
+  },
+  {
+   "keys": "⌘⌥⇧V",
+   "action": "Paste animation"
+  },
+  {
+   "keys": "⌘⌃V",
+   "action": "Open the Paste Special dialog box"
+  },
+  {
+   "keys": "Tab",
+   "action": "Select another object when one is selected"
+  },
+  {
+   "keys": "⇧Tab",
+   "action": "Select previous object"
+  },
+  {
+   "keys": "⌘⌥⇧B",
+   "action": "Send object back one position"
+  },
+  {
+   "keys": "⌘⌥⇧F",
+   "action": "Bring object forward one position"
+  },
+  {
+   "keys": "⌘⇧B",
+   "action": "Send object to back"
+  },
+  {
+   "keys": "⌘⇧F",
+   "action": "Bring object to front"
+  },
+  {
+   "keys": "⌘A",
+   "action": "Select all objects on a slide"
+  },
+  {
+   "keys": "⌘⌥G",
+   "action": "Group the selected objects"
+  },
+  {
+   "keys": "⌘⌥⇧G",
+   "action": "Ungroup the selected objects"
+  },
+  {
+   "keys": "⌘⌥J",
+   "action": "Regroup the selected objects"
+  },
+  {
+   "keys": "⌥→",
+   "action": "Rotate selected object clockwise 15 degrees"
+  },
+  {
+   "keys": "⌥←",
+   "action": "Rotate selected object counterclockwise 15 degrees"
+  },
+  {
+   "keys": "Space",
+   "action": "Play or pause media"
+  },
+  {
+   "keys": "⌘⇧1",
+   "action": "Format the selected object"
+  },
+  {
+   "keys": "⇧→",
+   "action": "Resize selected objects"
+  },
+  {
+   "keys": "→",
+   "action": "Move the selected object"
+  },
+  {
+   "keys": "⌘→",
+   "action": "Move the selected object (nudge)"
+  },
+  {
+   "keys": "⇧→",
+   "action": "Select one character to the right"
+  },
+  {
+   "keys": "⇧←",
+   "action": "Select one character to the left"
+  },
+  {
+   "keys": "⌥⇧→",
+   "action": "Select to the end of a word"
+  },
+  {
+   "keys": "⌥⇧←",
+   "action": "Select to the beginning of a word"
+  },
+  {
+   "keys": "⇧↑",
+   "action": "Select one line up"
+  },
+  {
+   "keys": "⇧↓",
+   "action": "Select one line down"
+  },
+  {
+   "keys": "⌘⇧←",
+   "action": "Select all text to the start of the line"
+  },
+  {
+   "keys": "⌘⇧→",
+   "action": "Select all text to the end of the line"
+  },
+  {
+   "keys": "⌥⇧↓",
+   "action": "Select to end of paragraph"
+  },
+  {
+   "keys": "⌥⇧↑",
+   "action": "Select to beginning of paragraph"
+  },
+  {
+   "keys": "Return",
+   "action": "Select text within an object"
+  },
+  {
+   "keys": "Delete",
+   "action": "Delete one character to the left"
+  },
+  {
+   "keys": "⌘Delete",
+   "action": "Delete one word to the left"
+  },
+  {
+   "keys": "FnDelete",
+   "action": "Delete one character to the right"
+  },
+  {
+   "keys": "⌥FnDelete",
+   "action": "Delete one word to the right"
+  },
+  {
+   "keys": "←",
+   "action": "Move one character to the left"
+  },
+  {
+   "keys": "→",
+   "action": "Move one character to the right"
+  },
+  {
+   "keys": "↑",
+   "action": "Move one line up"
+  },
+  {
+   "keys": "↓",
+   "action": "Move one line down"
+  },
+  {
+   "keys": "⌥←",
+   "action": "Move to beginning of word or one word to left"
+  },
+  {
+   "keys": "⌥→",
+   "action": "Move one word to the right"
+  },
+  {
+   "keys": "End",
+   "action": "Move to the end of a line"
+  },
+  {
+   "keys": "Home",
+   "action": "Move to the beginning of a line"
+  },
+  {
+   "keys": "⌥↑",
+   "action": "Move to beginning of paragraph or up one paragraph"
+  },
+  {
+   "keys": "⌥↓",
+   "action": "Move down one paragraph"
+  },
+  {
+   "keys": "⌘↑",
+   "action": "Move to start of all text in object"
+  },
+  {
+   "keys": "⌘↓",
+   "action": "Move to end of all text in object"
+  },
+  {
+   "keys": "⌘[",
+   "action": "Promote a paragraph"
+  },
+  {
+   "keys": "⌘]",
+   "action": "Demote a paragraph"
+  },
+  {
+   "keys": "⌘F",
+   "action": "Open the Search in Presentation search field"
+  },
+  {
+   "keys": "⌘⇧H",
+   "action": "Open the Find and Replace pane"
+  },
+  {
+   "keys": "⌘⇧>",
+   "action": "Increase font size of selected text"
+  },
+  {
+   "keys": "⌘⇧<",
+   "action": "Decrease font size of selected text"
+  },
+  {
+   "keys": "⌘⌥M",
+   "action": "Open the Paragraph dialog box"
+  },
+  {
+   "keys": "⇧F3",
+   "action": "Switch between sentence case, uppercase, or lowercase"
+  },
+  {
+   "keys": "⌘U",
+   "action": "Apply underline formatting to selected text"
+  },
+  {
+   "keys": "⌘I",
+   "action": "Apply italic formatting to selected text"
+  },
+  {
+   "keys": "⌘⌃=",
+   "action": "Apply subscript formatting"
+  },
+  {
+   "keys": "⌘⌃⇧=",
+   "action": "Apply superscript formatting"
+  },
+  {
+   "keys": "⌃Space",
+   "action": "Remove manual character formatting"
+  },
+  {
+   "keys": "⌘E",
+   "action": "Center a paragraph"
+  },
+  {
+   "keys": "⌘J",
+   "action": "Justify a paragraph"
+  },
+  {
+   "keys": "⌘L",
+   "action": "Left align a paragraph"
+  },
+  {
+   "keys": "⌘R",
+   "action": "Right align a paragraph"
+  },
+  {
+   "keys": "⌥⇧Tab",
+   "action": "Insert a tab in a cell"
+  },
+  {
+   "keys": "⌘↑",
+   "action": "Move selected slide or section up in order"
+  },
+  {
+   "keys": "⌘↓",
+   "action": "Move selected slide or section down in order"
+  },
+  {
+   "keys": "⌘⇧↑",
+   "action": "Move selected slide or section to the beginning"
+  },
+  {
+   "keys": "⌘⇧↓",
+   "action": "Move selected slide or section to the end"
+  },
+  {
+   "keys": "⌘1",
+   "action": "Switch to Normal view"
+  },
+  {
+   "keys": "⌘2",
+   "action": "Switch to Slide Sorter view"
+  },
+  {
+   "keys": "⌘3",
+   "action": "Switch to Notes Page view"
+  },
+  {
+   "keys": "⌘4",
+   "action": "Switch to Outline View"
+  },
+  {
+   "keys": "⌘⌥1",
+   "action": "Switch to Slide Master view"
+  },
+  {
+   "keys": "⌘⌥2",
+   "action": "Switch to Handout Master view"
+  },
+  {
+   "keys": "⌘⌥3",
+   "action": "Switch to Notes Master view"
+  },
+  {
+   "keys": "⌥Return",
+   "action": "Switch to Presenter view"
+  },
+  {
+   "keys": "⌃⇧Tab",
+   "action": "Toggle between Outline View and thumbnail pane"
+  },
+  {
+   "keys": "⌘⌃F",
+   "action": "Switch to full screen"
+  },
+  {
+   "keys": "⌘⌥⌃G",
+   "action": "Show or hide guides"
+  },
+  {
+   "keys": "⇧F9",
+   "action": "Show or hide the grid"
+  },
+  {
+   "keys": "F6",
+   "action": "Cycle clockwise through panes in Normal view"
+  },
+  {
+   "keys": "⇧F6",
+   "action": "Cycle counterclockwise through panes in Normal view"
+  },
+  {
+   "keys": "F1",
+   "action": "Show the help menu"
+  },
+  {
+   "keys": "⌘⌃Z",
+   "action": "Switch Drawing mode on and off"
+  },
+  {
+   "keys": "⌘⌥⌃R",
+   "action": "Show Thesaurus entry for selected word"
+  },
+  {
+   "keys": "⌘⇧Return",
+   "action": "Start a presentation from the beginning"
+  },
+  {
+   "keys": "⌘Return",
+   "action": "Start a presentation from the current slide"
+  },
+  {
+   "keys": "⌥Return",
+   "action": "Start the presentation in Presenter View"
+  },
+  {
+   "keys": "N",
+   "action": "Next animation or advance to the next slide"
+  },
+  {
+   "keys": "P",
+   "action": "Previous animation or return to the previous slide"
+  },
+  {
+   "keys": "⌘I",
+   "action": "Hide the pointer (slide show)"
+  },
+  {
+   "keys": "B",
+   "action": "Display a blank black slide, or return from it"
+  },
+  {
+   "keys": ".",
+   "action": "Display a blank black slide, or return from it"
+  },
+  {
+   "keys": "W",
+   "action": "Display a blank white slide, or return from it"
+  },
+  {
+   "keys": ",",
+   "action": "Display a blank white slide, or return from it"
+  },
+  {
+   "keys": "-",
+   "action": "End the presentation"
+  },
+  {
+   "keys": "⌘.",
+   "action": "End the presentation"
+  },
+  {
+   "keys": "H",
+   "action": "Go to the next slide, if the next slide is hidden"
+  },
+  {
+   "keys": "Fn←",
+   "action": "Return to the first slide"
+  },
+  {
+   "keys": "Fn→",
+   "action": "Go to the last slide"
+  },
+  {
+   "keys": "Tab",
+   "action": "Go to the next hotspot on the current slide"
+  },
+  {
+   "keys": "⇧Tab",
+   "action": "Go to the previous hyperlink on the current slide"
+  },
+  {
+   "keys": "⌘L",
+   "action": "Start the laser pointer"
+  },
+  {
+   "keys": "⌘P",
+   "action": "Change the pointer to a pen"
+  },
+  {
+   "keys": "⌘A",
+   "action": "Change the pointer to an arrow"
+  },
+  {
+   "keys": "⌃H",
+   "action": "Hide the pointer on mouse move"
+  },
+  {
+   "keys": "⌘U",
+   "action": "Show the pointer on mouse move"
+  },
+  {
+   "keys": "⇧E",
+   "action": "Erase on-screen annotations"
+  },
+  {
+   "keys": "⌥X",
+   "action": "Change the camera source for cameo"
+  }
  ]
 }

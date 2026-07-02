@@ -560,7 +560,7 @@ def seed_into(app):   # app not installed/scanned on this machine → fill in fr
 def collect_community():
     # seed app-menu packs shared from OTHER machines (defaults/<app>/menu-*.json, made by share_menus.py)
     # for apps NOT scanned on this machine — so you see them without installing the app. Call LAST.
-    n, have = 0, {e["scope"] for e in entries}
+    n, have = 0, {e["scope"] for e in entries if e.get("source") != "web"}  # web is complementary reference, not a local scan → still seed the shared menu pack (union), the viewer dedups exact overlaps
     packs = glob.glob(os.path.join(DEFAULTS_DIR, "*", "menu-*.json")) + glob.glob(os.path.join(DEFAULTS_DIR, "*", "keymap-*.json"))
     for path in sorted(packs):
         try: data = json.load(open(path))
@@ -663,7 +663,7 @@ def web_key(spec):
         elif s[i:i+2] == 'Fn': mods.append('fn'); i += 2
         else: break
     rest = s[i:].strip()
-    seq = rest if (' then ' in rest or 'press' in rest or ',' in rest) else None
+    seq = rest if (' then ' in rest or 'press' in rest or (',' in rest and len(rest) > 1)) else None  # bare "," is a key, not a sequence separator
     if seq: rest = re.split(r'[ ,]', rest)[0]            # first key of the sequence drives grid placement
     if ' or ' in rest: rest = rest.split(' or ')[0].strip()          # "Delete or #" → first alternative (full in detail)
     if '/' in rest and rest != '/': rest = rest.split('/')[0].strip()  # "↑/↓" → first; keep bare "/"
