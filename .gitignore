@@ -15,6 +15,10 @@ annotations.json
 axmenudump
 *.o
 
+# ── Raw vendor keymap snapshots (Adobe .kys/.htm 등) — 재파싱용 로컬 보관.
+#    저작물이라 커밋 금지: 파생된 defaults/ 팩만 추적한다.
+_sources/
+
 # ── Python / macOS cruft ──────────────────────────────────────────────
 __pycache__/
 *.pyc
