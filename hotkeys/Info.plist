@@ -8,8 +8,9 @@
     <key>CFBundleVersion</key>         <string>1</string>
     <key>CFBundleShortVersionString</key> <string>1.0</string>
     <key>CFBundleExecutable</key>      <string>svhotkeys</string>
+    <key>CFBundleIconFile</key>        <string>AppIcon</string>
     <key>CFBundlePackageType</key>     <string>APPL</string>
-    <key>LSMinimumSystemVersion</key>  <string>11.0</string>
+    <key>LSMinimumSystemVersion</key>  <string>13.0</string>
     <!-- menu-bar agent: no Dock icon, no main window -->
     <key>LSUIElement</key>             <true/>
     <key>NSHumanReadableCopyright</key><string>Shortcut Viewer · MIT</string>

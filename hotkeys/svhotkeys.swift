@@ -336,61 +336,125 @@ struct RecorderField: NSViewRepresentable {
 }
 
 // ══════════════════════ SwiftUI editor ══════════════════════
+let ACCENT = Color(red: 0.55, green: 0.36, blue: 0.96)
 let ACTION_TYPES: [(String, String)] = [
     ("open_app","앱 열기"), ("open_url","웹사이트 열기"), ("open_folder","폴더 열기"),
     ("open_file","파일 열기"), ("run_shell","명령 실행 (zsh)"), ("applescript","AppleScript"),
     ("paste_text","텍스트 붙여넣기"), ("show_viewer","단축키 뷰어 열기")]
 func actionLabel(_ t: String) -> String { ACTION_TYPES.first { $0.0 == t }?.1 ?? t }
+func actionMeta(_ t: String) -> (icon: String, color: Color) {
+    switch t {
+    case "open_app":    return ("app.fill", .blue)
+    case "open_url":    return ("globe", .teal)
+    case "open_folder": return ("folder.fill", .orange)
+    case "open_file":   return ("doc.fill", .gray)
+    case "run_shell":   return ("terminal.fill", .indigo)
+    case "applescript": return ("wand.and.stars", .purple)
+    case "paste_text":  return ("doc.on.clipboard.fill", .pink)
+    case "show_viewer": return ("keyboard.fill", .green)
+    default:            return ("bolt.fill", .secondary)
+    }
+}
+
+// One shortcut, as a card row.
+struct HotkeyCard: View {
+    let hk: Hotkey
+    var onToggle: (Bool) -> Void
+    var onEdit: () -> Void
+    var onDelete: () -> Void
+    @State private var hover = false
+    var body: some View {
+        let meta = actionMeta(hk.action.type)
+        HStack(spacing: 12) {
+            Toggle("", isOn: Binding(get: { hk.enabled }, set: onToggle))
+                .labelsHidden().toggleStyle(.switch).controlSize(.small).tint(ACCENT)
+            Text(comboLabel(hk.mods, hk.key))
+                .font(.system(size: 14, weight: .bold, design: .rounded)).foregroundColor(ACCENT)
+                .padding(.horizontal, 10).padding(.vertical, 5)
+                .background(Capsule().fill(ACCENT.opacity(0.14)))
+                .frame(minWidth: 76)
+            ZStack { Circle().fill(meta.color.gradient).frame(width: 30, height: 30)
+                     Image(systemName: meta.icon).font(.system(size: 13, weight: .semibold)).foregroundColor(.white) }
+            VStack(alignment: .leading, spacing: 2) {
+                Text(hk.title.isEmpty ? actionLabel(hk.action.type) : hk.title).fontWeight(.medium)
+                Text(hk.action.value.isEmpty ? actionLabel(hk.action.type) : hk.action.value)
+                    .font(.caption).foregroundColor(.secondary).lineLimit(1).truncationMode(.middle)
+            }
+            Spacer(minLength: 4)
+            if hover {
+                Button(action: onEdit) { Image(systemName: "pencil") }.buttonStyle(.borderless).help("편집")
+                Button(action: onDelete) { Image(systemName: "trash") }.buttonStyle(.borderless).foregroundColor(.red).help("삭제")
+            }
+        }
+        .padding(.horizontal, 14).padding(.vertical, 10)
+        .background(RoundedRectangle(cornerRadius: 12).fill(Color(nsColor: .controlBackgroundColor)))
+        .overlay(RoundedRectangle(cornerRadius: 12).strokeBorder(hover ? ACCENT.opacity(0.5) : Color.primary.opacity(0.08)))
+        .shadow(color: .black.opacity(hover ? 0.12 : 0.05), radius: hover ? 5 : 2, y: 1)
+        .opacity(hk.enabled ? 1 : 0.5)
+        .animation(.easeOut(duration: 0.12), value: hover)
+        .onHover { hover = $0 }
+    }
+}
 
 struct EditorView: View {
     @ObservedObject var store = Store.shared
     @State private var editing: Hotkey? = nil
     @State private var isNew = false
+    func newHotkey() { editing = Hotkey(mods: ["opt"]); isNew = true }
     var body: some View {
         VStack(spacing: 0) {
-            HStack {
-                Text("SV Hotkeys — 글로벌 단축키").font(.headline)
+            // header
+            HStack(spacing: 12) {
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(LinearGradient(colors: [ACCENT, ACCENT.opacity(0.65)], startPoint: .topLeading, endPoint: .bottomTrailing))
+                    .frame(width: 40, height: 40)
+                    .overlay(Image(systemName: "command").font(.system(size: 19, weight: .bold)).foregroundColor(.white))
+                    .shadow(color: ACCENT.opacity(0.4), radius: 6, y: 2)
+                VStack(alignment: .leading, spacing: 1) {
+                    Text("SV Hotkeys").font(.system(size: 17, weight: .bold))
+                    Text("어디서나 실행되는 글로벌 단축키").font(.caption).foregroundColor(.secondary)
+                }
                 Spacer()
-                Button { editing = Hotkey(mods: ["opt"]); isNew = true } label: { Label("핫키 추가", systemImage: "plus") }
-            }.padding(12)
+                Button(action: newHotkey) { Label("핫키 추가", systemImage: "plus") }
+                    .buttonStyle(.borderedProminent).tint(ACCENT).controlSize(.large)
+            }.padding(16)
             Divider()
+            // content
             if store.hotkeys.isEmpty {
-                VStack(spacing: 8) {
-                    Image(systemName: "keyboard").font(.system(size: 40)).foregroundColor(.secondary)
-                    Text("아직 글로벌 핫키가 없어요").foregroundColor(.secondary)
-                    Text("‘핫키 추가’를 눌러 첫 단축키를 만들어 보세요. 예: ⌥F → Finder 열기")
-                        .font(.caption).foregroundColor(.secondary).multilineTextAlignment(.center)
-                }.frame(maxWidth: .infinity, maxHeight: .infinity).padding()
+                VStack(spacing: 15) {
+                    ZStack { Circle().fill(ACCENT.opacity(0.12)).frame(width: 92, height: 92)
+                             Image(systemName: "keyboard").font(.system(size: 40)).foregroundColor(ACCENT) }
+                    Text("아직 글로벌 핫키가 없어요").font(.title3).fontWeight(.semibold)
+                    Text("‘핫키 추가’를 눌러 첫 단축키를 만들어 보세요.\n예: ⌥F → Finder 열기 · ⌃⌥T → 터미널")
+                        .font(.callout).foregroundColor(.secondary).multilineTextAlignment(.center)
+                    Button(action: newHotkey) { Label("첫 핫키 만들기", systemImage: "plus") }
+                        .buttonStyle(.borderedProminent).tint(ACCENT).controlSize(.large)
+                }.frame(maxWidth: .infinity, maxHeight: .infinity).padding(40)
             } else {
-                List {
-                    ForEach(store.hotkeys.indices, id: \.self) { i in
-                        HStack(spacing: 10) {
-                            Toggle("", isOn: Binding(get: { store.hotkeys[i].enabled },
-                                                     set: { store.hotkeys[i].enabled = $0; store.commit() })).labelsHidden()
-                            Text(comboLabel(store.hotkeys[i].mods, store.hotkeys[i].key))
-                                .font(.system(size: 15, weight: .bold)).frame(width: 92, alignment: .leading)
-                                .foregroundColor(.purple)
-                            VStack(alignment: .leading, spacing: 1) {
-                                Text(store.hotkeys[i].title.isEmpty ? "(제목 없음)" : store.hotkeys[i].title)
-                                Text("\(actionLabel(store.hotkeys[i].action.type)): \(store.hotkeys[i].action.value)")
-                                    .font(.caption).foregroundColor(.secondary).lineLimit(1)
-                            }
-                            Spacer()
-                            Button { editing = store.hotkeys[i]; isNew = false } label: { Image(systemName: "pencil") }.buttonStyle(.borderless)
-                            Button { store.hotkeys.remove(at: i); store.commit() } label: { Image(systemName: "trash") }.buttonStyle(.borderless).foregroundColor(.red)
-                        }.padding(.vertical, 2)
-                    }
+                ScrollView {
+                    LazyVStack(spacing: 8) {
+                        ForEach(store.hotkeys) { hk in
+                            HotkeyCard(hk: hk,
+                                onToggle: { v in if let i = store.hotkeys.firstIndex(where: { $0.id == hk.id }) { store.hotkeys[i].enabled = v; store.commit() } },
+                                onEdit: { editing = hk; isNew = false },
+                                onDelete: { store.hotkeys.removeAll { $0.id == hk.id }; store.commit() })
+                        }
+                    }.padding(16)
                 }
             }
             Divider()
-            HStack {
-                Text(Accessibility.isTrusted ? "any-combo: 켜짐 ✓" : "일반 조합(⌘⌥⌃)은 권한 불필요")
+            // footer
+            HStack(spacing: 6) {
+                Image(systemName: Accessibility.isTrusted ? "checkmark.seal.fill" : "lock.open.fill")
+                    .foregroundColor(Accessibility.isTrusted ? .green : .secondary).font(.caption)
+                Text(Accessibility.isTrusted ? "any-combo 켜짐 (손쉬운 사용)" : "일반 조합(⌘⌥⌃)은 권한 없이 바로 작동")
                     .font(.caption).foregroundColor(.secondary)
                 Spacer()
-                Text("\(store.hotkeys.filter { $0.enabled }.count)개 활성").font(.caption).foregroundColor(.secondary)
-            }.padding(10)
+                Text("\(store.hotkeys.filter { $0.enabled }.count) / \(store.hotkeys.count) 활성")
+                    .font(.caption.monospacedDigit()).foregroundColor(.secondary)
+            }.padding(.horizontal, 16).padding(.vertical, 10)
         }
-        .frame(width: 560, height: 460)
+        .frame(width: 600, height: 520)
         .sheet(item: $editing) { hk in
             EditSheet(hotkey: hk, isNew: isNew) { saved in
                 if let idx = store.hotkeys.firstIndex(where: { $0.id == saved.id }) { store.hotkeys[idx] = saved }
@@ -415,19 +479,19 @@ struct EditSheet: View {
         KnownShortcuts.shared.load()
         let users = KnownShortcuts.shared.usersOf(hotkey.mods, hotkey.key)
         let combo = comboLabel(hotkey.mods, hotkey.key)
-        if users.isEmpty { conflictBad = false; conflictText = "✅ \(combo) — 완전히 빈 조합. 안전해요." }
+        if users.isEmpty { conflictBad = false; conflictText = "\(combo) — 완전히 빈 조합. 안전하게 쓸 수 있어요." }
         else {
             let glob = users.filter { $0.scope == "global" }
             let apps = Array(Set(users.filter { $0.scope != "global" }.map { $0.scope })).prefix(4)
             conflictBad = true
             conflictText = glob.isEmpty
-                ? "⚠️ \(combo) — 앱에서 사용 중: \(apps.joined(separator: ", ")). 글로벌로 잡으면 그 앱에선 못 씁니다."
-                : "⚠️ \(combo) — 시스템/글로벌에서 사용: \(glob.prefix(2).map { $0.action }.joined(separator: ", ")). 충돌 위험."
+                ? "\(combo) — 앱에서 사용 중: \(apps.joined(separator: ", ")). 글로벌로 잡으면 그 앱에선 못 씁니다."
+                : "\(combo) — 시스템/글로벌에서 사용: \(glob.prefix(2).map { $0.action }.joined(separator: ", ")). 충돌 위험."
         }
     }
     func suggestFree() {
         KnownShortcuts.shared.load()
-        if hotkey.mods.isEmpty { hotkey.mods = ["opt"] }   // 기본 ⌥ 레이어(덜 겹침)
+        if hotkey.mods.isEmpty { hotkey.mods = ["opt"] }
         let taken = Set(Store.shared.hotkeys.filter { $0.mods.sorted() == hotkey.mods.sorted() }.map { $0.key })
         if let k = KnownShortcuts.shared.freeKey(mods: hotkey.mods, avoiding: taken) {
             hotkey.key = k; comboDisplay = comboLabel(hotkey.mods, k); updateConflict()
@@ -442,50 +506,82 @@ struct EditSheet: View {
         case "run_shell": return "screencapture -i -c"
         case "applescript": return "tell application \"Notes\" to make new note"
         case "paste_text": return "붙여넣을 텍스트"
-        case "show_viewer": return "(비워둬도 됨)"
         default: return ""
         }
     }
+    var canSave: Bool { !hotkey.key.isEmpty && (hotkey.action.type == "show_viewer" || !hotkey.action.value.isEmpty) }
+    @ViewBuilder func field<T: View>(_ label: String, @ViewBuilder _ content: () -> T) -> some View {
+        VStack(alignment: .leading, spacing: 5) {
+            Text(label).font(.caption.weight(.semibold)).foregroundColor(.secondary)
+            content()
+        }
+    }
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text(isNew ? "새 글로벌 핫키" : "핫키 편집").font(.headline)
-            Form {
-                TextField("제목 (예: Finder 열기)", text: $hotkey.title)
-                HStack {
-                    Text("조합").frame(width: 44, alignment: .leading)
-                    RecorderField(display: $comboDisplay) { mods, key in hotkey.mods = mods; hotkey.key = key; updateConflict() }
-                        .frame(width: 160, height: 26)
-                    Button { suggestFree() } label: { Label("빈 키 추천", systemImage: "sparkles") }.font(.caption)
+        VStack(spacing: 0) {
+            // header
+            HStack(spacing: 10) {
+                Image(systemName: isNew ? "plus.circle.fill" : "pencil.circle.fill").font(.title2).foregroundColor(ACCENT)
+                Text(isNew ? "새 글로벌 핫키" : "핫키 편집").font(.headline)
+                Spacer()
+            }.padding(16)
+            Divider()
+            VStack(alignment: .leading, spacing: 15) {
+                field("제목") { TextField("예: Finder 열기", text: $hotkey.title).textFieldStyle(.roundedBorder) }
+                field("단축키 조합") {
+                    HStack(spacing: 10) {
+                        RecorderField(display: $comboDisplay) { mods, key in hotkey.mods = mods; hotkey.key = key; updateConflict() }
+                            .frame(width: 172, height: 30)
+                        Button { suggestFree() } label: { Label("빈 키 추천", systemImage: "sparkles") }.buttonStyle(.bordered)
+                        Spacer()
+                    }
                 }
                 if !conflictText.isEmpty {
-                    Text(conflictText).font(.caption)
-                        .foregroundColor(conflictBad ? .orange : .green)
-                        .fixedSize(horizontal: false, vertical: true)
+                    HStack(spacing: 8) {
+                        Image(systemName: conflictBad ? "exclamationmark.triangle.fill" : "checkmark.circle.fill")
+                        Text(conflictText).font(.callout).fixedSize(horizontal: false, vertical: true)
+                        Spacer(minLength: 0)
+                    }
+                    .padding(10)
+                    .background(RoundedRectangle(cornerRadius: 9).fill((conflictBad ? Color.orange : Color.green).opacity(0.15)))
+                    .foregroundColor(conflictBad ? .orange : .green)
                 }
-                Picker("동작", selection: $hotkey.action.type) {
-                    ForEach(ACTION_TYPES, id: \.0) { Text($0.1).tag($0.0) }
+                field("동작") {
+                    Picker("", selection: $hotkey.action.type) {
+                        ForEach(ACTION_TYPES, id: \.0) { t in
+                            Label(t.1, systemImage: actionMeta(t.0).icon).tag(t.0)
+                        }
+                    }.labelsHidden().pickerStyle(.menu)
                 }
                 if needsApp {
-                    Picker("앱", selection: $hotkey.action.value) {
-                        Text("— 앱 선택 —").tag("")
-                        ForEach(apps, id: \.self) { Text($0).tag($0) }
+                    field("앱 선택") {
+                        Picker("", selection: $hotkey.action.value) {
+                            Text("— 앱을 고르세요 —").tag("")
+                            ForEach(apps, id: \.self) { Text($0).tag($0) }
+                        }.labelsHidden()
                     }
                 } else if hotkey.action.type != "show_viewer" {
-                    TextField(valuePlaceholder, text: $hotkey.action.value)
+                    field("값") { TextField(valuePlaceholder, text: $hotkey.action.value).textFieldStyle(.roundedBorder) }
                 }
-                Toggle("다른 앱도 잡기 (anyCombo · 손쉬운 사용 권한 필요)", isOn: $hotkey.anyCombo)
-            }
+                Toggle(isOn: $hotkey.anyCombo) {
+                    VStack(alignment: .leading, spacing: 1) {
+                        Text("다른 앱도 잡기 (anyCombo)")
+                        Text("⇧Space 처럼 다른 앱과 겹치는 조합까지 가로챕니다 · 손쉬운 사용 권한 필요")
+                            .font(.caption).foregroundColor(.secondary)
+                    }
+                }.tint(ACCENT)
+            }.padding(18)
+            Divider()
+            // footer
             HStack {
                 if hotkey.anyCombo && !Accessibility.isTrusted {
-                    Button("권한 열기") { Accessibility.requestTrust(); Accessibility.openSettings() }.font(.caption)
+                    Button { Accessibility.requestTrust(); Accessibility.openSettings() } label: { Label("권한 열기", systemImage: "lock.open") }.font(.caption)
                 }
                 Spacer()
-                Button("취소") { onCancel() }
-                Button("저장") { onSave(hotkey) }.keyboardShortcut(.defaultAction)
-                    .disabled(hotkey.key.isEmpty || (hotkey.action.type != "show_viewer" && hotkey.action.value.isEmpty))
-            }
+                Button("취소") { onCancel() }.controlSize(.large)
+                Button("저장") { onSave(hotkey) }.keyboardShortcut(.defaultAction).buttonStyle(.borderedProminent).tint(ACCENT).controlSize(.large).disabled(!canSave)
+            }.padding(16)
         }
-        .padding(18).frame(width: 440)
+        .frame(width: 480)
         .onAppear { comboDisplay = hotkey.key.isEmpty ? "" : comboLabel(hotkey.mods, hotkey.key); apps = installedApps(); updateConflict() }
     }
 }
@@ -509,7 +605,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         Store.shared.load()
         reregister()
         watchConfig()
-        if firstRun || Store.shared.hotkeys.isEmpty { DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { self.openEditor() } }
+        if firstRun || Store.shared.hotkeys.isEmpty || CommandLine.arguments.contains("--editor") {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { self.openEditor() }
+        }
     }
 
     func suspendHotkeys() { HotKeyCenter.shared.unregisterAll(); EventTapCenter.shared.disable() }

@@ -10,8 +10,8 @@ APP="SV Hotkeys.app"
 BIN="svhotkeys"
 
 echo "▸ swiftc (universal: arm64 + x86_64)"
-if swiftc -O -target arm64-apple-macos11  svhotkeys.swift -o /tmp/svhotkeys.arm64 2>/dev/null \
-   && swiftc -O -target x86_64-apple-macos11 svhotkeys.swift -o /tmp/svhotkeys.x86_64 2>/dev/null \
+if swiftc -O -target arm64-apple-macos13  svhotkeys.swift -o /tmp/svhotkeys.arm64 2>/dev/null \
+   && swiftc -O -target x86_64-apple-macos13 svhotkeys.swift -o /tmp/svhotkeys.x86_64 2>/dev/null \
    && lipo -create /tmp/svhotkeys.arm64 /tmp/svhotkeys.x86_64 -output "$BIN" 2>/dev/null; then
   rm -f /tmp/svhotkeys.arm64 /tmp/svhotkeys.x86_64
   echo "  → universal ($(lipo -archs "$BIN"))"
@@ -27,6 +27,7 @@ rm -rf "$APP"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
 cp "$BIN" "$APP/Contents/MacOS/svhotkeys"
 cp Info.plist "$APP/Contents/Info.plist"
+[ -f AppIcon.icns ] && cp AppIcon.icns "$APP/Contents/Resources/AppIcon.icns"
 printf 'APPL????' > "$APP/Contents/PkgInfo"
 
 echo "▸ codesign (ad-hoc)"
