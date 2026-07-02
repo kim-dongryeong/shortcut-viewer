@@ -562,15 +562,18 @@ def collect_community():
     # for apps NOT scanned on this machine — so you see them without installing the app. Call LAST.
     n, have = 0, {e["scope"] for e in entries if e.get("source") != "web"}  # web is complementary reference, not a local scan → still seed the shared menu pack (union), the viewer dedups exact overlaps
     packs = glob.glob(os.path.join(DEFAULTS_DIR, "*", "menu-*.json")) + glob.glob(os.path.join(DEFAULTS_DIR, "*", "keymap-*.json"))
+    best = {}   # (app, menu|keymap) → newest pack; 앱당 menu팩 + keymap팩 각각 seeding (메뉴/전체 키맵은 상호보완, 겹침은 viewer가 dedup)
     for path in sorted(packs):
         try: data = json.load(open(path))
         except Exception: continue
         app = data.get("app") or data.get("scope")
         if not app or app in have: continue           # already have it from a local scan → skip (no dup)
+        k = (app, os.path.basename(path).split("-")[0])
+        if k not in best or _verkey(data.get("version")) > _verkey(best[k].get("version")): best[k] = data
+    for data in best.values():
         for e in data.get("entries", []):
             e2 = dict(e); e2["detail"] = ("공유 · 타 기기 · " + (e2.get("detail") or "")).strip(" ·")  # keep original provenance (e.g. .kys commandname)
             entries.append(e2); n += 1
-        have.add(app)
     return n
 
 def collect_vscode():

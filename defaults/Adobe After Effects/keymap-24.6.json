@@ -1,0 +1,6474 @@
+{
+ "app": "Adobe After Effects",
+ "entries": [
+  {
+   "action": "Title Action Grid Rotate",
+   "detail": "ae aeks default · SingleQuote · TitleActionGridRotate · ctx: CItem",
+   "group": "Adobe After Effects",
+   "key": "'",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Zoom Out",
+   "detail": "ae aeks default · Comma · ZoomOut · ctx: CPanoECOutline, CPanoProjItem, CPanoProjLayerPanoMask, FloPano",
+   "group": "Adobe After Effects",
+   "key": ",",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Time Zoom Out",
+   "detail": "ae aeks default · - · CompTimeZoomOut · ctx: CCompCompCmd, TLOutlinePano",
+   "group": "Adobe After Effects",
+   "key": "-",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Zoom In",
+   "detail": "ae aeks default · . · ZoomIn · ctx: CPanoECOutline, CPanoProjItem, CPanoProjLayerPanoMask, FloPano",
+   "group": "Adobe After Effects",
+   "key": ".",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Zoom100 Percent",
+   "detail": "ae aeks default · / · Zoom100Percent · ctx: CPanoECOutline, CPanoProjItem, CPanoProjLayerPanoMask, FloPano",
+   "group": "Adobe After Effects",
+   "key": "/",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Goto Marker0",
+   "detail": "ae aeks default · 0 · CompGotoMarker0 · ctx: CCompMarkerCmd",
+   "group": "Adobe After Effects",
+   "key": "0",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Goto Marker1",
+   "detail": "ae aeks default · 1 · CompGotoMarker1 · ctx: CCompMarkerCmd",
+   "group": "Adobe After Effects",
+   "key": "1",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Paint Time Step Back",
+   "detail": "ae aeks default · 1 · PaintTimeStepBack · ctx: CCompPaintCmd",
+   "group": "Adobe After Effects",
+   "key": "1",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Tool Camera Orbit",
+   "detail": "ae aeks default · 1 · ToolCameraOrbit · ctx: CEggAppTool",
+   "group": "Adobe After Effects",
+   "key": "1",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Goto Marker2",
+   "detail": "ae aeks default · 2 · CompGotoMarker2 · ctx: CCompMarkerCmd",
+   "group": "Adobe After Effects",
+   "key": "2",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Paint Time Step Forward",
+   "detail": "ae aeks default · 2 · PaintTimeStepForward · ctx: CCompPaintCmd",
+   "group": "Adobe After Effects",
+   "key": "2",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Tool Camera Pan",
+   "detail": "ae aeks default · 2 · ToolCameraPan · ctx: CEggAppTool",
+   "group": "Adobe After Effects",
+   "key": "2",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Clone Select Preset1",
+   "detail": "ae aeks default · 3 · CloneSelectPreset1 · ctx: CCompCloneCmd",
+   "group": "Adobe After Effects",
+   "key": "3",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Goto Marker3",
+   "detail": "ae aeks default · 3 · CompGotoMarker3 · ctx: CCompMarkerCmd",
+   "group": "Adobe After Effects",
+   "key": "3",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Tool Camera Dolly",
+   "detail": "ae aeks default · 3 · ToolCameraDolly · ctx: CEggAppTool",
+   "group": "Adobe After Effects",
+   "key": "3",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Clone Select Preset2",
+   "detail": "ae aeks default · 4 · CloneSelectPreset2 · ctx: CCompCloneCmd",
+   "group": "Adobe After Effects",
+   "key": "4",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Goto Marker4",
+   "detail": "ae aeks default · 4 · CompGotoMarker4 · ctx: CCompMarkerCmd",
+   "group": "Adobe After Effects",
+   "key": "4",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Gizmo Mode Position",
+   "detail": "ae aeks default · 4 · GizmoModePosition · ctx: CEggAppTool",
+   "group": "Adobe After Effects",
+   "key": "4",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Clone Select Preset3",
+   "detail": "ae aeks default · 5 · CloneSelectPreset3 · ctx: CCompCloneCmd",
+   "group": "Adobe After Effects",
+   "key": "5",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Goto Marker5",
+   "detail": "ae aeks default · 5 · CompGotoMarker5 · ctx: CCompMarkerCmd",
+   "group": "Adobe After Effects",
+   "key": "5",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Gizmo Mode Scale",
+   "detail": "ae aeks default · 5 · GizmoModeScale · ctx: CEggAppTool",
+   "group": "Adobe After Effects",
+   "key": "5",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Clone Select Preset4",
+   "detail": "ae aeks default · 6 · CloneSelectPreset4 · ctx: CCompCloneCmd",
+   "group": "Adobe After Effects",
+   "key": "6",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Goto Marker6",
+   "detail": "ae aeks default · 6 · CompGotoMarker6 · ctx: CCompMarkerCmd",
+   "group": "Adobe After Effects",
+   "key": "6",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Gizmo Mode Rotate",
+   "detail": "ae aeks default · 6 · GizmoModeRotate · ctx: CEggAppTool",
+   "group": "Adobe After Effects",
+   "key": "6",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Clone Select Preset5",
+   "detail": "ae aeks default · 7 · CloneSelectPreset5 · ctx: CCompCloneCmd",
+   "group": "Adobe After Effects",
+   "key": "7",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Goto Marker7",
+   "detail": "ae aeks default · 7 · CompGotoMarker7 · ctx: CCompMarkerCmd",
+   "group": "Adobe After Effects",
+   "key": "7",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Goto Marker8",
+   "detail": "ae aeks default · 8 · CompGotoMarker8 · ctx: CCompMarkerCmd",
+   "group": "Adobe After Effects",
+   "key": "8",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Goto Marker9",
+   "detail": "ae aeks default · 9 · CompGotoMarker9 · ctx: CCompMarkerCmd",
+   "group": "Adobe After Effects",
+   "key": "9",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Time Zoom Frames",
+   "detail": "ae aeks default · ; · CompTimeZoomFrames · ctx: CCompCompCmd, TLOutlinePano",
+   "group": "Adobe After Effects",
+   "key": ";",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Time Zoom In",
+   "detail": "ae aeks default · = · CompTimeZoomIn · ctx: CCompCompCmd, TLOutlinePano",
+   "group": "Adobe After Effects",
+   "key": "=",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Twirl Anchor Point",
+   "detail": "ae aeks default · A · CompTwirlAnchorPoint · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "A",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Set Work Area Start",
+   "detail": "ae aeks default · B · SetWorkAreaStart · ctx: CCompCmd",
+   "group": "Adobe After Effects",
+   "key": "B",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Tool Camera",
+   "detail": "ae aeks default · C · ToolCamera · ctx: CEggAppTool",
+   "group": "Adobe After Effects",
+   "key": "C",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Scroll To Current Time",
+   "detail": "ae aeks default · D · CompScrollToCurrentTime · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "D",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Paint Color Reset BW",
+   "detail": "ae aeks default · D · PaintColorResetBW · ctx: CCompPaintCmd",
+   "group": "Adobe After Effects",
+   "key": "D",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Clear",
+   "detail": "ae aeks default · Delete · Clear · ctx: CCompCmd, COutline, CPanoProjLayer, FloPano",
+   "group": "Adobe After Effects",
+   "key": "Delete",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Delete Backward",
+   "detail": "ae aeks default · Delete · TextDeleteBackward · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "Delete",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "MT Nudge Down",
+   "detail": "ae aeks default · DownArrow · MTNudgeDown · ctx: Tracker",
+   "group": "Adobe After Effects",
+   "key": "Down",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Nudge Down",
+   "detail": "ae aeks default · DownArrow · NudgeDown · ctx: CCompCompCmd, CPanoProjLayerPano",
+   "group": "Adobe After Effects",
+   "key": "Down",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Select Next",
+   "detail": "ae aeks default · DownArrow · SelectNext · ctx: CPanoECOutline, POutlinePano, RQOutlinePano",
+   "group": "Adobe After Effects",
+   "key": "Down",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Cursor To Down",
+   "detail": "ae aeks default · DownArrow · TextCursorToDown · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "Down",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Toggle Effects",
+   "detail": "ae aeks default · E · CompToggleEffects · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "E",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Cursor To Line End",
+   "detail": "ae aeks default · END · TextCursorToLineEnd · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "End",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Time Fast Forward",
+   "detail": "ae aeks default · END · TimeFastForward · ctx: CCompTime, CDirItemTabPanelTime",
+   "group": "Adobe After Effects",
+   "key": "End",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Cancel All Previews",
+   "detail": "ae aeks default · Esc · CancelAllPreviews · ctx: CEggApp",
+   "group": "Adobe After Effects",
+   "key": "Escape",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Stop Render Queue",
+   "detail": "ae aeks default · Esc · StopRenderQueue · ctx: CPanoRender, RQOutlinePano",
+   "group": "Adobe After Effects",
+   "key": "Escape",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Switch To Last3 D View",
+   "detail": "ae aeks default · Esc · SwitchToLast3DView · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "Escape",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Cancel",
+   "detail": "ae aeks default · Esc · TextCancel · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "Escape",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Toggle Mask Feathers",
+   "detail": "ae aeks default · F · CompToggleMaskFeathers · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "F",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Look At Selected",
+   "detail": "ae aeks default · F · LookAtSelected · ctx: CameraToolUI",
+   "group": "Adobe After Effects",
+   "key": "F",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Help After Effects Help",
+   "detail": "ae aeks default · F1 · HelpAfterEffectsHelp · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "F1",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Switch To3 D View A",
+   "detail": "ae aeks default · F10 · SwitchTo3DViewA · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "F10",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Switch To3 D View First",
+   "detail": "ae aeks default · F10 · SwitchTo3DViewFirst · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "F10",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Switch To3 D View B",
+   "detail": "ae aeks default · F11 · SwitchTo3DViewB · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "F11",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Switch To3 D View C",
+   "detail": "ae aeks default · F12 · SwitchTo3DViewC · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "F12",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Deselect All",
+   "detail": "ae aeks default · F2 · DeselectAll · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "F2",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Effect Controls",
+   "detail": "ae aeks default · F3 · ToggleEffectControls · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "F3",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Switches Modes",
+   "detail": "ae aeks default · F4 · ToggleSwitchesModes · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "F4",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Show Snapshot1",
+   "detail": "ae aeks default · F5 · ShowSnapshot1 · ctx: CItem",
+   "group": "Adobe After Effects",
+   "key": "F5",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Show Snapshot2",
+   "detail": "ae aeks default · F6 · ShowSnapshot2 · ctx: CItem",
+   "group": "Adobe After Effects",
+   "key": "F6",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Show Snapshot3",
+   "detail": "ae aeks default · F7 · ShowSnapshot3 · ctx: CItem",
+   "group": "Adobe After Effects",
+   "key": "F7",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Show Snapshot4",
+   "detail": "ae aeks default · F8 · ShowSnapshot4 · ctx: CItem",
+   "group": "Adobe After Effects",
+   "key": "F8",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Easy Ease",
+   "detail": "ae aeks default · F9 · EasyEase · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "F9",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Clear",
+   "detail": "ae aeks default · FwdDel · Clear · ctx: CCompCmd, COutline, CPanoProjLayer, FloPano",
+   "group": "Adobe After Effects",
+   "key": "ForwardDelete",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Delete Forward",
+   "detail": "ae aeks default · FwdDel · TextDeleteForward · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "ForwardDelete",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Tool Pen",
+   "detail": "ae aeks default · G · ToolPen · ctx: CEggAppTool",
+   "group": "Adobe After Effects",
+   "key": "G",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Tool Hand",
+   "detail": "ae aeks default · H · ToolHand · ctx: CEggAppTool",
+   "group": "Adobe After Effects",
+   "key": "H",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Cursor To Line Start",
+   "detail": "ae aeks default · HOME · TextCursorToLineStart · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "Home",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Time Rewind",
+   "detail": "ae aeks default · HOME · TimeRewind · ctx: CCompTime, CDirItemTabPanelTime",
+   "group": "Adobe After Effects",
+   "key": "Home",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Time Jump To In",
+   "detail": "ae aeks default · I · TimeJumpToIn · ctx: CCompTime, CPanoProjFootage",
+   "group": "Adobe After Effects",
+   "key": "I",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Prev Keyframe",
+   "detail": "ae aeks default · J · PrevKeyframe · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "J",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Next Keyframe",
+   "detail": "ae aeks default · K · NextKeyframe · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "K",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Twirl Audio",
+   "detail": "ae aeks default · L · CompTwirlAudio · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "L",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "MT Nudge Left",
+   "detail": "ae aeks default · LeftArrow · MTNudgeLeft · ctx: Tracker",
+   "group": "Adobe After Effects",
+   "key": "Left",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Nudge Left",
+   "detail": "ae aeks default · LeftArrow · NudgeLeft · ctx: CCompCompCmd, CPanoProjLayerPano",
+   "group": "Adobe After Effects",
+   "key": "Left",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Cursor To Left",
+   "detail": "ae aeks default · LeftArrow · TextCursorToLeft · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "Left",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Time Step Back",
+   "detail": "ae aeks default · LeftArrow · TimeStepBack · ctx: CPanoProjFootage",
+   "group": "Adobe After Effects",
+   "key": "Left",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Twirl Closed",
+   "detail": "ae aeks default · LeftArrow · TwirlClosed · ctx: CPanoECOutline, POutlinePano, RQOutlinePano",
+   "group": "Adobe After Effects",
+   "key": "Left",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Toggle Mask Shapes",
+   "detail": "ae aeks default · M · CompToggleMaskShapes · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "M",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Set Work Area End",
+   "detail": "ae aeks default · N · SetWorkAreaEnd · ctx: CCompCmd",
+   "group": "Adobe After Effects",
+   "key": "N",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Time Jump To Out",
+   "detail": "ae aeks default · O · TimeJumpToOut · ctx: CCompTime, CPanoProjFootage",
+   "group": "Adobe After Effects",
+   "key": "O",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Twirl Position",
+   "detail": "ae aeks default · P · CompTwirlPosition · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "P",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Time Step Forward",
+   "detail": "ae aeks default · PageDOWN · TimeStepForward · ctx: CCompTime, CDirItemTabPanelTime",
+   "group": "Adobe After Effects",
+   "key": "PageDown",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Time Step Back",
+   "detail": "ae aeks default · PageUP · TimeStepBack · ctx: CCompTime, CDirItemTabPanelTime",
+   "group": "Adobe After Effects",
+   "key": "PageUp",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Tool Mask",
+   "detail": "ae aeks default · Q · ToolMask · ctx: CEggAppTool",
+   "group": "Adobe After Effects",
+   "key": "Q",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Twirl Rotation",
+   "detail": "ae aeks default · R · CompTwirlRotation · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "R",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Open Source",
+   "detail": "ae aeks default · Return · OpenSource · ctx: CCompCmd",
+   "group": "Adobe After Effects",
+   "key": "Return",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Rename",
+   "detail": "ae aeks default · Return · Rename · ctx: COutline",
+   "group": "Adobe After Effects",
+   "key": "Return",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Start Render Queue",
+   "detail": "ae aeks default · Return · StartRenderQueue · ctx: RQOutlinePano",
+   "group": "Adobe After Effects",
+   "key": "Return",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "MT Nudge Right",
+   "detail": "ae aeks default · RightArrow · MTNudgeRight · ctx: Tracker",
+   "group": "Adobe After Effects",
+   "key": "Right",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Nudge Right",
+   "detail": "ae aeks default · RightArrow · NudgeRight · ctx: CCompCompCmd, CPanoProjLayerPano",
+   "group": "Adobe After Effects",
+   "key": "Right",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Cursor To Right",
+   "detail": "ae aeks default · RightArrow · TextCursorToRight · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "Right",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Time Step Forward",
+   "detail": "ae aeks default · RightArrow · TimeStepForward · ctx: CPanoProjFootage",
+   "group": "Adobe After Effects",
+   "key": "Right",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Twirl Open",
+   "detail": "ae aeks default · RightArrow · TwirlOpen · ctx: CPanoECOutline, POutlinePano, RQOutlinePano",
+   "group": "Adobe After Effects",
+   "key": "Right",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Twirl Scale",
+   "detail": "ae aeks default · S · CompTwirlScale · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "S",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Time Spacebar Play",
+   "detail": "ae aeks default · Space · TimeSpacebarPlay · ctx: CCompTime, CDirItemTabPanelTime",
+   "group": "Adobe After Effects",
+   "key": "Space",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Twirl Opacity",
+   "detail": "ae aeks default · T · CompTwirlOpacity · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "T",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Open Mini Flow Popup",
+   "detail": "ae aeks default · Tab · OpenMiniFlowPopup · ctx: CDirTabPanel",
+   "group": "Adobe After Effects",
+   "key": "Tab",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Toggle Uber Animating Keyframes",
+   "detail": "ae aeks default · U · CompToggleUberAnimatingKeyframes · ctx: CCompCompCmd, CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "U",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "MT Nudge Up",
+   "detail": "ae aeks default · UpArrow · MTNudgeUp · ctx: Tracker",
+   "group": "Adobe After Effects",
+   "key": "Up",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Nudge Up",
+   "detail": "ae aeks default · UpArrow · NudgeUp · ctx: CCompCompCmd, CPanoProjLayerPano",
+   "group": "Adobe After Effects",
+   "key": "Up",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Select Previous",
+   "detail": "ae aeks default · UpArrow · SelectPrevious · ctx: CPanoECOutline, POutlinePano, RQOutlinePano",
+   "group": "Adobe After Effects",
+   "key": "Up",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Cursor To Up",
+   "detail": "ae aeks default · UpArrow · TextCursorToUp · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "Up",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Tool Arrow",
+   "detail": "ae aeks default · V · ToolArrow · ctx: CEggAppTool",
+   "group": "Adobe After Effects",
+   "key": "V",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Tool Rotate",
+   "detail": "ae aeks default · W · ToolRotate · ctx: CEggAppTool",
+   "group": "Adobe After Effects",
+   "key": "W",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Scoll Selected Layer To Top",
+   "detail": "ae aeks default · X · CompScollSelectedLayerToTop · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "X",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Paint Color Swap Fg Bg",
+   "detail": "ae aeks default · X · PaintColorSwapFgBg · ctx: CCompPaintCmd",
+   "group": "Adobe After Effects",
+   "key": "X",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Tool Pan",
+   "detail": "ae aeks default · Y · ToolPan · ctx: CEggAppTool",
+   "group": "Adobe After Effects",
+   "key": "Y",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Tool Magnify",
+   "detail": "ae aeks default · Z · ToolMagnify · ctx: CEggAppTool",
+   "group": "Adobe After Effects",
+   "key": "Z",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Time Set In",
+   "detail": "ae aeks default · [ · TimeSetIn · ctx: CCompTime, CPanoProjLayer, TLOutlinePano",
+   "group": "Adobe After Effects",
+   "key": "[",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Open Comp Stuff",
+   "detail": "ae aeks default · Backslash · CompOpenCompStuff · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "\\",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Open Comp",
+   "detail": "ae aeks default · Backslash · OpenComp · ctx: CEggApp, CPanoECOutline, CPanoProjLayer, FloPano",
+   "group": "Adobe After Effects",
+   "key": "\\",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Time Set Out",
+   "detail": "ae aeks default · ] · TimeSetOut · ctx: CCompTime, CPanoProjLayer, TLOutlinePano",
+   "group": "Adobe After Effects",
+   "key": "]",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Tab Panel Maximize",
+   "detail": "ae aeks default · ` · ToggleTabPanelMaximize · ctx: AE_TopLevelWindow",
+   "group": "Adobe After Effects",
+   "key": "`",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Preview Numpad0",
+   "detail": "ae aeks default · Pad0 · PreviewNumpad0 · ctx: CEggApp",
+   "group": "Adobe After Effects",
+   "key": "keypad_0",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Select Layer1",
+   "detail": "ae aeks default · Pad1 · CompSelectLayer1 · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_1",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Paint Set Opacity10",
+   "detail": "ae aeks default · Pad1 · PaintSetOpacity10 · ctx: CCompPaintCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_1",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Select Layer2",
+   "detail": "ae aeks default · Pad2 · CompSelectLayer2 · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_2",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Paint Set Opacity20",
+   "detail": "ae aeks default · Pad2 · PaintSetOpacity20 · ctx: CCompPaintCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_2",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Select Layer3",
+   "detail": "ae aeks default · Pad3 · CompSelectLayer3 · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_3",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Paint Set Opacity30",
+   "detail": "ae aeks default · Pad3 · PaintSetOpacity30 · ctx: CCompPaintCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_3",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Select Layer4",
+   "detail": "ae aeks default · Pad4 · CompSelectLayer4 · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_4",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Paint Set Opacity40",
+   "detail": "ae aeks default · Pad4 · PaintSetOpacity40 · ctx: CCompPaintCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_4",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Select Layer5",
+   "detail": "ae aeks default · Pad5 · CompSelectLayer5 · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_5",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Paint Set Opacity50",
+   "detail": "ae aeks default · Pad5 · PaintSetOpacity50 · ctx: CCompPaintCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_5",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Select Layer6",
+   "detail": "ae aeks default · Pad6 · CompSelectLayer6 · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_6",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Paint Set Opacity60",
+   "detail": "ae aeks default · Pad6 · PaintSetOpacity60 · ctx: CCompPaintCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_6",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Select Layer7",
+   "detail": "ae aeks default · Pad7 · CompSelectLayer7 · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_7",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Paint Set Opacity70",
+   "detail": "ae aeks default · Pad7 · PaintSetOpacity70 · ctx: CCompPaintCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_7",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Select Layer8",
+   "detail": "ae aeks default · Pad8 · CompSelectLayer8 · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_8",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Paint Set Opacity80",
+   "detail": "ae aeks default · Pad8 · PaintSetOpacity80 · ctx: CCompPaintCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_8",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Select Layer9",
+   "detail": "ae aeks default · Pad9 · CompSelectLayer9 · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_9",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Paint Set Opacity90",
+   "detail": "ae aeks default · Pad9 · PaintSetOpacity90 · ctx: CCompPaintCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_9",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Clear",
+   "detail": "ae aeks default · PadClear · Clear · ctx: CSwitchboard, CSwitchboardModal",
+   "group": "Adobe After Effects",
+   "key": "keypad_clear",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Paint Set Opacity100",
+   "detail": "ae aeks default · PadComma · PaintSetOpacity100 · ctx: CCompPaintCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_comma",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Preview Audio",
+   "detail": "ae aeks default · PadComma · PreviewAudio · ctx: CEggApp",
+   "group": "Adobe After Effects",
+   "key": "keypad_comma",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Paint Set Opacity100",
+   "detail": "ae aeks default · PadDecimal · PaintSetOpacity100 · ctx: CCompPaintCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_decimal",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Preview Audio",
+   "detail": "ae aeks default · PadDecimal · PreviewAudio · ctx: CEggApp",
+   "group": "Adobe After Effects",
+   "key": "keypad_decimal",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Paint Set Opacity100",
+   "detail": "ae aeks default · PadDelete · PaintSetOpacity100 · ctx: CCompPaintCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_delete",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Preview Audio",
+   "detail": "ae aeks default · PadDelete · PreviewAudio · ctx: CEggApp",
+   "group": "Adobe After Effects",
+   "key": "keypad_delete",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Time Fast Forward",
+   "detail": "ae aeks default · PadEnd · TimeFastForward · ctx: CDirItemTabPanelTime",
+   "group": "Adobe After Effects",
+   "key": "keypad_end",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Open Item Window",
+   "detail": "ae aeks default · Enter · OpenItemWindow · ctx: POutlinePano",
+   "group": "Adobe After Effects",
+   "key": "keypad_enter",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Open Source",
+   "detail": "ae aeks default · Enter · OpenSource · ctx: CCompCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_enter",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Start Render Queue",
+   "detail": "ae aeks default · Enter · StartRenderQueue · ctx: RQOutlinePano",
+   "group": "Adobe After Effects",
+   "key": "keypad_enter",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Commit",
+   "detail": "ae aeks default · Enter · TextCommit · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "keypad_enter",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Time Rewind",
+   "detail": "ae aeks default · PadHome · TimeRewind · ctx: CDirItemTabPanelTime",
+   "group": "Adobe After Effects",
+   "key": "keypad_home",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Preview Numpad0",
+   "detail": "ae aeks default · PadInsert · PreviewNumpad0 · ctx: CEggApp",
+   "group": "Adobe After Effects",
+   "key": "keypad_insert",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Nudge Rot CCW",
+   "detail": "ae aeks default · PadMinus · NudgeRotCCW · ctx: CCompCompCmd, CPanoProjLayerPano",
+   "group": "Adobe After Effects",
+   "key": "keypad_minus",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Add Marker",
+   "detail": "ae aeks default · PadMultiply · AddMarker · ctx: CCompCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_multiply",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Time Step Forward",
+   "detail": "ae aeks default · PadPageDown · TimeStepForward · ctx: CDirItemTabPanelTime",
+   "group": "Adobe After Effects",
+   "key": "keypad_pagedown",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Time Step Back",
+   "detail": "ae aeks default · PadPageUp · TimeStepBack · ctx: CDirItemTabPanelTime",
+   "group": "Adobe After Effects",
+   "key": "keypad_pageup",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Nudge Rot CW",
+   "detail": "ae aeks default · PadPlus · NudgeRotCW · ctx: CCompCompCmd, CPanoProjLayerPano",
+   "group": "Adobe After Effects",
+   "key": "keypad_plus",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Transmit",
+   "detail": "ae aeks default · PadSlash · ToggleTransmit · ctx: CEggApp",
+   "group": "Adobe After Effects",
+   "key": "keypad_slash",
+   "mods": [],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Title Action Grid Anim",
+   "detail": "ae aeks default · Option+SingleQuote · TitleActionGridAnim · ctx: CItem",
+   "group": "Adobe After Effects",
+   "key": "'",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Title Action Safe Toggle",
+   "detail": "ae aeks default · Shift+SingleQuote · TitleActionSafeToggle · ctx: CItem",
+   "group": "Adobe After Effects",
+   "key": "'",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Show Grid",
+   "detail": "ae aeks default · Cmd+SingleQuote · ToggleShowGrid · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "'",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Select Prev Viewer Context",
+   "detail": "ae aeks default · Shift+Comma · SelectPrevViewerContext · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": ",",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Zoom Out Resize",
+   "detail": "ae aeks default · Option+Comma · ZoomOutResize · ctx: CPanoECOutline, CPanoProjItem",
+   "group": "Adobe After Effects",
+   "key": ",",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Prev Xfer Mode",
+   "detail": "ae aeks default · Shift+- · PrevXferMode · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "-",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Zoom Out Resize",
+   "detail": "ae aeks default · Cmd+- · ZoomOutResize · ctx: CPanoECOutline, CPanoProjItem",
+   "group": "Adobe After Effects",
+   "key": "-",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Preview Audio",
+   "detail": "ae aeks default · macControl+. · PreviewAudio · ctx: CEggApp",
+   "group": "Adobe After Effects",
+   "key": ".",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Select Next Viewer Context",
+   "detail": "ae aeks default · Shift+. · SelectNextViewerContext · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": ".",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Stop Render Queue",
+   "detail": "ae aeks default · Cmd+. · StopRenderQueue · ctx: CPanoRender, RQOutlinePano",
+   "group": "Adobe After Effects",
+   "key": ".",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Zoom In Resize",
+   "detail": "ae aeks default · Option+. · ZoomInResize · ctx: CPanoECOutline, CPanoProjItem",
+   "group": "Adobe After Effects",
+   "key": ".",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Add Item To Comp",
+   "detail": "ae aeks default · Cmd+/ · AddItemToComp · ctx: CSwitchboard, POutlinePano",
+   "group": "Adobe After Effects",
+   "key": "/",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Fit Item View",
+   "detail": "ae aeks default · Shift+/ · FitItemView · ctx: CPanoECOutline, CPanoProjItem",
+   "group": "Adobe After Effects",
+   "key": "/",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Fit Item View Up To100",
+   "detail": "ae aeks default · Option+/ · FitItemViewUpTo100 · ctx: CPanoECOutline, CPanoProjItem",
+   "group": "Adobe After Effects",
+   "key": "/",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Marker0",
+   "detail": "ae aeks default · Shift+0 · CompMarker0 · ctx: CCompMarkerCmd",
+   "group": "Adobe After Effects",
+   "key": "0",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Preview Numpad0",
+   "detail": "ae aeks default · macControl+0 · PreviewNumpad0 · ctx: CEggApp",
+   "group": "Adobe After Effects",
+   "key": "0",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Show Hide Project",
+   "detail": "ae aeks default · Cmd+0 · ShowHideProject · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "0",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Marker1",
+   "detail": "ae aeks default · Shift+1 · CompMarker1 · ctx: CCompMarkerCmd",
+   "group": "Adobe After Effects",
+   "key": "1",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Show Hide Tools",
+   "detail": "ae aeks default · Cmd+1 · ShowHideTools · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "1",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Show Red Channel",
+   "detail": "ae aeks default · Option+1 · ShowRedChannel · ctx: CItem",
+   "group": "Adobe After Effects",
+   "key": "1",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Tool Camera Orbit Toggle",
+   "detail": "ae aeks default · Shift+1 · ToolCameraOrbitToggle · ctx: CEggAppTool",
+   "group": "Adobe After Effects",
+   "key": "1",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Marker2",
+   "detail": "ae aeks default · Shift+2 · CompMarker2 · ctx: CCompMarkerCmd",
+   "group": "Adobe After Effects",
+   "key": "2",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Show Green Channel",
+   "detail": "ae aeks default · Option+2 · ShowGreenChannel · ctx: CItem",
+   "group": "Adobe After Effects",
+   "key": "2",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Show Hide Info",
+   "detail": "ae aeks default · Cmd+2 · ShowHideInfo · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "2",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Tool Camera Pan Toggle",
+   "detail": "ae aeks default · Shift+2 · ToolCameraPanToggle · ctx: CEggAppTool",
+   "group": "Adobe After Effects",
+   "key": "2",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Marker3",
+   "detail": "ae aeks default · Shift+3 · CompMarker3 · ctx: CCompMarkerCmd",
+   "group": "Adobe After Effects",
+   "key": "3",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Show Blue Channel",
+   "detail": "ae aeks default · Option+3 · ShowBlueChannel · ctx: CItem",
+   "group": "Adobe After Effects",
+   "key": "3",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Show Hide Time Panel",
+   "detail": "ae aeks default · Cmd+3 · ShowHideTimePanel · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "3",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Tool Camera Dolly Toggle",
+   "detail": "ae aeks default · Shift+3 · ToolCameraDollyToggle · ctx: CEggAppTool",
+   "group": "Adobe After Effects",
+   "key": "3",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Marker4",
+   "detail": "ae aeks default · Shift+4 · CompMarker4 · ctx: CCompMarkerCmd",
+   "group": "Adobe After Effects",
+   "key": "4",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Show Alpha Channel",
+   "detail": "ae aeks default · Option+4 · ShowAlphaChannel · ctx: CItem",
+   "group": "Adobe After Effects",
+   "key": "4",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Show Hide Audio",
+   "detail": "ae aeks default · Cmd+4 · ShowHideAudio · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "4",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Marker5",
+   "detail": "ae aeks default · Shift+5 · CompMarker5 · ctx: CCompMarkerCmd",
+   "group": "Adobe After Effects",
+   "key": "5",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Show Alpha Outline",
+   "detail": "ae aeks default · Option+5 · ShowAlphaOutline · ctx: CItem",
+   "group": "Adobe After Effects",
+   "key": "5",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Show Hide Fx Pal",
+   "detail": "ae aeks default · Cmd+5 · ShowHideFxPal · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "5",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Marker6",
+   "detail": "ae aeks default · Shift+6 · CompMarker6 · ctx: CCompMarkerCmd",
+   "group": "Adobe After Effects",
+   "key": "6",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Show Alpha Overlay",
+   "detail": "ae aeks default · Option+6 · ShowAlphaOverlay · ctx: CItem",
+   "group": "Adobe After Effects",
+   "key": "6",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Show Hide Char Pal",
+   "detail": "ae aeks default · Cmd+6 · ShowHideCharPal · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "6",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Marker7",
+   "detail": "ae aeks default · Shift+7 · CompMarker7 · ctx: CCompMarkerCmd",
+   "group": "Adobe After Effects",
+   "key": "7",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Show Hide Para Pal",
+   "detail": "ae aeks default · Cmd+7 · ShowHideParaPal · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "7",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Add Marker",
+   "detail": "ae aeks default · macControl+8 · AddMarker · ctx: CCompCmd",
+   "group": "Adobe After Effects",
+   "key": "8",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Marker8",
+   "detail": "ae aeks default · Shift+8 · CompMarker8 · ctx: CCompMarkerCmd",
+   "group": "Adobe After Effects",
+   "key": "8",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Show Hide Paint Pal",
+   "detail": "ae aeks default · Cmd+8 · ShowHidePaintPal · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "8",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Marker9",
+   "detail": "ae aeks default · Shift+9 · CompMarker9 · ctx: CCompMarkerCmd",
+   "group": "Adobe After Effects",
+   "key": "9",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Show Hide Brush Pal",
+   "detail": "ae aeks default · Cmd+9 · ShowHideBrushPal · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "9",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Time Zoom Toggle Full Custom",
+   "detail": "ae aeks default · Shift+; · CompTimeZoomToggleFullCustom · ctx: CCompCompCmd, TLOutlinePano",
+   "group": "Adobe After Effects",
+   "key": ";",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Show Guides",
+   "detail": "ae aeks default · Cmd+; · ToggleShowGuides · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": ";",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Next Xfer Mode",
+   "detail": "ae aeks default · Shift+= · NextXferMode · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "=",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Zoom In Resize",
+   "detail": "ae aeks default · Cmd+= · ZoomInResize · ctx: CPanoECOutline, CPanoProjItem",
+   "group": "Adobe After Effects",
+   "key": "=",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Twirl Anchor Point Add State",
+   "detail": "ae aeks default · Shift+A · CompTwirlAnchorPointAddState · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "A",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Twirl Anchor Point New KF",
+   "detail": "ae aeks default · Option+A · CompTwirlAnchorPointNewKF · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "A",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Select All",
+   "detail": "ae aeks default · Cmd+A · SelectAll · ctx: CSwitchboard, CSwitchboardModal",
+   "group": "Adobe After Effects",
+   "key": "A",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Set Sampling Quality Bilinear",
+   "detail": "ae aeks default · Option+B · SetSamplingQualityBilinear · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "B",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Tool Paint",
+   "detail": "ae aeks default · Cmd+B · ToolPaint · ctx: CEggAppTool",
+   "group": "Adobe After Effects",
+   "key": "B",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Copy",
+   "detail": "ae aeks default · Cmd+C · Copy · ctx: CSwitchboard, CSwitchboardModal",
+   "group": "Adobe After Effects",
+   "key": "C",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Tool Camera Toggle",
+   "detail": "ae aeks default · Shift+C · ToolCameraToggle · ctx: CEggAppTool",
+   "group": "Adobe After Effects",
+   "key": "C",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Duplicate",
+   "detail": "ae aeks default · Cmd+D · Duplicate · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "D",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Clear Mask",
+   "detail": "ae aeks default · Option+Delete · ClearMask · ctx: CCompCmd, CPanoProjLayer",
+   "group": "Adobe After Effects",
+   "key": "Delete",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Clear Without Warning",
+   "detail": "ae aeks default · Cmd+Delete · ClearWithoutWarning · ctx: FloPano, POutlinePano",
+   "group": "Adobe After Effects",
+   "key": "Delete",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "MT Nudge Down Hold Pos",
+   "detail": "ae aeks default · Option+DownArrow · MTNudgeDownHoldPos · ctx: Tracker",
+   "group": "Adobe After Effects",
+   "key": "Down",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "MT Nudge Down More",
+   "detail": "ae aeks default · Shift+DownArrow · MTNudgeDownMore · ctx: Tracker",
+   "group": "Adobe After Effects",
+   "key": "Down",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Nudge Down",
+   "detail": "ae aeks default · Option+DownArrow · NudgeDown · ctx: CPanoProjLayerPano",
+   "group": "Adobe After Effects",
+   "key": "Down",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Nudge Down More",
+   "detail": "ae aeks default · Shift+DownArrow · NudgeDownMore · ctx: CCompCompCmd, CPanoProjLayerPano",
+   "group": "Adobe After Effects",
+   "key": "Down",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Select Next",
+   "detail": "ae aeks default · Cmd+DownArrow · SelectNext · ctx: CCompCmd",
+   "group": "Adobe After Effects",
+   "key": "Down",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Select Next Add",
+   "detail": "ae aeks default · Shift+DownArrow · SelectNextAdd · ctx: CPanoECOutline, POutlinePano, RQOutlinePano",
+   "group": "Adobe After Effects",
+   "key": "Down",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Cursor To Word Down",
+   "detail": "ae aeks default · Cmd+DownArrow · TextCursorToWordDown · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "Down",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Increase Leading",
+   "detail": "ae aeks default · Option+DownArrow · TextIncreaseLeading · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "Down",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Select To Down",
+   "detail": "ae aeks default · Shift+DownArrow · TextSelectToDown · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "Down",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Toggle Effects Add State",
+   "detail": "ae aeks default · Shift+E · CompToggleEffectsAddState · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "E",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Edit File Externally",
+   "detail": "ae aeks default · Cmd+E · EditFileExternally · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "E",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Temporal Align End",
+   "detail": "ae aeks default · Option+END · TemporalAlignEnd · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "End",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Cursor To Document End",
+   "detail": "ae aeks default · Cmd+END · TextCursorToDocumentEnd · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "End",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Select To Line End",
+   "detail": "ae aeks default · Shift+END · TextSelectToLineEnd · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "End",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Time Jump To WA End",
+   "detail": "ae aeks default · Shift+END · TimeJumpToWAEnd · ctx: CCompTime",
+   "group": "Adobe After Effects",
+   "key": "End",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Open MRU Context",
+   "detail": "ae aeks default · Shift+Esc · OpenMRUContext · ctx: CEggApp",
+   "group": "Adobe After Effects",
+   "key": "Escape",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Toggle Mask Feathers Add State",
+   "detail": "ae aeks default · Shift+F · CompToggleMaskFeathersAddState · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "F",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Toggle Mask Feathers New KF",
+   "detail": "ae aeks default · Option+F · CompToggleMaskFeathersNewKF · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "F",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Find",
+   "detail": "ae aeks default · Cmd+F · Find · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "F",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Switch To Workspace A",
+   "detail": "ae aeks default · Shift+F10 · SwitchToWorkspaceA · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "F10",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Show Project Tree",
+   "detail": "ae aeks default · Cmd+F11 · ShowProjectTree · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "F11",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Switch To Workspace B",
+   "detail": "ae aeks default · Shift+F11 · SwitchToWorkspaceB · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "F11",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Show Console",
+   "detail": "ae aeks default · Cmd+F12 · ShowConsole · ctx: CEggApp",
+   "group": "Adobe After Effects",
+   "key": "F12",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Switch To Workspace C",
+   "detail": "ae aeks default · Shift+F12 · SwitchToWorkspaceC · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "F12",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Deselect All Keyframes",
+   "detail": "ae aeks default · Shift+F2 · DeselectAllKeyframes · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "F2",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Graph",
+   "detail": "ae aeks default · Shift+F3 · ToggleGraph · ctx: CCompCompCmd, TLOutlinePano",
+   "group": "Adobe After Effects",
+   "key": "F3",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Tlw Parent Column",
+   "detail": "ae aeks default · Shift+F4 · ToggleTlwParentColumn · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "F4",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Take Snapshot1",
+   "detail": "ae aeks default · Shift+F5 · TakeSnapshot1 · ctx: CItem",
+   "group": "Adobe After Effects",
+   "key": "F5",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Take Snapshot2",
+   "detail": "ae aeks default · Shift+F6 · TakeSnapshot2 · ctx: CItem",
+   "group": "Adobe After Effects",
+   "key": "F6",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Take Snapshot3",
+   "detail": "ae aeks default · Shift+F7 · TakeSnapshot3 · ctx: CItem",
+   "group": "Adobe After Effects",
+   "key": "F7",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Take Snapshot4",
+   "detail": "ae aeks default · Shift+F8 · TakeSnapshot4 · ctx: CItem",
+   "group": "Adobe After Effects",
+   "key": "F8",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Easy Ease In",
+   "detail": "ae aeks default · Shift+F9 · EasyEaseIn · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "F9",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Clear Mask",
+   "detail": "ae aeks default · Option+FwdDel · ClearMask · ctx: CCompCmd, CPanoProjLayer",
+   "group": "Adobe After Effects",
+   "key": "ForwardDelete",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Group",
+   "detail": "ae aeks default · Cmd+G · Group · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "G",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Tool Pen Toggle",
+   "detail": "ae aeks default · Shift+G · ToolPenToggle · ctx: CEggAppTool",
+   "group": "Adobe After Effects",
+   "key": "G",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Mac Sys Menu Hide Me",
+   "detail": "ae aeks default · Cmd+H · MacSysMenuHideMe · ctx: MacSysShortcutsStd",
+   "group": "Adobe After Effects",
+   "key": "H",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Replace Footage",
+   "detail": "ae aeks default · Cmd+H · ReplaceFootage · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "H",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Center Layer In View",
+   "detail": "ae aeks default · Cmd+HOME · CenterLayerInView · ctx: CCompCmd",
+   "group": "Adobe After Effects",
+   "key": "Home",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Temporal Align Start",
+   "detail": "ae aeks default · Option+HOME · TemporalAlignStart · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "Home",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Cursor To Document Start",
+   "detail": "ae aeks default · Cmd+HOME · TextCursorToDocumentStart · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "Home",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Select To Line Start",
+   "detail": "ae aeks default · Shift+HOME · TextSelectToLineStart · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "Home",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Time Jump To WA Start",
+   "detail": "ae aeks default · Shift+HOME · TimeJumpToWAStart · ctx: CCompTime",
+   "group": "Adobe After Effects",
+   "key": "Home",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Import Footage",
+   "detail": "ae aeks default · Cmd+I · ImportFootage · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "I",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "High Resolution",
+   "detail": "ae aeks default · Cmd+J · HighResolution · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "J",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Prev Keyframe In Selection",
+   "detail": "ae aeks default · Shift+J · PrevKeyframeInSelection · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "J",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Settings",
+   "detail": "ae aeks default · Cmd+K · CompSettings · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Next Keyframe In Selection",
+   "detail": "ae aeks default · Shift+K · NextKeyframeInSelection · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "K",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Twirl Audio Add State",
+   "detail": "ae aeks default · Shift+L · CompTwirlAudioAddState · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "L",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Twirl Audio New KF",
+   "detail": "ae aeks default · Option+L · CompTwirlAudioNewKF · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "L",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Lock",
+   "detail": "ae aeks default · Cmd+L · ToggleLock · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "L",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "MT Nudge Left Hold Pos",
+   "detail": "ae aeks default · Option+LeftArrow · MTNudgeLeftHoldPos · ctx: Tracker",
+   "group": "Adobe After Effects",
+   "key": "Left",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "MT Nudge Left More",
+   "detail": "ae aeks default · Shift+LeftArrow · MTNudgeLeftMore · ctx: Tracker",
+   "group": "Adobe After Effects",
+   "key": "Left",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Nudge Keyframes Earlier",
+   "detail": "ae aeks default · Option+LeftArrow · NudgeKeyframesEarlier · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "Left",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Nudge Left More",
+   "detail": "ae aeks default · Shift+LeftArrow · NudgeLeftMore · ctx: CCompCompCmd, CPanoProjLayerPano",
+   "group": "Adobe After Effects",
+   "key": "Left",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Cursor To Word Left",
+   "detail": "ae aeks default · Cmd+LeftArrow · TextCursorToWordLeft · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "Left",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Decrease Kerning",
+   "detail": "ae aeks default · Option+LeftArrow · TextDecreaseKerning · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "Left",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Select To Left",
+   "detail": "ae aeks default · Shift+LeftArrow · TextSelectToLeft · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "Left",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Time Step Back",
+   "detail": "ae aeks default · Cmd+LeftArrow · TimeStepBack · ctx: CCompTime, CDirItemTabPanelTime",
+   "group": "Adobe After Effects",
+   "key": "Left",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Add Comp To Render Queue",
+   "detail": "ae aeks default · Cmd+M · AddCompToRenderQueue · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "M",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Toggle Mask Shapes Add State",
+   "detail": "ae aeks default · Shift+M · CompToggleMaskShapesAddState · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "M",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Toggle Mask Shapes New KF",
+   "detail": "ae aeks default · Option+M · CompToggleMaskShapesNewKF · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "M",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Mac Sys Menu Minimize",
+   "detail": "ae aeks default · Cmd+M · MacSysMenuMinimize · ctx: MacSysShortcutsStd",
+   "group": "Adobe After Effects",
+   "key": "M",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "New Comp",
+   "detail": "ae aeks default · Cmd+N · NewComp · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "N",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Open",
+   "detail": "ae aeks default · Cmd+O · Open · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "O",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Twirl Position Add State",
+   "detail": "ae aeks default · Shift+P · CompTwirlPositionAddState · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "P",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Twirl Position New KF",
+   "detail": "ae aeks default · Option+P · CompTwirlPositionNewKF · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "P",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Tool Pin",
+   "detail": "ae aeks default · Cmd+P · ToolPin · ctx: CEggAppTool",
+   "group": "Adobe After Effects",
+   "key": "P",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Nudge Later",
+   "detail": "ae aeks default · Option+PageDOWN · NudgeLater · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "PageDown",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Paint Time Step Forward",
+   "detail": "ae aeks default · Cmd+PageDOWN · PaintTimeStepForward · ctx: CCompPaintCmd",
+   "group": "Adobe After Effects",
+   "key": "PageDown",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Time Step Forward More",
+   "detail": "ae aeks default · Shift+PageDOWN · TimeStepForwardMore · ctx: CCompTime, CDirItemTabPanelTime",
+   "group": "Adobe After Effects",
+   "key": "PageDown",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Nudge Earlier",
+   "detail": "ae aeks default · Option+PageUP · NudgeEarlier · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "PageUp",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Paint Time Step Back",
+   "detail": "ae aeks default · Cmd+PageUP · PaintTimeStepBack · ctx: CCompPaintCmd",
+   "group": "Adobe After Effects",
+   "key": "PageUp",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Time Step Back More",
+   "detail": "ae aeks default · Shift+PageUP · TimeStepBackMore · ctx: CCompTime, CDirItemTabPanelTime",
+   "group": "Adobe After Effects",
+   "key": "PageUp",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Quit",
+   "detail": "ae aeks default · Cmd+Q · Quit · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "Q",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Tool Mask Toggle",
+   "detail": "ae aeks default · Shift+Q · ToolMaskToggle · ctx: CEggAppTool",
+   "group": "Adobe After Effects",
+   "key": "Q",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Twirl Rotation Add State",
+   "detail": "ae aeks default · Shift+R · CompTwirlRotationAddState · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "R",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Twirl Rotation New KF",
+   "detail": "ae aeks default · Option+R · CompTwirlRotationNewKF · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "R",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Show Rulers",
+   "detail": "ae aeks default · Cmd+R · ShowRulers · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "R",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Commit",
+   "detail": "ae aeks default · Cmd+Return · TextCommit · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "Return",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "MT Nudge Right Hold Pos",
+   "detail": "ae aeks default · Option+RightArrow · MTNudgeRightHoldPos · ctx: Tracker",
+   "group": "Adobe After Effects",
+   "key": "Right",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "MT Nudge Right More",
+   "detail": "ae aeks default · Shift+RightArrow · MTNudgeRightMore · ctx: Tracker",
+   "group": "Adobe After Effects",
+   "key": "Right",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Nudge Keyframes Later",
+   "detail": "ae aeks default · Option+RightArrow · NudgeKeyframesLater · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "Right",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Nudge Right More",
+   "detail": "ae aeks default · Shift+RightArrow · NudgeRightMore · ctx: CCompCompCmd, CPanoProjLayerPano",
+   "group": "Adobe After Effects",
+   "key": "Right",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Cursor To Word Right",
+   "detail": "ae aeks default · Cmd+RightArrow · TextCursorToWordRight · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "Right",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Increase Kerning",
+   "detail": "ae aeks default · Option+RightArrow · TextIncreaseKerning · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "Right",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Select To Right",
+   "detail": "ae aeks default · Shift+RightArrow · TextSelectToRight · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "Right",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Time Step Forward",
+   "detail": "ae aeks default · Cmd+RightArrow · TimeStepForward · ctx: CCompTime, CDirItemTabPanelTime",
+   "group": "Adobe After Effects",
+   "key": "Right",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Twirl Scale Add State",
+   "detail": "ae aeks default · Shift+S · CompTwirlScaleAddState · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "S",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Twirl Scale New KF",
+   "detail": "ae aeks default · Option+S · CompTwirlScaleNewKF · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "S",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Save",
+   "detail": "ae aeks default · Cmd+S · Save · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "S",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Time Shift Spacebar Play",
+   "detail": "ae aeks default · Shift+Space · TimeShiftSpacebarPlay · ctx: CCompTime, CDirItemTabPanelTime",
+   "group": "Adobe After Effects",
+   "key": "Space",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Twirl Opacity Add State",
+   "detail": "ae aeks default · Shift+T · CompTwirlOpacityAddState · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "T",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Twirl Opacity New KF",
+   "detail": "ae aeks default · Option+T · CompTwirlOpacityNewKF · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "T",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Mask Reshape",
+   "detail": "ae aeks default · Cmd+T · MaskReshape · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "T",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Tool Text",
+   "detail": "ae aeks default · Cmd+T · ToolText · ctx: CEggAppTool",
+   "group": "Adobe After Effects",
+   "key": "T",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Best Quality",
+   "detail": "ae aeks default · Cmd+U · BestQuality · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "U",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Toggle Uber Animating Keyframes Add State",
+   "detail": "ae aeks default · Shift+U · CompToggleUberAnimatingKeyframesAddState · ctx: CCompCompCmd, CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "U",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "MT Nudge Up Hold Pos",
+   "detail": "ae aeks default · Option+UpArrow · MTNudgeUpHoldPos · ctx: Tracker",
+   "group": "Adobe After Effects",
+   "key": "Up",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "MT Nudge Up More",
+   "detail": "ae aeks default · Shift+UpArrow · MTNudgeUpMore · ctx: Tracker",
+   "group": "Adobe After Effects",
+   "key": "Up",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Nudge Up",
+   "detail": "ae aeks default · Option+UpArrow · NudgeUp · ctx: CPanoProjLayerPano",
+   "group": "Adobe After Effects",
+   "key": "Up",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Nudge Up More",
+   "detail": "ae aeks default · Shift+UpArrow · NudgeUpMore · ctx: CCompCompCmd, CPanoProjLayerPano",
+   "group": "Adobe After Effects",
+   "key": "Up",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Select Previous",
+   "detail": "ae aeks default · Cmd+UpArrow · SelectPrevious · ctx: CCompCmd",
+   "group": "Adobe After Effects",
+   "key": "Up",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Select Previous Add",
+   "detail": "ae aeks default · Shift+UpArrow · SelectPreviousAdd · ctx: CPanoECOutline, POutlinePano, RQOutlinePano",
+   "group": "Adobe After Effects",
+   "key": "Up",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Cursor To Word Up",
+   "detail": "ae aeks default · Cmd+UpArrow · TextCursorToWordUp · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "Up",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Decrease Leading",
+   "detail": "ae aeks default · Option+UpArrow · TextDecreaseLeading · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "Up",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Select To Up",
+   "detail": "ae aeks default · Shift+UpArrow · TextSelectToUp · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "Up",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Gizmo Mode Toggle",
+   "detail": "ae aeks default · Shift+V · GizmoModeToggle · ctx: CEggAppTool",
+   "group": "Adobe After Effects",
+   "key": "V",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Paste",
+   "detail": "ae aeks default · Cmd+V · Paste · ctx: CSwitchboard, CSwitchboardModal",
+   "group": "Adobe After Effects",
+   "key": "V",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Close",
+   "detail": "ae aeks default · Cmd+W · Close · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "W",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Tool Roto Brush",
+   "detail": "ae aeks default · Option+W · ToolRotoBrush · ctx: CEggAppTool",
+   "group": "Adobe After Effects",
+   "key": "W",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Cut",
+   "detail": "ae aeks default · Cmd+X · Cut · ctx: CSwitchboard, CSwitchboardModal",
+   "group": "Adobe After Effects",
+   "key": "X",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Show Xray",
+   "detail": "ae aeks default · Option+X · ShowXray · ctx: CItem",
+   "group": "Adobe After Effects",
+   "key": "X",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "New Solid In Comp",
+   "detail": "ae aeks default · Cmd+Y · NewSolidInComp · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "Y",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Undo",
+   "detail": "ae aeks default · Cmd+Z · Undo · ctx: CSwitchboard, CSwitchboardModal",
+   "group": "Adobe After Effects",
+   "key": "Z",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "MT Set Start",
+   "detail": "ae aeks default · Option+[ · MTSetStart · ctx: Tracker",
+   "group": "Adobe After Effects",
+   "key": "[",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Send Farther",
+   "detail": "ae aeks default · Cmd+[ · SendFarther · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "[",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Time Trim In",
+   "detail": "ae aeks default · Option+[ · TimeTrimIn · ctx: CCompTime, CPanoProjFootage, CPanoProjLayer, TLOutlinePano",
+   "group": "Adobe After Effects",
+   "key": "[",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Add Items To New Comp",
+   "detail": "ae aeks default · Option+Backslash · AddItemsToNewComp · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "\\",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Zoom Window Mega",
+   "detail": "ae aeks default · Cmd+Backslash · ZoomWindowMega · ctx: AE_TopLevelWindow",
+   "group": "Adobe After Effects",
+   "key": "\\",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Bring Closer",
+   "detail": "ae aeks default · Cmd+] · BringCloser · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "]",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "MT Set End",
+   "detail": "ae aeks default · Option+] · MTSetEnd · ctx: Tracker",
+   "group": "Adobe After Effects",
+   "key": "]",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Time Trim Out",
+   "detail": "ae aeks default · Option+] · TimeTrimOut · ctx: CCompTime, CPanoProjFootage, CPanoProjLayer, TLOutlinePano",
+   "group": "Adobe After Effects",
+   "key": "]",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Select Next Mask",
+   "detail": "ae aeks default · Option+` · SelectNextMask · ctx: CPanoProjItem",
+   "group": "Adobe After Effects",
+   "key": "`",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Twirl Explode",
+   "detail": "ae aeks default · macControl+` · TwirlExplode · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "`",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Twirl Explode",
+   "detail": "ae aeks default · Cmd+` · TwirlExplode · ctx: CTopic",
+   "group": "Adobe After Effects",
+   "key": "`",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Twirl Preserve Solo",
+   "detail": "ae aeks default · Shift+` · TwirlPreserveSolo · ctx: CCompCompCmd, CTopic",
+   "group": "Adobe After Effects",
+   "key": "`",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Preview Numpad0 N Frames",
+   "detail": "ae aeks default · Option+Pad0 · PreviewNumpad0NFrames · ctx: CEggApp",
+   "group": "Adobe After Effects",
+   "key": "keypad_0",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Preview Shift Numpad0",
+   "detail": "ae aeks default · Shift+Pad0 · PreviewShiftNumpad0 · ctx: CEggApp",
+   "group": "Adobe After Effects",
+   "key": "keypad_0",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Save Preview Current",
+   "detail": "ae aeks default · Cmd+Pad0 · SavePreviewCurrent · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "keypad_0",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Toggle Select Layer1",
+   "detail": "ae aeks default · Shift+Pad1 · CompToggleSelectLayer1 · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_1",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Paint Set Flow10",
+   "detail": "ae aeks default · Shift+Pad1 · PaintSetFlow10 · ctx: CCompPaintCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_1",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Toggle Select Layer2",
+   "detail": "ae aeks default · Shift+Pad2 · CompToggleSelectLayer2 · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_2",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Paint Set Flow20",
+   "detail": "ae aeks default · Shift+Pad2 · PaintSetFlow20 · ctx: CCompPaintCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_2",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Toggle Select Layer3",
+   "detail": "ae aeks default · Shift+Pad3 · CompToggleSelectLayer3 · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_3",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Paint Set Flow30",
+   "detail": "ae aeks default · Shift+Pad3 · PaintSetFlow30 · ctx: CCompPaintCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_3",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Toggle Select Layer4",
+   "detail": "ae aeks default · Shift+Pad4 · CompToggleSelectLayer4 · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_4",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Paint Set Flow40",
+   "detail": "ae aeks default · Shift+Pad4 · PaintSetFlow40 · ctx: CCompPaintCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_4",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Toggle Select Layer5",
+   "detail": "ae aeks default · Shift+Pad5 · CompToggleSelectLayer5 · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_5",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Paint Set Flow50",
+   "detail": "ae aeks default · Shift+Pad5 · PaintSetFlow50 · ctx: CCompPaintCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_5",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Toggle Select Layer6",
+   "detail": "ae aeks default · Shift+Pad6 · CompToggleSelectLayer6 · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_6",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Paint Set Flow60",
+   "detail": "ae aeks default · Shift+Pad6 · PaintSetFlow60 · ctx: CCompPaintCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_6",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Toggle Select Layer7",
+   "detail": "ae aeks default · Shift+Pad7 · CompToggleSelectLayer7 · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_7",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Paint Set Flow70",
+   "detail": "ae aeks default · Shift+Pad7 · PaintSetFlow70 · ctx: CCompPaintCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_7",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Toggle Select Layer8",
+   "detail": "ae aeks default · Shift+Pad8 · CompToggleSelectLayer8 · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_8",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Paint Set Flow80",
+   "detail": "ae aeks default · Shift+Pad8 · PaintSetFlow80 · ctx: CCompPaintCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_8",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Toggle Select Layer9",
+   "detail": "ae aeks default · Shift+Pad9 · CompToggleSelectLayer9 · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_9",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Paint Set Flow90",
+   "detail": "ae aeks default · Shift+Pad9 · PaintSetFlow90 · ctx: CCompPaintCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_9",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Purge All Memory",
+   "detail": "ae aeks default · macControl+PadClear · PurgeAllMemory · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "keypad_clear",
+   "mods": [
+    "ctrl"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Paint Set Flow100",
+   "detail": "ae aeks default · Shift+PadComma · PaintSetFlow100 · ctx: CCompPaintCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_comma",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Preview Audio Work Area",
+   "detail": "ae aeks default · Option+PadComma · PreviewAudioWorkArea · ctx: CEggApp",
+   "group": "Adobe After Effects",
+   "key": "keypad_comma",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Paint Set Flow100",
+   "detail": "ae aeks default · Shift+PadDecimal · PaintSetFlow100 · ctx: CCompPaintCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_decimal",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Preview Audio Work Area",
+   "detail": "ae aeks default · Option+PadDecimal · PreviewAudioWorkArea · ctx: CEggApp",
+   "group": "Adobe After Effects",
+   "key": "keypad_decimal",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Paint Set Flow100",
+   "detail": "ae aeks default · Shift+PadDelete · PaintSetFlow100 · ctx: CCompPaintCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_delete",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Preview Audio Work Area",
+   "detail": "ae aeks default · Option+PadDelete · PreviewAudioWorkArea · ctx: CEggApp",
+   "group": "Adobe After Effects",
+   "key": "keypad_delete",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Open Layer Source Window",
+   "detail": "ae aeks default · Option+Enter · OpenLayerSourceWindow · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "keypad_enter",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Preview Numpad0 N Frames",
+   "detail": "ae aeks default · Option+PadInsert · PreviewNumpad0NFrames · ctx: CEggApp",
+   "group": "Adobe After Effects",
+   "key": "keypad_insert",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Preview Shift Numpad0",
+   "detail": "ae aeks default · Shift+PadInsert · PreviewShiftNumpad0 · ctx: CEggApp",
+   "group": "Adobe After Effects",
+   "key": "keypad_insert",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Save Preview Current",
+   "detail": "ae aeks default · Cmd+PadInsert · SavePreviewCurrent · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "keypad_insert",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Nudge Rot CCW More",
+   "detail": "ae aeks default · Shift+PadMinus · NudgeRotCCWMore · ctx: CCompCompCmd, CPanoProjLayerPano",
+   "group": "Adobe After Effects",
+   "key": "keypad_minus",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Nudge Scale Smaller",
+   "detail": "ae aeks default · Option+PadMinus · NudgeScaleSmaller · ctx: CCompCompCmd, CPanoProjLayerPano",
+   "group": "Adobe After Effects",
+   "key": "keypad_minus",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Nudge Scale Smaller",
+   "detail": "ae aeks default · Cmd+PadMinus · NudgeScaleSmaller · ctx: CCompCompCmd, CPanoProjLayerPano",
+   "group": "Adobe After Effects",
+   "key": "keypad_minus",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Add Layer Marker With Dialog",
+   "detail": "ae aeks default · Option+PadMultiply · AddLayerMarkerWithDialog · ctx: CCompCmd",
+   "group": "Adobe After Effects",
+   "key": "keypad_multiply",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Nudge Rot CW More",
+   "detail": "ae aeks default · Shift+PadPlus · NudgeRotCWMore · ctx: CCompCompCmd, CPanoProjLayerPano",
+   "group": "Adobe After Effects",
+   "key": "keypad_plus",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Nudge Scale Larger",
+   "detail": "ae aeks default · Option+PadPlus · NudgeScaleLarger · ctx: CCompCompCmd, CPanoProjLayerPano",
+   "group": "Adobe After Effects",
+   "key": "keypad_plus",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Nudge Scale Larger",
+   "detail": "ae aeks default · Cmd+PadPlus · NudgeScaleLarger · ctx: CCompCompCmd, CPanoProjLayerPano",
+   "group": "Adobe After Effects",
+   "key": "keypad_plus",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Proof Colors",
+   "detail": "ae aeks default · Shift+PadSlash · ProofColors · ctx: CPanoProjItem",
+   "group": "Adobe After Effects",
+   "key": "keypad_slash",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Open Keyboard Shortcuts Panel",
+   "detail": "ae aeks default · Cmd+Option+SingleQuote · OpenKeyboardShortcutsPanel · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "'",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Snap Grid",
+   "detail": "ae aeks default · Cmd+Shift+SingleQuote · ToggleSnapGrid · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "'",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Select Prev Tab",
+   "detail": "ae aeks default · Option+Shift+Comma · SelectPrevTab · ctx: AE_TopLevelWindow",
+   "group": "Adobe After Effects",
+   "key": ",",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Decrease Font Size",
+   "detail": "ae aeks default · Shift+Cmd+Comma · TextDecreaseFontSize · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": ",",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Time Stretch In",
+   "detail": "ae aeks default · Cmd+Shift+Comma · TimeStretchIn · ctx: CCompTime, CPanoProjLayer, TLOutlinePano",
+   "group": "Adobe After Effects",
+   "key": ",",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Time Stretch Out",
+   "detail": "ae aeks default · Cmd+Option+Comma · TimeStretchOut · ctx: CCompTime, CPanoProjLayer, TLOutlinePano",
+   "group": "Adobe After Effects",
+   "key": ",",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Send To Back",
+   "detail": "ae aeks default · Cmd+Shift+- · SendToBack · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "-",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Zoom Out",
+   "detail": "ae aeks default · Cmd+Option+- · ZoomOut · ctx: CPanoECOutline, CPanoProjItem",
+   "group": "Adobe After Effects",
+   "key": "-",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Preview Audio Work Area",
+   "detail": "ae aeks default · macControl+Option+. · PreviewAudioWorkArea · ctx: CEggApp",
+   "group": "Adobe After Effects",
+   "key": ".",
+   "mods": [
+    "ctrl",
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Select Next Tab",
+   "detail": "ae aeks default · Option+Shift+. · SelectNextTab · ctx: AE_TopLevelWindow",
+   "group": "Adobe After Effects",
+   "key": ".",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Increase Font Size",
+   "detail": "ae aeks default · Shift+Cmd+. · TextIncreaseFontSize · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": ".",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Add Comp To Render Queue",
+   "detail": "ae aeks default · Cmd+Shift+/ · AddCompToRenderQueue · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "/",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Add Item To Comp Replace Layer",
+   "detail": "ae aeks default · Cmd+Option+/ · AddItemToCompReplaceLayer · ctx: CSwitchboard, POutlinePano",
+   "group": "Adobe After Effects",
+   "key": "/",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Transmit",
+   "detail": "ae aeks default · macControl+Shift+/ · ToggleTransmit · ctx: CEggApp",
+   "group": "Adobe After Effects",
+   "key": "/",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Zoom No Scroll",
+   "detail": "ae aeks default · Cmd+Option+/ · ZoomNoScroll · ctx: CPanoECOutline, CPanoProjItem",
+   "group": "Adobe After Effects",
+   "key": "/",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Preview Numpad0 N Frames",
+   "detail": "ae aeks default · macControl+Option+0 · PreviewNumpad0NFrames · ctx: CEggApp",
+   "group": "Adobe After Effects",
+   "key": "0",
+   "mods": [
+    "ctrl",
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Preview Shift Numpad0",
+   "detail": "ae aeks default · macControl+Shift+0 · PreviewShiftNumpad0 · ctx: CEggApp",
+   "group": "Adobe After Effects",
+   "key": "0",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Show Hide Render Queue",
+   "detail": "ae aeks default · Cmd+Option+0 · ShowHideRenderQueue · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "0",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Fast Previews Off Keyboard",
+   "detail": "ae aeks default · Cmd+Option+1 · FastPreviewsOffKeyboard · ctx: CItem",
+   "group": "Adobe After Effects",
+   "key": "1",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Gizmo Mode Legacy",
+   "detail": "ae aeks default · Cmd+Shift+1 · GizmoModeLegacy · ctx: CEggAppTool",
+   "group": "Adobe After Effects",
+   "key": "1",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Show Red Channel Alt",
+   "detail": "ae aeks default · Option+Shift+1 · ShowRedChannelAlt · ctx: CItem",
+   "group": "Adobe After Effects",
+   "key": "1",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Fast Previews Adaptive Resolution Keyboard",
+   "detail": "ae aeks default · Cmd+Option+2 · FastPreviewsAdaptiveResolutionKeyboard · ctx: CItem",
+   "group": "Adobe After Effects",
+   "key": "2",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Show Green Channel Alt",
+   "detail": "ae aeks default · Option+Shift+2 · ShowGreenChannelAlt · ctx: CItem",
+   "group": "Adobe After Effects",
+   "key": "2",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Show Blue Channel Alt",
+   "detail": "ae aeks default · Option+Shift+3 · ShowBlueChannelAlt · ctx: CItem",
+   "group": "Adobe After Effects",
+   "key": "3",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Fast Previews Calder RTE Draft3 D Keyboard",
+   "detail": "ae aeks default · Cmd+Option+4 · FastPreviewsCalderRTEDraft3DKeyboard · ctx: CItem",
+   "group": "Adobe After Effects",
+   "key": "4",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Show Alpha Channel Alt",
+   "detail": "ae aeks default · Option+Shift+4 · ShowAlphaChannelAlt · ctx: CItem",
+   "group": "Adobe After Effects",
+   "key": "4",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Fast Previews Wireframe Keyboard",
+   "detail": "ae aeks default · Cmd+Option+5 · FastPreviewsWireframeKeyboard · ctx: CItem",
+   "group": "Adobe After Effects",
+   "key": "5",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Add Layer Marker With Dialog",
+   "detail": "ae aeks default · Option+macControl+8 · AddLayerMarkerWithDialog · ctx: CCompCmd",
+   "group": "Adobe After Effects",
+   "key": "8",
+   "mods": [
+    "ctrl",
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Show Debug Monitor",
+   "detail": "ae aeks default · Cmd+Shift+9 · ShowDebugMonitor · ctx: CEggApp",
+   "group": "Adobe After Effects",
+   "key": "9",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Prefs General",
+   "detail": "ae aeks default · Cmd+Option+; · PrefsGeneral · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": ";",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Snap Guides",
+   "detail": "ae aeks default · Cmd+Shift+; · ToggleSnapGuides · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": ";",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Bring To Front",
+   "detail": "ae aeks default · Cmd+Shift+= · BringToFront · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "=",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Super Script",
+   "detail": "ae aeks default · Shift+Cmd+= · TextSuperScript · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "=",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Expression",
+   "detail": "ae aeks default · Option+Shift+= · ToggleExpression · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "=",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Zoom In",
+   "detail": "ae aeks default · Cmd+Option+= · ZoomIn · ctx: CPanoECOutline, CPanoProjItem",
+   "group": "Adobe After Effects",
+   "key": "=",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Twirl Anchor Point Add State New KF",
+   "detail": "ae aeks default · Option+Shift+A · CompTwirlAnchorPointAddStateNewKF · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "A",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Deselect All",
+   "detail": "ae aeks default · Cmd+Shift+A · DeselectAll · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "A",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Select All Visible Keyframes",
+   "detail": "ae aeks default · Cmd+Option+A · SelectAllVisibleKeyframes · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "A",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Set Sampling Quality Bicubic",
+   "detail": "ae aeks default · Option+Shift+B · SetSamplingQualityBicubic · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "B",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Set Work Area To Selection",
+   "detail": "ae aeks default · Cmd+Option+B · SetWorkAreaToSelection · ctx: CCompCmd",
+   "group": "Adobe After Effects",
+   "key": "B",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Compify",
+   "detail": "ae aeks default · Cmd+Shift+C · Compify · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "C",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Copy Expression Linked Instance",
+   "detail": "ae aeks default · Cmd+Option+C · CopyExpressionLinkedInstance · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "C",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Remember Interpretation",
+   "detail": "ae aeks default · Cmd+Option+C · RememberInterpretation · ctx: POutlinePano",
+   "group": "Adobe After Effects",
+   "key": "C",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Align Center",
+   "detail": "ae aeks default · Shift+Cmd+C · TextAlignCenter · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "C",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Casts Shadows",
+   "detail": "ae aeks default · Option+Shift+C · ToggleCastsShadows · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "C",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "New Debug Comp",
+   "detail": "ae aeks default · Shift+Option+D · NewDebugComp · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "D",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Split Layer",
+   "detail": "ae aeks default · Cmd+Shift+D · SplitLayer · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "D",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "MT Nudge Down Hold Pos More",
+   "detail": "ae aeks default · Option+Shift+DownArrow · MTNudgeDownHoldPosMore · ctx: Tracker",
+   "group": "Adobe After Effects",
+   "key": "Down",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Nudge Down More",
+   "detail": "ae aeks default · Option+Shift+DownArrow · NudgeDownMore · ctx: CPanoProjLayerPano",
+   "group": "Adobe After Effects",
+   "key": "Down",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Select Next Add",
+   "detail": "ae aeks default · Cmd+Shift+DownArrow · SelectNextAdd · ctx: CCompCmd",
+   "group": "Adobe After Effects",
+   "key": "Down",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Send Farther",
+   "detail": "ae aeks default · Cmd+Option+DownArrow · SendFarther · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "Down",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Decrease Baseline Shift",
+   "detail": "ae aeks default · Shift+Option+DownArrow · TextDecreaseBaselineShift · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "Down",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Increase Leading A Lot",
+   "detail": "ae aeks default · Cmd+Option+DownArrow · TextIncreaseLeadingALot · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "Down",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Select To Word Down",
+   "detail": "ae aeks default · Shift+Cmd+DownArrow · TextSelectToWordDown · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "Down",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Filter None",
+   "detail": "ae aeks default · Cmd+Shift+E · FilterNone · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "E",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Show Frame File Name",
+   "detail": "ae aeks default · Cmd+Option+E · ShowFrameFileName · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "E",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Select To Document End",
+   "detail": "ae aeks default · Shift+Cmd+END · TextSelectToDocumentEnd · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "End",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Toggle Mask Feathers Add State New KF",
+   "detail": "ae aeks default · Option+Shift+F · CompToggleMaskFeathersAddStateNewKF · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "F",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Look At All",
+   "detail": "ae aeks default · Cmd+Shift+F · LookAtAll · ctx: CameraToolUI",
+   "group": "Adobe After Effects",
+   "key": "F",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Mask Feather",
+   "detail": "ae aeks default · Cmd+Shift+F · MaskFeather · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "F",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Stretch Layer To Fit",
+   "detail": "ae aeks default · Cmd+Option+F · StretchLayerToFit · ctx: CCompCmd",
+   "group": "Adobe After Effects",
+   "key": "F",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Justify All",
+   "detail": "ae aeks default · Shift+Cmd+F · TextJustifyAll · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "F",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Show Comp Tree",
+   "detail": "ae aeks default · Cmd+Shift+F11 · ShowCompTree · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "F11",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Test Host Plugin",
+   "detail": "ae aeks default · Cmd+Shift+F12 · TestHostPlugin · ctx: CEggApp",
+   "group": "Adobe After Effects",
+   "key": "F12",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Purge Snapshot1",
+   "detail": "ae aeks default · Cmd+Shift+F5 · PurgeSnapshot1 · ctx: CItem",
+   "group": "Adobe After Effects",
+   "key": "F5",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Purge Snapshot2",
+   "detail": "ae aeks default · Cmd+Shift+F6 · PurgeSnapshot2 · ctx: CItem",
+   "group": "Adobe After Effects",
+   "key": "F6",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Purge Snapshot3",
+   "detail": "ae aeks default · Cmd+Shift+F7 · PurgeSnapshot3 · ctx: CItem",
+   "group": "Adobe After Effects",
+   "key": "F7",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Purge Snapshot4",
+   "detail": "ae aeks default · Cmd+Shift+F8 · PurgeSnapshot4 · ctx: CItem",
+   "group": "Adobe After Effects",
+   "key": "F8",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Easy Ease Out",
+   "detail": "ae aeks default · Cmd+Shift+F9 · EasyEaseOut · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "F9",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Interpret Footage",
+   "detail": "ae aeks default · Cmd+Option+G · InterpretFootage · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "G",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Ungroup",
+   "detail": "ae aeks default · Cmd+Shift+G · Ungroup · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "G",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Mac Sys Menu Hide Me",
+   "detail": "ae aeks default · Cmd+macControl+H · MacSysMenuHideMe · ctx: MacSysShortcutsAlt",
+   "group": "Adobe After Effects",
+   "key": "H",
+   "mods": [
+    "ctrl",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Mac Sys Menu Hide Others",
+   "detail": "ae aeks default · Cmd+Option+H · MacSysMenuHideOthers · ctx: MacSysShortcutsStd",
+   "group": "Adobe After Effects",
+   "key": "H",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Keyframe Hold Interp",
+   "detail": "ae aeks default · Cmd+Option+H · ToggleKeyframeHoldInterp · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "H",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Layer Controls",
+   "detail": "ae aeks default · Cmd+Shift+H · ToggleLayerControls · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "H",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Write Version File",
+   "detail": "ae aeks default · Cmd+Shift+HELP · WriteVersionFile · ctx: CEggApp",
+   "group": "Adobe After Effects",
+   "key": "Help",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Center Anchor To Bounds",
+   "detail": "ae aeks default · Cmd+Option+HOME · CenterAnchorToBounds · ctx: CCompCmd",
+   "group": "Adobe After Effects",
+   "key": "Home",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Select To Document Start",
+   "detail": "ae aeks default · Shift+Cmd+HOME · TextSelectToDocumentStart · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "Home",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Import Multiple",
+   "detail": "ae aeks default · Cmd+Option+I · ImportMultiple · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "I",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Mask Inverse",
+   "detail": "ae aeks default · Cmd+Shift+I · MaskInverse · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "I",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Speculative Preview",
+   "detail": "ae aeks default · Option+Shift+I · SpeculativePreview · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "I",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Cust Res No Dialog",
+   "detail": "ae aeks default · Cmd+Option+J · CustResNoDialog · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "J",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Go To Time",
+   "detail": "ae aeks default · Option+Shift+J · GoToTime · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "J",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "High Resolution Recurse",
+   "detail": "ae aeks default · Cmd+macControl+J · HighResolutionRecurse · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "J",
+   "mods": [
+    "ctrl",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Med Resolution",
+   "detail": "ae aeks default · Cmd+Shift+J · MedResolution · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "J",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Justify Left",
+   "detail": "ae aeks default · Shift+Cmd+J · TextJustifyLeft · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "J",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Keyframe Interp Dialog",
+   "detail": "ae aeks default · Cmd+Option+K · KeyframeInterpDialog · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "K",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Keyframe Velocity Dialog",
+   "detail": "ae aeks default · Cmd+Shift+K · KeyframeVelocityDialog · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "K",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text All Caps",
+   "detail": "ae aeks default · Shift+Cmd+K · TextAllCaps · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "K",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Twirl Audio Add State New KF",
+   "detail": "ae aeks default · Option+Shift+L · CompTwirlAudioAddStateNewKF · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "L",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Force Scan For Changed Footage",
+   "detail": "ae aeks default · Cmd+Option+L · ForceScanForChangedFootage · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "L",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Align Left",
+   "detail": "ae aeks default · Shift+Cmd+L · TextAlignLeft · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "L",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Unlock All Layers",
+   "detail": "ae aeks default · Cmd+Shift+L · UnlockAllLayers · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "L",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "MT Nudge Left Hold Pos More",
+   "detail": "ae aeks default · Option+Shift+LeftArrow · MTNudgeLeftHoldPosMore · ctx: Tracker",
+   "group": "Adobe After Effects",
+   "key": "Left",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Nudge Keyframes Earlier More",
+   "detail": "ae aeks default · Option+Shift+LeftArrow · NudgeKeyframesEarlierMore · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "Left",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Decrease Kerning A Lot",
+   "detail": "ae aeks default · Cmd+Option+LeftArrow · TextDecreaseKerningALot · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "Left",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Select To Word Left",
+   "detail": "ae aeks default · Shift+Cmd+LeftArrow · TextSelectToWordLeft · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "Left",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Time Rewind",
+   "detail": "ae aeks default · Cmd+Option+LeftArrow · TimeRewind · ctx: CCompTime, CDirItemTabPanelTime",
+   "group": "Adobe After Effects",
+   "key": "Left",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Time Step Back More",
+   "detail": "ae aeks default · Cmd+Shift+LeftArrow · TimeStepBackMore · ctx: CCompTime, CDirItemTabPanelTime",
+   "group": "Adobe After Effects",
+   "key": "Left",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Add To Adobe Media Encoder Render Queue",
+   "detail": "ae aeks default · Cmd+Option+M · AddToAdobeMediaEncoderRenderQueue · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "M",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Toggle Mask Shapes Add State New KF",
+   "detail": "ae aeks default · Option+Shift+M · CompToggleMaskShapesAddStateNewKF · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "M",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Mac Sys Menu Minimize",
+   "detail": "ae aeks default · Cmd+macControl+M · MacSysMenuMinimize · ctx: CSwitchboard, MacSysShortcutsAlt",
+   "group": "Adobe After Effects",
+   "key": "M",
+   "mods": [
+    "ctrl",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Mask",
+   "detail": "ae aeks default · Cmd+Shift+M · Mask · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "M",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "New",
+   "detail": "ae aeks default · Cmd+Option+N · New · ctx: CEggApp, CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "N",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "New Mask",
+   "detail": "ae aeks default · Cmd+Shift+N · NewMask · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "N",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "New Viewer",
+   "detail": "ae aeks default · Option+Shift+N · NewViewer · ctx: CDirTabPanel",
+   "group": "Adobe After Effects",
+   "key": "N",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Auto Orient",
+   "detail": "ae aeks default · Cmd+Option+O · AutoOrient · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "O",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Opacity",
+   "detail": "ae aeks default · Cmd+Shift+O · Opacity · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "O",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Twirl Position Add State New KF",
+   "detail": "ae aeks default · Option+Shift+P · CompTwirlPositionAddStateNewKF · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "P",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Offset",
+   "detail": "ae aeks default · Cmd+Shift+P · Offset · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "P",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Set Proxy File",
+   "detail": "ae aeks default · Cmd+Option+P · SetProxyFile · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "P",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Nudge Later More",
+   "detail": "ae aeks default · Option+Shift+PageDOWN · NudgeLaterMore · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "PageDown",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Nudge Earlier More",
+   "detail": "ae aeks default · Option+Shift+PageUP · NudgeEarlierMore · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "PageUp",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Twirl Rotation Add State New KF",
+   "detail": "ae aeks default · Option+Shift+R · CompTwirlRotationAddStateNewKF · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "R",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Reverse Layer",
+   "detail": "ae aeks default · Cmd+Option+R · ReverseLayer · ctx: CCompCmd",
+   "group": "Adobe After Effects",
+   "key": "R",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Rotate All",
+   "detail": "ae aeks default · Cmd+Shift+R · RotateAll · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "R",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Align Right",
+   "detail": "ae aeks default · Shift+Cmd+R · TextAlignRight · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "R",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "MT Nudge Right Hold Pos More",
+   "detail": "ae aeks default · Option+Shift+RightArrow · MTNudgeRightHoldPosMore · ctx: Tracker",
+   "group": "Adobe After Effects",
+   "key": "Right",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Nudge Keyframes Later More",
+   "detail": "ae aeks default · Option+Shift+RightArrow · NudgeKeyframesLaterMore · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "Right",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Increase Kerning A Lot",
+   "detail": "ae aeks default · Cmd+Option+RightArrow · TextIncreaseKerningALot · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "Right",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Select To Word Right",
+   "detail": "ae aeks default · Shift+Cmd+RightArrow · TextSelectToWordRight · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "Right",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Time Fast Forward",
+   "detail": "ae aeks default · Cmd+Option+RightArrow · TimeFastForward · ctx: CCompTime, CDirItemTabPanelTime",
+   "group": "Adobe After Effects",
+   "key": "Right",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Time Step Forward More",
+   "detail": "ae aeks default · Cmd+Shift+RightArrow · TimeStepForwardMore · ctx: CCompTime, CDirItemTabPanelTime",
+   "group": "Adobe After Effects",
+   "key": "Right",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Twirl Scale Add State New KF",
+   "detail": "ae aeks default · Option+Shift+S · CompTwirlScaleAddStateNewKF · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "S",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Save As",
+   "detail": "ae aeks default · Cmd+Shift+S · SaveAs · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "S",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Save Frame As",
+   "detail": "ae aeks default · Cmd+Option+S · SaveFrameAs · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "S",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Twirl Opacity Add State New KF",
+   "detail": "ae aeks default · Option+Shift+T · CompTwirlOpacityAddStateNewKF · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "T",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Enable Time Remap",
+   "detail": "ae aeks default · Cmd+Option+T · EnableTimeRemap · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "T",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Effect Controls",
+   "detail": "ae aeks default · Cmd+Shift+T · ToggleEffectControls · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "T",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Best Quality Recurse",
+   "detail": "ae aeks default · Cmd+macControl+U · BestQualityRecurse · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "U",
+   "mods": [
+    "ctrl",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp View Options",
+   "detail": "ae aeks default · Cmd+Option+U · CompViewOptions · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "U",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Draft Quality",
+   "detail": "ae aeks default · Cmd+Shift+U · DraftQuality · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "U",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Bring Closer",
+   "detail": "ae aeks default · Cmd+Option+UpArrow · BringCloser · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "Up",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "MT Nudge Up Hold Pos More",
+   "detail": "ae aeks default · Option+Shift+UpArrow · MTNudgeUpHoldPosMore · ctx: Tracker",
+   "group": "Adobe After Effects",
+   "key": "Up",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Nudge Up More",
+   "detail": "ae aeks default · Option+Shift+UpArrow · NudgeUpMore · ctx: CPanoProjLayerPano",
+   "group": "Adobe After Effects",
+   "key": "Up",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Select Previous Add",
+   "detail": "ae aeks default · Cmd+Shift+UpArrow · SelectPreviousAdd · ctx: CCompCmd",
+   "group": "Adobe After Effects",
+   "key": "Up",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Decrease Leading A Lot",
+   "detail": "ae aeks default · Cmd+Option+UpArrow · TextDecreaseLeadingALot · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "Up",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Increase Baseline Shift",
+   "detail": "ae aeks default · Shift+Option+UpArrow · TextIncreaseBaselineShift · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "Up",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Select To Word Up",
+   "detail": "ae aeks default · Shift+Cmd+UpArrow · TextSelectToWordUp · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "Up",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Apply Interpretation",
+   "detail": "ae aeks default · Cmd+Option+V · ApplyInterpretation · ctx: POutlinePano",
+   "group": "Adobe After Effects",
+   "key": "V",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Paste Alt",
+   "detail": "ae aeks default · Cmd+Option+V · PasteAlt · ctx: CCompCmd",
+   "group": "Adobe After Effects",
+   "key": "V",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Paste Reversed Keyframes",
+   "detail": "ae aeks default · Cmd+Shift+V · PasteReversedKeyframes · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "V",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Close All",
+   "detail": "ae aeks default · Cmd+Option+W · CloseAll · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "W",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Close Window",
+   "detail": "ae aeks default · Cmd+Shift+W · CloseWindow · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "W",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Comp Trim To Work Area",
+   "detail": "ae aeks default · Cmd+Shift+X · CompTrimToWorkArea · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "X",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Reset Horizontal Scale",
+   "detail": "ae aeks default · Shift+Cmd+X · TextResetHorizontalScale · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "X",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Layer Settings",
+   "detail": "ae aeks default · Cmd+Shift+Y · LayerSettings · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "Y",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "New Effects Layer",
+   "detail": "ae aeks default · Cmd+Option+Y · NewEffectsLayer · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "Y",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Redo",
+   "detail": "ae aeks default · Cmd+Shift+Z · Redo · ctx: CSwitchboard, CSwitchboardModal",
+   "group": "Adobe After Effects",
+   "key": "Z",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Send To Back",
+   "detail": "ae aeks default · Cmd+Shift+[ · SendToBack · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "[",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Zoom Window Mega Main Monitor",
+   "detail": "ae aeks default · Cmd+Option+Backslash · ZoomWindowMegaMainMonitor · ctx: AE_TopLevelWindow",
+   "group": "Adobe After Effects",
+   "key": "\\",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Bring To Front",
+   "detail": "ae aeks default · Cmd+Shift+] · BringToFront · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "]",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Select Previous Mask",
+   "detail": "ae aeks default · Option+Shift+` · SelectPreviousMask · ctx: CPanoProjItem",
+   "group": "Adobe After Effects",
+   "key": "`",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Twirl Preserve Solo Explode",
+   "detail": "ae aeks default · macControl+Shift+` · TwirlPreserveSoloExplode · ctx: CCompCompCmd",
+   "group": "Adobe After Effects",
+   "key": "`",
+   "mods": [
+    "ctrl",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Twirl Preserve Solo Explode",
+   "detail": "ae aeks default · Cmd+Shift+` · TwirlPreserveSoloExplode · ctx: CTopic",
+   "group": "Adobe After Effects",
+   "key": "`",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Save Preview Shift Numpad0",
+   "detail": "ae aeks default · Cmd+Shift+Pad0 · SavePreviewShiftNumpad0 · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "keypad_0",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Save Preview Shift Numpad0",
+   "detail": "ae aeks default · Cmd+Shift+PadInsert · SavePreviewShiftNumpad0 · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "keypad_insert",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Nudge Opacity Down",
+   "detail": "ae aeks default · macControl+Option+PadMinus · NudgeOpacityDown · ctx: CCompCompCmd, CPanoProjLayerPano",
+   "group": "Adobe After Effects",
+   "key": "keypad_minus",
+   "mods": [
+    "ctrl",
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Nudge Scale Smaller More",
+   "detail": "ae aeks default · Option+Shift+PadMinus · NudgeScaleSmallerMore · ctx: CCompCompCmd, CPanoProjLayerPano",
+   "group": "Adobe After Effects",
+   "key": "keypad_minus",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Nudge Scale Smaller More",
+   "detail": "ae aeks default · Cmd+Shift+PadMinus · NudgeScaleSmallerMore · ctx: CCompCompCmd, CPanoProjLayerPano",
+   "group": "Adobe After Effects",
+   "key": "keypad_minus",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Nudge Opacity Up",
+   "detail": "ae aeks default · macControl+Option+PadPlus · NudgeOpacityUp · ctx: CCompCompCmd, CPanoProjLayerPano",
+   "group": "Adobe After Effects",
+   "key": "keypad_plus",
+   "mods": [
+    "ctrl",
+    "opt"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Nudge Scale Larger More",
+   "detail": "ae aeks default · Option+Shift+PadPlus · NudgeScaleLargerMore · ctx: CCompCompCmd, CPanoProjLayerPano",
+   "group": "Adobe After Effects",
+   "key": "keypad_plus",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Nudge Scale Larger More",
+   "detail": "ae aeks default · Cmd+Shift+PadPlus · NudgeScaleLargerMore · ctx: CCompCompCmd, CPanoProjLayerPano",
+   "group": "Adobe After Effects",
+   "key": "keypad_plus",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Purge All Memory",
+   "detail": "ae aeks default · Cmd+Option+PadSlash · PurgeAllMemory · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "keypad_slash",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Decrease Font Size A Lot",
+   "detail": "ae aeks default · Shift+Cmd+Option+Comma · TextDecreaseFontSizeALot · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": ",",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Increase Font Size A Lot",
+   "detail": "ae aeks default · Shift+Cmd+Option+. · TextIncreaseFontSizeALot · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": ".",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Lock Guides",
+   "detail": "ae aeks default · Cmd+Option+Shift+; · ToggleLockGuides · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": ";",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Sub Script",
+   "detail": "ae aeks default · Shift+Cmd+Option+= · TextSubScript · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "=",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Deselect All Keyframes",
+   "detail": "ae aeks default · Cmd+Option+Shift+A · DeselectAllKeyframes · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "A",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Auto Leading",
+   "detail": "ae aeks default · Shift+Cmd+Option+A · TextAutoLeading · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "A",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "New Camera",
+   "detail": "ae aeks default · Cmd+Option+Shift+C · NewCamera · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "C",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Recent Script00",
+   "detail": "ae aeks default · Cmd+Option+Shift+D · RecentScript00 · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "D",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Send To Back",
+   "detail": "ae aeks default · Cmd+Option+Shift+DownArrow · SendToBack · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "Down",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Decrease Baseline Shift A Lot",
+   "detail": "ae aeks default · Shift+Cmd+Option+DownArrow · TextDecreaseBaselineShiftALot · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "Down",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Last Effect",
+   "detail": "ae aeks default · Cmd+Option+Shift+E · LastEffect · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "E",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Recent Favorite00",
+   "detail": "ae aeks default · Cmd+Option+Shift+F · RecentFavorite00 · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "F",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Stretch Layer To Fit Vertical",
+   "detail": "ae aeks default · Cmd+Option+Shift+G · StretchLayerToFitVertical · ctx: CCompCmd",
+   "group": "Adobe After Effects",
+   "key": "G",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Mac Sys Menu Hide Others",
+   "detail": "ae aeks default · Cmd+Option+macControl+H · MacSysMenuHideOthers · ctx: MacSysShortcutsAlt",
+   "group": "Adobe After Effects",
+   "key": "H",
+   "mods": [
+    "ctrl",
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Stretch Layer To Fit Horizontal",
+   "detail": "ae aeks default · Cmd+Option+Shift+H · StretchLayerToFitHorizontal · ctx: CCompCmd",
+   "group": "Adobe After Effects",
+   "key": "H",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Write Version File Extra",
+   "detail": "ae aeks default · Cmd+Option+Shift+HELP · WriteVersionFileExtra · ctx: CEggApp",
+   "group": "Adobe After Effects",
+   "key": "Help",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Cust Res No Dialog Recurse",
+   "detail": "ae aeks default · Cmd+Option+macControl+J · CustResNoDialogRecurse · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "J",
+   "mods": [
+    "ctrl",
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Low Resolution",
+   "detail": "ae aeks default · Cmd+Option+Shift+J · LowResolution · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "J",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Med Resolution Recurse",
+   "detail": "ae aeks default · Cmd+Shift+macControl+J · MedResolutionRecurse · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "J",
+   "mods": [
+    "ctrl",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Justify Right",
+   "detail": "ae aeks default · Shift+Cmd+Option+J · TextJustifyRight · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "J",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Project Settings",
+   "detail": "ae aeks default · Cmd+Option+Shift+K · ProjectSettings · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "K",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Small Caps",
+   "detail": "ae aeks default · Shift+Cmd+Option+K · TextSmallCaps · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "K",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "New Light",
+   "detail": "ae aeks default · Cmd+Option+Shift+L · NewLight · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "L",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Time Jump To Prev In Out",
+   "detail": "ae aeks default · Cmd+Option+Shift+LeftArrow · TimeJumpToPrevInOut · ctx: CCompTime",
+   "group": "Adobe After Effects",
+   "key": "Left",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "New Folder",
+   "detail": "ae aeks default · Cmd+Option+Shift+N · NewFolder · ctx: POutlinePano",
+   "group": "Adobe After Effects",
+   "key": "N",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "New Viewer New Frame",
+   "detail": "ae aeks default · Cmd+Option+Shift+N · NewViewerNewFrame · ctx: CDirTabPanel",
+   "group": "Adobe After Effects",
+   "key": "N",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Browse In Bridge",
+   "detail": "ae aeks default · Cmd+Option+Shift+O · BrowseInBridge · ctx: CEggApp",
+   "group": "Adobe After Effects",
+   "key": "O",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Recent Project00",
+   "detail": "ae aeks default · Cmd+Option+Shift+P · RecentProject00 · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "P",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Reset Tracking",
+   "detail": "ae aeks default · macControl+Shift+Cmd+Q · TextResetTracking · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "Q",
+   "mods": [
+    "ctrl",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Orientation",
+   "detail": "ae aeks default · Cmd+Option+Shift+R · Orientation · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "R",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Time Jump To Next In Out",
+   "detail": "ae aeks default · Cmd+Option+Shift+RightArrow · TimeJumpToNextInOut · ctx: CCompTime",
+   "group": "Adobe After Effects",
+   "key": "Right",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Increment And Save",
+   "detail": "ae aeks default · Cmd+Option+Shift+S · IncrementAndSave · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "S",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "New Text Layer",
+   "detail": "ae aeks default · Cmd+Option+Shift+T · NewTextLayer · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "T",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Toggle Composer",
+   "detail": "ae aeks default · Shift+Cmd+Option+T · TextToggleComposer · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "T",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Draft Quality Recurse",
+   "detail": "ae aeks default · Cmd+Shift+macControl+U · DraftQualityRecurse · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "U",
+   "mods": [
+    "ctrl",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Wireframe Quality",
+   "detail": "ae aeks default · Cmd+Option+Shift+U · WireframeQuality · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "U",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Bring To Front",
+   "detail": "ae aeks default · Cmd+Option+Shift+UpArrow · BringToFront · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "Up",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Increase Baseline Shift A Lot",
+   "detail": "ae aeks default · Shift+Cmd+Option+UpArrow · TextIncreaseBaselineShiftALot · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "Up",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Video",
+   "detail": "ae aeks default · Cmd+Option+Shift+V · ToggleVideo · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "V",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Text Reset Vertical Scale",
+   "detail": "ae aeks default · Shift+Cmd+Option+X · TextResetVerticalScale · ctx: TextLayerUI",
+   "group": "Adobe After Effects",
+   "key": "X",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "New Null Object",
+   "detail": "ae aeks default · Cmd+Option+Shift+Y · NewNullObject · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "Y",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Look At Selected",
+   "detail": "ae aeks default · Cmd+Option+Shift+Backslash · LookAtSelected · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "\\",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Nudge Opacity Down More",
+   "detail": "ae aeks default · macControl+Option+Shift+PadMinus · NudgeOpacityDownMore · ctx: CCompCompCmd, CPanoProjLayerPano",
+   "group": "Adobe After Effects",
+   "key": "keypad_minus",
+   "mods": [
+    "ctrl",
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Nudge Opacity Up More",
+   "detail": "ae aeks default · macControl+Option+Shift+PadPlus · NudgeOpacityUpMore · ctx: CCompCompCmd, CPanoProjLayerPano",
+   "group": "Adobe After Effects",
+   "key": "keypad_plus",
+   "mods": [
+    "ctrl",
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Low Resolution Recurse",
+   "detail": "ae aeks default · Cmd+Option+Shift+macControl+J · LowResolutionRecurse · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "J",
+   "mods": [
+    "ctrl",
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Scan For Changed Footage",
+   "detail": "ae aeks default · Cmd+macControl+Option+Shift+Q · ScanForChangedFootage · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "Q",
+   "mods": [
+    "ctrl",
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Write String File",
+   "detail": "ae aeks default · Cmd+Option+Shift+macControl+S · WriteStringFile · ctx: CEggApp",
+   "group": "Adobe After Effects",
+   "key": "S",
+   "mods": [
+    "ctrl",
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Wireframe Quality Recurse",
+   "detail": "ae aeks default · Cmd+Option+Shift+macControl+U · WireframeQualityRecurse · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "U",
+   "mods": [
+    "ctrl",
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  },
+  {
+   "action": "Memory Mode Toggle",
+   "detail": "ae aeks default · Cmd+Option+Shift+macControl+Enter · MemoryModeToggle · ctx: CSwitchboard",
+   "group": "Adobe After Effects",
+   "key": "keypad_enter",
+   "mods": [
+    "ctrl",
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe After Effects",
+   "source": "app config"
+  }
+ ],
+ "provenance": {
+  "file": "ae-default.txt",
+  "kind": "prefs-default-set",
+  "note": "AE writes the built-in Default set here on first run"
+ },
+ "scope": "Adobe After Effects",
+ "version": "24.6"
+}

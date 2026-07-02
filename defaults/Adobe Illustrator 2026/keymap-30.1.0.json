@@ -1,0 +1,2603 @@
+{
+ "app": "Adobe Illustrator 2026",
+ "entries": [
+  {
+   "action": "Paint Color",
+   "detail": "illustrator .kys default · tools · Adobe Paint Color · 표기 <",
+   "group": "Adobe Illustrator 2026",
+   "key": ",",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Delete Anchor Point Tool",
+   "detail": "illustrator .kys default · tools · Adobe Delete Anchor Point Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "-",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Paint Gradient",
+   "detail": "illustrator .kys default · tools · Adobe Paint Gradient · 표기 >",
+   "group": "Adobe Illustrator 2026",
+   "key": ".",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Paint None",
+   "detail": "illustrator .kys default · tools · Adobe Paint None",
+   "group": "Adobe Illustrator 2026",
+   "key": "/",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Add Anchor Point Tool",
+   "detail": "illustrator .kys default · tools · Adobe Add Anchor Point Tool · 표기 +",
+   "group": "Adobe Illustrator 2026",
+   "key": "=",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Direct Select Tool",
+   "detail": "illustrator .kys default · tools · Adobe Direct Select Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "A",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Brush Tool",
+   "detail": "illustrator .kys default · tools · Adobe Brush Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "B",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Scissors Tool",
+   "detail": "illustrator .kys default · tools · Adobe Scissors Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "C",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Default Fill Stroke",
+   "detail": "illustrator .kys default · tools · Adobe Default Fill Stroke",
+   "group": "Adobe Illustrator 2026",
+   "key": "D",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Free Transform Tool",
+   "detail": "illustrator .kys default · tools · Adobe Free Transform Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "E",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Screen Mode",
+   "detail": "illustrator .kys default · tools · Adobe Toggle Screen Mode",
+   "group": "Adobe Illustrator 2026",
+   "key": "F",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Helpcontent",
+   "detail": "illustrator .kys default · menus · helpcontent",
+   "group": "Adobe Illustrator 2026",
+   "key": "F1",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Cut",
+   "detail": "illustrator .kys default · menus · cut2",
+   "group": "Adobe Illustrator 2026",
+   "key": "F2",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Copy",
+   "detail": "illustrator .kys default · menus · copy2",
+   "group": "Adobe Illustrator 2026",
+   "key": "F3",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Paste",
+   "detail": "illustrator .kys default · menus · paste2",
+   "group": "Adobe Illustrator 2026",
+   "key": "F4",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Brush Manager Menu Item",
+   "detail": "illustrator .kys default · menus · Adobe BrushManager Menu Item",
+   "group": "Adobe Illustrator 2026",
+   "key": "F5",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Color Palette",
+   "detail": "illustrator .kys default · menus · Adobe Color Palette",
+   "group": "Adobe Illustrator 2026",
+   "key": "F6",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Adobe Layer Palette",
+   "detail": "illustrator .kys default · menus · AdobeLayerPalette1",
+   "group": "Adobe Illustrator 2026",
+   "key": "F7",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "New Symbol Shortcut",
+   "detail": "illustrator .kys default · menus · Adobe New Symbol Shortcut",
+   "group": "Adobe Illustrator 2026",
+   "key": "F8",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Gradient Vector Tool",
+   "detail": "illustrator .kys default · tools · Adobe Gradient Vector Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "G",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Scroll Tool",
+   "detail": "illustrator .kys default · tools · Adobe Scroll Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "H",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Eyedropper Tool",
+   "detail": "illustrator .kys default · tools · Adobe Eyedropper Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "I",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Column Graph Tool",
+   "detail": "illustrator .kys default · tools · Adobe Column Graph Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "J",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Planar Paintbucket Tool",
+   "detail": "illustrator .kys default · tools · Adobe Planar Paintbucket Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "K",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Ellipse Shape Tool",
+   "detail": "illustrator .kys default · tools · Adobe Ellipse Shape Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "L",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Rectangle Shape Tool",
+   "detail": "illustrator .kys default · tools · Adobe Rectangle Shape Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "M",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Freehand Tool",
+   "detail": "illustrator .kys default · tools · Adobe Freehand Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "N",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Reflect Tool",
+   "detail": "illustrator .kys default · tools · Adobe Reflect Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "O",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Pen Tool",
+   "detail": "illustrator .kys default · tools · Adobe Pen Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "P",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Direct Lasso Tool",
+   "detail": "illustrator .kys default · tools · Adobe Direct Lasso Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "Q",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Rotate Tool",
+   "detail": "illustrator .kys default · tools · Adobe Rotate Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "R",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Scale Tool",
+   "detail": "illustrator .kys default · tools · Adobe Scale Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "S",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Type Tool",
+   "detail": "illustrator .kys default · tools · Adobe Type Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "T",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Palettes",
+   "detail": "illustrator .kys default · tools · Adobe Toggle Palettes",
+   "group": "Adobe Illustrator 2026",
+   "key": "Tab",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Mesh Editing Tool",
+   "detail": "illustrator .kys default · tools · Adobe Mesh Editing Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "U",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Select Tool",
+   "detail": "illustrator .kys default · tools · Adobe Select Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "V",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Blend Tool",
+   "detail": "illustrator .kys default · tools · Adobe Blend Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "W",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Fill Stroke",
+   "detail": "illustrator .kys default · tools · Adobe Toggle Fill Stroke",
+   "group": "Adobe Illustrator 2026",
+   "key": "X",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Magic Wand Tool",
+   "detail": "illustrator .kys default · tools · Adobe Magic Wand Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "Y",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Zoom Tool",
+   "detail": "illustrator .kys default · tools · Adobe Zoom Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "Z",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Tool Dec Diameter",
+   "detail": "illustrator .kys default · tools · Adobe Tool Dec Diameter",
+   "group": "Adobe Illustrator 2026",
+   "key": "[",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Line Tool",
+   "detail": "illustrator .kys default · tools · Adobe Line Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "\\",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Tool Inc Diameter",
+   "detail": "illustrator .kys default · tools · Adobe Tool Inc Diameter",
+   "group": "Adobe Illustrator 2026",
+   "key": "]",
+   "mods": [],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Showgrid",
+   "detail": "illustrator .kys default · menus · showgrid",
+   "group": "Adobe Illustrator 2026",
+   "key": "'",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Zoomin",
+   "detail": "illustrator .kys default · menus · zoomin2",
+   "group": "Adobe Illustrator 2026",
+   "key": "=",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Unitundo Pref",
+   "detail": "illustrator .kys default · menus · unitundoPref",
+   "group": "Adobe Illustrator 2026",
+   "key": ",",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Zoomout",
+   "detail": "illustrator .kys default · menus · zoomout",
+   "group": "Adobe Illustrator 2026",
+   "key": "-",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "New Fill Shortcut",
+   "detail": "illustrator .kys default · menus · Adobe New Fill Shortcut",
+   "group": "Adobe Illustrator 2026",
+   "key": "/",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Fitin",
+   "detail": "illustrator .kys default · menus · fitin",
+   "group": "Adobe Illustrator 2026",
+   "key": "0",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Actualsize",
+   "detail": "illustrator .kys default · menus · actualsize",
+   "group": "Adobe Illustrator 2026",
+   "key": "1",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Lock",
+   "detail": "illustrator .kys default · menus · lock",
+   "group": "Adobe Illustrator 2026",
+   "key": "2",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Hide",
+   "detail": "illustrator .kys default · menus · hide",
+   "group": "Adobe Illustrator 2026",
+   "key": "3",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Repeat Pathfinder",
+   "detail": "illustrator .kys default · menus · repeatPathfinder",
+   "group": "Adobe Illustrator 2026",
+   "key": "4",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Makeguide",
+   "detail": "illustrator .kys default · menus · makeguide",
+   "group": "Adobe Illustrator 2026",
+   "key": "5",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Find Reselect menu item",
+   "detail": "illustrator .kys default · menus · Find Reselect menu item",
+   "group": "Adobe Illustrator 2026",
+   "key": "6",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Make Mask",
+   "detail": "illustrator .kys default · menus · makeMask",
+   "group": "Adobe Illustrator 2026",
+   "key": "7",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Compound Path",
+   "detail": "illustrator .kys default · menus · compoundPath",
+   "group": "Adobe Illustrator 2026",
+   "key": "8",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Showguide",
+   "detail": "illustrator .kys default · menus · showguide",
+   "group": "Adobe Illustrator 2026",
+   "key": ";",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Zoomin",
+   "detail": "illustrator .kys default · menus · zoomin · 표기 +",
+   "group": "Adobe Illustrator 2026",
+   "key": "=",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Selectall",
+   "detail": "illustrator .kys default · menus · selectall",
+   "group": "Adobe Illustrator 2026",
+   "key": "A",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Blob Brush Tool",
+   "detail": "illustrator .kys default · tools · Adobe Blob Brush Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "B",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Paste Back",
+   "detail": "illustrator .kys default · menus · pasteBack",
+   "group": "Adobe Illustrator 2026",
+   "key": "B",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Anchor Point Tool",
+   "detail": "illustrator .kys default · tools · Adobe Anchor Point Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "C",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Copy",
+   "detail": "illustrator .kys default · menus · copy",
+   "group": "Adobe Illustrator 2026",
+   "key": "C",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Drawing Mode",
+   "detail": "illustrator .kys default · tools · Adobe Toggle Drawing Mode",
+   "group": "Adobe Illustrator 2026",
+   "key": "D",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Transformagain",
+   "detail": "illustrator .kys default · menus · transformagain",
+   "group": "Adobe Illustrator 2026",
+   "key": "D",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Apply Last Filter",
+   "detail": "illustrator .kys default · menus · Apply Last Filter",
+   "group": "Adobe Illustrator 2026",
+   "key": "E",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Eraser Tool",
+   "detail": "illustrator .kys default · tools · Adobe Eraser Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "E",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Open GLCompositor Preview",
+   "detail": "illustrator .kys default · menus · OpenGLCompositorPreview",
+   "group": "Adobe Illustrator 2026",
+   "key": "E",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Paste Front",
+   "detail": "illustrator .kys default · menus · pasteFront",
+   "group": "Adobe Illustrator 2026",
+   "key": "F",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Presentation Mode",
+   "detail": "illustrator .kys default · tools · Adobe Presentation Mode",
+   "group": "Adobe Illustrator 2026",
+   "key": "F",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Stroke Palette",
+   "detail": "illustrator .kys default · menus · Adobe Stroke Palette",
+   "group": "Adobe Illustrator 2026",
+   "key": "F10",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Internal palettes posing as plug in menus attributes",
+   "detail": "illustrator .kys default · menus · internal palettes posing as plug-in menus-attributes",
+   "group": "Adobe Illustrator 2026",
+   "key": "F11",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Browse for script",
+   "detail": "illustrator .kys default · menus · ai_browse_for_script",
+   "group": "Adobe Illustrator 2026",
+   "key": "F12",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Harmony Palette",
+   "detail": "illustrator .kys default · menus · Adobe Harmony Palette",
+   "group": "Adobe Illustrator 2026",
+   "key": "F3",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Live Color Dialog",
+   "detail": "illustrator .kys default · menus · Live Color Dialog",
+   "group": "Adobe Illustrator 2026",
+   "key": "F4",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Style Palette",
+   "detail": "illustrator .kys default · menus · Adobe Style Palette",
+   "group": "Adobe Illustrator 2026",
+   "key": "F5",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Style Palette",
+   "detail": "illustrator .kys default · menus · Style Palette",
+   "group": "Adobe Illustrator 2026",
+   "key": "F6",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Adobe Align Objects",
+   "detail": "illustrator .kys default · menus · AdobeAlignObjects2",
+   "group": "Adobe Illustrator 2026",
+   "key": "F7",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Adobe Transform Objects",
+   "detail": "illustrator .kys default · menus · AdobeTransformObjects1",
+   "group": "Adobe Illustrator 2026",
+   "key": "F8",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Internal palettes posing as plug in menus info",
+   "detail": "illustrator .kys default · menus · internal palettes posing as plug-in menus-info",
+   "group": "Adobe Illustrator 2026",
+   "key": "F8",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Gradient Palette",
+   "detail": "illustrator .kys default · menus · Adobe Gradient Palette",
+   "group": "Adobe Illustrator 2026",
+   "key": "F9",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Group",
+   "detail": "illustrator .kys default · menus · group",
+   "group": "Adobe Illustrator 2026",
+   "key": "G",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Edge",
+   "detail": "illustrator .kys default · menus · edge",
+   "group": "Adobe Illustrator 2026",
+   "key": "H",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Rotate Canvas Tool",
+   "detail": "illustrator .kys default · tools · Adobe Rotate Canvas Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "H",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Check Spelling",
+   "detail": "illustrator .kys default · menus · Check Spelling",
+   "group": "Adobe Illustrator 2026",
+   "key": "I",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Join",
+   "detail": "illustrator .kys default · menus · join",
+   "group": "Adobe Illustrator 2026",
+   "key": "J",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Preference",
+   "detail": "illustrator .kys default · menus · preference",
+   "group": "Adobe Illustrator 2026",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Slice Tool",
+   "detail": "illustrator .kys default · tools · Adobe Slice Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "K",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Adobe Layer Palette",
+   "detail": "illustrator .kys default · menus · AdobeLayerPalette2",
+   "group": "Adobe Illustrator 2026",
+   "key": "L",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Planar Face Select Tool",
+   "detail": "illustrator .kys default · tools · Adobe Planar Face Select Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "L",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Minimize Window",
+   "detail": "illustrator .kys default · menus · minimizeWindow",
+   "group": "Adobe Illustrator 2026",
+   "key": "M",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Shape Builder Tool",
+   "detail": "illustrator .kys default · tools · Adobe Shape Builder Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "M",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "New",
+   "detail": "illustrator .kys default · menus · new",
+   "group": "Adobe Illustrator 2026",
+   "key": "N",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Shaper Tool",
+   "detail": "illustrator .kys default · tools · Adobe Shaper Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "N",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Crop Tool",
+   "detail": "illustrator .kys default · tools · Adobe Crop Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "O",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Open",
+   "detail": "illustrator .kys default · menus · open",
+   "group": "Adobe Illustrator 2026",
+   "key": "O",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Perspective Grid Tool",
+   "detail": "illustrator .kys default · tools · Perspective Grid Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "P",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Print",
+   "detail": "illustrator .kys default · menus · Print",
+   "group": "Adobe Illustrator 2026",
+   "key": "P",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Quick Pen Tool",
+   "detail": "illustrator .kys default · tools · Adobe Quick Pen Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "Q",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Quit",
+   "detail": "illustrator .kys default · menus · quit",
+   "group": "Adobe Illustrator 2026",
+   "key": "Q",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Ruler",
+   "detail": "illustrator .kys default · menus · ruler",
+   "group": "Adobe Illustrator 2026",
+   "key": "R",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Warp Tool",
+   "detail": "illustrator .kys default · tools · Adobe Warp Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "R",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Save",
+   "detail": "illustrator .kys default · menus · save",
+   "group": "Adobe Illustrator 2026",
+   "key": "S",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Symbol Sprayer Tool",
+   "detail": "illustrator .kys default · tools · Adobe Symbol Sprayer Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "S",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Internal palettes posing as plug in menus character",
+   "detail": "illustrator .kys default · menus · internal palettes posing as plug-in menus-character",
+   "group": "Adobe Illustrator 2026",
+   "key": "T",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Touch Type Tool",
+   "detail": "illustrator .kys default · tools · Adobe Touch Type Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "T",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Closing Palettes",
+   "detail": "illustrator .kys default · tools · Adobe Toggle Closing Palettes",
+   "group": "Adobe Illustrator 2026",
+   "key": "Tab",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Snapomatic on off menu item",
+   "detail": "illustrator .kys default · menus · Snapomatic on-off menu item",
+   "group": "Adobe Illustrator 2026",
+   "key": "U",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Paste",
+   "detail": "illustrator .kys default · menus · paste",
+   "group": "Adobe Illustrator 2026",
+   "key": "V",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Perspective Selection Tool",
+   "detail": "illustrator .kys default · tools · Perspective Selection Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "V",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Close",
+   "detail": "illustrator .kys default · menus · close",
+   "group": "Adobe Illustrator 2026",
+   "key": "W",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Width Tool",
+   "detail": "illustrator .kys default · tools · Adobe Width Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "W",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Cut",
+   "detail": "illustrator .kys default · menus · cut",
+   "group": "Adobe Illustrator 2026",
+   "key": "X",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Swap Fill Stroke",
+   "detail": "illustrator .kys default · tools · Adobe Swap Fill Stroke",
+   "group": "Adobe Illustrator 2026",
+   "key": "X",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Preview",
+   "detail": "illustrator .kys default · menus · preview",
+   "group": "Adobe Illustrator 2026",
+   "key": "Y",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Undo",
+   "detail": "illustrator .kys default · menus · undo",
+   "group": "Adobe Illustrator 2026",
+   "key": "Z",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Send Backward",
+   "detail": "illustrator .kys default · menus · sendBackward",
+   "group": "Adobe Illustrator 2026",
+   "key": "[",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Send Forward",
+   "detail": "illustrator .kys default · menus · sendForward",
+   "group": "Adobe Illustrator 2026",
+   "key": "]",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Curvature Tool",
+   "detail": "illustrator .kys default · tools · Adobe Curvature Tool",
+   "group": "Adobe Illustrator 2026",
+   "key": "`",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Navigate To Next Document",
+   "detail": "illustrator .kys default · menus · navigateToNextDocument",
+   "group": "Adobe Illustrator 2026",
+   "key": "`",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Symbolism Dec Intensity",
+   "detail": "illustrator .kys default · tools · Adobe Symbolism Dec Intensity",
+   "group": "Adobe Illustrator 2026",
+   "key": "[",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Symbolism Inc Intensity",
+   "detail": "illustrator .kys default · tools · Adobe Symbolism Inc Intensity",
+   "group": "Adobe Illustrator 2026",
+   "key": "]",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Snapgrid",
+   "detail": "illustrator .kys default · menus · snapgrid",
+   "group": "Adobe Illustrator 2026",
+   "key": "'",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Snappoint",
+   "detail": "illustrator .kys default · menus · snappoint",
+   "group": "Adobe Illustrator 2026",
+   "key": "'",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Face Size Down",
+   "detail": "illustrator .kys default · menus · faceSizeDown",
+   "group": "Adobe Illustrator 2026",
+   "key": ",",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "~discretionary Hyphen",
+   "detail": "illustrator .kys default · menus · ~discretionaryHyphen",
+   "group": "Adobe Illustrator 2026",
+   "key": "-",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Face Size Up",
+   "detail": "illustrator .kys default · menus · faceSizeUp",
+   "group": "Adobe Illustrator 2026",
+   "key": ".",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "New Stroke Shortcut",
+   "detail": "illustrator .kys default · menus · Adobe New Stroke Shortcut",
+   "group": "Adobe Illustrator 2026",
+   "key": "/",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Fitall",
+   "detail": "illustrator .kys default · menus · fitall",
+   "group": "Adobe Illustrator 2026",
+   "key": "0",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Reset Rotation View",
+   "detail": "illustrator .kys default · menus · resetRotationView",
+   "group": "Adobe Illustrator 2026",
+   "key": "1",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Unlock All",
+   "detail": "illustrator .kys default · menus · unlockAll",
+   "group": "Adobe Illustrator 2026",
+   "key": "2",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Show All",
+   "detail": "illustrator .kys default · menus · showAll",
+   "group": "Adobe Illustrator 2026",
+   "key": "3",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Releaseguide",
+   "detail": "illustrator .kys default · menus · releaseguide",
+   "group": "Adobe Illustrator 2026",
+   "key": "5",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Release Mask",
+   "detail": "illustrator .kys default · menus · releaseMask",
+   "group": "Adobe Illustrator 2026",
+   "key": "7",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Lockguide",
+   "detail": "illustrator .kys default · menus · lockguide",
+   "group": "Adobe Illustrator 2026",
+   "key": ";",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "~super Script",
+   "detail": "illustrator .kys default · menus · ~superScript",
+   "group": "Adobe Illustrator 2026",
+   "key": "=",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Deselectall",
+   "detail": "illustrator .kys default · menus · deselectall",
+   "group": "Adobe Illustrator 2026",
+   "key": "A",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Selectallinartboard",
+   "detail": "illustrator .kys default · menus · selectallinartboard",
+   "group": "Adobe Illustrator 2026",
+   "key": "A",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Bounding Box Toggle",
+   "detail": "illustrator .kys default · menus · AI Bounding Box Toggle",
+   "group": "Adobe Illustrator 2026",
+   "key": "B",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Path Blend Make",
+   "detail": "illustrator .kys default · menus · Path Blend Make",
+   "group": "Adobe Illustrator 2026",
+   "key": "B",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "~text Bold",
+   "detail": "illustrator .kys default · menus · ~textBold",
+   "group": "Adobe Illustrator 2026",
+   "key": "B",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Center Align",
+   "detail": "illustrator .kys default · menus · centerAlign",
+   "group": "Adobe Illustrator 2026",
+   "key": "C",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Make Envelope",
+   "detail": "illustrator .kys default · menus · Make Envelope",
+   "group": "Adobe Illustrator 2026",
+   "key": "C",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Transparency Grid Menu Item",
+   "detail": "illustrator .kys default · menus · TransparencyGrid Menu Item",
+   "group": "Adobe Illustrator 2026",
+   "key": "D",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Apply Last Effect",
+   "detail": "illustrator .kys default · menus · Adobe Apply Last Effect",
+   "group": "Adobe Illustrator 2026",
+   "key": "E",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Export For Screens",
+   "detail": "illustrator .kys default · menus · exportForScreens",
+   "group": "Adobe Illustrator 2026",
+   "key": "E",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Last Filter",
+   "detail": "illustrator .kys default · menus · Last Filter",
+   "group": "Adobe Illustrator 2026",
+   "key": "E",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Justify All",
+   "detail": "illustrator .kys default · menus · justifyAll",
+   "group": "Adobe Illustrator 2026",
+   "key": "F",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Transparency Palette Menu Item",
+   "detail": "illustrator .kys default · menus · Adobe Transparency Palette Menu Item",
+   "group": "Adobe Illustrator 2026",
+   "key": "F10",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Symbol Palette",
+   "detail": "illustrator .kys default · menus · Adobe Symbol Palette",
+   "group": "Adobe Illustrator 2026",
+   "key": "F11",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Edit Pattern",
+   "detail": "illustrator .kys default · menus · Adobe Edit Pattern",
+   "group": "Adobe Illustrator 2026",
+   "key": "F8",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Pathfinder UI",
+   "detail": "illustrator .kys default · menus · Adobe PathfinderUI",
+   "group": "Adobe Illustrator 2026",
+   "key": "F9",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Gradient Feedback",
+   "detail": "illustrator .kys default · menus · Gradient Feedback",
+   "group": "Adobe Illustrator 2026",
+   "key": "G",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Ungroup",
+   "detail": "illustrator .kys default · menus · ungroup",
+   "group": "Adobe Illustrator 2026",
+   "key": "G",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Ungroup All",
+   "detail": "illustrator .kys default · menus · ungroupAll",
+   "group": "Adobe Illustrator 2026",
+   "key": "G",
+   "mods": [
+    "opt",
+    "shift"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Artboard",
+   "detail": "illustrator .kys default · menus · artboard",
+   "group": "Adobe Illustrator 2026",
+   "key": "H",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Hide Others",
+   "detail": "illustrator .kys default · menus · hideOthers",
+   "group": "Adobe Illustrator 2026",
+   "key": "H",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Show Hidden Char",
+   "detail": "illustrator .kys default · menus · showHiddenChar",
+   "group": "Adobe Illustrator 2026",
+   "key": "I",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Show Perspective Grid",
+   "detail": "illustrator .kys default · menus · Show Perspective Grid",
+   "group": "Adobe Illustrator 2026",
+   "key": "I",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "~text Italic",
+   "detail": "illustrator .kys default · menus · ~textItalic",
+   "group": "Adobe Illustrator 2026",
+   "key": "I",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Average",
+   "detail": "illustrator .kys default · menus · average",
+   "group": "Adobe Illustrator 2026",
+   "key": "J",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Justify",
+   "detail": "illustrator .kys default · menus · justify",
+   "group": "Adobe Illustrator 2026",
+   "key": "J",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Color",
+   "detail": "illustrator .kys default · menus · color",
+   "group": "Adobe Illustrator 2026",
+   "key": "K",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Tracking",
+   "detail": "illustrator .kys default · menus · tracking",
+   "group": "Adobe Illustrator 2026",
+   "key": "K",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Adobe Layer Palette",
+   "detail": "illustrator .kys default · menus · AdobeLayerPalette3",
+   "group": "Adobe Illustrator 2026",
+   "key": "L",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Left Align",
+   "detail": "illustrator .kys default · menus · leftAlign",
+   "group": "Adobe Illustrator 2026",
+   "key": "L",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Create Envelope Grid",
+   "detail": "illustrator .kys default · menus · Create Envelope Grid",
+   "group": "Adobe Illustrator 2026",
+   "key": "M",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Transformmove",
+   "detail": "illustrator .kys default · menus · transformmove",
+   "group": "Adobe Illustrator 2026",
+   "key": "M",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "~em Space",
+   "detail": "illustrator .kys default · menus · ~emSpace",
+   "group": "Adobe Illustrator 2026",
+   "key": "M",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "New",
+   "detail": "illustrator .kys default · menus · new2",
+   "group": "Adobe Illustrator 2026",
+   "key": "N",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "New From Template",
+   "detail": "illustrator .kys default · menus · newFromTemplate",
+   "group": "Adobe Illustrator 2026",
+   "key": "N",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "~en Space",
+   "detail": "illustrator .kys default · menus · ~enSpace",
+   "group": "Adobe Illustrator 2026",
+   "key": "N",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Bridge Browse",
+   "detail": "illustrator .kys default · menus · Adobe Bridge Browse",
+   "group": "Adobe Illustrator 2026",
+   "key": "O",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Outline",
+   "detail": "illustrator .kys default · menus · outline",
+   "group": "Adobe Illustrator 2026",
+   "key": "O",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Document",
+   "detail": "illustrator .kys default · menus · document",
+   "group": "Adobe Illustrator 2026",
+   "key": "P",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Place",
+   "detail": "illustrator .kys default · menus · AI Place",
+   "group": "Adobe Illustrator 2026",
+   "key": "P",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Clear Track",
+   "detail": "illustrator .kys default · menus · clearTrack",
+   "group": "Adobe Illustrator 2026",
+   "key": "Q",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Right Align",
+   "detail": "illustrator .kys default · menus · rightAlign",
+   "group": "Adobe Illustrator 2026",
+   "key": "R",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Ruler Coordinate System",
+   "detail": "illustrator .kys default · menus · rulerCoordinateSystem",
+   "group": "Adobe Illustrator 2026",
+   "key": "R",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Saveacopy",
+   "detail": "illustrator .kys default · menus · saveacopy",
+   "group": "Adobe Illustrator 2026",
+   "key": "S",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Saveas",
+   "detail": "illustrator .kys default · menus · saveas",
+   "group": "Adobe Illustrator 2026",
+   "key": "S",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Internal palettes posing as plug in menus paragraph",
+   "detail": "illustrator .kys default · menus · internal palettes posing as plug-in menus-paragraph",
+   "group": "Adobe Illustrator 2026",
+   "key": "T",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Internal palettes posing as plug in menus tab",
+   "detail": "illustrator .kys default · menus · internal palettes posing as plug-in menus-tab",
+   "group": "Adobe Illustrator 2026",
+   "key": "T",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Switch Sel Tool",
+   "detail": "illustrator .kys default · menus · switchSelTool",
+   "group": "Adobe Illustrator 2026",
+   "key": "Tab",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "~text Underline",
+   "detail": "illustrator .kys default · menus · ~textUnderline",
+   "group": "Adobe Illustrator 2026",
+   "key": "U",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Paste In Place",
+   "detail": "illustrator .kys default · menus · pasteInPlace",
+   "group": "Adobe Illustrator 2026",
+   "key": "V",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Paste Without Formatting",
+   "detail": "illustrator .kys default · menus · pasteWithoutFormatting",
+   "group": "Adobe Illustrator 2026",
+   "key": "V",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Close All",
+   "detail": "illustrator .kys default · menus · closeAll",
+   "group": "Adobe Illustrator 2026",
+   "key": "W",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Showtemplate",
+   "detail": "illustrator .kys default · menus · showtemplate",
+   "group": "Adobe Illustrator 2026",
+   "key": "W",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Clear Type Scale",
+   "detail": "illustrator .kys default · menus · clearTypeScale",
+   "group": "Adobe Illustrator 2026",
+   "key": "X",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Make Planet X",
+   "detail": "illustrator .kys default · menus · Make Planet X",
+   "group": "Adobe Illustrator 2026",
+   "key": "X",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Raster",
+   "detail": "illustrator .kys default · menus · raster",
+   "group": "Adobe Illustrator 2026",
+   "key": "Y",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Textthreads",
+   "detail": "illustrator .kys default · menus · textthreads",
+   "group": "Adobe Illustrator 2026",
+   "key": "Y",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Redo",
+   "detail": "illustrator .kys default · menus · redo",
+   "group": "Adobe Illustrator 2026",
+   "key": "Z",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Selection Hat",
+   "detail": "illustrator .kys default · menus · Selection Hat 9",
+   "group": "Adobe Illustrator 2026",
+   "key": "[",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Send To Back",
+   "detail": "illustrator .kys default · menus · sendToBack",
+   "group": "Adobe Illustrator 2026",
+   "key": "[",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "~kern Closer",
+   "detail": "illustrator .kys default · menus · ~kernCloser",
+   "group": "Adobe Illustrator 2026",
+   "key": "[",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Selection Hat",
+   "detail": "illustrator .kys default · menus · Selection Hat 8",
+   "group": "Adobe Illustrator 2026",
+   "key": "]",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Send To Front",
+   "detail": "illustrator .kys default · menus · sendToFront",
+   "group": "Adobe Illustrator 2026",
+   "key": "]",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "~kern Further",
+   "detail": "illustrator .kys default · menus · ~kernFurther",
+   "group": "Adobe Illustrator 2026",
+   "key": "]",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Navigate To Next Document Group",
+   "detail": "illustrator .kys default · menus · navigateToNextDocumentGroup",
+   "group": "Adobe Illustrator 2026",
+   "key": "`",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Navigate To Previous Document",
+   "detail": "illustrator .kys default · menus · navigateToPreviousDocument",
+   "group": "Adobe Illustrator 2026",
+   "key": "`",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Size Step Down",
+   "detail": "illustrator .kys default · menus · sizeStepDown",
+   "group": "Adobe Illustrator 2026",
+   "key": ",",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Size Step Up",
+   "detail": "illustrator .kys default · menus · sizeStepUp",
+   "group": "Adobe Illustrator 2026",
+   "key": ".",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Lock",
+   "detail": "illustrator .kys default · menus · lock2",
+   "group": "Adobe Illustrator 2026",
+   "key": "2",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Hide",
+   "detail": "illustrator .kys default · menus · hide2",
+   "group": "Adobe Illustrator 2026",
+   "key": "3",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "No Compound Path",
+   "detail": "illustrator .kys default · menus · noCompoundPath",
+   "group": "Adobe Illustrator 2026",
+   "key": "8",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "~subscript",
+   "detail": "illustrator .kys default · menus · ~subscript",
+   "group": "Adobe Illustrator 2026",
+   "key": "=",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Path Blend Release",
+   "detail": "illustrator .kys default · menus · Path Blend Release",
+   "group": "Adobe Illustrator 2026",
+   "key": "B",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Line Composer",
+   "detail": "illustrator .kys default · menus · toggleLineComposer",
+   "group": "Adobe Illustrator 2026",
+   "key": "C",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Transform",
+   "detail": "illustrator .kys default · menus · Transform3",
+   "group": "Adobe Illustrator 2026",
+   "key": "D",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Last Effect",
+   "detail": "illustrator .kys default · menus · Adobe Last Effect",
+   "group": "Adobe Illustrator 2026",
+   "key": "E",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Highlight Font",
+   "detail": "illustrator .kys default · menus · highlightFont",
+   "group": "Adobe Illustrator 2026",
+   "key": "F",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Debug Palette",
+   "detail": "illustrator .kys default · menus · debugPalette",
+   "group": "Adobe Illustrator 2026",
+   "key": "F12",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Generate Modal File Menu",
+   "detail": "illustrator .kys default · menus · Generate Modal File Menu ",
+   "group": "Adobe Illustrator 2026",
+   "key": "G",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Auto Hyphen",
+   "detail": "illustrator .kys default · menus · toggleAutoHyphen",
+   "group": "Adobe Illustrator 2026",
+   "key": "H",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "File Info",
+   "detail": "illustrator .kys default · menus · File Info",
+   "group": "Adobe Illustrator 2026",
+   "key": "I",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Avg And Join",
+   "detail": "illustrator .kys default · menus · avgAndJoin",
+   "group": "Adobe Illustrator 2026",
+   "key": "J",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "KBSC Menu Item",
+   "detail": "illustrator .kys default · menus · KBSC Menu Item",
+   "group": "Adobe Illustrator 2026",
+   "key": "K",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Highlight Font",
+   "detail": "illustrator .kys default · menus · highlightFont2",
+   "group": "Adobe Illustrator 2026",
+   "key": "M",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "~thin Space",
+   "detail": "illustrator .kys default · menus · ~thinSpace",
+   "group": "Adobe Illustrator 2026",
+   "key": "M",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Spacing",
+   "detail": "illustrator .kys default · menus · spacing",
+   "group": "Adobe Illustrator 2026",
+   "key": "O",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Package Menu Item",
+   "detail": "illustrator .kys default · menus · Package Menu Item",
+   "group": "Adobe Illustrator 2026",
+   "key": "P",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "AI Save For Web",
+   "detail": "illustrator .kys default · menus · Adobe AI Save For Web",
+   "group": "Adobe Illustrator 2026",
+   "key": "S",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Internal palettes posing as plug in menus opentype",
+   "detail": "illustrator .kys default · menus · internal palettes posing as plug-in menus-opentype",
+   "group": "Adobe Illustrator 2026",
+   "key": "T",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Switch Units",
+   "detail": "illustrator .kys default · menus · switchUnits",
+   "group": "Adobe Illustrator 2026",
+   "key": "U",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Paste In All Artboard",
+   "detail": "illustrator .kys default · menus · pasteInAllArtboard",
+   "group": "Adobe Illustrator 2026",
+   "key": "V",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Make Warp",
+   "detail": "illustrator .kys default · menus · Make Warp",
+   "group": "Adobe Illustrator 2026",
+   "key": "W",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Ink",
+   "detail": "illustrator .kys default · menus · ink",
+   "group": "Adobe Illustrator 2026",
+   "key": "Y",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Navigate To Previous Document Group",
+   "detail": "illustrator .kys default · menus · navigateToPreviousDocumentGroup",
+   "group": "Adobe Illustrator 2026",
+   "key": "`",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Illustrator 2026",
+   "source": "app config"
+  }
+ ],
+ "provenance": {
+  "file": "illustrator-defaults.kys",
+  "kind": "app-bundle"
+ },
+ "scope": "Adobe Illustrator 2026",
+ "version": "30.1.0"
+}

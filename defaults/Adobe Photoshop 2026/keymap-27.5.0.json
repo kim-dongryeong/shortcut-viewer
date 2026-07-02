@@ -1,0 +1,1329 @@
+{
+ "app": "Adobe Photoshop 2026",
+ "entries": [
+  {
+   "action": "Toggle Last State",
+   "detail": "photoshop .kys default · F1 · alt",
+   "group": "Adobe Photoshop 2026",
+   "key": "F1",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Revert",
+   "detail": "photoshop .kys default · F12",
+   "group": "Adobe Photoshop 2026",
+   "key": "F12",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Cut",
+   "detail": "photoshop .kys default · F2 · alt",
+   "group": "Adobe Photoshop 2026",
+   "key": "F2",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Copy",
+   "detail": "photoshop .kys default · F3 · alt",
+   "group": "Adobe Photoshop 2026",
+   "key": "F3",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Paste",
+   "detail": "photoshop .kys default · F4 · alt",
+   "group": "Adobe Photoshop 2026",
+   "key": "F4",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Brush",
+   "detail": "photoshop .kys default · F5",
+   "group": "Adobe Photoshop 2026",
+   "key": "F5",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Color",
+   "detail": "photoshop .kys default · F6",
+   "group": "Adobe Photoshop 2026",
+   "key": "F6",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Layers",
+   "detail": "photoshop .kys default · F7",
+   "group": "Adobe Photoshop 2026",
+   "key": "F7",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Info",
+   "detail": "photoshop .kys default · F8",
+   "group": "Adobe Photoshop 2026",
+   "key": "F8",
+   "mods": [],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Grid",
+   "detail": "photoshop .kys default · Cmd+'",
+   "group": "Adobe Photoshop 2026",
+   "key": "'",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Zoom In",
+   "detail": "photoshop .kys default · Cmd++",
+   "group": "Adobe Photoshop 2026",
+   "key": "=",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Hide Layers",
+   "detail": "photoshop .kys default · Cmd+,",
+   "group": "Adobe Photoshop 2026",
+   "key": ",",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Zoom Out",
+   "detail": "photoshop .kys default · Cmd+-",
+   "group": "Adobe Photoshop 2026",
+   "key": "-",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Lock Layers",
+   "detail": "photoshop .kys default · Cmd+/",
+   "group": "Adobe Photoshop 2026",
+   "key": "/",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Fit on Screen",
+   "detail": "photoshop .kys default · Cmd+0",
+   "group": "Adobe Photoshop 2026",
+   "key": "0",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "100%",
+   "detail": "photoshop .kys default · Cmd+1",
+   "group": "Adobe Photoshop 2026",
+   "key": "1",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Guides",
+   "detail": "photoshop .kys default · Cmd+;",
+   "group": "Adobe Photoshop 2026",
+   "key": ";",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Zoom In",
+   "detail": "photoshop .kys default · Cmd+= · alt",
+   "group": "Adobe Photoshop 2026",
+   "key": "=",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "All",
+   "detail": "photoshop .kys default · Cmd+A",
+   "group": "Adobe Photoshop 2026",
+   "key": "A",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Color Balance...",
+   "detail": "photoshop .kys default · Cmd+B",
+   "group": "Adobe Photoshop 2026",
+   "key": "B",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Copy",
+   "detail": "photoshop .kys default · Cmd+C",
+   "group": "Adobe Photoshop 2026",
+   "key": "C",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Deselect",
+   "detail": "photoshop .kys default · Cmd+D",
+   "group": "Adobe Photoshop 2026",
+   "key": "D",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Merge Layers",
+   "detail": "photoshop .kys default · Cmd+E",
+   "group": "Adobe Photoshop 2026",
+   "key": "E",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Show Universal Search",
+   "detail": "photoshop .kys default · Cmd+F",
+   "group": "Adobe Photoshop 2026",
+   "key": "F",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Fill...",
+   "detail": "photoshop .kys default · Shift+F5",
+   "group": "Adobe Photoshop 2026",
+   "key": "F5",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Feather...",
+   "detail": "photoshop .kys default · Shift+F6",
+   "group": "Adobe Photoshop 2026",
+   "key": "F6",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Inverse",
+   "detail": "photoshop .kys default · Shift+F7 · alt",
+   "group": "Adobe Photoshop 2026",
+   "key": "F7",
+   "mods": [
+    "shift"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Actions",
+   "detail": "photoshop .kys default · Opt+F9",
+   "group": "Adobe Photoshop 2026",
+   "key": "F9",
+   "mods": [
+    "opt"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Group Layers",
+   "detail": "photoshop .kys default · Cmd+G",
+   "group": "Adobe Photoshop 2026",
+   "key": "G",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Extras",
+   "detail": "photoshop .kys default · Cmd+H",
+   "group": "Adobe Photoshop 2026",
+   "key": "H",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Invert",
+   "detail": "photoshop .kys default · Cmd+I",
+   "group": "Adobe Photoshop 2026",
+   "key": "I",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Layer via Copy",
+   "detail": "photoshop .kys default · Cmd+J",
+   "group": "Adobe Photoshop 2026",
+   "key": "J",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "General...",
+   "detail": "photoshop .kys default · Cmd+K",
+   "group": "Adobe Photoshop 2026",
+   "key": "K",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Levels...",
+   "detail": "photoshop .kys default · Cmd+L",
+   "group": "Adobe Photoshop 2026",
+   "key": "L",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Curves...",
+   "detail": "photoshop .kys default · Cmd+M",
+   "group": "Adobe Photoshop 2026",
+   "key": "M",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "New...",
+   "detail": "photoshop .kys default · Cmd+N",
+   "group": "Adobe Photoshop 2026",
+   "key": "N",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Open...",
+   "detail": "photoshop .kys default · Cmd+O",
+   "group": "Adobe Photoshop 2026",
+   "key": "O",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Print...",
+   "detail": "photoshop .kys default · Cmd+P",
+   "group": "Adobe Photoshop 2026",
+   "key": "P",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Quit Photoshop",
+   "detail": "photoshop .kys default · Cmd+Q",
+   "group": "Adobe Photoshop 2026",
+   "key": "Q",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Rulers",
+   "detail": "photoshop .kys default · Cmd+R",
+   "group": "Adobe Photoshop 2026",
+   "key": "R",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Save",
+   "detail": "photoshop .kys default · Cmd+S",
+   "group": "Adobe Photoshop 2026",
+   "key": "S",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Free Transform",
+   "detail": "photoshop .kys default · Cmd+T",
+   "group": "Adobe Photoshop 2026",
+   "key": "T",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Hue/Saturation...",
+   "detail": "photoshop .kys default · Cmd+U",
+   "group": "Adobe Photoshop 2026",
+   "key": "U",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Paste",
+   "detail": "photoshop .kys default · Cmd+V",
+   "group": "Adobe Photoshop 2026",
+   "key": "V",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Close",
+   "detail": "photoshop .kys default · Cmd+W",
+   "group": "Adobe Photoshop 2026",
+   "key": "W",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Cut",
+   "detail": "photoshop .kys default · Cmd+X",
+   "group": "Adobe Photoshop 2026",
+   "key": "X",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Proof Colors",
+   "detail": "photoshop .kys default · Cmd+Y",
+   "group": "Adobe Photoshop 2026",
+   "key": "Y",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Undo",
+   "detail": "photoshop .kys default · Cmd+Z",
+   "group": "Adobe Photoshop 2026",
+   "key": "Z",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Send Backward",
+   "detail": "photoshop .kys default · Cmd+[",
+   "group": "Adobe Photoshop 2026",
+   "key": "[",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Bring Forward",
+   "detail": "photoshop .kys default · Cmd+]",
+   "group": "Adobe Photoshop 2026",
+   "key": "]",
+   "mods": [
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Quick Export PNG",
+   "detail": "photoshop .kys default · Shift+Cmd+'",
+   "group": "Adobe Photoshop 2026",
+   "key": "'",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Photoshop Online Help...",
+   "detail": "photoshop .kys default · Shift+Cmd+/",
+   "group": "Adobe Photoshop 2026",
+   "key": "/",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "100%",
+   "detail": "photoshop .kys default · Opt+Cmd+0 · alt",
+   "group": "Adobe Photoshop 2026",
+   "key": "0",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Lock Guides",
+   "detail": "photoshop .kys default · Opt+Cmd+;",
+   "group": "Adobe Photoshop 2026",
+   "key": ";",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Snap",
+   "detail": "photoshop .kys default · Shift+Cmd+;",
+   "group": "Adobe Photoshop 2026",
+   "key": ";",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "All Layers",
+   "detail": "photoshop .kys default · Opt+Cmd+A",
+   "group": "Adobe Photoshop 2026",
+   "key": "A",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Camera Raw Filter",
+   "detail": "photoshop .kys default · Shift+Cmd+A",
+   "group": "Adobe Photoshop 2026",
+   "key": "A",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Auto Color",
+   "detail": "photoshop .kys default · Shift+Cmd+B",
+   "group": "Adobe Photoshop 2026",
+   "key": "B",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Canvas Size...",
+   "detail": "photoshop .kys default · Opt+Cmd+C",
+   "group": "Adobe Photoshop 2026",
+   "key": "C",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Copy Merged",
+   "detail": "photoshop .kys default · Shift+Cmd+C",
+   "group": "Adobe Photoshop 2026",
+   "key": "C",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Reselect",
+   "detail": "photoshop .kys default · Shift+Cmd+D",
+   "group": "Adobe Photoshop 2026",
+   "key": "D",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Merge Visible",
+   "detail": "photoshop .kys default · Shift+Cmd+E",
+   "group": "Adobe Photoshop 2026",
+   "key": "E",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Fade...",
+   "detail": "photoshop .kys default · Shift+Cmd+F",
+   "group": "Adobe Photoshop 2026",
+   "key": "F",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Last Filter",
+   "detail": "photoshop .kys default · Control+Cmd+F",
+   "group": "Adobe Photoshop 2026",
+   "key": "F",
+   "mods": [
+    "ctrl",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Create Clipping Mask",
+   "detail": "photoshop .kys default · Opt+Cmd+G",
+   "group": "Adobe Photoshop 2026",
+   "key": "G",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Ungroup Layers",
+   "detail": "photoshop .kys default · Shift+Cmd+G",
+   "group": "Adobe Photoshop 2026",
+   "key": "G",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Hide Others",
+   "detail": "photoshop .kys default · Opt+Cmd+H",
+   "group": "Adobe Photoshop 2026",
+   "key": "H",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Hide Photoshop",
+   "detail": "photoshop .kys default · Control+Cmd+H",
+   "group": "Adobe Photoshop 2026",
+   "key": "H",
+   "mods": [
+    "ctrl",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Target Path",
+   "detail": "photoshop .kys default · Shift+Cmd+H",
+   "group": "Adobe Photoshop 2026",
+   "key": "H",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Image Size...",
+   "detail": "photoshop .kys default · Opt+Cmd+I",
+   "group": "Adobe Photoshop 2026",
+   "key": "I",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Inverse",
+   "detail": "photoshop .kys default · Shift+Cmd+I",
+   "group": "Adobe Photoshop 2026",
+   "key": "I",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Layer via Cut",
+   "detail": "photoshop .kys default · Shift+Cmd+J",
+   "group": "Adobe Photoshop 2026",
+   "key": "J",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Color Settings...",
+   "detail": "photoshop .kys default · Shift+Cmd+K",
+   "group": "Adobe Photoshop 2026",
+   "key": "K",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Auto Tone",
+   "detail": "photoshop .kys default · Shift+Cmd+L",
+   "group": "Adobe Photoshop 2026",
+   "key": "L",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Minimize",
+   "detail": "photoshop .kys default · Control+Cmd+M",
+   "group": "Adobe Photoshop 2026",
+   "key": "M",
+   "mods": [
+    "ctrl",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Record Measurements",
+   "detail": "photoshop .kys default · Shift+Cmd+M",
+   "group": "Adobe Photoshop 2026",
+   "key": "M",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Layer...",
+   "detail": "photoshop .kys default · Shift+Cmd+N",
+   "group": "Adobe Photoshop 2026",
+   "key": "N",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Browse in Bridge...",
+   "detail": "photoshop .kys default · Opt+Cmd+O",
+   "group": "Adobe Photoshop 2026",
+   "key": "O",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Browse in Bridge...",
+   "detail": "photoshop .kys default · Shift+Cmd+O · alt",
+   "group": "Adobe Photoshop 2026",
+   "key": "O",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Close Others",
+   "detail": "photoshop .kys default · Opt+Cmd+P",
+   "group": "Adobe Photoshop 2026",
+   "key": "P",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Lens Correction",
+   "detail": "photoshop .kys default · Shift+Cmd+R",
+   "group": "Adobe Photoshop 2026",
+   "key": "R",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Refine Edge...",
+   "detail": "photoshop .kys default · Opt+Cmd+R",
+   "group": "Adobe Photoshop 2026",
+   "key": "R",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Save As...",
+   "detail": "photoshop .kys default · Shift+Cmd+S",
+   "group": "Adobe Photoshop 2026",
+   "key": "S",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Save a Copy...",
+   "detail": "photoshop .kys default · Opt+Cmd+S",
+   "group": "Adobe Photoshop 2026",
+   "key": "S",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Again",
+   "detail": "photoshop .kys default · Shift+Cmd+T",
+   "group": "Adobe Photoshop 2026",
+   "key": "T",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Desaturate",
+   "detail": "photoshop .kys default · Shift+Cmd+U",
+   "group": "Adobe Photoshop 2026",
+   "key": "U",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Paste in Place",
+   "detail": "photoshop .kys default · Shift+Cmd+V",
+   "group": "Adobe Photoshop 2026",
+   "key": "V",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Vanishing Point",
+   "detail": "photoshop .kys default · Opt+Cmd+V",
+   "group": "Adobe Photoshop 2026",
+   "key": "V",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Close All",
+   "detail": "photoshop .kys default · Opt+Cmd+W",
+   "group": "Adobe Photoshop 2026",
+   "key": "W",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Close and Go to Bridge...",
+   "detail": "photoshop .kys default · Shift+Cmd+W",
+   "group": "Adobe Photoshop 2026",
+   "key": "W",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Liquify",
+   "detail": "photoshop .kys default · Shift+Cmd+X",
+   "group": "Adobe Photoshop 2026",
+   "key": "X",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Within Selection",
+   "detail": "photoshop .kys default · Opt+Cmd+X",
+   "group": "Adobe Photoshop 2026",
+   "key": "X",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Gamut Warning",
+   "detail": "photoshop .kys default · Shift+Cmd+Y",
+   "group": "Adobe Photoshop 2026",
+   "key": "Y",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Redo",
+   "detail": "photoshop .kys default · Shift+Cmd+Z",
+   "group": "Adobe Photoshop 2026",
+   "key": "Z",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Toggle Last State",
+   "detail": "photoshop .kys default · Opt+Cmd+Z",
+   "group": "Adobe Photoshop 2026",
+   "key": "Z",
+   "mods": [
+    "opt",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Send to Back",
+   "detail": "photoshop .kys default · Shift+Cmd+[",
+   "group": "Adobe Photoshop 2026",
+   "key": "[",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Bring to Front",
+   "detail": "photoshop .kys default · Shift+Cmd+]",
+   "group": "Adobe Photoshop 2026",
+   "key": "]",
+   "mods": [
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Quick Export Selection PNG",
+   "detail": "photoshop .kys default · Opt+Shift+Cmd+'",
+   "group": "Adobe Photoshop 2026",
+   "key": "'",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Wide Angle Correction",
+   "detail": "photoshop .kys default · Opt+Shift+Cmd+A",
+   "group": "Adobe Photoshop 2026",
+   "key": "A",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Black & White...",
+   "detail": "photoshop .kys default · Opt+Shift+Cmd+B",
+   "group": "Adobe Photoshop 2026",
+   "key": "B",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Content-Aware Scale",
+   "detail": "photoshop .kys default · Opt+Shift+Cmd+C",
+   "group": "Adobe Photoshop 2026",
+   "key": "C",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Find Layers",
+   "detail": "photoshop .kys default · Opt+Shift+Cmd+F",
+   "group": "Adobe Photoshop 2026",
+   "key": "F",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Generative Workspace...",
+   "detail": "photoshop .kys default · Opt+Shift+Cmd+G",
+   "group": "Adobe Photoshop 2026",
+   "key": "G",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "File Info...",
+   "detail": "photoshop .kys default · Opt+Shift+Cmd+I",
+   "group": "Adobe Photoshop 2026",
+   "key": "I",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Keyboard Shortcuts...",
+   "detail": "photoshop .kys default · Opt+Shift+Cmd+K",
+   "group": "Adobe Photoshop 2026",
+   "key": "K",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Auto Contrast",
+   "detail": "photoshop .kys default · Opt+Shift+Cmd+L",
+   "group": "Adobe Photoshop 2026",
+   "key": "L",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Menus...",
+   "detail": "photoshop .kys default · Opt+Shift+Cmd+M",
+   "group": "Adobe Photoshop 2026",
+   "key": "M",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Print One Copy",
+   "detail": "photoshop .kys default · Opt+Shift+Cmd+P",
+   "group": "Adobe Photoshop 2026",
+   "key": "P",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Render",
+   "detail": "photoshop .kys default · Opt+Shift+Cmd+R",
+   "group": "Adobe Photoshop 2026",
+   "key": "R",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Save for Web...",
+   "detail": "photoshop .kys default · Opt+Shift+Cmd+S",
+   "group": "Adobe Photoshop 2026",
+   "key": "S",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Generative Upscale...",
+   "detail": "photoshop .kys default · Opt+Shift+Cmd+U",
+   "group": "Adobe Photoshop 2026",
+   "key": "U",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Paste Into",
+   "detail": "photoshop .kys default · Opt+Shift+Cmd+V",
+   "group": "Adobe Photoshop 2026",
+   "key": "V",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Export As...",
+   "detail": "photoshop .kys default · Opt+Shift+Cmd+W",
+   "group": "Adobe Photoshop 2026",
+   "key": "W",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  },
+  {
+   "action": "Reveal All",
+   "detail": "photoshop .kys default · Opt+Shift+Cmd+X",
+   "group": "Adobe Photoshop 2026",
+   "key": "X",
+   "mods": [
+    "opt",
+    "shift",
+    "cmd"
+   ],
+   "scope": "Adobe Photoshop 2026",
+   "source": "app config"
+  }
+ ],
+ "provenance": {
+  "file": "photoshop-default.kys",
+  "kind": "app-bundle"
+ },
+ "scope": "Adobe Photoshop 2026",
+ "version": "27.5.0"
+}
