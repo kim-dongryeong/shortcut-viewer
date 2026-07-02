@@ -32,7 +32,7 @@
   .kbmain{display:flex;flex-direction:column}
   .kbright{display:flex;flex-direction:column}
   .krow{display:flex;align-items:flex-start}
-  .cap{position:relative;height:54px;margin:3px;border:1px solid var(--line);border-radius:8px;background:var(--panel);
+  .cap{position:relative;height:var(--caph,54px);margin:3px;border:1px solid var(--line);border-radius:8px;background:var(--panel);
        padding:4px 6px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;transition:transform .04s;flex:none}
   .cap:hover{transform:translateY(-1px);border-color:#3a4252}
   .cap .lab{font-size:10.5px;color:var(--dim);font-weight:700;white-space:nowrap}
@@ -110,6 +110,44 @@
   .notebtn{background:var(--panel);border:1px solid var(--line);border-radius:6px;color:var(--dim);cursor:pointer;font-size:11px;padding:2px 7px;white-space:nowrap}
   .noteshow{color:#ffd8a8;font-size:11px;margin-top:2px}
   .impbtn{display:inline-flex;align-items:center;padding:8px 11px;border:1px solid var(--line);border-radius:9px;background:var(--panel);cursor:pointer;font-size:14px}
+  /* ── light theme (KeyCue 식 밝은 테마 + 인쇄) ── */
+  html[data-theme="light"]{ --bg:#f6f7f9; --panel:#fff; --line:#d7dbe2; --txt:#1b2028; --dim:#67707e; }
+  html[data-theme="light"] .cap.mod{background:#eef1f5}
+  html[data-theme="light"] .row.hi,html[data-theme="light"] .cs.hi,html[data-theme="light"] .drow.hi,html[data-theme="light"] .gcard.hi,html[data-theme="light"] .cap.sel{background:#e0f2fe}
+  html[data-theme="light"] .cap.sel .lab,html[data-theme="light"] .cs.hi .csk,html[data-theme="light"] .row.hi .kc{color:#0369a1}
+  /* ── new-view panels (충돌·빈조합·통계·퀴즈) ── */
+  .vbar{display:flex;gap:7px;flex-wrap:wrap;align-items:center;margin:2px 0 10px}
+  .vbtn{font-size:13px;padding:6px 12px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--txt);cursor:pointer}
+  .vbtn.on{background:#0b2a45;border-color:#38bdf8;color:#7dd3fc}
+  html[data-theme="light"] .vbtn.on{background:#e0f2fe;color:#0369a1}
+  .conf{border:1px solid var(--line);border-left:3px solid #f59e0b;border-radius:8px;padding:8px 12px;margin:6px 0;background:var(--panel)}
+  .conf .ck{font-weight:800;font-size:15px;margin-bottom:4px}
+  .conf .cl{display:flex;gap:8px;align-items:baseline;padding:2px 0}
+  .conf .cl .src{font-size:11px;padding:1px 6px;border-radius:5px;color:#0b0d11;font-weight:700}
+  .freegrid{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+  .freek{min-width:40px;text-align:center;padding:9px 8px;border:1px solid var(--line);border-radius:8px;background:var(--panel);font-weight:700;cursor:pointer}
+  .freek:hover{border-color:#38bdf8}
+  .freek.home{border-color:#22c55e;box-shadow:inset 0 0 0 1px #22c55e33}
+  .statrow{display:flex;align-items:center;gap:9px;padding:3px 0;font-size:13px}
+  .statrow .sl{min-width:150px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .statbar{height:14px;border-radius:4px;background:#38bdf8;min-width:2px}
+  .statrow .sv{color:var(--txt);font-variant-numeric:tabular-nums;min-width:44px}
+  .quiz{max-width:560px;margin:10px 0;border:1px solid var(--line);border-radius:12px;padding:20px;background:var(--panel);text-align:center}
+  .quiz .qa{font-size:20px;font-weight:700;margin:6px 0 14px}
+  .quiz .qp{font-size:26px;font-weight:800;color:#7dd3fc;letter-spacing:1px;min-height:34px}
+  .quiz .qs{color:var(--dim);font-size:13px;margin-top:12px}
+  .quiz .qok{color:#22c55e} .quiz .qng{color:#ef4444}
+  .quiz button{margin:12px 6px 0}
+  kbd{font:inherit;background:var(--bg);border:1px solid var(--line);border-radius:5px;padding:1px 6px}
+  @media print{
+    html{--bg:#fff;--panel:#fff;--line:#bbb;--txt:#000;--dim:#555}
+    header,.controls,.hint,.vbar,#chordbar,#gestures,.tip,#kb,#detail,#results,#legend{display:none!important}
+    .wrap{max-width:none;padding:0}
+    #overview{display:block!important}
+    .ovwrap{column-width:250px}
+    .cs{break-inside:avoid} .ovgrp{break-inside:avoid}
+    .cs .csa{white-space:normal}
+  }
 </style>
 </head>
 <body>
@@ -136,6 +174,20 @@
     <button id="annexport" title="즐겨찾기·노트 파일로 내보내기">⬇︎</button>
     <label class="impbtn" title="즐겨찾기·노트 가져오기">⬆︎<input id="annimport" type="file" accept="application/json" style="display:none"></label>
   </div>
+  <div class="vbar" id="vbar">
+    <span class="meta">보기:</span>
+    <button class="vbtn" data-view="conflicts" title="현재 컨텍스트에서 한 조합에 2개 이상 서로 다른 동작이 걸린 것">⚠️ 충돌</button>
+    <button class="vbtn" data-view="free" title="현재 수식키 레이어에서 비어 있는(할당 가능한) 키">✨ 빈 조합</button>
+    <button class="vbtn" data-view="stats" title="앱별 개수·수식키 분포·바쁜 키 통계">📊 통계</button>
+    <button class="vbtn" data-view="quiz" title="현재 컨텍스트/즐겨찾기 단축키로 플래시카드 연습">🎓 퀴즈</button>
+    <span style="width:1px;height:20px;background:var(--line);margin:0 3px"></span>
+    <button id="commonbtn" class="vbtn" title="누구나 아는 흔한 단축키(⌘C·⌘V·⌘Z…) 숨기기">🙈 흔한 키</button>
+    <button id="themebtn" class="vbtn" title="밝은/어두운 테마">☾ 테마</button>
+    <button id="sizebtn" class="vbtn" title="키보드 크기">⇔ 크기</button>
+    <button id="printbtn" class="vbtn" title="전체 단축키를 인쇄/PDF (치트시트 포스터)">🖨 인쇄</button>
+    <button id="csvbtn" class="vbtn" title="현재 컨텍스트 단축키를 CSV로 내보내기">⤓ CSV</button>
+    <button id="mdbtn" class="vbtn" title="현재 컨텍스트 단축키를 Markdown 표로 내보내기">⤓ MD</button>
+  </div>
   <div class="hint">키를 <b>물리적으로 hold</b> 하면 레이어 ON(놓으면 복귀) · 수식키 키캡/칩 클릭=고정 · 각 키 숫자=전 조합 수, 점=소스 ·
     키 클릭→하단에 그 키의 <b>전 조합</b>, 수식키 누르면 해당 조합 <b style="color:#7dd3fc">하이라이트</b> · hover=미리보기 ·
     <span id="comboline"></span></div>
@@ -147,6 +199,7 @@
   <div id="gestures"></div>
 
   <div class="panel">
+    <div id="modepanel"></div>
     <div id="detail"><div class="empty">키를 클릭하면 그 키에 걸린 <b>모든 수식키 조합</b>이 여기에 표시되고, 수식키를 누르면 해당 조합이 강조됩니다.</div></div>
     <div id="overview"></div>
     <div id="results"></div>
@@ -167,7 +220,9 @@ let ovGroup = ['mod','key','source'].includes(localStorage.getItem('SVovGroup'))
 const COLORS = {system:'#3b82f6','app menu':'#9ca3af','app config':'#14b8a6',Karabiner:'#22c55e',BTT:'#f59e0b',Raycast:'#a855f7',web:'#06b6d4'};
 const MODS = ['ctrl','opt','shift','cmd'];
 const MODSYM = {ctrl:'⌃',opt:'⌥',shift:'⇧',cmd:'⌘',fn:'🌐',caps:'⇪'};
-const U = 56;
+const KEY_SIZES=[46,56,68];   // 키보드 크기 3단계 (작게/보통/크게)
+let keySizeIdx = [0,1,2].includes(+localStorage.getItem('SVkeySize')) ? +localStorage.getItem('SVkeySize') : 1;
+let U = KEY_SIZES[keySizeIdx];
 // physical-ish ANSI Mac layout. t:'key' = shortcut key, t:'mod' = modifier toggle, t:'gap' = spacer.
 const LAYOUT = [
   [['key','Escape',1,'esc'],['gap',0,0.4],['key','F1',1],['key','F2',1],['key','F3',1],['key','F4',1],['gap',0,0.3],
@@ -188,17 +243,23 @@ const FEXT = ['F13','F14','F15','F16','F17','F18','F19','F20'];
 
 let sticky=new Set(), held=new Set(), heldStr='', ctxSet=new Set(['Global']), filter='all', eff=new Set(), overview=false, selectedKey=null;
 let chordPrefix=null, chordReturn=null, CUR=null;   // which-key(연속) 모드: chordPrefix={mods,key}면 그리드가 그 prefix의 후속(2nd) 키 집합으로 바뀐다
+let panelMode=null;   // 새 전용 뷰: 'conflicts'|'free'|'stats'|'quiz'|null
+let theme = localStorage.getItem('SVtheme')==='light' ? 'light' : 'dark';
+document.documentElement.setAttribute('data-theme', theme);
+let hideCommon = localStorage.getItem('SVhideCommon')==='1';   // 누구나 아는 흔한 단축키(⌘C/V/Z…) 숨기기
+const COMMON_COMBOS = new Set(['cmd|C','cmd|V','cmd|X','cmd|Z','cmd|A','cmd|S','cmd|F','cmd|P','cmd|W','cmd|Q','cmd|N','cmd|O','cmd|T','cmd+shift|Z','cmd+shift|T']);
+function isCommon(e){ return !e.ckey && COMMON_COMBOS.has([...e.mods].sort().join('+')+'|'+e.key); }
 
 function recompute(){
   eff=new Set([...sticky,...held]);
   CUR = chordPrefix
     ? DB.entries.filter(e=> e.ckey && e.key===chordPrefix.key && sameSet(e.mods,new Set(chordPrefix.mods)) && inCtx(e))
                 .map(e=>({mods:e.cmods||[], key:e.ckey, action:e.action, source:e.source, scope:e.scope, detail:e.detail}))  // 후속 누름을 일반 엔트리처럼 리매핑 → 그리드/상세 로직 재사용
-    : dedupeDisplay(DB.entries.filter(inCtx));
+    : ctxEntries();
 }
 function sameSet(arr,set){ if(arr.length!==set.size) return false; for(const m of arr) if(!set.has(m)) return false; return true; }
 function inCtx(e){ return (e.scope==='global' && ctxSet.has('Global')) || ctxSet.has(e.scope) || ctxSet.has(e.group) || (ctxSet.has('BTT (전체)') && e.source==='BTT'); }
-function keyAll(key){ return (CUR||(CUR=dedupeDisplay(DB.entries.filter(inCtx)))).filter(e=>e.key===key); }
+function keyAll(key){ return (CUR||(CUR=ctxEntries())).filter(e=>e.key===key); }
 function matchEff(key){ return keyAll(key).filter(e=>sameSet(e.mods,eff)); }
 function comboSym(mods){ return [...MODS,'fn'].filter(m=>mods.includes(m)).map(m=>MODSYM[m]).join(''); }
 function chordSym(e){ return e&&e.ckey ? (comboSym(e.cmods||[])+e.ckey) : ''; }                 // 2nd press, 예: ⌘I
@@ -238,7 +299,7 @@ function renderCtx(){
   document.getElementById('ctxchips').innerHTML=['Global',...DB.meta.apps,'BTT (전체)',...(DB.meta.bttgroups||[])].map(a=>`<span class="chip" data-ctx="${a.replace(/"/g,'&quot;')}">${a}</span>`).join('');
   document.querySelectorAll('[data-ctx]').forEach(el=>el.onclick=()=>{ const c=el.dataset.ctx; ctxSet.has(c)?ctxSet.delete(c):ctxSet.add(c); sync(); });
   document.getElementById('filtersel').onchange=e=>{ filter=e.target.value; sync(); };
-  document.getElementById('ovbtn').onclick=()=>{ overview=!overview; document.getElementById('ovbtn').classList.toggle('on',overview); sync(); if(overview) document.getElementById('overview').scrollIntoView({behavior:'smooth',block:'start'}); };
+  document.getElementById('ovbtn').onclick=()=>{ overview=!overview; if(overview) panelMode=null; document.getElementById('ovbtn').classList.toggle('on',overview); sync(); if(overview) document.getElementById('overview').scrollIntoView({behavior:'smooth',block:'start'}); };
 }
 function enterChord(mods,key){          // ⌘K ▸ … 로 들어가 후속 키를 그리드에서 고르는 모드
   chordReturn={sticky:new Set(sticky), key:selectedKey, overview};
@@ -318,6 +379,7 @@ function navBlock(){
   return wrap;
 }
 function renderKB(){
+  document.documentElement.style.setProperty('--caph',(U-8)+'px');   // 키 높이도 크기(U)에 맞춰 스케일
   const kb=document.getElementById('kb'); kb.innerHTML='';
   const main=document.createElement('div'); main.className='kbmain';
   LAYOUT.forEach(row=>{ const d=document.createElement('div'); d.className='krow'; row.forEach(s=>d.appendChild(buildCap(s))); main.appendChild(d); });
@@ -425,7 +487,7 @@ function ovGroupKey(e){   // 치트시트 묶음 기준
 function renderOverview(){   // KeyCue 식: 선택 컨텍스트의 모든 단축키를, 묶음 기준대로 다단 치트시트로
   const o=document.getElementById('overview');
   if(!overview){ o.innerHTML=''; return; }
-  const ent=dedupeDisplay(DB.entries.filter(inCtx));
+  const ent=ctxEntries();
   const groups={};
   ent.forEach(e=>{ const g=ovGroupKey(e); (groups[g.label]=groups[g.label]||{ord:g.ord,items:[]}).items.push(e); });
   const order=Object.keys(groups).sort((a,b)=>(groups[a].ord-groups[b].ord)||a.localeCompare(b));
@@ -454,6 +516,103 @@ function renderOverview(){   // KeyCue 식: 선택 컨텍스트의 모든 단축
     +`<div class="ovwrap">${body}${gbody}</div>`;
   o.querySelectorAll('[data-ov]').forEach(el=>el.onclick=()=>{ const e=flat[+el.dataset.ov]; chordPrefix=null; chordReturn=null; sticky=new Set(e.mods); held=new Set(); selectedKey=e.key; sync(); if(!overview) window.scrollTo({top:0,behavior:'smooth'}); });
   o.querySelectorAll('[data-ovg]').forEach(b=>b.onclick=()=>{ ovGroup=b.dataset.ovg; localStorage.setItem('SVovGroup',ovGroup); renderOverview(); });
+}
+// ══════ 새 전용 뷰: 충돌 · 빈 조합 · 통계 · 퀴즈 ══════
+function ctxEntries(){ let e=dedupeDisplay(DB.entries.filter(inCtx)); return hideCommon?e.filter(x=>!isCommon(x)):e; }
+function comboFull(e){ return (comboSym(e.mods)||'')+e.key+(e.ckey?' ▸'+chordSym(e):''); }
+function setView(v){ panelMode=(panelMode===v?null:v); if(panelMode){ overview=false; document.getElementById('ovbtn').classList.remove('on'); if(v==='quiz') quizState=null; } sync(); if(panelMode) document.getElementById('modepanel').scrollIntoView({behavior:'smooth',block:'start'}); }
+const ALLKEYS=(()=>{ const k=[]; LAYOUT.forEach(r=>r.forEach(s=>{ if(s[0]==='key') k.push(s[1]); })); return [...new Set([...k,...NAV,'Up','Down','Left','Right',...FEXT])]; })();
+const HOMEROW=new Set(['A','S','D','F','G','H','J','K','L',';',"'"]);
+
+function renderConflicts(){
+  const ents=ctxEntries(), by={};
+  ents.forEach(e=>{ const k=[...e.mods].sort().join(',')+'|'+e.key+'|'+(e.ckey?comboSym(e.cmods||[])+e.ckey:''); (by[k]=by[k]||[]).push(e); });
+  const conflicts=[];
+  for(const k in by){ const g=by[k]; if(new Set(g.map(e=>ovNorm(e.action))).size>=2) conflicts.push(g); }
+  conflicts.sort((a,b)=>a[0].mods.length-b[0].mods.length||comboFull(a[0]).localeCompare(comboFull(b[0])));
+  let html=`<div class="sec">⚠️ 충돌 — ${[...ctxSet].join(', ')||'(없음)'} · ${conflicts.length}개 조합에 2+ 다른 동작 <span class="muted" style="text-transform:none;letter-spacing:0;font-size:11px">(같은 앱이면 실제 충돌 · 스코프가 다르면 컨텍스트 의존)</span></div>`;
+  html+= conflicts.length ? conflicts.map(g=>`<div class="conf"><div class="ck">${comboFull(g[0])} <span class="muted" style="font-weight:400;font-size:12px">${g.length}개</span></div>`
+      + g.map(e=>`<div class="cl"><span class="src" style="background:${COLORS[e.source]||'#666'}">${e.source}</span><span style="flex:1">${e.action.replace(/</g,'&lt;')}</span><span class="scope">${e.scope}</span></div>`).join('')+`</div>`).join('')
+    : `<div class="empty">선택한 컨텍스트에 충돌 없음 ✓</div>`;
+  document.getElementById('modepanel').innerHTML=html;
+}
+function renderFree(){
+  const taken=new Set(ctxEntries().filter(e=>sameSet(e.mods,eff)).map(e=>e.key));
+  const free=ALLKEYS.filter(k=>!taken.has(k));
+  let html=`<div class="sec">✨ 빈 조합 — 레이어 <b style="color:#7dd3fc">${effSym()||'(수식키 없음)'}</b> · ${[...ctxSet].join(', ')||'(없음)'} · 빈 키 ${free.length}/${ALLKEYS.length} <span class="muted" style="text-transform:none;letter-spacing:0;font-size:11px">(수식키를 눌러 레이어 전환 · 초록=홈row · 클릭→상세)</span></div>`;
+  if(eff.size===0) html+=`<div class="muted" style="margin:2px 0 8px">💡 새 글로벌 핫키엔 <b>⌥</b> 또는 <b>Hyper(⌃⌥⇧⌘)</b> 레이어 추천 — 시스템·앱과 덜 겹칩니다.</div>`;
+  html+=`<div class="freegrid">`+free.map(k=>`<div class="freek${HOMEROW.has(k)?' home':''}" data-fk="${k.replace(/"/g,'&quot;')}">${effSym()}${k}</div>`).join('')+`</div>`;
+  const el=document.getElementById('modepanel'); el.innerHTML=html;
+  el.querySelectorAll('[data-fk]').forEach(b=>b.onclick=()=>{ panelMode=null; selectedKey=b.dataset.fk; sync(); window.scrollTo({top:0,behavior:'smooth'}); });
+}
+function renderStats(){
+  const ents=DB.entries, cur=ctxEntries();
+  const tally=(arr,f)=>{ const o={}; arr.forEach(e=>{ const k=f(e); o[k]=(o[k]||0)+1; }); return Object.entries(o).sort((a,b)=>b[1]-a[1]); };
+  const apps=tally(ents,e=>e.scope==='global'?'(글로벌)':e.scope), maxApp=apps[0]?apps[0][1]:1;
+  const mods=tally(cur,e=>comboSym(e.mods)||'(무수식)'), maxMod=mods[0]?mods[0][1]:1;
+  const keys=tally(cur,e=>e.key).slice(0,15), maxKey=keys[0]?keys[0][1]:1;
+  const bar=(v,max,w=240)=>`<span class="statbar" style="width:${Math.max(2,Math.round(v/max*w))}px"></span>`;
+  const rows=(arr,max)=>arr.map(([s,v])=>`<div class="statrow"><span class="sl" title="${String(s).replace(/"/g,'&quot;')}">${String(s).replace(/</g,'&lt;')}</span>${bar(v,max)}<span class="sv">${v}</span></div>`).join('');
+  document.getElementById('modepanel').innerHTML=`<div class="sec">📊 통계</div>`
+    +`<div class="grp">앱별 단축키 수 <span class="muted" style="font-weight:400;font-size:11px">전체 ${ents.length}개 · ${apps.length}개 컨텍스트</span></div>`+rows(apps,maxApp)
+    +`<div class="grp">수식키 조합 분포 — ${[...ctxSet].join(', ')||'(없음)'}</div>`+rows(mods,maxMod)
+    +`<div class="grp">가장 바쁜 키 상위 15 — ${[...ctxSet].join(', ')||'(없음)'}</div>`+rows(keys,maxKey);
+}
+let quizState=null;
+function quizPool(){
+  const favKeys=Object.keys(ANN.fav); let pool=[];
+  favKeys.forEach(ak=>{ const i=ak.indexOf('|'), key=ak.slice(i+1), mods=ak.slice(0,i)?ak.slice(0,i).split('+'):[]; const m=DB.entries.find(e=>e.key===key&&sameSet(e.mods,new Set(mods))); if(m) pool.push(m); });
+  if(!pool.length) pool=ctxEntries().filter(e=>e.mods.length>0);
+  return pool;
+}
+function newQuizQ(){ const pool=quizPool(); if(!pool.length){ quizState={empty:true}; return; } const q=pool[Math.floor(Math.random()*pool.length)]; const sc=quizState||{score:0,total:0}; quizState={q,answered:false,pressed:null,correct:false,score:sc.score||0,total:sc.total||0}; }
+function renderQuiz(){
+  if(!quizState) newQuizQ();
+  const el=document.getElementById('modepanel');
+  if(quizState.empty){ el.innerHTML=`<div class="sec">🎓 퀴즈</div><div class="empty">연습할 단축키가 없습니다 — 즐겨찾기(⭐)를 추가하거나 컨텍스트를 선택하세요.</div>`; return; }
+  const q=quizState.q, want=comboSym(q.mods)+q.key;
+  let body=`<div class="qa">${q.action.replace(/</g,'&lt;')}</div><div class="muted" style="font-size:12px">${q.scope}</div>`;
+  if(!quizState.answered){
+    body+=`<div class="qp">${quizState.pressed||'⌨︎ 조합을 눌러보세요'}</div><button id="qreveal">정답 보기</button><button id="qskip">건너뛰기 ▸</button>`;
+  } else {
+    body+=`<div class="qp ${quizState.correct?'qok':'qng'}">${want} ${quizState.correct?'✓':'✗'}</div>`
+      + (!quizState.correct&&quizState.pressed?`<div class="muted">눌린 것: ${quizState.pressed}</div>`:'')
+      + `<button id="qnext">다음 ▸</button>`;
+  }
+  body+=`<div class="qs">점수 ${quizState.score}/${quizState.total}${Object.keys(ANN.fav).length?' · 즐겨찾기로 연습 중':' · 현재 컨텍스트로 연습 중'}</div>`;
+  el.innerHTML=`<div class="sec">🎓 퀴즈 — 동작을 보고 단축키 맞히기 <span class="muted" style="text-transform:none;letter-spacing:0;font-size:11px">(실제 키를 누르면 채점)</span></div><div class="quiz">${body}</div>`;
+  const rev=el.querySelector('#qreveal'); if(rev) rev.onclick=()=>gradeQuiz(null);
+  const nx=el.querySelector('#qnext'), sk=el.querySelector('#qskip');
+  if(nx) nx.onclick=()=>{ newQuizQ(); renderQuiz(); };
+  if(sk) sk.onclick=()=>{ newQuizQ(); renderQuiz(); };
+}
+function gradeQuiz(pressed){
+  if(!quizState||quizState.answered||quizState.empty) return;
+  const want=comboSym(quizState.q.mods)+quizState.q.key;
+  quizState.answered=true; quizState.total++; quizState.pressed=pressed||quizState.pressed;
+  quizState.correct=(pressed===want); if(quizState.correct) quizState.score++;
+  renderQuiz();
+}
+function exportRows(fmt){
+  const ents=ctxEntries().slice().sort((a,b)=>a.mods.length-b.mods.length||a.key.localeCompare(b.key)||a.action.localeCompare(b.action));
+  const rows=ents.map(e=>[comboFull(e), e.action, e.scope, e.source]);
+  const name=([...ctxSet].join('_').replace(/[^\w가-힣]+/g,'-')||'shortcuts');
+  let text,mime,ext;
+  if(fmt==='csv'){ const esc=s=>`"${String(s).replace(/"/g,'""')}"`; text='﻿조합,동작,스코프,소스\n'+rows.map(r=>r.map(esc).join(',')).join('\n'); mime='text/csv'; ext='csv'; }
+  else { text=`# 단축키 — ${[...ctxSet].join(', ')}\n\n| 조합 | 동작 | 스코프 | 소스 |\n|---|---|---|---|\n`+rows.map(r=>'| '+r.map(s=>String(s).replace(/\|/g,'\\|')).join(' | ')+' |').join('\n')+'\n'; mime='text/markdown'; ext='md'; }
+  const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([text],{type:mime})); a.download=name+'.'+ext; a.click();
+}
+function saveHash(){
+  const s={c:[...ctxSet]}; if(selectedKey)s.k=selectedKey; if(sticky.size)s.m=[...sticky];
+  if(overview)s.o=1; if(panelMode)s.p=panelMode; if(ovGroup!=='mod')s.g=ovGroup;
+  try{ history.replaceState(null,'','#'+encodeURIComponent(JSON.stringify(s))); }catch(e){}
+}
+function restoreHash(){
+  try{ const h=decodeURIComponent(location.hash.slice(1)); if(!h) return; const s=JSON.parse(h);
+    if(Array.isArray(s.c)&&s.c.length) ctxSet=new Set(s.c);
+    if(s.k) selectedKey=s.k; if(Array.isArray(s.m)) sticky=new Set(s.m);
+    overview=!!s.o; panelMode=s.p||null; if(['mod','key','source'].includes(s.g)) ovGroup=s.g;
+  }catch(e){}
 }
 function renderSearch(q){
   const r=document.getElementById('results');
@@ -489,15 +648,29 @@ function sync(){
     cb.querySelector('#chordexit').onclick=exitChord;
   } else cb.style.display='none';
   renderKB(); renderGestures(); renderOverview();
-  const det=document.getElementById('detail');      // 전체 단축키(overview)가 켜지면 키별 상세는 숨기고 치트시트만
-  if(overview){ det.style.display='none'; }
+  document.querySelectorAll('[data-view]').forEach(el=>el.classList.toggle('on', panelMode===el.dataset.view));
+  document.getElementById('commonbtn').classList.toggle('on',hideCommon);
+  document.getElementById('themebtn').classList.toggle('on',theme==='light');
+  const mp=document.getElementById('modepanel');
+  if(panelMode==='conflicts') renderConflicts();
+  else if(panelMode==='free') renderFree();
+  else if(panelMode==='stats') renderStats();
+  else if(panelMode==='quiz') renderQuiz();
+  else mp.innerHTML='';
+  const det=document.getElementById('detail');      // 전체 단축키(overview)/전용 패널이 켜지면 키별 상세는 숨긴다
+  if(overview||panelMode){ det.style.display='none'; }
   else { det.style.display=''; if(selectedKey) showDetail(selectedKey);
     else det.innerHTML='<div class="empty">키를 클릭하면 그 키에 걸린 <b>모든 수식키 조합</b>이 여기에 표시되고, 수식키를 누르면 해당 조합이 강조됩니다.</div>'; }
+  saveHash();
 }
 function readHeld(e){ const h=new Set(); if(e.metaKey)h.add('cmd'); if(e.ctrlKey)h.add('ctrl'); if(e.altKey)h.add('opt'); if(e.shiftKey)h.add('shift'); return h; }
 const CODEMAP={Backquote:'`',Minus:'-',Equal:'=',BracketLeft:'[',BracketRight:']',Semicolon:';',Quote:"'",Comma:',',Period:'.',Slash:'/',Space:'Space',Enter:'Return',Tab:'Tab',Escape:'Escape',Backspace:'Delete',Delete:'ForwardDelete',ArrowLeft:'Left',ArrowRight:'Right',ArrowUp:'Up',ArrowDown:'Down',Home:'Home',End:'End',PageUp:'PageUp',PageDown:'PageDown',CapsLock:'CapsLock'};
 function codeToKey(code){ if(!code)return null; if(code==='Backslash')return String.fromCharCode(92); if(code.startsWith('Key'))return code.slice(3); if(code.startsWith('Digit'))return code.slice(5); if(code[0]==='F'&&code.length<=3&&!isNaN(parseInt(code.slice(1),10)))return code; return CODEMAP[code]||null; }
-document.addEventListener('keydown',e=>{ if(e.target.tagName==='INPUT')return; if(e.key==='Escape'&&chordPrefix){ e.preventDefault(); exitChord(); return; } const h=readHeld(e); const s=[...h].sort().join(); const mapped=codeToKey(e.code); let changed=false; if(s!==heldStr){heldStr=s;held=h;changed=true;} if(mapped){ e.preventDefault(); if(!e.repeat){ selectedKey = (mapped===selectedKey ? null : mapped); changed=true; } } if(changed) sync(); });   // 같은 키 다시 누르면 해제(토글)
+document.addEventListener('keydown',e=>{ if(e.target.tagName==='INPUT')return;
+  if(e.key==='Escape'&&chordPrefix){ e.preventDefault(); exitChord(); return; }
+  if(e.key==='Escape'&&panelMode){ e.preventDefault(); panelMode=null; sync(); return; }
+  if(panelMode==='quiz'){ const mk=codeToKey(e.code); if(mk){ e.preventDefault(); if(!e.repeat){ if(quizState&&!quizState.answered){ const combo=comboSym([...readHeld(e)])+mk; gradeQuiz(combo); } else { newQuizQ(); renderQuiz(); } } } return; }
+  const h=readHeld(e); const s=[...h].sort().join(); const mapped=codeToKey(e.code); let changed=false; if(s!==heldStr){heldStr=s;held=h;changed=true;} if(mapped){ e.preventDefault(); if(!e.repeat){ selectedKey = (mapped===selectedKey ? null : mapped); changed=true; } } if(changed) sync(); });   // 같은 키 다시 누르면 해제(토글)
 document.addEventListener('keyup',e=>{ const h=readHeld(e); const s=[...h].sort().join(); if(s!==heldStr){heldStr=s;held=h;sync();} });
 window.addEventListener('blur',()=>{ if(heldStr){heldStr='';held=new Set();sync();} });
 
@@ -518,9 +691,16 @@ function renderFavs(){
   r.querySelectorAll('[data-jump]').forEach(el=>el.onclick=()=>{ const ak=el.dataset.jump,i=ak.indexOf('|'); chordPrefix=null; chordReturn=null; sticky=new Set(ak.slice(0,i)?ak.slice(0,i).split('+'):[]); held=new Set(); selectedKey=ak.slice(i+1); sync(); window.scrollTo({top:0,behavior:'smooth'}); });
   r.scrollIntoView({behavior:'smooth',block:'start'});
 }
-renderMeta(); renderChips(); renderCtx(); sync();
+restoreHash(); renderMeta(); renderChips(); renderCtx(); sync();
 document.getElementById('search').oninput=e=>renderSearch(e.target.value.trim());
 document.getElementById('favview').onclick=renderFavs;
+document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>setView(b.dataset.view));
+document.getElementById('themebtn').onclick=()=>{ theme=theme==='light'?'dark':'light'; document.documentElement.setAttribute('data-theme',theme); localStorage.setItem('SVtheme',theme); };
+document.getElementById('sizebtn').onclick=()=>{ keySizeIdx=(keySizeIdx+1)%3; U=KEY_SIZES[keySizeIdx]; localStorage.setItem('SVkeySize',keySizeIdx); sync(); };
+document.getElementById('commonbtn').onclick=()=>{ hideCommon=!hideCommon; localStorage.setItem('SVhideCommon',hideCommon?'1':'0'); document.getElementById('commonbtn').classList.toggle('on',hideCommon); sync(); };
+document.getElementById('printbtn').onclick=()=>{ const ov=overview,pm=panelMode; overview=true; panelMode=null; document.getElementById('ovbtn').classList.add('on'); sync(); setTimeout(()=>{ window.print(); overview=ov; panelMode=pm; document.getElementById('ovbtn').classList.toggle('on',overview); sync(); },150); };
+document.getElementById('csvbtn').onclick=()=>exportRows('csv');
+document.getElementById('mdbtn').onclick=()=>exportRows('md');
 document.getElementById('scopepos').onclick=()=>{ prefScopeRight=!prefScopeRight; localStorage.setItem('SVscopeRight',prefScopeRight?'1':'0'); if(selectedKey)showDetail(selectedKey); };
 document.getElementById('annexport').onclick=()=>{ const b=new Blob([JSON.stringify(ANN,null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download='shortcut-annotations.json'; a.click(); };
 document.getElementById('annimport').onchange=e=>{ const f=e.target.files[0]; if(!f)return; const rd=new FileReader(); rd.onload=()=>{ try{ const j=JSON.parse(rd.result); Object.assign(ANN.fav,j.fav||{}); Object.assign(ANN.note,j.note||{}); saveAnn(); sync(); alert('가져왔습니다 ✓'); }catch(_){ alert('JSON 파싱 실패'); } }; rd.readAsText(f); };
