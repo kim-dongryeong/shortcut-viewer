@@ -13,6 +13,7 @@ collectors (build.py + axmenudump) → shortcuts.json → viewer.html  (from vie
 - `axmenudump.swift` → `axmenudump` (compiled binary) — reads running apps' menu shortcuts via the Accessibility API.
 - `viewer.template.html` — the interactive grid UI; data is injected at the `/*__DATA__*/` marker.
 - `render.py` — re-renders `viewer.html` from the existing `shortcuts.json` only (no scan).
+- **Final normalize pass** (build.py, after `collect_community()`): NSEvent PUA chars (``대 = arrows/F-keys from AX `cmdChar`) + glyphs (`⎋↖↘⇞⇟`) → canonical key names; shifted symbols (`+<>?"{`…) → base key + `shift` mod; exact-dup removal. This is the ONLY point covering all sources (menu-reuse & community packs bypass `add()`). `normalize_packs.py` applies the same tables (keep in sync) to the tracked `defaults/` packs — order-preserving, idempotent.
 - `refresh.sh` — (re)compile axmenudump + run build.py (full scan). `dump_vscode.sh` — export VS Code default keybindings. `dump_codex.sh` — extract Codex in-app shortcuts from its app.asar.
 
 ## ⚠️ The build-vs-render rule (most important)

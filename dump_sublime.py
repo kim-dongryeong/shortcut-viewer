@@ -50,9 +50,12 @@ def combo(token):
 def humanize(cmd, args):
     base = (cmd or "").replace("_", " ").strip().title()
     if isinstance(args, dict):
-        for k in ("to", "by", "panel", "name", "extend", "characters"):
+        f = args.get("file")
+        if isinstance(f, str):    # run_macro_file 등 — 파일명이 실제 동작명 ("Delete Left Right" ≠ "Add Line in Braces")
+            return base + " (" + os.path.splitext(os.path.basename(f))[0] + ")"
+        for k in ("to", "by", "panel", "name", "extend", "characters", "level"):
             v = args.get(k)
-            if isinstance(v, str): base += f" ({v})"; break
+            if isinstance(v, (str, int)) and not isinstance(v, bool): base += f" ({v})"; break
     return base or (cmd or "")
 def app_ver():
     try:
@@ -77,6 +80,13 @@ def main():
             cm, ck = combo(keys[1])
             if ck: e["cmods"] = cm or []; e["ckey"] = ck
         ents.append(e)
+    before = len(ents)   # 같은 조합·동작이 context별로 여러 행 → 사용자에겐 동일하므로 붕괴
+    seen, uniq = set(), []
+    for e in ents:
+        fp = (tuple(e["mods"]), e["key"], e["action"], e.get("ckey"), tuple(e.get("cmods") or []))
+        if fp not in seen: seen.add(fp); uniq.append(e)
+    ents = uniq
+    if before > len(ents): print(f"  context-변형 중복 {before - len(ents)}건 붕괴")
     ver = app_ver()
     d = os.path.join(PROJ, "defaults", "Sublime Text"); os.makedirs(d, exist_ok=True)
     payload = {"app": "Sublime Text", "version": ver, "scope": "Sublime Text",

@@ -6,7 +6,7 @@
 #   • aborts if any known PII signature survives (defense in depth)
 # Run on a Mac where the apps are installed AND were scanned (./refresh.sh with them open).
 #   usage:  python3 share_menus.py "Microsoft Excel" "Notion" "Adobe Premiere Pro 2025"
-import json, os, re, sys, subprocess, plistlib
+import json, os, re, sys, subprocess, plistlib, unicodedata
 PROJ = os.path.dirname(os.path.abspath(__file__)); HOME = os.path.expanduser("~")
 
 def pii_set():
@@ -14,7 +14,8 @@ def pii_set():
     for cmd in (["id", "-un"], ["id", "-F"]):          # username, full name ("Kim Dongryeong")
         try:
             v = subprocess.check_output(cmd, text=True).strip()
-            if v: s.add(v)
+            if v:                                       # 한글 이름: AX 메뉴 문자열은 NFC/NFD가 섞여 옴 → 양쪽 형태 모두 스크럽·검출 대상
+                s.add(unicodedata.normalize("NFC", v)); s.add(unicodedata.normalize("NFD", v))
         except Exception: pass
     return {p for p in s if len(p) >= 3}               # never scrub 1-2 char strings
 

@@ -42,7 +42,7 @@
    "action": "Composition ▸ Composition Mini-Flowchart",
    "detail": "app menu (shared)",
    "group": "Adobe After Effects",
-   "key": "⇥",
+   "key": "Tab",
    "mods": [],
    "scope": "Adobe After Effects",
    "source": "app menu"
@@ -51,7 +51,7 @@
    "action": "Edit ▸ Clear",
    "detail": "app menu (shared)",
    "group": "Adobe After Effects",
-   "key": "⌦",
+   "key": "ForwardDelete",
    "mods": [],
    "scope": "Adobe After Effects",
    "source": "app menu"
@@ -60,7 +60,7 @@
    "action": "View ▸ Switch to Last 3D View",
    "detail": "app menu (shared)",
    "group": "Adobe After Effects",
-   "key": "⎋",
+   "key": "Escape",
    "mods": [],
    "scope": "Adobe After Effects",
    "source": "app menu"
@@ -69,7 +69,7 @@
    "action": "Help ▸ After Effects Help...",
    "detail": "app menu (shared)",
    "group": "Adobe After Effects",
-   "key": "",
+   "key": "F1",
    "mods": [],
    "scope": "Adobe After Effects",
    "source": "app menu"
@@ -78,7 +78,7 @@
    "action": "Effect ▸ Effect Controls",
    "detail": "app menu (shared)",
    "group": "Adobe After Effects",
-   "key": "",
+   "key": "F3",
    "mods": [],
    "scope": "Adobe After Effects",
    "source": "app menu"
@@ -87,7 +87,7 @@
    "action": "Animation ▸ Keyframe Assistant ▸ Easy Ease",
    "detail": "app menu (shared)",
    "group": "Adobe After Effects",
-   "key": "",
+   "key": "F9",
    "mods": [],
    "scope": "Adobe After Effects",
    "source": "app menu"
@@ -580,7 +580,7 @@
    "action": "Layer ▸ Transform ▸ Center In View",
    "detail": "app menu (shared)",
    "group": "Adobe After Effects",
-   "key": "↖",
+   "key": "Home",
    "mods": [
     "cmd"
    ],
@@ -591,7 +591,7 @@
    "action": "Edit ▸ Purge ▸ All Memory",
    "detail": "app menu (shared)",
    "group": "Adobe After Effects",
-   "key": "⌦",
+   "key": "ForwardDelete",
    "mods": [
     "ctrl"
    ],
@@ -602,7 +602,7 @@
    "action": "Animation ▸ Keyframe Assistant ▸ Easy Ease In",
    "detail": "app menu (shared)",
    "group": "Adobe After Effects",
-   "key": "",
+   "key": "F9",
    "mods": [
     "shift"
    ],
@@ -613,7 +613,7 @@
    "action": "Window ▸ Workspace ▸ Default",
    "detail": "app menu (shared)",
    "group": "Adobe After Effects",
-   "key": "",
+   "key": "F10",
    "mods": [
     "shift"
    ],
@@ -624,7 +624,7 @@
    "action": "Window ▸ Workspace ▸ Review",
    "detail": "app menu (shared)",
    "group": "Adobe After Effects",
-   "key": "",
+   "key": "F11",
    "mods": [
     "shift"
    ],
@@ -635,7 +635,7 @@
    "action": "Window ▸ Workspace ▸ Learn",
    "detail": "app menu (shared)",
    "group": "Adobe After Effects",
-   "key": "",
+   "key": "F12",
    "mods": [
     "shift"
    ],
@@ -1282,7 +1282,7 @@
    "action": "Layer ▸ Transform ▸ Center Anchor Point in Layer Content",
    "detail": "app menu (shared)",
    "group": "Adobe After Effects",
-   "key": "↖",
+   "key": "Home",
    "mods": [
     "opt",
     "cmd"
@@ -1294,7 +1294,7 @@
    "action": "Animation ▸ Keyframe Assistant ▸ Easy Ease Out",
    "detail": "app menu (shared)",
    "group": "Adobe After Effects",
-   "key": "",
+   "key": "F9",
    "mods": [
     "shift",
     "cmd"
@@ -1306,7 +1306,7 @@
    "action": "Composition ▸ Composition Flowchart",
    "detail": "app menu (shared)",
    "group": "Adobe After Effects",
-   "key": "",
+   "key": "F11",
    "mods": [
     "shift",
     "cmd"

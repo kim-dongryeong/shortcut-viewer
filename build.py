@@ -660,6 +660,7 @@ def web_key(spec):
         c = s[i]
         if c in WEB_MODSYM: mods.append(WEB_MODSYM[c]); i += 1
         elif c == ' ': i += 1
+        elif c == '+' and i + 1 < len(s): i += 1          # "Fn+Delete"의 구분자 (끝의 '+'는 키 자체: "⌘+")
         elif s[i:i+2] == 'Fn': mods.append('fn'); i += 2
         else: break
     rest = s[i:].strip()
@@ -786,6 +787,35 @@ menu_n = collect_menus(); appd_n = collect_app_defaults()   # menus first so cur
 gst_n = collect_codex_gestures() + collect_manual_gestures()   # non-static triggers (double/hold/multi-tap)
 web_n = collect_web()                                          # web-app shortcuts (Google Sheets/Docs/Drive…)
 com_n = collect_community()                                    # menu packs shared from other machines (last → knows local scopes)
+
+# ---------- 최종 정규화 + 완전중복 제거 ----------
+# collect_menus의 재사용 경로와 collect_community는 add()를 거치지 않으므로, 여기가 전 소스를 커버하는 유일한 지점.
+# (keep in sync with normalize_packs.py)
+PUA_KEY = {chr(0xF700): "Up", chr(0xF701): "Down", chr(0xF702): "Left", chr(0xF703): "Right",   # NSEvent function-key PUA chars (AX cmdChar가 그대로 내보냄 → 그리드에 안 보이는 tofu)
+           chr(0xF728): "ForwardDelete", chr(0xF729): "Home", chr(0xF72B): "End", chr(0xF72C): "PageUp", chr(0xF72D): "PageDown",
+           "⎋": "Escape", "⌫": "Delete", "⌦": "ForwardDelete", "⇥": "Tab", "↩": "Return", "⏎": "Return", "Esc": "Escape",
+           "↖": "Home", "↘": "End", "⇞": "PageUp", "⇟": "PageDown"}
+PUA_KEY.update({chr(0xF704 + i): "F" + str(i + 1) for i in range(20)})   # NSF1FunctionKey(0xF704)…NSF20
+SHIFTED = {'+': '=', '_': '-', '~': '`', '!': '1', '@': '2', '#': '3', '$': '4', '%': '5', '^': '6', '&': '7', '*': '8',
+           '(': '9', ')': '0', '{': '[', '}': ']', '|': '\\', ':': ';', '"': "'", '<': ',', '>': '.', '?': '/'}   # 물리 키 = base + shift (원 표기는 detail에 남음)
+def _norm_entry_keys(e):
+    for kf, mf in (("key", "mods"), ("ckey", "cmods")):
+        k = e.get(kf)
+        if not k: continue
+        k = PUA_KEY.get(k, k)
+        if k in SHIFTED:
+            k = SHIFTED[k]
+            if "shift" not in (e.get(mf) or []): e[mf] = (e.get(mf) or []) + ["shift"]
+        e[kf] = k
+        e[mf] = norm_mods(e.get(mf) or [])
+_seen, _uniq = set(), []
+for e in entries:
+    _norm_entry_keys(e)
+    fp = json.dumps(e, sort_keys=True, ensure_ascii=False)
+    if fp not in _seen: _seen.add(fp); _uniq.append(e)
+if len(_uniq) < len(entries): print(f"  정규화: 완전중복 {len(entries) - len(_uniq)}건 제거")
+entries[:] = _uniq
+
 counts = {"system": sys_n, "Karabiner": kara_n, "BTT": btt_n, "Raycast": ray_n, "수동": mg_n,
           "Shottr/ScreenBrush": sb_n, "공유": com_n,
           "Obsidian": obs_n, "VS Code": vsc_n, "Codex": cdx_n, "web": web_n, "app menu": menu_n, "app 기본": appd_n,

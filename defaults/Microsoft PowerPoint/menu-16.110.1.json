@@ -26,8 +26,9 @@
    "action": "View ▸ Zoom ▸ Zoom In",
    "detail": "app menu (shared)",
    "group": "Microsoft PowerPoint",
-   "key": "+",
+   "key": "=",
    "mods": [
+    "shift",
     "cmd"
    ],
    "scope": "Microsoft PowerPoint",
@@ -114,8 +115,9 @@
    "action": "Help ▸ PowerPoint Help",
    "detail": "app menu (shared)",
    "group": "Microsoft PowerPoint",
-   "key": "?",
+   "key": "/",
    "mods": [
+    "shift",
     "cmd"
    ],
    "scope": "Microsoft PowerPoint",
@@ -894,7 +896,7 @@
    "action": "View ▸ Show Outline",
    "detail": "app menu (shared)",
    "group": "Microsoft PowerPoint",
-   "key": "⇥",
+   "key": "Tab",
    "mods": [
     "ctrl",
     "shift"

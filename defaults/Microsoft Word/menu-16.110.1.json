@@ -37,8 +37,9 @@
    "action": "Help ▸ Word Help",
    "detail": "app menu (shared)",
    "group": "Microsoft Word",
-   "key": "?",
+   "key": "/",
    "mods": [
+    "shift",
     "cmd"
    ],
    "scope": "Microsoft Word",

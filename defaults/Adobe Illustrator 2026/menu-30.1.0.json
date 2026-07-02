@@ -6,7 +6,7 @@
    "action": "Help ▸ Illustrator Help...",
    "detail": "app menu (shared)",
    "group": "Adobe Illustrator 2026",
-   "key": "",
+   "key": "F1",
    "mods": [],
    "scope": "Adobe Illustrator 2026",
    "source": "app menu"
@@ -15,7 +15,7 @@
    "action": "Window ▸ Brushes",
    "detail": "app menu (shared)",
    "group": "Adobe Illustrator 2026",
-   "key": "",
+   "key": "F5",
    "mods": [],
    "scope": "Adobe Illustrator 2026",
    "source": "app menu"
@@ -24,7 +24,7 @@
    "action": "Window ▸ Color",
    "detail": "app menu (shared)",
    "group": "Adobe Illustrator 2026",
-   "key": "",
+   "key": "F6",
    "mods": [],
    "scope": "Adobe Illustrator 2026",
    "source": "app menu"
@@ -33,7 +33,7 @@
    "action": "Window ▸ Layers",
    "detail": "app menu (shared)",
    "group": "Adobe Illustrator 2026",
-   "key": "",
+   "key": "F7",
    "mods": [],
    "scope": "Adobe Illustrator 2026",
    "source": "app menu"
@@ -53,8 +53,9 @@
    "action": "View ▸ Zoom In",
    "detail": "app menu (shared)",
    "group": "Adobe Illustrator 2026",
-   "key": "+",
+   "key": "=",
    "mods": [
+    "shift",
     "cmd"
    ],
    "scope": "Adobe Illustrator 2026",
@@ -482,7 +483,7 @@
    "action": "Window ▸ Color Guide",
    "detail": "app menu (shared)",
    "group": "Adobe Illustrator 2026",
-   "key": "",
+   "key": "F3",
    "mods": [
     "shift"
    ],
@@ -493,7 +494,7 @@
    "action": "Window ▸ Graphic Styles",
    "detail": "app menu (shared)",
    "group": "Adobe Illustrator 2026",
-   "key": "",
+   "key": "F5",
    "mods": [
     "shift"
    ],
@@ -504,7 +505,7 @@
    "action": "Window ▸ Appearance",
    "detail": "app menu (shared)",
    "group": "Adobe Illustrator 2026",
-   "key": "",
+   "key": "F6",
    "mods": [
     "shift"
    ],
@@ -515,7 +516,7 @@
    "action": "Window ▸ Align",
    "detail": "app menu (shared)",
    "group": "Adobe Illustrator 2026",
-   "key": "",
+   "key": "F7",
    "mods": [
     "shift"
    ],
@@ -526,7 +527,7 @@
    "action": "Window ▸ Info",
    "detail": "app menu (shared)",
    "group": "Adobe Illustrator 2026",
-   "key": "",
+   "key": "F8",
    "mods": [
     "cmd"
    ],
@@ -537,7 +538,7 @@
    "action": "Window ▸ Transform",
    "detail": "app menu (shared)",
    "group": "Adobe Illustrator 2026",
-   "key": "",
+   "key": "F8",
    "mods": [
     "shift"
    ],
@@ -548,7 +549,7 @@
    "action": "Window ▸ Gradient",
    "detail": "app menu (shared)",
    "group": "Adobe Illustrator 2026",
-   "key": "",
+   "key": "F9",
    "mods": [
     "cmd"
    ],
@@ -559,7 +560,7 @@
    "action": "Window ▸ Stroke",
    "detail": "app menu (shared)",
    "group": "Adobe Illustrator 2026",
-   "key": "",
+   "key": "F10",
    "mods": [
     "cmd"
    ],
@@ -570,7 +571,7 @@
    "action": "Window ▸ Attributes",
    "detail": "app menu (shared)",
    "group": "Adobe Illustrator 2026",
-   "key": "",
+   "key": "F11",
    "mods": [
     "cmd"
    ],
@@ -581,7 +582,7 @@
    "action": "File ▸ Scripts ▸ Other Script...",
    "detail": "app menu (shared)",
    "group": "Adobe Illustrator 2026",
-   "key": "",
+   "key": "F12",
    "mods": [
     "cmd"
    ],
@@ -1228,7 +1229,7 @@
    "action": "Object ▸ Pattern ▸ Edit Pattern",
    "detail": "app menu (shared)",
    "group": "Adobe Illustrator 2026",
-   "key": "",
+   "key": "F8",
    "mods": [
     "shift",
     "cmd"
@@ -1240,7 +1241,7 @@
    "action": "Window ▸ Pathfinder",
    "detail": "app menu (shared)",
    "group": "Adobe Illustrator 2026",
-   "key": "",
+   "key": "F9",
    "mods": [
     "shift",
     "cmd"
@@ -1252,7 +1253,7 @@
    "action": "Window ▸ Transparency",
    "detail": "app menu (shared)",
    "group": "Adobe Illustrator 2026",
-   "key": "",
+   "key": "F10",
    "mods": [
     "shift",
     "cmd"
@@ -1264,7 +1265,7 @@
    "action": "Window ▸ Symbols",
    "detail": "app menu (shared)",
    "group": "Adobe Illustrator 2026",
-   "key": "",
+   "key": "F11",
    "mods": [
     "shift",
     "cmd"

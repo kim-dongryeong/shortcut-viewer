@@ -37,8 +37,9 @@
    "action": "Help ▸ Excel Help",
    "detail": "app menu (shared)",
    "group": "Microsoft Excel",
-   "key": "?",
+   "key": "/",
    "mods": [
+    "shift",
     "cmd"
    ],
    "scope": "Microsoft Excel",
@@ -334,7 +335,7 @@
    "action": "Insert ▸ Sheet ▸ Insert Sheet",
    "detail": "app menu (shared)",
    "group": "Microsoft Excel",
-   "key": "",
+   "key": "F11",
    "mods": [
     "shift"
    ],

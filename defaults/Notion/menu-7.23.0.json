@@ -15,8 +15,9 @@
    "action": "View ▸ Zoom In",
    "detail": "app menu (shared)",
    "group": "Notion",
-   "key": "+",
+   "key": "=",
    "mods": [
+    "shift",
     "cmd"
    ],
    "scope": "Notion",

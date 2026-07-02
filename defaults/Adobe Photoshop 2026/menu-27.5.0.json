@@ -6,7 +6,7 @@
    "action": "Window ▸ Brush Settings",
    "detail": "app menu (shared)",
    "group": "Adobe Photoshop 2026",
-   "key": "",
+   "key": "F5",
    "mods": [],
    "scope": "Adobe Photoshop 2026",
    "source": "app menu"
@@ -15,7 +15,7 @@
    "action": "Window ▸ Color",
    "detail": "app menu (shared)",
    "group": "Adobe Photoshop 2026",
-   "key": "",
+   "key": "F6",
    "mods": [],
    "scope": "Adobe Photoshop 2026",
    "source": "app menu"
@@ -24,7 +24,7 @@
    "action": "Window ▸ Layers",
    "detail": "app menu (shared)",
    "group": "Adobe Photoshop 2026",
-   "key": "",
+   "key": "F7",
    "mods": [],
    "scope": "Adobe Photoshop 2026",
    "source": "app menu"
@@ -33,7 +33,7 @@
    "action": "Window ▸ Info",
    "detail": "app menu (shared)",
    "group": "Adobe Photoshop 2026",
-   "key": "",
+   "key": "F8",
    "mods": [],
    "scope": "Adobe Photoshop 2026",
    "source": "app menu"
@@ -42,7 +42,7 @@
    "action": "File ▸ Revert",
    "detail": "app menu (shared)",
    "group": "Adobe Photoshop 2026",
-   "key": "",
+   "key": "F12",
    "mods": [],
    "scope": "Adobe Photoshop 2026",
    "source": "app menu"
@@ -62,8 +62,9 @@
    "action": "View ▸ Zoom In",
    "detail": "app menu (shared)",
    "group": "Adobe Photoshop 2026",
-   "key": "+",
+   "key": "=",
    "mods": [
+    "shift",
     "cmd"
    ],
    "scope": "Adobe Photoshop 2026",
@@ -447,7 +448,7 @@
    "action": "Edit ▸ Fill...",
    "detail": "app menu (shared)",
    "group": "Adobe Photoshop 2026",
-   "key": "",
+   "key": "F5",
    "mods": [
     "shift"
    ],
@@ -458,7 +459,7 @@
    "action": "Select ▸ Modify ▸ Feather...",
    "detail": "app menu (shared)",
    "group": "Adobe Photoshop 2026",
-   "key": "",
+   "key": "F6",
    "mods": [
     "shift"
    ],
@@ -469,7 +470,7 @@
    "action": "Window ▸ Actions",
    "detail": "app menu (shared)",
    "group": "Adobe Photoshop 2026",
-   "key": "",
+   "key": "F9",
    "mods": [
     "opt"
    ],

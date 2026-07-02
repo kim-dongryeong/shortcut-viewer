@@ -263,42 +263,6 @@
    "source": "app config"
   },
   {
-   "action": "Edit ▸ Clear",
-   "detail": "premiere .kys default · cmd.edit.clear",
-   "group": "Adobe Premiere Pro",
-   "key": "Delete",
-   "mods": [],
-   "scope": "Adobe Premiere Pro",
-   "source": "app config"
-  },
-  {
-   "action": "Edit ▸ Clear",
-   "detail": "premiere .kys default · cmd.edit.clear",
-   "group": "Adobe Premiere Pro",
-   "key": "Delete",
-   "mods": [],
-   "scope": "Adobe Premiere Pro",
-   "source": "app config"
-  },
-  {
-   "action": "Edit ▸ Clear",
-   "detail": "premiere .kys default · cmd.edit.clear",
-   "group": "Adobe Premiere Pro",
-   "key": "Delete",
-   "mods": [],
-   "scope": "Adobe Premiere Pro",
-   "source": "app config"
-  },
-  {
-   "action": "Edit ▸ Clear",
-   "detail": "premiere .kys default · cmd.edit.clear",
-   "group": "Adobe Premiere Pro",
-   "key": "Delete",
-   "mods": [],
-   "scope": "Adobe Premiere Pro",
-   "source": "app config"
-  },
-  {
    "action": "Graphics ▸ Clear",
    "detail": "premiere .kys default · cmd.graphics.clear",
    "group": "Adobe Premiere Pro",
@@ -1630,17 +1594,6 @@
    "source": "app config"
   },
   {
-   "action": "Monitor ▸ Nudge ▸ Down ▸ One",
-   "detail": "premiere .kys default · cmd.monitor.nudge.down.one",
-   "group": "Adobe Premiere Pro",
-   "key": "Down",
-   "mods": [
-    "cmd"
-   ],
-   "scope": "Adobe Premiere Pro",
-   "source": "app config"
-  },
-  {
    "action": "Project ▸ Moveextend ▸ Down",
    "detail": "premiere .kys default · cmd.project.moveextend.down",
    "group": "Adobe Premiere Pro",
@@ -2026,17 +1979,6 @@
    "source": "app config"
   },
   {
-   "action": "Monitor ▸ Nudge ▸ Left ▸ One",
-   "detail": "premiere .kys default · cmd.monitor.nudge.left.one",
-   "group": "Adobe Premiere Pro",
-   "key": "Left",
-   "mods": [
-    "cmd"
-   ],
-   "scope": "Adobe Premiere Pro",
-   "source": "app config"
-  },
-  {
    "action": "Project ▸ Moveextend ▸ Left",
    "detail": "premiere .kys default · cmd.project.moveextend.left",
    "group": "Adobe Premiere Pro",
@@ -2367,17 +2309,6 @@
    "source": "app config"
   },
   {
-   "action": "Monitor ▸ Nudge ▸ Right ▸ One",
-   "detail": "premiere .kys default · cmd.monitor.nudge.right.one",
-   "group": "Adobe Premiere Pro",
-   "key": "Right",
-   "mods": [
-    "cmd"
-   ],
-   "scope": "Adobe Premiere Pro",
-   "source": "app config"
-  },
-  {
    "action": "Project ▸ Moveextend ▸ Right",
    "detail": "premiere .kys default · cmd.project.moveextend.right",
    "group": "Adobe Premiere Pro",
@@ -2569,17 +2500,6 @@
    "detail": "premiere .kys default · cmd.titler.misc.font.underline",
    "group": "Adobe Premiere Pro",
    "key": "U",
-   "mods": [
-    "cmd"
-   ],
-   "scope": "Adobe Premiere Pro",
-   "source": "app config"
-  },
-  {
-   "action": "Monitor ▸ Nudge ▸ Up ▸ One",
-   "detail": "premiere .kys default · cmd.monitor.nudge.up.one",
-   "group": "Adobe Premiere Pro",
-   "key": "Up",
    "mods": [
     "cmd"
    ],
@@ -2935,8 +2855,8 @@
    "group": "Adobe Premiere Pro",
    "key": ",",
    "mods": [
-    "shift",
-    "opt"
+    "opt",
+    "shift"
    ],
    "scope": "Adobe Premiere Pro",
    "source": "app config"
@@ -2959,8 +2879,8 @@
    "group": "Adobe Premiere Pro",
    "key": ".",
    "mods": [
-    "shift",
-    "opt"
+    "opt",
+    "shift"
    ],
    "scope": "Adobe Premiere Pro",
    "source": "app config"
@@ -3007,8 +2927,8 @@
    "group": "Adobe Premiere Pro",
    "key": "0",
    "mods": [
-    "shift",
-    "opt"
+    "opt",
+    "shift"
    ],
    "scope": "Adobe Premiere Pro",
    "source": "app config"
@@ -3019,8 +2939,8 @@
    "group": "Adobe Premiere Pro",
    "key": "1",
    "mods": [
-    "shift",
-    "opt"
+    "opt",
+    "shift"
    ],
    "scope": "Adobe Premiere Pro",
    "source": "app config"
@@ -3031,8 +2951,8 @@
    "group": "Adobe Premiere Pro",
    "key": "2",
    "mods": [
-    "shift",
-    "opt"
+    "opt",
+    "shift"
    ],
    "scope": "Adobe Premiere Pro",
    "source": "app config"
@@ -3043,8 +2963,8 @@
    "group": "Adobe Premiere Pro",
    "key": "3",
    "mods": [
-    "shift",
-    "opt"
+    "opt",
+    "shift"
    ],
    "scope": "Adobe Premiere Pro",
    "source": "app config"
@@ -3055,8 +2975,8 @@
    "group": "Adobe Premiere Pro",
    "key": "4",
    "mods": [
-    "shift",
-    "opt"
+    "opt",
+    "shift"
    ],
    "scope": "Adobe Premiere Pro",
    "source": "app config"
@@ -3067,8 +2987,8 @@
    "group": "Adobe Premiere Pro",
    "key": "5",
    "mods": [
-    "shift",
-    "opt"
+    "opt",
+    "shift"
    ],
    "scope": "Adobe Premiere Pro",
    "source": "app config"
@@ -3079,8 +2999,8 @@
    "group": "Adobe Premiere Pro",
    "key": "6",
    "mods": [
-    "shift",
-    "opt"
+    "opt",
+    "shift"
    ],
    "scope": "Adobe Premiere Pro",
    "source": "app config"
@@ -3091,8 +3011,8 @@
    "group": "Adobe Premiere Pro",
    "key": "7",
    "mods": [
-    "shift",
-    "opt"
+    "opt",
+    "shift"
    ],
    "scope": "Adobe Premiere Pro",
    "source": "app config"
@@ -3103,8 +3023,8 @@
    "group": "Adobe Premiere Pro",
    "key": "8",
    "mods": [
-    "shift",
-    "opt"
+    "opt",
+    "shift"
    ],
    "scope": "Adobe Premiere Pro",
    "source": "app config"
@@ -3127,8 +3047,8 @@
    "group": "Adobe Premiere Pro",
    "key": "9",
    "mods": [
-    "shift",
-    "opt"
+    "opt",
+    "shift"
    ],
    "scope": "Adobe Premiere Pro",
    "source": "app config"
@@ -3230,18 +3150,6 @@
    "source": "app config"
   },
   {
-   "action": "Monitor ▸ Nudge ▸ Down ▸ Five",
-   "detail": "premiere .kys default · cmd.monitor.nudge.down.five",
-   "group": "Adobe Premiere Pro",
-   "key": "Down",
-   "mods": [
-    "shift",
-    "cmd"
-   ],
-   "scope": "Adobe Premiere Pro",
-   "source": "app config"
-  },
-  {
    "action": "Text ▸ Select ▸ Segment ▸ Start",
    "detail": "premiere .kys default · cmd.text.select.segment.start",
    "group": "Adobe Premiere Pro",
@@ -3271,8 +3179,8 @@
    "group": "Adobe Premiere Pro",
    "key": "Down",
    "mods": [
-    "shift",
-    "opt"
+    "opt",
+    "shift"
    ],
    "scope": "Adobe Premiere Pro",
    "source": "app config"
@@ -3422,25 +3330,13 @@
    "source": "app config"
   },
   {
-   "action": "Monitor ▸ Nudge ▸ Left ▸ Five",
-   "detail": "premiere .kys default · cmd.monitor.nudge.left.five",
-   "group": "Adobe Premiere Pro",
-   "key": "Left",
-   "mods": [
-    "shift",
-    "cmd"
-   ],
-   "scope": "Adobe Premiere Pro",
-   "source": "app config"
-  },
-  {
    "action": "Sequence ▸ Trimbackwardmany",
    "detail": "premiere .kys default · cmd.sequence.trimbackwardmany",
    "group": "Adobe Premiere Pro",
    "key": "Left",
    "mods": [
-    "shift",
-    "opt"
+    "opt",
+    "shift"
    ],
    "scope": "Adobe Premiere Pro",
    "source": "app config"
@@ -3487,8 +3383,8 @@
    "group": "Adobe Premiere Pro",
    "key": "M",
    "mods": [
-    "shift",
-    "opt"
+    "opt",
+    "shift"
    ],
    "scope": "Adobe Premiere Pro",
    "source": "app config"
@@ -3590,25 +3486,13 @@
    "source": "app config"
   },
   {
-   "action": "Monitor ▸ Nudge ▸ Right ▸ Five",
-   "detail": "premiere .kys default · cmd.monitor.nudge.right.five",
-   "group": "Adobe Premiere Pro",
-   "key": "Right",
-   "mods": [
-    "shift",
-    "cmd"
-   ],
-   "scope": "Adobe Premiere Pro",
-   "source": "app config"
-  },
-  {
    "action": "Sequence ▸ Trimforwardmany",
    "detail": "premiere .kys default · cmd.sequence.trimforwardmany",
    "group": "Adobe Premiere Pro",
    "key": "Right",
    "mods": [
-    "shift",
-    "opt"
+    "opt",
+    "shift"
    ],
    "scope": "Adobe Premiere Pro",
    "source": "app config"
@@ -3710,18 +3594,6 @@
    "source": "app config"
   },
   {
-   "action": "Monitor ▸ Nudge ▸ Up ▸ Five",
-   "detail": "premiere .kys default · cmd.monitor.nudge.up.five",
-   "group": "Adobe Premiere Pro",
-   "key": "Up",
-   "mods": [
-    "shift",
-    "cmd"
-   ],
-   "scope": "Adobe Premiere Pro",
-   "source": "app config"
-  },
-  {
    "action": "Timeline ▸ Goto ▸ Prev ▸ Caption ▸ Trackitem",
    "detail": "premiere .kys default · cmd.timeline.goto.prev.caption.trackitem",
    "group": "Adobe Premiere Pro",
@@ -3739,8 +3611,8 @@
    "group": "Adobe Premiere Pro",
    "key": "Up",
    "mods": [
-    "shift",
-    "opt"
+    "opt",
+    "shift"
    ],
    "scope": "Adobe Premiere Pro",
    "source": "app config"
@@ -3871,8 +3743,8 @@
    "group": "Adobe Premiere Pro",
    "key": "C",
    "mods": [
-    "shift",
     "opt",
+    "shift",
     "cmd"
    ],
    "scope": "Adobe Premiere Pro",
@@ -3884,8 +3756,8 @@
    "group": "Adobe Premiere Pro",
    "key": "Left",
    "mods": [
-    "shift",
     "opt",
+    "shift",
     "cmd"
    ],
    "scope": "Adobe Premiere Pro",
@@ -3897,8 +3769,8 @@
    "group": "Adobe Premiere Pro",
    "key": "Left",
    "mods": [
-    "shift",
     "opt",
+    "shift",
     "cmd"
    ],
    "scope": "Adobe Premiere Pro",
@@ -3910,8 +3782,8 @@
    "group": "Adobe Premiere Pro",
    "key": "R",
    "mods": [
-    "shift",
     "opt",
+    "shift",
     "cmd"
    ],
    "scope": "Adobe Premiere Pro",
@@ -3923,8 +3795,8 @@
    "group": "Adobe Premiere Pro",
    "key": "R",
    "mods": [
-    "shift",
     "opt",
+    "shift",
     "cmd"
    ],
    "scope": "Adobe Premiere Pro",
@@ -3936,8 +3808,8 @@
    "group": "Adobe Premiere Pro",
    "key": "Right",
    "mods": [
-    "shift",
     "opt",
+    "shift",
     "cmd"
    ],
    "scope": "Adobe Premiere Pro",
@@ -3949,8 +3821,8 @@
    "group": "Adobe Premiere Pro",
    "key": "Right",
    "mods": [
-    "shift",
     "opt",
+    "shift",
     "cmd"
    ],
    "scope": "Adobe Premiere Pro",

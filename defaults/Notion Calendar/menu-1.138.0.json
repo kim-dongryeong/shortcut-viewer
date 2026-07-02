@@ -24,8 +24,9 @@
    "action": "View ▸ Interface Scale ▸ Zoom In",
    "detail": "app menu (shared)",
    "group": "Notion Calendar",
-   "key": "+",
+   "key": "=",
    "mods": [
+    "shift",
     "cmd"
    ],
    "scope": "Notion Calendar",
