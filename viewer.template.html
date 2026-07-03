@@ -46,7 +46,7 @@
   .cap .act{font-size:9px;line-height:1.1;margin-top:auto;max-height:22px;overflow:hidden;color:#cdd3df}
   .cap.taken{border-color:#3a4252}
   .ov{font-size:8px;color:var(--dim);padding:0 3px;border-radius:4px;background:#222732;margin-left:2px}
-  .ov.dup{color:#f59e0b;background:#3a2a12}
+  .ov.dup{color:#ef4444;background:#3a1414}   /* 같은 앱 내 충돌 = 빨강 (BTT 주황과 구분) */
   .cap.busy:not(.taken){border-color:#33405e}
   .cap.dim{opacity:.3}
   .cap.freehl{border-color:#3d9e6b!important}   /* 빈 키: 차분한 초록 테두리 (글로우 없음) */
@@ -345,7 +345,7 @@ function renderMeta(){
     `생성 ${DB.meta.generated} · 총 ${DB.meta.total}개 · `+Object.entries(c).map(([k,v])=>`${k} ${v}`).join(' · ');
   document.getElementById('legend').innerHTML = Object.entries(COLORS)
     .map(([k,v])=>`<span title="${k==='web'?'제조사 공식문서에서 fetch·파싱 (로컬 스캔 아님)':''}"><span class="dot" style="background:${v}"></span>${k==='web'?'web=공식문서 fetch(스캔 아님)':k}</span>`).join('')
-    + `<span><span class="dot" style="background:#f59e0b"></span>같은 컨텍스트 겹침(+N)</span>`;
+    + `<span><span class="dot" style="background:#ef4444"></span>같은 앱 내 충돌(+N)</span>`;
 }
 function renderChips(){
   document.getElementById('modchips').innerHTML = ['ctrl','opt','shift','cmd','fn'].map(m=>`<span class="chip" data-mod="${m}">${MODSYM[m]} ${m}</span>`).join('');
