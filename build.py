@@ -237,14 +237,16 @@ def collect_karabiner():
     p = os.path.join(HOME, ".config/karabiner/karabiner.json")
     if not os.path.exists(p): print("  Karabiner: no config"); return 0
     data = json.load(open(p)); n = 0
-    KSCOPE = "Karabiner-Elements"   # 사용자 remap을 Karabiner-Elements 컨텍스트(+아이콘)에 넣는다 — 'global'에 묻히지 않게(BTT와 동일 취지)
+    # scope는 'global'이 정직하다(리맵은 모든 앱에서 동작). 대신 group="Karabiner-Elements"로 그 칩에 묶는다 —
+    # 뷰어 inCtx가 e.group도 매칭하므로 Global에도, Karabiner-Elements 컨텍스트에도 뜬다(BTT가 쓰는 방식과 동일).
+    KGROUP = "Karabiner-Elements"
     profs = data.get("profiles", [])
     active = [pr for pr in profs if pr.get("selected")] or profs[:1]   # only the SELECTED profile is live; ignore inactive profiles
     for prof in active:
         for sm in prof.get("simple_modifications", []):
             kc = (sm.get("from") or {}).get("key_code")
             to = ",".join((t.get("key_code") or "?") for t in sm.get("to", []))
-            add([], kara_key(kc), f"→ {to}", "Karabiner", KSCOPE, "simple_modification"); n += 1
+            add([], kara_key(kc), f"→ {to}", "Karabiner", "global", "simple_modification", group=KGROUP); n += 1
         KSYM = {'cmd': '⌘', 'opt': '⌥', 'ctrl': '⌃', 'shift': '⇧', 'fn': '🌐'}
         for rule in prof.get("complex_modifications", {}).get("rules", []):
             if rule.get("enabled", True) is False: continue   # Karabiner UI로 끈 규칙(enabled:false)은 실제 비활성 → 제외
@@ -263,7 +265,7 @@ def collect_karabiner():
                     elif t.get("set_variable"): to_parts.append("변수:" + (t["set_variable"].get("name") or ""))
                 to_str = " ".join(to_parts)
                 action = (f"{desc} → {to_str}" if desc and to_str else (f"→ {to_str}" if to_str else (desc or "remap")))
-                add(mods, kara_key(kc), action, "Karabiner", KSCOPE, "complex_modification"); n += 1
+                add(mods, kara_key(kc), action, "Karabiner", "global", "complex_modification", group=KGROUP); n += 1
     return n
 
 # BTTPredefinedActionType (ZACTION on the child action row) → human name. Partial enum
