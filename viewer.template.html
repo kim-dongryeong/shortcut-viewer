@@ -227,7 +227,7 @@
     <button id="annexport" class="vbtn" title="즐겨찾기·노트·내 단축키 내보내기">⬇︎ 내보내기</button>
     <label class="impbtn vbtn" title="즐겨찾기·노트 가져오기">⬆︎ 가져오기<input id="annimport" type="file" accept="application/json" style="display:none"></label>
   </div>
-  <div class="hint">키를 <b>물리적으로 hold</b> 하면 레이어 ON(놓으면 복귀) · 수식키 키캡/칩 클릭=고정 · 각 키 숫자=전 조합 수, 점=소스 ·
+  <div class="hint" id="hint" style="display:none">키를 <b>물리적으로 hold</b> 하면 레이어 ON(놓으면 복귀) · 수식키 키캡/칩 클릭=고정 · 각 키 숫자=전 조합 수, 점=소스 ·
     키 클릭→하단에 그 키의 <b>전 조합</b>, 수식키 누르면 해당 조합 <b style="color:#7dd3fc">하이라이트</b> · hover=미리보기 ·
     <span id="comboline"></span></div>
 
@@ -435,7 +435,7 @@ function navBlock(){
   return wrap;
 }
 function renderKB(){
-  document.documentElement.style.setProperty('--caph',(U-8)+'px');   // 키 높이도 크기(U)에 맞춰 스케일
+  document.documentElement.style.setProperty('--caph',(U-2)+'px');   // 키 높이(기본 U=56 → 54px, 원래 크기) · 크기 3단계에 비례
   const kb=document.getElementById('kb'); kb.innerHTML='';
   const main=document.createElement('div'); main.className='kbmain';
   LAYOUT.forEach(row=>{ const d=document.createElement('div'); d.className='krow'; row.forEach(s=>d.appendChild(buildCap(s))); main.appendChild(d); });
@@ -791,7 +791,7 @@ function sync(){
   document.querySelectorAll('[data-special]').forEach(el=>{const set=el.dataset.special==='hyper'?['ctrl','opt','shift','cmd']:['ctrl','opt','shift'];el.classList.toggle('on',set.every(m=>eff.has(m)));});
   document.querySelectorAll('[data-ctx]').forEach(el=>el.classList.toggle('on',ctxSet.has(el.dataset.ctx)));
   const cs=document.getElementById('ctxsummary'); if(cs) cs.textContent=[...ctxSet].join(', ')||'(없음)';
-  document.getElementById('comboline').innerHTML = eff.size? `현재: <b>${effSym()}</b>` : `수식키 없음`;
+  document.getElementById('comboline').innerHTML = eff.size? `현재: <b>${effSym()}</b>` : ``;
   const cb=document.getElementById('chordbar');
   if(chordPrefix){ const n=(CUR||[]).length;
     cb.style.display='block';
@@ -845,7 +845,7 @@ function renderFavs(){
 }
 mergeCustom(); restoreHash(); renderMeta(); renderChips(); renderCtx(); sync();
 document.getElementById('addbtn').onclick=addCustom;
-document.getElementById('moretoggle').onclick=()=>{ const m=document.getElementById('moretools'); const show=m.style.display==='none'; m.style.display=show?'flex':'none'; document.getElementById('moretoggle').classList.toggle('on',show); };
+document.getElementById('moretoggle').onclick=()=>{ const m=document.getElementById('moretools'); const show=m.style.display==='none'; m.style.display=show?'flex':'none'; document.getElementById('hint').style.display=show?'block':'none'; document.getElementById('moretoggle').classList.toggle('on',show); };
 document.getElementById('ctxtoggle').onclick=()=>{ const c=document.getElementById('ctxchips'); const show=c.style.display==='none'; c.style.display=show?'inline-flex':'none'; document.getElementById('ctxtoggle').textContent=show?'▴ 접기':'▾ 앱 선택'; };
 document.getElementById('search').oninput=e=>renderSearch(e.target.value.trim());
 document.getElementById('favview').onclick=renderFavs;
