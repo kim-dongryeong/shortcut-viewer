@@ -306,7 +306,7 @@ final class Engine {
     private(set) var gestures: [GestBind] = []
     var diagnostic: (([String], String) -> Void)? = nil    // observe-only report of pressed combos
     private var tap: CFMachPort?; private var source: CFRunLoopSource?
-    private var pending: ComboBind?; private var pendingStep = 0; private var pendingDeadline: CFAbsoluteTime = 0
+    private var pendingCands: [ComboBind] = []; private var pendingStep = 0; private var pendingDeadline: CFAbsoluteTime = 0   // 리더 진입 후 남은 후보들(같은 리더 공유 = 분기)
     private var tapTimes: [Int: [CFAbsoluteTime]] = [:]
     private var holdTimers: [Int: DispatchWorkItem] = [:]
     private var otherKeySincePress = false
@@ -356,21 +356,30 @@ final class Engine {
             let name = NAMEFOR[Int(kc)] ?? "key\(kc)"; DispatchQueue.main.async { diag(modsFrom(gf), name) }
             return Unmanaged.passUnretained(event)
         }
-        if let p = pending {   // sequence continuation
+        if !pendingCands.isEmpty {   // sequence continuation — 같은 리더를 공유하는 여러 후보를 좁혀 나간다(분기)
             if CFAbsoluteTimeGetCurrent() > pendingDeadline { clearPending() }
             else {
-                let step = p.seqRest[pendingStep]
-                if step.0 == kc && step.1 == gf {
-                    pendingStep += 1
-                    if pendingStep >= p.seqRest.count { let a = p.action; clearPending(); DispatchQueue.main.async(execute: a) }
-                    else { pendingDeadline = CFAbsoluteTimeGetCurrent() + 2.0; HUD.show("\(p.title) — 다음 키…") }
+                let matched = pendingCands.filter { pendingStep < $0.seqRest.count && $0.seqRest[pendingStep].0 == kc && $0.seqRest[pendingStep].1 == gf }
+                if !matched.isEmpty {
+                    let nextStep = pendingStep + 1
+                    if let done = matched.first(where: { nextStep >= $0.seqRest.count }) {   // 완성된 후보 발사(더 짧은 시퀀스 우선)
+                        let a = done.action; clearPending(); DispatchQueue.main.async(execute: a)
+                    } else {
+                        pendingCands = matched; pendingStep = nextStep; pendingDeadline = CFAbsoluteTimeGetCurrent() + 2.0
+                        HUD.show("\(comboLabel(modsFrom(matched[0].generic), NAMEFOR[Int(matched[0].keyCode)] ?? "")) — 다음 키…")
+                    }
                     return nil
-                } else { clearPending() }
+                } else { clearPending() }   // 어느 후보와도 안 맞음 → 취소
             }
         }
-        for b in combos where b.keyCode == kc && b.generic == gf && lrOK(event, b.lr) && frontmostMatches(b.app ?? "") {
-            if b.seqRest.isEmpty { let a = b.action; DispatchQueue.main.async(execute: a); return nil }
-            pending = b; pendingStep = 0; pendingDeadline = CFAbsoluteTimeGetCurrent() + 2.0; HUD.show("\(b.title) — 다음 키…"); return nil
+        let firstHit = combos.filter { $0.keyCode == kc && $0.generic == gf && lrOK(event, $0.lr) && frontmostMatches($0.app ?? "") }
+        if let simple = firstHit.first(where: { $0.seqRest.isEmpty }) {   // 단순 조합 = 즉시 발사
+            let a = simple.action; DispatchQueue.main.async(execute: a); return nil
+        }
+        let seqs = firstHit.filter { !$0.seqRest.isEmpty }
+        if !seqs.isEmpty {   // 리더 진입 — 이 리더를 공유하는 모든 시퀀스를 후보로 담는다
+            pendingCands = seqs; pendingStep = 0; pendingDeadline = CFAbsoluteTimeGetCurrent() + 2.0
+            HUD.show("\(comboLabel(modsFrom(seqs[0].generic), NAMEFOR[Int(seqs[0].keyCode)] ?? "")) — 다음 키…"); return nil
         }
         return Unmanaged.passUnretained(event)
     }
@@ -395,7 +404,7 @@ final class Engine {
         } else { holdTimers[kc]?.cancel(); holdTimers[kc] = nil }
     }
     private func cancelHolds() { holdTimers.values.forEach { $0.cancel() }; holdTimers = [:] }
-    private func clearPending() { pending = nil; pendingStep = 0; HUD.hide() }
+    private func clearPending() { pendingCands = []; pendingStep = 0; HUD.hide() }
 }
 
 // tiny floating HUD for sequence/leader mode
