@@ -896,6 +896,13 @@ def collect_app_icons():
     for scope, bundle in scope_bundle.items():
         u = _app_icon_datauri(bundle)
         if u: icons[scope] = u
+    # 로컬에 없는(공유·타 기기) 앱은 defaults/<scope>/icon.png 에서 — save_icon.py로 그 앱 있는 맥에서 넣어둔 것
+    for scope in {e["scope"] for e in entries}:
+        if scope in icons: continue
+        p = os.path.join(DEFAULTS_DIR, scope, "icon.png")
+        if os.path.exists(p):
+            try: icons[scope] = "data:image/png;base64," + base64.b64encode(open(p, "rb").read()).decode()
+            except Exception: pass
     return icons
 app_icons = collect_app_icons()
 print(f"  앱 아이콘 {len(app_icons)}개 추출")
