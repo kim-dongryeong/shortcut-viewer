@@ -19,6 +19,10 @@
   .chip.held{box-shadow:0 0 0 2px #22d3ee inset}
   #ctxchips .chip{padding:5px 9px;font-size:12px}
   #ctxchips .chip.on{background:#0d9488;border-color:#0d9488}
+  .ctxbulk{display:flex;gap:6px;flex-basis:100%;margin-bottom:4px;padding-bottom:8px;border-bottom:1px solid var(--line);align-items:center}
+  .ctxbulk .lbl{font-size:11px;color:var(--dim);margin-right:2px}
+  .ctxbulk button{font-size:11px;padding:3px 10px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--dim);cursor:pointer}
+  .ctxbulk button:hover{color:var(--txt);border-color:#0d9488}
   select,input,button{background:var(--panel);color:var(--txt);border:1px solid var(--line);border-radius:9px;padding:8px 11px;font-size:14px}
   button{cursor:pointer}
   button.on{background:#2563eb;border-color:#2563eb}
@@ -354,8 +358,13 @@ function renderChips(){
 function toggleMod(m){ sticky.has(m)?sticky.delete(m):sticky.add(m); sync(); }
 function renderCtx(){
   const customScopes=[...new Set((ANN.custom||[]).map(c=>c.scope).filter(s=>s&&s.toLowerCase()!=='global'&&!DB.meta.apps.includes(s)))];
-  document.getElementById('ctxchips').innerHTML=['Global',...DB.meta.apps,...customScopes,'BTT (전체)',...(DB.meta.bttgroups||[])].map(a=>`<span class="chip" data-ctx="${a.replace(/"/g,'&quot;')}">${a}</span>`).join('');
+  const allCtx=['Global',...DB.meta.apps,...customScopes,'BTT (전체)',...(DB.meta.bttgroups||[])];
+  const bulk=`<div class="ctxbulk"><span class="lbl">선택:</span><button data-bulk="all">전체 선택</button><button data-bulk="none">전체 해제</button><button data-bulk="invert">반대 선택</button></div>`;
+  document.getElementById('ctxchips').innerHTML=bulk+allCtx.map(a=>`<span class="chip" data-ctx="${a.replace(/"/g,'&quot;')}">${a}</span>`).join('');
   document.querySelectorAll('[data-ctx]').forEach(el=>el.onclick=()=>{ const c=el.dataset.ctx; ctxSet.has(c)?ctxSet.delete(c):ctxSet.add(c); sync(); });
+  document.querySelectorAll('[data-bulk]').forEach(b=>b.onclick=()=>{ const m=b.dataset.bulk;
+    ctxSet = m==='all' ? new Set(allCtx) : m==='none' ? new Set() : new Set(allCtx.filter(c=>!ctxSet.has(c)));
+    sync(); });
   document.getElementById('filtersel').onchange=e=>{ filter=e.target.value; sync(); };
   document.getElementById('ovbtn').onclick=()=>{ overview=!overview; if(overview) panelMode=null; document.getElementById('ovbtn').classList.toggle('on',overview); sync(); if(overview) document.getElementById('overview').scrollIntoView({behavior:'smooth',block:'start'}); };
 }
