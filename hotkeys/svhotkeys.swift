@@ -39,21 +39,32 @@ let KEYCODE: [String: Int] = [
 let NAMEFOR: [Int: String] = { var m = [Int: String](); for (k, v) in KEYCODE { m[v] = k }; return m }()
 let MODSYM: [String: String] = ["cmd":"⌘","opt":"⌥","ctrl":"⌃","shift":"⇧"]
 let MOD_ORDER = ["ctrl","opt","shift","cmd"]
-
+let MOD_BASE = ["cmd","opt","ctrl","shift"]
+// side-specific mod tokens: "lcmd"/"rcmd"/"lopt"/… (skhd/Karabiner style)
+func modBase(_ m: String) -> String {
+    if (m.hasPrefix("l") || m.hasPrefix("r")), MOD_BASE.contains(String(m.dropFirst())) { return String(m.dropFirst()) }
+    return m
+}
+func modSide(_ m: String) -> String? {   // "lcmd"->"left", "cmd"->nil
+    guard m.count > 3, MOD_BASE.contains(String(m.dropFirst())) else { return nil }
+    if m.hasPrefix("l") { return "left" }
+    if m.hasPrefix("r") { return "right" }
+    return nil
+}
 func carbonMods(_ mods: [String]) -> UInt32 {
     var m: UInt32 = 0
-    if mods.contains("cmd")   { m |= UInt32(cmdKey) }
-    if mods.contains("opt")   { m |= UInt32(optionKey) }
-    if mods.contains("ctrl")  { m |= UInt32(controlKey) }
-    if mods.contains("shift") { m |= UInt32(shiftKey) }
+    for md in mods.map(modBase) {
+        if md == "cmd" { m |= UInt32(cmdKey) }; if md == "opt" { m |= UInt32(optionKey) }
+        if md == "ctrl" { m |= UInt32(controlKey) }; if md == "shift" { m |= UInt32(shiftKey) }
+    }
     return m
 }
 func cocoaFlags(_ mods: [String]) -> NSEvent.ModifierFlags {
     var f: NSEvent.ModifierFlags = []
-    if mods.contains("cmd")   { f.insert(.command) }
-    if mods.contains("opt")   { f.insert(.option) }
-    if mods.contains("ctrl")  { f.insert(.control) }
-    if mods.contains("shift") { f.insert(.shift) }
+    for md in mods.map(modBase) {
+        if md == "cmd" { f.insert(.command) }; if md == "opt" { f.insert(.option) }
+        if md == "ctrl" { f.insert(.control) }; if md == "shift" { f.insert(.shift) }
+    }
     return f
 }
 func modsFrom(_ f: NSEvent.ModifierFlags) -> [String] {
@@ -65,11 +76,57 @@ func modsFrom(_ f: NSEvent.ModifierFlags) -> [String] {
     return m
 }
 func comboLabel(_ mods: [String], _ key: String) -> String {
-    (MOD_ORDER.filter { mods.contains($0) }.map { MODSYM[$0]! }.joined()) + key
+    let sym = mods.map { m -> String in
+        let s = MODSYM[modBase(m)] ?? modBase(m)
+        if let side = modSide(m) { return (side == "left" ? "L" : "R") + s }
+        return s
+    }.joined()
+    return sym + key
+}
+// CGEvent device-dependent modifier bits (for L/R distinction)
+enum DEV { static let lctrl: UInt64 = 0x1, lshift: UInt64 = 0x2, rshift: UInt64 = 0x4, lcmd: UInt64 = 0x8,
+                  rcmd: UInt64 = 0x10, lopt: UInt64 = 0x20, ropt: UInt64 = 0x40, rctrl: UInt64 = 0x2000 }
+func deviceBit(_ base: String, _ side: String) -> UInt64 {
+    switch (base, side) {
+    case ("cmd","left"): return DEV.lcmd;   case ("cmd","right"): return DEV.rcmd
+    case ("opt","left"): return DEV.lopt;   case ("opt","right"): return DEV.ropt
+    case ("shift","left"): return DEV.lshift; case ("shift","right"): return DEV.rshift
+    case ("ctrl","left"): return DEV.lctrl; case ("ctrl","right"): return DEV.rctrl
+    default: return 0 }
+}
+// modifier-key virtual keycode → (base, side), for gesture/recorder side detection
+let MODKEY: [Int: (String, String)] = [55:("cmd","left"),54:("cmd","right"),58:("opt","left"),61:("opt","right"),
+    56:("shift","left"),60:("shift","right"),59:("ctrl","left"),62:("ctrl","right")]
+func frontmostMatches(_ app: String) -> Bool {
+    if app.isEmpty { return true }
+    guard let f = NSWorkspace.shared.frontmostApplication else { return false }
+    let a = app.lowercased()
+    if let b = f.bundleIdentifier?.lowercased(), b == a || b.contains(a) { return true }
+    if let n = f.localizedName?.lowercased(), n == a || n.contains(a) { return true }
+    return false
+}
+// display label for any trigger kind (combo / L-R / app-scoped / gesture / sequence)
+func triggerLabel(_ hk: Hotkey) -> String {
+    if let t = hk.trigger {
+        let s = MODSYM[modBase(t.mod)] ?? t.mod
+        let pfx = (t.side == "left" ? "L" : t.side == "right" ? "R" : "")
+        switch t.kind {
+        case "double":   return pfx + s + s
+        case "multitap": return pfx + s + "×\(t.count ?? 3)"
+        case "hold":     return pfx + s + " hold"
+        default:         return pfx + s
+        }
+    }
+    if let seq = hk.sequence, !seq.isEmpty { return seq.map { comboLabel($0.mods, $0.key) }.joined(separator: " ▸ ") }
+    let base = comboLabel(hk.mods, hk.key)
+    if let app = hk.app, !app.isEmpty { return base + " ·\(app)" }
+    return base
 }
 
 // ══════════════════════ config model (read + write) ══════════════════════
 struct HKAction: Codable { var type: String; var value: String }
+struct Combo: Codable { var mods: [String]; var key: String }
+struct HKTrigger: Codable { var kind: String; var mod: String; var side: String?; var count: Int?; var ms: Int? }   // 제스처: double/hold/multitap
 struct Hotkey: Codable, Identifiable {
     var id: String
     var title: String
@@ -78,14 +135,19 @@ struct Hotkey: Codable, Identifiable {
     var action: HKAction
     var enabled: Bool
     var anyCombo: Bool
+    var app: String?           // NEW: 이 앱이 최전면일 때만 (bundle id 또는 이름) · nil=모든 앱
+    var trigger: HKTrigger?    // NEW: 제스처 트리거(더블탭/홀드/멀티탭) — 있으면 mods/key 대신 사용
+    var sequence: [Combo]?     // NEW: 시퀀스/리더 (예: ⌘K ⌘I) — 첫 조합이 진입, 나머지가 후속
 
     init(id: String? = nil, title: String = "", mods: [String] = [], key: String = "",
-         action: HKAction = HKAction(type: "open_app", value: ""), enabled: Bool = true, anyCombo: Bool = false) {
+         action: HKAction = HKAction(type: "open_app", value: ""), enabled: Bool = true, anyCombo: Bool = false,
+         app: String? = nil, trigger: HKTrigger? = nil, sequence: [Combo]? = nil) {
         self.id = id ?? "h" + String(UInt32.random(in: 0..<0xFFFFFF), radix: 16)
         self.title = title; self.mods = mods; self.key = key
         self.action = action; self.enabled = enabled; self.anyCombo = anyCombo
+        self.app = app; self.trigger = trigger; self.sequence = sequence
     }
-    enum CK: String, CodingKey { case id, title, mods, key, action, enabled, anyCombo }
+    enum CK: String, CodingKey { case id, title, mods, key, action, enabled, anyCombo, app, trigger, sequence }
     init(from d: Decoder) throws {   // tolerant: missing fields get defaults
         let c = try d.container(keyedBy: CK.self)
         id = (try? c.decode(String.self, forKey: .id)) ?? ("h" + String(UInt32.random(in: 0..<0xFFFFFF), radix: 16))
@@ -95,7 +157,12 @@ struct Hotkey: Codable, Identifiable {
         action = (try? c.decode(HKAction.self, forKey: .action)) ?? HKAction(type: "open_app", value: "")
         enabled = (try? c.decode(Bool.self, forKey: .enabled)) ?? true
         anyCombo = (try? c.decode(Bool.self, forKey: .anyCombo)) ?? false
+        app = try? c.decodeIfPresent(String.self, forKey: .app)
+        trigger = try? c.decodeIfPresent(HKTrigger.self, forKey: .trigger)
+        sequence = try? c.decodeIfPresent([Combo].self, forKey: .sequence)
     }
+    // 이 핫키가 EventTap(Accessibility)을 필요로 하나 — Carbon으로 안 되는 것들
+    var needsTap: Bool { anyCombo || app != nil || trigger != nil || sequence != nil || mods.contains { modSide($0) != nil } }
 }
 struct ConfigFile: Codable { var version: Int; var hotkeys: [Hotkey] }
 
@@ -220,54 +287,137 @@ final class HotKeyCenter {
     func unregisterAll() { for r in refs { if let r { UnregisterEventHotKey(r) } }; refs = []; actions = [:]; nextID = 1 }
 }
 
-// ══════════════════════ CGEventTap multi-hotkey (any combo; needs Accessibility) ══════════════════════
-final class EventTapCenter {
-    static let shared = EventTapCenter()
-    private var tap: CFMachPort?
-    private var source: CFRunLoopSource?
-    private var binds: [(kc: CGKeyCode, mods: NSEvent.ModifierFlags, action: () -> Void)] = []
-    func setBinds(_ b: [(CGKeyCode, NSEvent.ModifierFlags, () -> Void)]) {
-        binds = b.map { (kc: $0.0, mods: $0.1.intersection([.command,.option,.control,.shift]), action: $0.2) }
+// ══════════════════════ advanced trigger engine (CGEventTap; needs Accessibility) ══════════════════════
+// Handles what Carbon can't: app-scoped combos, left/right-specific modifiers, modifier
+// gestures (double-tap / hold / multi-tap), sequences/leader keys (⌘K ⌘I), and a diagnostic mode.
+final class Engine {
+    static let shared = Engine()
+    struct ComboBind {
+        let keyCode: CGKeyCode
+        let generic: NSEvent.ModifierFlags                 // required generic modifiers
+        let lr: [(bit: UInt64, base: String)]              // required device bits (L/R)
+        let app: String?                                   // frontmost-app scope (nil/"" = any)
+        let seqRest: [(CGKeyCode, NSEvent.ModifierFlags)]  // continuation combos (sequence); empty = simple
+        let title: String
+        let action: () -> Void
     }
+    struct GestBind { let base: String; let side: String; let kind: String; let count: Int; let ms: Double; let title: String; let action: () -> Void }
+    private(set) var combos: [ComboBind] = []
+    private(set) var gestures: [GestBind] = []
+    var diagnostic: (([String], String) -> Void)? = nil    // observe-only report of pressed combos
+    private var tap: CFMachPort?; private var source: CFRunLoopSource?
+    private var pending: ComboBind?; private var pendingStep = 0; private var pendingDeadline: CFAbsoluteTime = 0
+    private var tapTimes: [Int: [CFAbsoluteTime]] = [:]
+    private var holdTimers: [Int: DispatchWorkItem] = [:]
+    private var otherKeySincePress = false
+
+    func set(combos: [ComboBind], gestures: [GestBind]) { self.combos = combos; self.gestures = gestures }
+    var hasWork: Bool { !combos.isEmpty || !gestures.isEmpty || diagnostic != nil }
+
     @discardableResult
     func enable() -> Bool {
         if tap != nil { return true }
-        let mask: CGEventMask = (1 << CGEventType.keyDown.rawValue) | (1 << CGEventType.tapDisabledByTimeout.rawValue)
+        let mask: CGEventMask = (1 << CGEventType.keyDown.rawValue) | (1 << CGEventType.flagsChanged.rawValue) | (1 << CGEventType.tapDisabledByTimeout.rawValue)
         let info = Unmanaged.passUnretained(self).toOpaque()
         guard let t = CGEvent.tapCreate(tap: .cgSessionEventTap, place: .headInsertEventTap, options: .defaultTap,
               eventsOfInterest: mask, callback: { _, type, event, refcon in
                   guard let refcon else { return Unmanaged.passUnretained(event) }
-                  return Unmanaged<EventTapCenter>.fromOpaque(refcon).takeUnretainedValue().handle(type, event)
+                  return Unmanaged<Engine>.fromOpaque(refcon).takeUnretainedValue().handle(type, event)
               }, userInfo: info) else { return false }
-        tap = t
-        source = CFMachPortCreateRunLoopSource(kCFAllocatorDefault, t, 0)
-        CFRunLoopAddSource(CFRunLoopGetMain(), source, .commonModes)
-        CGEvent.tapEnable(tap: t, enable: true)
+        tap = t; source = CFMachPortCreateRunLoopSource(kCFAllocatorDefault, t, 0)
+        CFRunLoopAddSource(CFRunLoopGetMain(), source, .commonModes); CGEvent.tapEnable(tap: t, enable: true)
         return true
+    }
+    func disable() {
+        if let tap { CGEvent.tapEnable(tap: tap, enable: false) }
+        if let source { CFRunLoopRemoveSource(CFRunLoopGetMain(), source, .commonModes) }
+        tap = nil; source = nil; clearPending(); cancelHolds()
+    }
+    private func genericFlags(_ e: CGEvent) -> NSEvent.ModifierFlags {
+        var f: NSEvent.ModifierFlags = []; let cg = e.flags
+        if cg.contains(.maskCommand) { f.insert(.command) }; if cg.contains(.maskAlternate) { f.insert(.option) }
+        if cg.contains(.maskControl) { f.insert(.control) }; if cg.contains(.maskShift) { f.insert(.shift) }
+        return f
+    }
+    private func lrOK(_ e: CGEvent, _ lr: [(bit: UInt64, base: String)]) -> Bool {
+        let raw = e.flags.rawValue; for c in lr where (raw & c.bit) == 0 { return false }; return true
     }
     private func handle(_ type: CGEventType, _ event: CGEvent) -> Unmanaged<CGEvent>? {
         if type == .tapDisabledByTimeout || type == .tapDisabledByUserInput {
             if let tap { CGEvent.tapEnable(tap: tap, enable: true) }; return Unmanaged.passUnretained(event)
         }
-        if type == .keyDown, event.getIntegerValueField(.keyboardEventAutorepeat) == 0 {
-            let kc = CGKeyCode(event.getIntegerValueField(.keyboardEventKeycode))
-            var f: NSEvent.ModifierFlags = []
-            let cg = event.flags
-            if cg.contains(.maskCommand)   { f.insert(.command) }
-            if cg.contains(.maskAlternate) { f.insert(.option) }
-            if cg.contains(.maskControl)   { f.insert(.control) }
-            if cg.contains(.maskShift)     { f.insert(.shift) }
-            for b in binds where b.kc == kc && b.mods == f {
-                DispatchQueue.main.async { b.action() }; return nil   // consume
+        if type == .flagsChanged { handleFlags(event); return Unmanaged.passUnretained(event) }
+        guard type == .keyDown else { return Unmanaged.passUnretained(event) }
+        otherKeySincePress = true; cancelHolds(); tapTimes = [:]
+        if event.getIntegerValueField(.keyboardEventAutorepeat) != 0 { return Unmanaged.passUnretained(event) }
+        let kc = CGKeyCode(event.getIntegerValueField(.keyboardEventKeycode))
+        let gf = genericFlags(event)
+        if let diag = diagnostic {   // diagnostic mode: report + passthrough (never fire/consume)
+            let name = NAMEFOR[Int(kc)] ?? "key\(kc)"; DispatchQueue.main.async { diag(modsFrom(gf), name) }
+            return Unmanaged.passUnretained(event)
+        }
+        if let p = pending {   // sequence continuation
+            if CFAbsoluteTimeGetCurrent() > pendingDeadline { clearPending() }
+            else {
+                let step = p.seqRest[pendingStep]
+                if step.0 == kc && step.1 == gf {
+                    pendingStep += 1
+                    if pendingStep >= p.seqRest.count { let a = p.action; clearPending(); DispatchQueue.main.async(execute: a) }
+                    else { pendingDeadline = CFAbsoluteTimeGetCurrent() + 2.0; HUD.show("\(p.title) — 다음 키…") }
+                    return nil
+                } else { clearPending() }
             }
+        }
+        for b in combos where b.keyCode == kc && b.generic == gf && lrOK(event, b.lr) && frontmostMatches(b.app ?? "") {
+            if b.seqRest.isEmpty { let a = b.action; DispatchQueue.main.async(execute: a); return nil }
+            pending = b; pendingStep = 0; pendingDeadline = CFAbsoluteTimeGetCurrent() + 2.0; HUD.show("\(b.title) — 다음 키…"); return nil
         }
         return Unmanaged.passUnretained(event)
     }
-    func disable() {
-        if let tap { CGEvent.tapEnable(tap: tap, enable: false) }
-        if let source { CFRunLoopRemoveSource(CFRunLoopGetMain(), source, .commonModes) }
-        tap = nil; source = nil
+    private func handleFlags(_ event: CGEvent) {
+        let kc = Int(event.getIntegerValueField(.keyboardEventKeycode))
+        guard let (base, side) = MODKEY[kc] else { return }
+        let down = (event.flags.rawValue & deviceBit(base, side)) != 0
+        let now = CFAbsoluteTimeGetCurrent()
+        if down {
+            otherKeySincePress = false
+            var arr = (tapTimes[kc] ?? []).filter { now - $0 < 0.5 }; arr.append(now); tapTimes[kc] = arr
+            let taps = arr.count
+            for g in gestures where (g.kind == "double" || g.kind == "multitap") && g.base == base
+                && (g.side == "either" || g.side == side) && taps == (g.kind == "double" ? 2 : max(2, g.count)) {
+                let a = g.action; tapTimes[kc] = []; DispatchQueue.main.async(execute: a)
+            }
+            for g in gestures where g.kind == "hold" && g.base == base && (g.side == "either" || g.side == side) {
+                let work = DispatchWorkItem { [weak self] in guard let self, !self.otherKeySincePress else { return }; DispatchQueue.main.async(execute: g.action) }
+                holdTimers[kc]?.cancel(); holdTimers[kc] = work
+                DispatchQueue.main.asyncAfter(deadline: .now() + g.ms / 1000.0, execute: work)
+            }
+        } else { holdTimers[kc]?.cancel(); holdTimers[kc] = nil }
     }
+    private func cancelHolds() { holdTimers.values.forEach { $0.cancel() }; holdTimers = [:] }
+    private func clearPending() { pending = nil; pendingStep = 0; HUD.hide() }
+}
+
+// tiny floating HUD for sequence/leader mode
+enum HUD {
+    static var panel: NSPanel?
+    static func show(_ text: String) {
+        DispatchQueue.main.async {
+            if panel == nil {
+                let p = NSPanel(contentRect: NSRect(x: 0, y: 0, width: 360, height: 54), styleMask: [.borderless, .nonactivatingPanel], backing: .buffered, defer: false)
+                p.level = .floating; p.isOpaque = false; p.backgroundColor = .clear; p.hasShadow = true; p.ignoresMouseEvents = true; panel = p
+            }
+            guard let p = panel, let host = p.contentView else { return }
+            let bg = NSView(frame: NSRect(x: 0, y: 0, width: 360, height: 54)); bg.wantsLayer = true
+            bg.layer?.backgroundColor = NSColor(red: 0.17, green: 0.11, blue: 0.36, alpha: 0.96).cgColor; bg.layer?.cornerRadius = 13
+            let label = NSTextField(labelWithString: "🔗 " + text)
+            label.font = .systemFont(ofSize: 15, weight: .semibold); label.textColor = .white; label.frame = NSRect(x: 16, y: 16, width: 328, height: 22)
+            bg.addSubview(label); p.contentView = bg; _ = host
+            if let scr = NSScreen.main { p.setFrameOrigin(NSPoint(x: scr.frame.midX - 180, y: scr.frame.midY - 140)) }
+            p.orderFrontRegardless()
+        }
+    }
+    static func hide() { DispatchQueue.main.async { panel?.orderOut(nil) } }
 }
 
 enum Accessibility {
@@ -368,7 +518,7 @@ struct HotkeyCard: View {
         HStack(spacing: 12) {
             Toggle("", isOn: Binding(get: { hk.enabled }, set: onToggle))
                 .labelsHidden().toggleStyle(.switch).controlSize(.small).tint(ACCENT)
-            Text(comboLabel(hk.mods, hk.key))
+            Text(triggerLabel(hk))
                 .font(.system(size: 14, weight: .bold, design: .rounded)).foregroundColor(ACCENT)
                 .padding(.horizontal, 10).padding(.vertical, 5)
                 .background(Capsule().fill(ACCENT.opacity(0.14)))
@@ -474,6 +624,11 @@ struct EditSheet: View {
     @State private var apps: [String] = []
     @State private var conflictText = ""
     @State private var conflictBad = false
+    @State private var triggerKind = "combo"     // combo | gesture | sequence
+    @State private var lrSide = "either"          // either | left | right
+    @State private var gMod = "cmd"; @State private var gKind = "double"; @State private var gSide = "either"; @State private var gMs = 400.0
+    @State private var seq2Display = ""; @State private var seq2Mods: [String] = []; @State private var seq2Key = ""
+    @State private var appScope = ""
     func updateConflict() {
         guard !hotkey.key.isEmpty else { conflictText = ""; return }
         KnownShortcuts.shared.load()
@@ -509,7 +664,32 @@ struct EditSheet: View {
         default: return ""
         }
     }
-    var canSave: Bool { !hotkey.key.isEmpty && (hotkey.action.type == "show_viewer" || !hotkey.action.value.isEmpty) }
+    var canSave: Bool {
+        let actionOK = hotkey.action.type == "show_viewer" || !hotkey.action.value.isEmpty
+        switch triggerKind {
+        case "gesture":  return actionOK
+        case "sequence": return !hotkey.key.isEmpty && !seq2Key.isEmpty && actionOK
+        default:         return !hotkey.key.isEmpty && actionOK
+        }
+    }
+    func buildHotkey() -> Hotkey {
+        var h = hotkey
+        h.app = appScope.isEmpty ? nil : appScope
+        h.trigger = nil; h.sequence = nil
+        switch triggerKind {
+        case "gesture":
+            h.mods = []; h.key = ""; h.anyCombo = false
+            h.trigger = HKTrigger(kind: gKind, mod: gMod, side: gSide, count: gKind == "multitap" ? 3 : nil, ms: gKind == "hold" ? Int(gMs) : nil)
+        case "sequence":
+            h.anyCombo = false
+            h.sequence = [Combo(mods: hotkey.mods.map(modBase), key: hotkey.key), Combo(mods: seq2Mods.map(modBase), key: seq2Key)]
+            h.mods = []; h.key = ""
+        default:
+            h.mods = lrSide == "either" ? hotkey.mods.map(modBase) : hotkey.mods.map { (lrSide == "left" ? "l" : "r") + modBase($0) }
+            h.key = hotkey.key
+        }
+        return h
+    }
     @ViewBuilder func field<T: View>(_ label: String, @ViewBuilder _ content: () -> T) -> some View {
         VStack(alignment: .leading, spacing: 5) {
             Text(label).font(.caption.weight(.semibold)).foregroundColor(.secondary)
@@ -527,48 +707,65 @@ struct EditSheet: View {
             Divider()
             VStack(alignment: .leading, spacing: 15) {
                 field("제목") { TextField("예: Finder 열기", text: $hotkey.title).textFieldStyle(.roundedBorder) }
-                field("단축키 조합") {
-                    HStack(spacing: 10) {
-                        RecorderField(display: $comboDisplay) { mods, key in hotkey.mods = mods; hotkey.key = key; updateConflict() }
-                            .frame(width: 172, height: 30)
-                        Button { suggestFree() } label: { Label("빈 키 추천", systemImage: "sparkles") }.buttonStyle(.bordered)
-                        Spacer()
-                    }
+                field("트리거 종류") {
+                    Picker("", selection: $triggerKind) {
+                        Text("조합").tag("combo"); Text("제스처 (⌘⌘·홀드)").tag("gesture"); Text("시퀀스 (⌘K ⌘I)").tag("sequence")
+                    }.labelsHidden().pickerStyle(.segmented)
                 }
-                if !conflictText.isEmpty {
-                    HStack(spacing: 8) {
-                        Image(systemName: conflictBad ? "exclamationmark.triangle.fill" : "checkmark.circle.fill")
-                        Text(conflictText).font(.callout).fixedSize(horizontal: false, vertical: true)
-                        Spacer(minLength: 0)
+                if triggerKind == "combo" {
+                    field("단축키 조합") {
+                        HStack(spacing: 8) {
+                            RecorderField(display: $comboDisplay) { mods, key in hotkey.mods = mods; hotkey.key = key; updateConflict() }.frame(width: 160, height: 30)
+                            Button { suggestFree() } label: { Image(systemName: "sparkles") }.buttonStyle(.bordered).help("빈 키 추천")
+                            Picker("", selection: $lrSide) { Text("좌우 무관").tag("either"); Text("왼쪽만").tag("left"); Text("오른쪽만").tag("right") }.labelsHidden().frame(width: 110)
+                        }
                     }
-                    .padding(10)
-                    .background(RoundedRectangle(cornerRadius: 9).fill((conflictBad ? Color.orange : Color.green).opacity(0.15)))
-                    .foregroundColor(conflictBad ? .orange : .green)
+                    if !conflictText.isEmpty {
+                        HStack(spacing: 8) {
+                            Image(systemName: conflictBad ? "exclamationmark.triangle.fill" : "checkmark.circle.fill")
+                            Text(conflictText).font(.callout).fixedSize(horizontal: false, vertical: true); Spacer(minLength: 0)
+                        }.padding(10).background(RoundedRectangle(cornerRadius: 9).fill((conflictBad ? Color.orange : Color.green).opacity(0.15))).foregroundColor(conflictBad ? .orange : .green)
+                    }
+                } else if triggerKind == "gesture" {
+                    field("제스처") {
+                        HStack(spacing: 8) {
+                            Picker("", selection: $gMod) { Text("⌘").tag("cmd"); Text("⌥").tag("opt"); Text("⌃").tag("ctrl"); Text("⇧").tag("shift") }.labelsHidden().frame(width: 66)
+                            Picker("", selection: $gKind) { Text("더블탭").tag("double"); Text("3번 탭").tag("multitap"); Text("길게 누름").tag("hold") }.labelsHidden().frame(width: 108)
+                            Picker("", selection: $gSide) { Text("좌우무관").tag("either"); Text("왼쪽").tag("left"); Text("오른쪽").tag("right") }.labelsHidden().frame(width: 92)
+                        }
+                    }
+                    if gKind == "hold" { field("길게 누르는 시간") { HStack { Slider(value: $gMs, in: 200...900, step: 50); Text("\(Int(gMs))ms").frame(width: 54).font(.callout.monospacedDigit()) } } }
+                    Text("예: ⌘ 더블탭 = ⌘⌘ · ⇧ 길게 누름. 손쉬운 사용 권한이 필요합니다.").font(.caption).foregroundColor(.secondary)
+                } else {
+                    field("첫 번째 조합") { RecorderField(display: $comboDisplay) { mods, key in hotkey.mods = mods; hotkey.key = key }.frame(width: 160, height: 30) }
+                    field("다음 조합") { RecorderField(display: $seq2Display) { mods, key in seq2Mods = mods; seq2Key = key }.frame(width: 160, height: 30) }
+                    Text("첫 조합을 누른 뒤 이어서 다음 조합을 누르면 실행 (예: ⌘K → ⌘I). 손쉬운 사용 권한 필요.").font(.caption).foregroundColor(.secondary)
                 }
                 field("동작") {
                     Picker("", selection: $hotkey.action.type) {
-                        ForEach(ACTION_TYPES, id: \.0) { t in
-                            Label(t.1, systemImage: actionMeta(t.0).icon).tag(t.0)
-                        }
+                        ForEach(ACTION_TYPES, id: \.0) { t in Label(t.1, systemImage: actionMeta(t.0).icon).tag(t.0) }
                     }.labelsHidden().pickerStyle(.menu)
                 }
                 if needsApp {
                     field("앱 선택") {
                         Picker("", selection: $hotkey.action.value) {
-                            Text("— 앱을 고르세요 —").tag("")
-                            ForEach(apps, id: \.self) { Text($0).tag($0) }
+                            Text("— 앱을 고르세요 —").tag(""); ForEach(apps, id: \.self) { Text($0).tag($0) }
                         }.labelsHidden()
                     }
                 } else if hotkey.action.type != "show_viewer" {
                     field("값") { TextField(valuePlaceholder, text: $hotkey.action.value).textFieldStyle(.roundedBorder) }
                 }
-                Toggle(isOn: $hotkey.anyCombo) {
-                    VStack(alignment: .leading, spacing: 1) {
-                        Text("다른 앱도 잡기 (anyCombo)")
-                        Text("⇧Space 처럼 다른 앱과 겹치는 조합까지 가로챕니다 · 손쉬운 사용 권한 필요")
-                            .font(.caption).foregroundColor(.secondary)
-                    }
-                }.tint(ACCENT)
+                field("이 앱에서만 (비우면 모든 앱)") {
+                    Picker("", selection: $appScope) { Text("모든 앱").tag(""); ForEach(apps, id: \.self) { Text($0).tag($0) } }.labelsHidden()
+                }
+                if triggerKind == "combo" {
+                    Toggle(isOn: $hotkey.anyCombo) {
+                        VStack(alignment: .leading, spacing: 1) {
+                            Text("다른 앱도 잡기 (anyCombo)")
+                            Text("⇧Space 처럼 다른 앱과 겹치는 조합까지 · 손쉬운 사용 권한 필요").font(.caption).foregroundColor(.secondary)
+                        }
+                    }.tint(ACCENT)
+                }
             }.padding(18)
             Divider()
             // footer
@@ -578,11 +775,23 @@ struct EditSheet: View {
                 }
                 Spacer()
                 Button("취소") { onCancel() }.controlSize(.large)
-                Button("저장") { onSave(hotkey) }.keyboardShortcut(.defaultAction).buttonStyle(.borderedProminent).tint(ACCENT).controlSize(.large).disabled(!canSave)
+                Button("저장") { onSave(buildHotkey()) }.keyboardShortcut(.defaultAction).buttonStyle(.borderedProminent).tint(ACCENT).controlSize(.large).disabled(!canSave)
             }.padding(16)
         }
         .frame(width: 480)
-        .onAppear { comboDisplay = hotkey.key.isEmpty ? "" : comboLabel(hotkey.mods, hotkey.key); apps = installedApps(); updateConflict() }
+        .onAppear {
+            apps = installedApps(); appScope = hotkey.app ?? ""
+            if let t = hotkey.trigger { triggerKind = "gesture"; gMod = modBase(t.mod); gKind = t.kind; gSide = t.side ?? "either"; gMs = Double(t.ms ?? 400) }
+            else if let seq = hotkey.sequence, seq.count >= 2 {
+                triggerKind = "sequence"; hotkey.mods = seq[0].mods; hotkey.key = seq[0].key
+                comboDisplay = comboLabel(seq[0].mods, seq[0].key); seq2Mods = seq[1].mods; seq2Key = seq[1].key; seq2Display = comboLabel(seq[1].mods, seq[1].key)
+            } else {
+                comboDisplay = hotkey.key.isEmpty ? "" : comboLabel(hotkey.mods, hotkey.key)
+                if hotkey.mods.contains(where: { modSide($0) == "left" }) { lrSide = "left" }
+                else if hotkey.mods.contains(where: { modSide($0) == "right" }) { lrSide = "right" }
+            }
+            updateConflict()
+        }
     }
 }
 
@@ -593,6 +802,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     var failed: [String] = []
     var watch: DispatchSourceFileSystemObject?
     var editorWindow: NSWindow?
+    var diagnosticOn = false
 
     func applicationDidFinishLaunching(_ n: Notification) {
         status = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
@@ -613,24 +823,68 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         }
     }
 
-    func suspendHotkeys() { HotKeyCenter.shared.unregisterAll(); EventTapCenter.shared.disable() }
+    func suspendHotkeys() { HotKeyCenter.shared.unregisterAll(); Engine.shared.disable() }
 
     func reregister() {
-        HotKeyCenter.shared.unregisterAll(); EventTapCenter.shared.disable()
+        HotKeyCenter.shared.unregisterAll(); Engine.shared.disable()
         registered = 0; failed = []
-        var tapBinds: [(CGKeyCode, NSEvent.ModifierFlags, () -> Void)] = []
+        var combos: [Engine.ComboBind] = []; var gestures: [Engine.GestBind] = []
         for hk in Store.shared.hotkeys where hk.enabled {
-            guard let kc = KEYCODE[hk.key] else { failed.append("\(comboLabel(hk.mods, hk.key)) (알 수 없는 키)"); continue }
             let act: () -> Void = { Runner.run(hk.action) }
-            if hk.anyCombo { tapBinds.append((CGKeyCode(kc), cocoaFlags(hk.mods), act)); registered += 1 }
-            else if HotKeyCenter.shared.register(keyCode: kc, mods: carbonMods(hk.mods), action: act) { registered += 1 }
+            let title = hk.title.isEmpty ? (hk.action.value.isEmpty ? actionLabel(hk.action.type) : hk.action.value) : hk.title
+            // ── gesture (double-tap / hold / multi-tap of a modifier) ──
+            if let t = hk.trigger {
+                gestures.append(Engine.GestBind(base: modBase(t.mod), side: t.side ?? "either", kind: t.kind,
+                    count: t.count ?? 2, ms: Double(t.ms ?? 400), title: title, action: act)); registered += 1; continue
+            }
+            // ── sequence / leader (⌘K ⌘I) ──
+            if let seq = hk.sequence, let entry = seq.first, let kc0 = KEYCODE[entry.key] {
+                let rest = seq.dropFirst().compactMap { c -> (CGKeyCode, NSEvent.ModifierFlags)? in
+                    guard let k = KEYCODE[c.key] else { return nil }; return (CGKeyCode(k), cocoaFlags(c.mods)) }
+                combos.append(Engine.ComboBind(keyCode: CGKeyCode(kc0), generic: cocoaFlags(entry.mods), lr: [], app: hk.app,
+                    seqRest: rest, title: title, action: act)); registered += 1; continue
+            }
+            // ── plain / L-R / app-scoped combo ──
+            guard let kc = KEYCODE[hk.key] else { failed.append("\(comboLabel(hk.mods, hk.key)) (알 수 없는 키)"); continue }
+            if hk.needsTap {
+                let lr = hk.mods.compactMap { m -> (bit: UInt64, base: String)? in
+                    guard let s = modSide(m) else { return nil }; return (bit: deviceBit(modBase(m), s), base: modBase(m)) }
+                combos.append(Engine.ComboBind(keyCode: CGKeyCode(kc), generic: cocoaFlags(hk.mods), lr: lr, app: hk.app,
+                    seqRest: [], title: title, action: act)); registered += 1
+            } else if HotKeyCenter.shared.register(keyCode: kc, mods: carbonMods(hk.mods), action: act) { registered += 1 }
             else { failed.append("\(comboLabel(hk.mods, hk.key)) (예약됨/사용중)") }
         }
-        if !tapBinds.isEmpty {
-            EventTapCenter.shared.setBinds(tapBinds)
-            if !EventTapCenter.shared.enable() { failed.append("\(tapBinds.count)개 anyCombo — 손쉬운 사용 권한 필요") }
+        Engine.shared.set(combos: combos, gestures: gestures)
+        if Engine.shared.hasWork, !Engine.shared.enable() {
+            failed.append("고급 트리거(앱별·L/R·제스처·시퀀스) — 손쉬운 사용 권한 필요")
         }
         rebuildMenu()
+    }
+
+    // ── runtime diagnostic: press any combo → who uses it (like Shortcut Detective, cross-source) ──
+    @objc func toggleDiag() {
+        diagnosticOn.toggle()
+        Engine.shared.diagnostic = diagnosticOn ? { [weak self] mods, key in self?.reportDiag(mods, key) } : nil
+        if diagnosticOn {
+            if !Accessibility.isTrusted { Accessibility.requestTrust(); Accessibility.openSettings() }
+            _ = Engine.shared.enable()
+            HUD.show("🔎 진단 모드 — 아무 조합이나 눌러보세요 (다시 끄기: 메뉴바)")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) { if self.diagnosticOn { HUD.hide() } }
+        } else { HUD.hide(); reregister() }   // rebuild without the diagnostic tap
+        rebuildMenu()
+    }
+    func reportDiag(_ mods: [String], _ key: String) {
+        KnownShortcuts.shared.load()
+        let combo = comboLabel(mods, key)
+        var who: [String] = []
+        if Store.shared.hotkeys.contains(where: { $0.enabled && $0.key == key && Set($0.mods.map(modBase)) == Set(mods) }) { who.append("SV Hotkeys(내 핫키)") }
+        for (scope, list) in Dictionary(grouping: KnownShortcuts.shared.usersOf(mods, key), by: { $0.scope }).prefix(4) {
+            who.append("\(scope): \(list.first?.action ?? "")")
+        }
+        let front = NSWorkspace.shared.frontmostApplication?.localizedName ?? "?"
+        HUD.show(who.isEmpty ? "\(combo) — 아무도 안 씀 (빈 조합) · 최전면 \(front)"
+                             : "\(combo) → \(who.prefix(3).joined(separator: " · ")) · 최전면 \(front)")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { if self.diagnosticOn { HUD.hide() } }
     }
 
     func rebuildMenu() {
@@ -644,12 +898,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             let m = NSMenuItem(title: "설정된 핫키 없음 — ‘핫키 편집기’에서 추가", action: nil, keyEquivalent: ""); m.isEnabled = false; menu.addItem(m)
         }
         for hk in Store.shared.hotkeys {
-            let m = NSMenuItem(title: "\(hk.enabled ? "●" : "○") \(comboLabel(hk.mods, hk.key))   \(hk.title.isEmpty ? hk.action.value : hk.title)", action: #selector(fireNow(_:)), keyEquivalent: "")
+            let m = NSMenuItem(title: "\(hk.enabled ? "●" : "○") \(triggerLabel(hk))   \(hk.title.isEmpty ? hk.action.value : hk.title)", action: #selector(fireNow(_:)), keyEquivalent: "")
             m.representedObject = hk.action; m.target = self; menu.addItem(m)
         }
         if !failed.isEmpty { menu.addItem(.separator()); for f in failed { let m = NSMenuItem(title: "⚠️ \(f)", action: nil, keyEquivalent: ""); m.isEnabled = false; menu.addItem(m) } }
         menu.addItem(.separator())
-        if !Accessibility.isTrusted { menu.addItem(mk("any-combo 켜기 (손쉬운 사용…)", #selector(enableAX))) }
+        let diag = mk(diagnosticOn ? "🔎 진단 모드 끄기" : "🔎 진단 모드 (누가 이 키 쓰나)", #selector(toggleDiag))
+        if diagnosticOn { diag.state = .on }; menu.addItem(diag)
+        if !Accessibility.isTrusted { menu.addItem(mk("any-combo·고급 트리거 켜기 (손쉬운 사용…)", #selector(enableAX))) }
         menu.addItem(mk("설정 파일 열기 (hotkeys.json)", #selector(openConfig)))
         menu.addItem(mk("Shortcut Viewer 열기", #selector(openViewer)))
         menu.addItem(mk("다시 읽기 (Reload)", #selector(reloadNow)))
@@ -731,8 +987,9 @@ if CommandLine.arguments.contains("--list") || CommandLine.arguments.contains("-
     Store.shared.load()
     print("hotkeys.json: \(CONFIG_PATH)\n항목 \(Store.shared.hotkeys.count)개:")
     for hk in Store.shared.hotkeys {
-        let known = KEYCODE[hk.key] != nil ? "✓" : "✗(알 수 없는 키)"
-        print("  [\(hk.enabled ? "on":"off")|\(hk.anyCombo ? "eventtap":"carbon")|\(known)] \(comboLabel(hk.mods, hk.key))  →  \(hk.action.type): \(hk.action.value)   (\(hk.title))")
+        let kind = hk.trigger != nil ? "gesture" : hk.sequence != nil ? "sequence" : hk.needsTap ? "eventtap" : "carbon"
+        let scope = hk.app.map { " @\($0)" } ?? ""
+        print("  [\(hk.enabled ? "on" : "off")|\(kind)] \(triggerLabel(hk))\(scope)  →  \(hk.action.type): \(hk.action.value)   (\(hk.title))")
     }
     exit(0)
 }

@@ -116,6 +116,29 @@ python3 gen_hotkeys.py            # hotkeys.json → karabiner-sv.json · skhdrc
 
 데몬은 이 파일이 **바뀌면 자동으로 다시 읽습니다** — 뷰어에서 내보내고 저장하면 즉시 반영.
 
+## 고급 트리거 (Karabiner·BTT급) — 손쉬운 사용 권한 필요
+
+일반 조합(⌘/⌥/⌃)은 권한 0이지만, 아래는 **CGEventTap**을 쓰므로 손쉬운 사용 권한이 필요합니다(메뉴바 ▸ "고급 트리거 켜기"). 편집기에서 **트리거 종류: 조합 · 제스처 · 시퀀스**로 고르거나 JSON을 직접 씁니다.
+
+| 기능 | 무엇 | JSON |
+|---|---|---|
+| **앱별 핫키** | 그 앱이 최전면일 때만 발동 (아니면 통과) | `"app":"Figma"` (이름 또는 bundle id) |
+| **L/R 수식키** | 왼쪽/오른쪽 구분 (skhd·Karabiner식) | `"mods":["ropt"]` = 오른쪽 ⌥ (`l`/`r` + cmd/opt/ctrl/shift) |
+| **제스처** | 수식키 더블탭·멀티탭·길게 누름 | `"trigger":{"kind":"double","mod":"cmd","side":"left"}` · `{"kind":"hold","mod":"shift","ms":450}` · `{"kind":"multitap","mod":"opt","count":3}` |
+| **시퀀스/리더** | 첫 조합 → 다음 조합 (⌘K ⌘I, ⌥Space→C) | `"sequence":[{"mods":["cmd"],"key":"K"},{"mods":["cmd"],"key":"I"}]` (첫 조합 뒤 2초 안에 다음 키; 화면 중앙 HUD 표시) |
+| **런타임 진단** | 아무 조합이나 눌러 **누가 쓰나** 확인 (모든 소스 대조) | 메뉴바 ▸ 🔎 진단 모드 (Shortcut Detective식, 단 크로스소스) |
+
+```json
+{"title":"Figma에서만 이름변경", "mods":["opt"], "key":"R", "app":"Figma",
+ "action":{"type":"run_shell","value":"..."}, "enabled":true}
+{"title":"왼쪽 ⌘ 더블탭 → 뷰어", "trigger":{"kind":"double","mod":"cmd","side":"left"},
+ "action":{"type":"show_viewer","value":""}}
+{"title":"⌘K ⌘I → 계산기", "sequence":[{"mods":["cmd"],"key":"K"},{"mods":["cmd"],"key":"I"}],
+ "action":{"type":"open_app","value":"Calculator"}}
+```
+
+> 예시는 `hotkeys.example.json` 하단 5개(기본 꺼짐)에 있습니다. 켜려면 편집기에서 토글하거나 `"enabled":true`.
+
 ## 안전 / 프라이버시
 
 - `hotkeys.json`·생성된 `karabiner-sv.json`/`skhdrc.sv`/`hammerspoon-sv.lua`는 **당신의 실제 핫키·홈 경로**를 담아 **git에 안 올라갑니다**(`.gitignore`). 공유되는 건 `hotkeys.example.json`뿐.

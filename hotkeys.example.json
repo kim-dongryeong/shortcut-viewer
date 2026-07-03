@@ -17,6 +17,12 @@
     {"id":"dark",     "title":"다크 모드 켜기/끄기",                    "mods":["ctrl","opt"], "key":"D",     "enabled":false, "action":{"type":"applescript","value":"tell application \"System Events\" to tell appearance preferences to set dark mode to not dark mode"}},
     {"id":"newnote",  "title":"새 메모",                               "mods":["opt"],        "key":"N",     "action":{"type":"applescript","value":"tell application \"Notes\" to make new note"}},
     {"id":"emptytrash","title":"휴지통 비우기 (안전상 기본 꺼짐)",       "mods":["ctrl","opt"], "key":"Delete","enabled":false, "action":{"type":"applescript","value":"tell application \"Finder\" to empty trash"}},
-    {"id":"spotify",  "title":"Spotify 재생/일시정지 (anyCombo 예시)",  "mods":["ctrl","opt"], "key":"P",     "anyCombo":false, "action":{"type":"applescript","value":"tell application \"Spotify\" to playpause"}}
+    {"id":"spotify",  "title":"Spotify 재생/일시정지 (anyCombo 예시)",  "mods":["ctrl","opt"], "key":"P",     "anyCombo":false, "action":{"type":"applescript","value":"tell application \"Spotify\" to playpause"}},
+
+    {"id":"figma_only","title":"고급① Figma에서만 ⌥R",     "mods":["opt"], "key":"R", "app":"Figma", "enabled":false, "action":{"type":"run_shell","value":"echo figma-rename"}},
+    {"id":"ropt_j",    "title":"오른쪽 ⌥+J (L/R 구분)",      "mods":["ropt"], "key":"J", "enabled":false, "action":{"type":"open_app","value":"Finder"}},
+    {"id":"lcmd2",     "title":"왼쪽 ⌘ 더블탭 → 뷰어",       "trigger":{"kind":"double","mod":"cmd","side":"left"}, "enabled":false, "action":{"type":"show_viewer","value":""}},
+    {"id":"shift_hold","title":"⇧ 길게 누름 → 영역 스크린샷", "trigger":{"kind":"hold","mod":"shift","ms":450}, "enabled":false, "action":{"type":"run_shell","value":"screencapture -i -c"}},
+    {"id":"leader_c",  "title":"리더: ⌥Space → C → 계산기",  "sequence":[{"mods":["opt"],"key":"Space"},{"mods":[],"key":"C"}], "enabled":false, "action":{"type":"open_app","value":"Calculator"}}
   ]
 }
