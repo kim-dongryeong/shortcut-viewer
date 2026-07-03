@@ -237,7 +237,9 @@ def collect_karabiner():
     p = os.path.join(HOME, ".config/karabiner/karabiner.json")
     if not os.path.exists(p): print("  Karabiner: no config"); return 0
     data = json.load(open(p)); n = 0
-    for prof in data.get("profiles", []):
+    profs = data.get("profiles", [])
+    active = [pr for pr in profs if pr.get("selected")] or profs[:1]   # only the SELECTED profile is live; ignore inactive profiles
+    for prof in active:
         for sm in prof.get("simple_modifications", []):
             kc = (sm.get("from") or {}).get("key_code")
             to = ",".join((t.get("key_code") or "?") for t in sm.get("to", []))
