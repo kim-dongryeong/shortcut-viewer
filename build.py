@@ -739,6 +739,15 @@ _AX_GLOBE_ITEMS = ("Emoji & Symbols", "Start Dictation", "이모지 및 기호",
 def _is_globe_item(text):
     return any(g in (text or "") for g in _AX_GLOBE_ITEMS)
 
+# (아래 _reclass_window_mgmt와 함께 쓰는 판별자 — collect_menus의 안정화 계산에서도 필요해 여기로 올렸다)
+WIN_MGMT_MARKERS = ("Move & Resize", "Full Screen Tile", "Return to Previous Size")
+WIN_MGMT_LEAVES = {"Fill", "Center", "Left & Right", "Top & Bottom"}
+def _is_window_mgmt(action):
+    a = action or ""
+    if not a.startswith("Window"): return False
+    if any(m in a for m in WIN_MGMT_MARKERS): return True
+    return "▸" in a and a.split("▸")[-1].strip() in WIN_MGMT_LEAVES
+
 def collect_menus():
     binp = os.path.join(PROJ, "axmenudump")
     if not os.path.exists(binp): print("  app menus: axmenudump not compiled"); return 0
@@ -761,14 +770,43 @@ def collect_menus():
         arr = json.loads(r.stdout or "[]")
     except Exception as e:
         print("  app menus: parse error", e); return 0
-    n = 0
+    n = 0; fresh_real = {}
     for m in arr:
         key = ax_key(m)
         if not key: continue
         mods = decode_ax_mods(m.get("cmdModifiers", -1))
         action = m.get("path") or m.get("title")
         if not mods and _is_globe_item(action): continue  # AX can't encode the Globe/fn key → bare-letter artifact
-        add(mods, key, action, "app menu", m.get("app", "?"), m.get("bundle", "")); n += 1
+        app = m.get("app", "?")
+        add(mods, key, action, "app menu", app, m.get("bundle", "")); n += 1
+        if not ((action or "").startswith("Apple ▸") or _is_window_mgmt(action)):
+            fresh_real[app] = fresh_real.get(app, 0) + 1   # 이 앱의 '진짜' 단축키 수 (Apple/창관리 주입 제외)
+    # ── 안정화(high-water-mark) ──────────────────────────────────────────────────────────────────
+    # AX 스캔은 그 순간 '실행 중이고 메뉴가 펼쳐진' 앱만 읽는다. Xcode처럼 메뉴가 지연 로딩되는 앱이
+    # 프로젝트 없이/덜 펼쳐진 채 스캔되면 boilerplate만 잡혀, 직전에 잘 잡아둔 데이터를 통째로 덮어쓴다.
+    # → 이전 스캔이 어떤 앱을 '더 많이(=더 완전)' 담고 있었으면, 이번의 빈약한 결과 대신 이전 것을 유지한다.
+    #    (앱을 켠 채 refresh하면 그때 더 완전해지고 그게 새 기준이 됨. 초기화하려면 shortcuts.json 삭제.)
+    PSEUDO = ("macOS 시스템", "macOS 창 관리")
+    prev = os.path.join(PROJ, "shortcuts.json")
+    if os.path.exists(prev):
+        try:
+            old = [e for e in json.load(open(prev)).get("entries", [])
+                   if e.get("source") == "app menu" and "공유" not in (e.get("detail") or "")
+                   and e.get("scope") not in PSEUDO
+                   and not (not e.get("mods") and _is_globe_item(e.get("action")))]
+            old_by_app = {}
+            for e in old: old_by_app.setdefault(e.get("scope", "?"), []).append(e)
+            kept = []
+            for app, olds in old_by_app.items():
+                if len(olds) > fresh_real.get(app, 0):     # 이전이 더 완전 → 이번(빈약) 스캔분을 이전 것으로 교체
+                    entries[:] = [e for e in entries if not (e.get("source") == "app menu" and e.get("scope") == app)]
+                    for e in olds: e["group"] = e.get("group") or "app menu"; entries.append(e)
+                    kept.append(app)
+            if kept:
+                n = len([e for e in entries if e.get("source") == "app menu"])
+                print(f"  app menus: 이전 스캔이 더 완전한 {len(kept)}개 앱 유지(안정화): {', '.join(sorted(kept)[:8])}{' …' if len(kept) > 8 else ''}")
+        except Exception as ex:
+            print("  app menus: 안정화 단계 건너뜀:", ex)
     return n
 
 def collect_env():   # provenance: OS/app versions + locale, so each scan is a versioned datapoint. NO PII (no host/user/serial).
@@ -833,13 +871,7 @@ def _norm_entry_keys(e):
 # macOS가 '모든 앱'의 Window 메뉴에 주입하는 시스템 창-타일링 항목(Move & Resize·Fill·Center·Full Screen Tile…).
 # → 앱마다 26개씩 중복 + OneNote 등으로 오태깅되는 걸, 하나의 'macOS 창 관리' 스코프로 재분류(중복 제거).
 # 또 AX 메뉴 API는 Globe(🌐) 비트를 못 줘서 ⌃⇧↑처럼 오는데, 이 단축키들은 실제로 ⌃⇧🌐+화살표라 fn을 복원한다.
-WIN_MGMT_MARKERS = ("Move & Resize", "Full Screen Tile", "Return to Previous Size")
-WIN_MGMT_LEAVES = {"Fill", "Center", "Left & Right", "Top & Bottom"}
-def _is_window_mgmt(action):
-    a = action or ""
-    if not a.startswith("Window"): return False
-    if any(m in a for m in WIN_MGMT_MARKERS): return True
-    return "▸" in a and a.split("▸")[-1].strip() in WIN_MGMT_LEAVES
+# (WIN_MGMT_MARKERS / _is_window_mgmt 는 collect_menus에서도 써서 위쪽으로 이동해 정의돼 있음)
 def _reclass_window_mgmt(e):
     if e.get("source") != "app menu" or not _is_window_mgmt(e.get("action")): return
     e["scope"] = "macOS 창 관리"; e["group"] = "macOS 창 관리"; e["detail"] = "macOS 시스템 창 타일링 (모든 앱 공통)"
