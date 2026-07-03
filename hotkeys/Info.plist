@@ -14,5 +14,13 @@
     <!-- menu-bar agent: no Dock icon, no main window -->
     <key>LSUIElement</key>             <true/>
     <key>NSHumanReadableCopyright</key><string>Shortcut Viewer · MIT</string>
+    <!-- URL scheme so the web viewer can apply hotkeys directly: svhotkeys://apply?b64=… -->
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLName</key>    <string>com.shortcutviewer.hotkeys</string>
+            <key>CFBundleURLSchemes</key> <array><string>svhotkeys</string></array>
+        </dict>
+    </array>
 </dict>
 </plist>

@@ -678,8 +678,14 @@ function ghkAdd(){ const el=document.getElementById('modepanel');
   if(type!=='show_viewer'&&!val){ alert('동작 값을 입력하세요 (예: Finder · https://google.com)'); return; }
   ANN.ghk.push({title:el.querySelector('#ghkTitle').value.trim(), mods:[...ghkDraftMods], key, action:{type,value:val}, anyCombo:el.querySelector('#ghkAny').checked, enabled:true});
   saveAnn(); ghkDraftMods=new Set(); renderGHK(); }
-function exportHotkeysJSON(){ const data={version:1,hotkeys:(ANN.ghk||[]).map((g,i)=>({id:g.id||('g'+(i+1)),title:g.title||'',mods:g.mods,key:g.key,action:g.action,anyCombo:!!g.anyCombo,enabled:g.enabled!==false}))};
-  const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'})); a.download='hotkeys.json'; a.click(); }
+function ghkConfig(){ return {version:1,hotkeys:(ANN.ghk||[]).map((g,i)=>({id:g.id||('g'+(i+1)),title:g.title||'',mods:g.mods,key:g.key,action:g.action,anyCombo:!!g.anyCombo,enabled:g.enabled!==false}))}; }
+function exportHotkeysJSON(){ const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([JSON.stringify(ghkConfig(),null,2)],{type:'application/json'})); a.download='hotkeys.json'; a.click(); }
+function applyToApp(){
+  if(!(ANN.ghk||[]).length){ alert('먼저 핫키를 하나 이상 추가하세요.'); return; }
+  const b64=btoa(unescape(encodeURIComponent(JSON.stringify(ghkConfig()))));   // UTF-8 안전 base64 → 커스텀 URL 스킴으로 앱에 전달
+  location.href='svhotkeys://apply?b64='+encodeURIComponent(b64);
+  setTimeout(()=>{ const s=document.getElementById('ghkApplyMsg'); if(s) s.textContent='앱이 안 뜨면: 설치 안 됐거나(→ ./install_hotkeys.sh) 브라우저의 “SV Hotkeys 열기” 허용을 눌러주세요.'; }, 1200);
+}
 // 백엔드 설정 미리보기 (gen_hotkeys.py와 동일 규칙)
 const GHK_KMAP=(()=>{ const m={}; 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').forEach(c=>m[c]=[c.toLowerCase(),c.toLowerCase(),c.toLowerCase()]); '0123456789'.split('').forEach(d=>m[d]=[d,d,d]);
   for(let n=1;n<=20;n++)m['F'+n]=['f'+n,'f'+n,'f'+n];
@@ -710,8 +716,13 @@ function renderGHK(){ const el=document.getElementById('modepanel');
       <div class="ghkstatus" id="ghkStatus" style="display:none"></div>
     </div>
     <div class="ghklist">${list}</div>
-    <div class="ghkbackends"><b>내보내기 / 설치</b> · <button id="ghkExport">⤓ hotkeys.json 내보내기</button>
-      <span class="muted" style="font-size:11px">저장 → <code>~/.config/shortcut-viewer/hotkeys.json</code></span>
+    <div class="ghkbackends">
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:6px">
+        <button id="ghkApply" class="ghkadd" style="font-size:14px;padding:9px 16px">⚡ SV Hotkeys 앱에 바로 적용</button>
+        <button id="ghkExport">⤓ hotkeys.json 내보내기</button>
+        <span class="muted" style="font-size:11px">‘바로 적용’은 앱이 설치돼 있으면 클릭 한 번에 반영 (다운로드·수동 이동 불필요)</span>
+      </div>
+      <div id="ghkApplyMsg" class="muted" style="font-size:11px;color:#fbbf24;min-height:14px"></div>
       <div style="margin:8px 0 3px;font-size:12px"><b style="color:#c4b5fd">우리 앱으로 실행 (설치 1줄, 권장):</b> <code>./install_hotkeys.sh</code> — SV Hotkeys 메뉴바 앱이 이 파일을 읽어 실행합니다. 아무것도 안 깔아도 됩니다.</div>
       <div class="ghktabs"><span class="muted" style="font-size:11px;align-self:center">미리보기:</span>${[['daemon','⭐ SV Hotkeys (우리 앱)'],['karabiner','Karabiner'],['skhd','skhd'],['hammerspoon','Hammerspoon']].map(([b,l])=>`<button data-gb="${b}" class="${ghkBackend===b?'on':''}">${l}</button>`).join('')}</div>
       <div class="muted" style="font-size:11px;margin:2px 0">Karabiner·skhd·Hammerspoon은 <b>이미 그 도구를 쓰는 사람용 선택 내보내기</b>입니다 (우리 앱을 대신하는 게 아니라, 원하면 그쪽으로도 낼 수 있음).</div>
@@ -720,6 +731,7 @@ function renderGHK(){ const el=document.getElementById('modepanel');
   const ki=el.querySelector('#ghkKey'); ki.oninput=()=>ghkUpdateStatus();
   el.querySelector('#ghkType').onchange=e=>{ const a=GHK_ACTIONS.find(x=>x[0]===e.target.value); el.querySelector('#ghkVal').placeholder=a?a[2]:''; };
   el.querySelector('#ghkPick').onclick=ghkPickFree; el.querySelector('#ghkAdd').onclick=ghkAdd; el.querySelector('#ghkExport').onclick=exportHotkeysJSON;
+  el.querySelector('#ghkApply').onclick=applyToApp;
   el.querySelectorAll('[data-delg]').forEach(b=>b.onclick=()=>{ ANN.ghk.splice(+b.dataset.delg,1); saveAnn(); renderGHK(); });
   el.querySelectorAll('[data-gb]').forEach(b=>b.onclick=()=>{ ghkBackend=b.dataset.gb; el.querySelectorAll('[data-gb]').forEach(x=>x.classList.toggle('on',x.dataset.gb===ghkBackend)); ghkRenderBackend(); });
   ghkRenderBackend();

@@ -601,6 +601,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         HK.suspend = { [weak self] in self?.suspendHotkeys() }
         HK.resume  = { [weak self] in self?.reregister() }
         Store.shared.onChange = { [weak self] in self?.reregister() }
+        // URL scheme: let the web viewer apply hotkeys directly (svhotkeys://apply?b64=…)
+        NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(handleGetURL(_:reply:)),
+            forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
         let firstRun = !FileManager.default.fileExists(atPath: CONFIG_PATH)
         Store.shared.load()
         reregister()
@@ -679,6 +682,38 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         editorWindow?.makeKeyAndOrderFront(nil)
     }
     func windowWillClose(_ n: Notification) { NSApp.setActivationPolicy(.accessory) }
+
+    // ── receive svhotkeys:// URLs from the web viewer ──
+    @objc func handleGetURL(_ event: NSAppleEventDescriptor, reply: NSAppleEventDescriptor) {
+        if let s = event.paramDescriptor(forKeyword: AEKeyword(keyDirectObject))?.stringValue,
+           let url = URL(string: s) { handle(url) }
+    }
+    func application(_ application: NSApplication, open urls: [URL]) { urls.forEach { handle($0) } }
+    func handle(_ url: URL) {
+        guard url.scheme == "svhotkeys" else { return }
+        switch url.host {
+        case "open": openEditor()
+        case "apply":
+            let comps = URLComponents(url: url, resolvingAgainstBaseURL: false)
+            guard let b64 = comps?.queryItems?.first(where: { $0.name == "b64" })?.value,
+                  let data = Data(base64Encoded: b64),
+                  let cfg = try? JSONDecoder().decode(ConfigFile.self, from: data) else {
+                NSSound.beep(); return
+            }
+            applyFromViewer(cfg.hotkeys)
+        default: break
+        }
+    }
+    func applyFromViewer(_ hks: [Hotkey]) {
+        NSApp.setActivationPolicy(.regular); NSApp.activate(ignoringOtherApps: true)
+        let a = NSAlert()
+        a.messageText = "뷰어에서 \(hks.count)개 글로벌 핫키를 적용할까요?"
+        a.informativeText = "SV Hotkeys의 현재 설정을 뷰어에서 만든 것으로 대체합니다."
+        a.addButton(withTitle: "적용"); a.addButton(withTitle: "취소")
+        if a.runModal() == .alertFirstButtonReturn {
+            Store.shared.hotkeys = hks; Store.shared.commit(); openEditor()
+        } else { NSApp.setActivationPolicy(.accessory) }
+    }
 
     func watchConfig() {
         let dir = (CONFIG_PATH as NSString).deletingLastPathComponent
