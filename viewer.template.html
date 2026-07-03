@@ -23,6 +23,8 @@
   .ctxbulk .lbl{font-size:11px;color:var(--dim);margin-right:2px}
   .ctxbulk button{font-size:11px;padding:3px 10px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--dim);cursor:pointer}
   .ctxbulk button:hover{color:var(--txt);border-color:#0d9488}
+  .ctxbulk button.on{background:#0d9488;border-color:#0d9488;color:#fff}
+  .ctxicon{width:15px;height:15px;border-radius:3px;vertical-align:-3px;margin-right:5px;object-fit:contain}
   select,input,button{background:var(--panel);color:var(--txt);border:1px solid var(--line);border-radius:9px;padding:8px 11px;font-size:14px}
   button{cursor:pointer}
   button.on{background:#2563eb;border-color:#2563eb}
@@ -309,6 +311,7 @@ let panelMode=null;   // 새 전용 뷰: 'conflicts'|'free'|'stats'|'quiz'|null
 let theme = localStorage.getItem('SVtheme')==='light' ? 'light' : 'dark';
 document.documentElement.setAttribute('data-theme', theme);
 let hideCommon = localStorage.getItem('SVhideCommon')==='1';   // 누구나 아는 흔한 단축키(⌘C/V/Z…) 숨기기
+let showIcons = localStorage.getItem('SVicons')==='1';          // 컨텍스트 칩에 앱 아이콘 표시
 const COMMON_COMBOS = new Set(['cmd|C','cmd|V','cmd|X','cmd|Z','cmd|A','cmd|S','cmd|F','cmd|P','cmd|W','cmd|Q','cmd|N','cmd|O','cmd|T','cmd+shift|Z','cmd+shift|T']);
 function isCommon(e){ return !e.ckey && COMMON_COMBOS.has([...e.mods].sort().join('+')+'|'+e.key); }
 
@@ -360,10 +363,12 @@ function toggleMod(m){ sticky.has(m)?sticky.delete(m):sticky.add(m); sync(); }
 function renderCtx(){
   const customScopes=[...new Set((ANN.custom||[]).map(c=>c.scope).filter(s=>s&&s.toLowerCase()!=='global'&&!DB.meta.apps.includes(s)))];
   const allCtx=['Global',...DB.meta.apps,...customScopes,'BTT (전체)',...(DB.meta.bttgroups||[])];
-  const bulk=`<div class="ctxbulk"><span class="lbl">선택:</span><button data-bulk="all">전체 선택</button><button data-bulk="none">전체 해제</button><button data-bulk="invert">반대 선택</button></div>`;
-  document.getElementById('ctxchips').innerHTML=bulk+allCtx.map(a=>`<span class="chip" data-ctx="${a.replace(/"/g,'&quot;')}">${a}</span>`).join('');
+  const ICONS=DB.meta.icons||{};
+  const bulk=`<div class="ctxbulk"><span class="lbl">선택:</span><button data-bulk="all">전체 선택</button><button data-bulk="none">전체 해제</button><button data-bulk="invert">반대 선택</button><span style="flex:1"></span><button data-bulk="icons" class="${showIcons?'on':''}">🖼 앱 아이콘</button></div>`;
+  document.getElementById('ctxchips').innerHTML=bulk+allCtx.map(a=>{ const ic=(showIcons&&ICONS[a])?`<img class="ctxicon" src="${ICONS[a]}" alt="">`:''; return `<span class="chip" data-ctx="${a.replace(/"/g,'&quot;')}">${ic}${a}</span>`; }).join('');
   document.querySelectorAll('[data-ctx]').forEach(el=>el.onclick=()=>{ const c=el.dataset.ctx; ctxSet.has(c)?ctxSet.delete(c):ctxSet.add(c); sync(); });
   document.querySelectorAll('[data-bulk]').forEach(b=>b.onclick=()=>{ const m=b.dataset.bulk;
+    if(m==='icons'){ showIcons=!showIcons; localStorage.setItem('SVicons',showIcons?'1':'0'); renderCtx(); return; }
     ctxSet = m==='all' ? new Set(allCtx) : m==='none' ? new Set() : new Set(allCtx.filter(c=>!ctxSet.has(c)));
     sync(); });
   document.getElementById('filtersel').onchange=e=>{ filter=e.target.value; sync(); };

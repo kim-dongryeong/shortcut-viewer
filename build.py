@@ -861,9 +861,48 @@ for k, v in counts.items(): print(f"  {k:12s} {v}")
 
 apps = sorted({e["scope"] for e in entries + gestures if e["scope"] != "global"})
 bttgroups = sorted({e["group"] for e in entries if e["source"] == "BTT" and e["group"] != "BTT"})
+
+# ---------- 앱 아이콘 추출 (컨텍스트 칩에 표시할 옵션용) — 각 앱의 .icns → 작은 PNG data URI ----------
+def _app_icon_datauri(bundle):
+    try:
+        paths = subprocess.check_output(["mdfind", f"kMDItemCFBundleIdentifier == '{bundle}'"], text=True, stderr=subprocess.DEVNULL).splitlines()
+    except Exception: return None
+    app = next((p.strip() for p in paths if p.strip().endswith(".app")), None)
+    if not app: return None
+    try: pl = plistlib.load(open(os.path.join(app, "Contents/Info.plist"), "rb"))
+    except Exception: return None
+    res = os.path.join(app, "Contents/Resources"); icns = None
+    icon = pl.get("CFBundleIconFile")
+    if icon:
+        cand = os.path.join(res, icon if icon.lower().endswith(".icns") else icon + ".icns")
+        if os.path.exists(cand): icns = cand
+    if not icns:
+        g = glob.glob(os.path.join(res, "*.icns"))
+        icns = next((x for x in g if "AppIcon" in x or "icon" in os.path.basename(x).lower()), (g[0] if g else None))
+    if not icns: return None
+    tmp = os.path.join(tempfile.gettempdir(), "_svicon.png")
+    try:
+        subprocess.run(["sips", "-s", "format", "png", "-Z", "40", icns, "--out", tmp], capture_output=True, check=True)
+        return "data:image/png;base64," + base64.b64encode(open(tmp, "rb").read()).decode()
+    except Exception: return None
+def collect_app_icons():
+    scope_bundle = {}
+    for e in entries:
+        if e.get("source") == "app menu":
+            d = (e.get("detail") or "").strip()
+            if "." in d and " " not in d and re.fullmatch(r"[A-Za-z0-9][\w.\-]+", d): scope_bundle.setdefault(e["scope"], d)
+    scope_bundle.update({"Code": "com.microsoft.VSCode", "Sublime Text": "com.sublimetext.4", "Obsidian": "md.obsidian", "Codex": "com.openai.codex"})
+    icons = {}
+    for scope, bundle in scope_bundle.items():
+        u = _app_icon_datauri(bundle)
+        if u: icons[scope] = u
+    return icons
+app_icons = collect_app_icons()
+print(f"  앱 아이콘 {len(app_icons)}개 추출")
+
 meta = {"generated": datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
         "counts": counts, "apps": apps, "bttgroups": bttgroups, "total": len(entries),
-        "env": collect_env()}
+        "icons": app_icons, "env": collect_env()}
 
 # Favorites/notes: bake annotations.json (exported from the viewer) into the data so they survive
 # even if the browser's localStorage is cleared/blocked, and are portable across machines.
