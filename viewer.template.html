@@ -17,6 +17,7 @@
   .chip.on{background:#2563eb;border-color:#2563eb;color:#fff}
   .chip.alt.on{background:#7c3aed;border-color:#7c3aed}
   .chip.held{box-shadow:0 0 0 2px #22d3ee inset}
+  mark.hl{color:#111;border-radius:3px;padding:0 2px;font-weight:600}   /* 검색어 하이라이트 (배경색은 인라인) */
   #ctxchips .chip{padding:5px 9px;font-size:12px}
   #ctxchips .chip.on{background:#0d9488;border-color:#0d9488}
   .ctxbulk{display:flex;gap:6px;flex-basis:100%;margin-bottom:4px;padding-bottom:8px;border-bottom:1px solid var(--line);align-items:center}
@@ -228,6 +229,7 @@
     </select>
     <button id="commonbtn" class="vbtn" title="누구나 아는 흔한 단축키(⌘C·⌘V·⌘Z…) 숨기기">🙈 흔한 키</button>
     <button id="themebtn" class="vbtn" title="밝은/어두운 테마">☾ 테마</button>
+    <button id="capturebtn" class="vbtn" title="키 입력을 낚아채 레이아웃에 반영(기본 켬). 끄면 ⌘C 복사·텍스트 편집이 정상 동작합니다.">⌨ 입력 감지</button>
     <label class="vbtn" style="display:inline-flex;align-items:center;gap:7px;cursor:default" title="키보드 레이아웃 크기 조절">⇔ 크기 <input type="range" id="sizeslider" min="40" max="92" step="2" style="width:96px;vertical-align:middle;cursor:ew-resize"></label>
     <button id="printbtn" class="vbtn" title="전체 단축키를 인쇄/PDF (치트시트 포스터)">🖨 인쇄</button>
     <button id="csvbtn" class="vbtn" title="현재 컨텍스트 단축키를 CSV로 내보내기">⤓ CSV</button>
@@ -313,6 +315,7 @@ let theme = localStorage.getItem('SVtheme')==='light' ? 'light' : 'dark';
 document.documentElement.setAttribute('data-theme', theme);
 let hideCommon = localStorage.getItem('SVhideCommon')==='1';   // 누구나 아는 흔한 단축키(⌘C/V/Z…) 숨기기
 let showIcons = localStorage.getItem('SVicons')!=='0';          // 컨텍스트 칩에 앱 아이콘 표시 (기본 ON, '0'이면 끔)
+let captureKeys = localStorage.getItem('SVcapture')!=='0';      // 키 입력을 낚아채 레이아웃에 반영 (기본 ON). 끄면 ⌘C 복사 등 정상 동작
 const COMMON_COMBOS = new Set(['cmd|C','cmd|V','cmd|X','cmd|Z','cmd|A','cmd|S','cmd|F','cmd|P','cmd|W','cmd|Q','cmd|N','cmd|O','cmd|T','cmd+shift|Z','cmd+shift|T']);
 function isCommon(e){ return !e.ckey && COMMON_COMBOS.has([...e.mods].sort().join('+')+'|'+e.key); }
 
@@ -481,11 +484,19 @@ function showTip(ev,key,all){
 function moveTip(ev){ tip.style.left=Math.min(ev.clientX+14,innerWidth-370)+'px'; tip.style.top=Math.min(ev.clientY+14,innerHeight-tip.offsetHeight-10)+'px'; }
 function hideTip(){ tip.style.display='none'; }
 
-function rowHTML(e,hi){
+const HLCOLORS = ['#fde047','#7dd3fc','#86efac','#f0abfc','#fdba74','#fca5a5'];   // 검색어별 하이라이트 색 (노랑·하늘·초록·분홍·주황·빨강)
+function hlText(text, kws){   // 각 키워드 매치를 서로 다른 색 <mark>로 (한 번에 치환해 태그 안쪽 오염 방지)
+  const safe=String(text||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');
+  const v=(kws||[]).filter(Boolean); if(!v.length) return safe;
+  const re=new RegExp('('+v.map(k=>k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|')+')','gi');
+  return safe.replace(re, m=>{ const i=v.findIndex(k=>k.toLowerCase()===m.toLowerCase());
+    return `<mark class="hl" style="background:${HLCOLORS[(i<0?0:i)%HLCOLORS.length]}">${m}</mark>`; });
+}
+function rowHTML(e,hi,kws){
   return `<div class="row${hi?' hi':''}"><span class="src" style="background:${COLORS[e.source]||'#666'}">${e.source}</span>`+
     `<span class="kc">${comboSym(e.mods)}${e.key}${e.ckey?' '+chordTag(e):''}</span>`+
-    `<div style="flex:1"><div>${e.action.replace(/</g,'&lt;')}</div>`+
-    `<div class="muted" style="font-size:11px">${(e.detail||'').replace(/</g,'&lt;')}</div></div>`+
+    `<div style="flex:1"><div>${hlText(e.action,kws)}</div>`+
+    `<div class="muted" style="font-size:11px">${hlText(e.detail||'',kws)}</div></div>`+
     `<span class="scope">${e.scope}</span></div>`;
 }
 function allModSubsets(){
@@ -784,9 +795,14 @@ function restoreHash(){
 function renderSearch(q){
   const r=document.getElementById('results');
   if(!q){ r.innerHTML=''; return; }
-  const ql=q.toLowerCase(), combo=parseQueryCombo(q);
-  const hits=DB.entries.filter(e=>combo?(e.key.toLowerCase()===combo.key.toLowerCase()&&sameSet(e.mods,new Set(combo.mods))):(e.action.toLowerCase().includes(ql)||e.key.toLowerCase()===ql)).slice(0,100);
-  r.innerHTML=`<div class="sec">검색결과 ${hits.length}</div>`+hits.map(e=>rowHTML(e,false)).join('');
+  const combo=parseQueryCombo(q);
+  const kws = combo ? [] : q.split(/\s+/).filter(Boolean);   // 공백으로 나눈 다중 키워드(모두 포함 = AND)
+  const hits=DB.entries.filter(e=>{
+    if(combo) return e.key.toLowerCase()===combo.key.toLowerCase()&&sameSet(e.mods,new Set(combo.mods));
+    const hay=(e.action+' '+e.key+' '+(e.detail||'')+' '+e.scope).toLowerCase();
+    return kws.every(k=>hay.includes(k.toLowerCase()));
+  }).slice(0,100);
+  r.innerHTML=`<div class="sec">검색결과 ${hits.length}</div>`+hits.map(e=>rowHTML(e,false,kws)).join('');
   r.querySelectorAll('.row').forEach((el,i)=>el.onclick=()=>jumpTo(hits[i]));
 }
 function parseQueryCombo(q){
@@ -819,6 +835,7 @@ function sync(){
   document.querySelectorAll('[data-view]').forEach(el=>el.classList.toggle('on', panelMode===el.dataset.view));
   document.getElementById('commonbtn').classList.toggle('on',hideCommon);
   document.getElementById('themebtn').classList.toggle('on',theme==='light');
+  document.getElementById('capturebtn').classList.toggle('on',captureKeys);
   const mp=document.getElementById('modepanel');
   if(panelMode==='conflicts') renderConflicts();
   else if(panelMode==='free') renderFree();
@@ -839,9 +856,10 @@ document.addEventListener('keydown',e=>{ if(e.target.tagName==='INPUT')return;
   if(e.key==='Escape'&&chordPrefix){ e.preventDefault(); exitChord(); return; }
   if(e.key==='Escape'&&panelMode){ e.preventDefault(); panelMode=null; sync(); return; }
   if(panelMode==='quiz'){ const mk=codeToKey(e.code); if(mk){ e.preventDefault(); if(!e.repeat){ if(quizState&&!quizState.answered){ const combo=comboSym([...readHeld(e)])+mk; gradeQuiz(combo); } else { newQuizQ(); renderQuiz(); } } } return; }
+  if(!captureKeys) return;   // 입력 감지 OFF — ⌘C 복사·텍스트 편집 등 브라우저 기본 동작을 막지 않음
   const mapped=codeToKey(e.code); const h=readHeld(e);   // 실제 입력에 충실 — 브라우저가 받은 그대로(예: caps→⌘Space 리맵이면 ⌘Space가 정확)
   const s=[...h].sort().join(); let changed=false; if(s!==heldStr){heldStr=s;held=h;changed=true;} if(mapped){ e.preventDefault(); if(!e.repeat){ selectedKey = (mapped===selectedKey ? null : mapped); changed=true; } } if(changed) sync(); });   // 같은 키 다시 누르면 해제(토글)
-document.addEventListener('keyup',e=>{ const h=readHeld(e); const s=[...h].sort().join(); if(s!==heldStr){heldStr=s;held=h;sync();} });
+document.addEventListener('keyup',e=>{ if(!captureKeys) return; const h=readHeld(e); const s=[...h].sort().join(); if(s!==heldStr){heldStr=s;held=h;sync();} });
 window.addEventListener('blur',()=>{ if(heldStr){heldStr='';held=new Set();sync();} });
 
 function renderFavs(){
@@ -872,6 +890,7 @@ document.getElementById('themebtn').onclick=()=>{ theme=theme==='light'?'dark':'
 { const sl=document.getElementById('sizeslider'); sl.value=U;   // 키보드 크기 슬라이더 — 드래그하면 연속 조절
   sl.oninput=()=>{ U=+sl.value; localStorage.setItem('SVkeyU',U); sync(); }; }
 document.getElementById('commonbtn').onclick=()=>{ hideCommon=!hideCommon; localStorage.setItem('SVhideCommon',hideCommon?'1':'0'); document.getElementById('commonbtn').classList.toggle('on',hideCommon); sync(); };
+document.getElementById('capturebtn').onclick=()=>{ captureKeys=!captureKeys; localStorage.setItem('SVcapture',captureKeys?'1':'0'); if(!captureKeys){ held=new Set(); heldStr=''; } sync(); };
 document.getElementById('printbtn').onclick=()=>{ const ov=overview,pm=panelMode; overview=true; panelMode=null; document.getElementById('ovbtn').classList.add('on'); sync(); setTimeout(()=>{ window.print(); overview=ov; panelMode=pm; document.getElementById('ovbtn').classList.toggle('on',overview); sync(); },150); };
 document.getElementById('csvbtn').onclick=()=>exportRows('csv');
 document.getElementById('mdbtn').onclick=()=>exportRows('md');
