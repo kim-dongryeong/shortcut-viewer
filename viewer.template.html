@@ -45,6 +45,8 @@
   .ov.dup{color:#f59e0b;background:#3a2a12}
   .cap.busy:not(.taken){border-color:#33405e}
   .cap.dim{opacity:.3}
+  .cap.freehl{border-color:#22c55e!important;box-shadow:inset 0 0 0 1.5px #22c55e, 0 0 8px rgba(34,197,94,.25)}
+  .cap.freehl .lab{color:#4ade80}
   .cap .bar{position:absolute;left:0;bottom:0;height:3px;width:100%}
   .cap.mod{align-items:center;justify-content:center;color:var(--dim);background:#12151b}
   .cap.mod.on{background:#2563eb;border-color:#2563eb;color:#fff}
@@ -402,6 +404,7 @@ function cellKey(key,label,wpx){
     if(filter==='free') el.classList.add('dim');
   } else { h+=`<div class="act muted">·</div>`; if(filter==='taken') el.classList.add('dim'); }
   if(key===selectedKey) el.classList.add('sel');
+  if(panelMode==='free' && !ms.length) el.classList.add('freehl');   // 빈 조합 모드: 이 레이어에서 빈 키를 초록 테두리로 그리드에 직접 표시
   const _ak=annKey([...eff],key);
   if(ANN.fav[_ak]||ANN.note[_ak]) h+=`<span class="annm">${ANN.fav[_ak]?'⭐':''}${ANN.note[_ak]?'📝':''}</span>`;
   el.innerHTML=h;
@@ -596,11 +599,9 @@ function renderConflicts(){
 function renderFree(){
   const taken=new Set(ctxEntries().filter(e=>sameSet(e.mods,eff)).map(e=>e.key));
   const free=ALLKEYS.filter(k=>!taken.has(k));
-  let html=`<div class="sec">✨ 빈 조합 — 레이어 <b style="color:#7dd3fc">${effSym()||'(수식키 없음)'}</b> · ${[...ctxSet].join(', ')||'(없음)'} · 빈 키 ${free.length}/${ALLKEYS.length} <span class="muted" style="text-transform:none;letter-spacing:0;font-size:11px">(수식키를 눌러 레이어 전환 · 초록=홈row · 클릭→상세)</span></div>`;
-  if(eff.size===0) html+=`<div class="muted" style="margin:2px 0 8px">💡 새 글로벌 핫키엔 <b>⌥</b> 또는 <b>Hyper(⌃⌥⇧⌘)</b> 레이어 추천 — 시스템·앱과 덜 겹칩니다.</div>`;
-  html+=`<div class="freegrid">`+free.map(k=>`<div class="freek${HOMEROW.has(k)?' home':''}" data-fk="${k.replace(/"/g,'&quot;')}">${effSym()}${k}</div>`).join('')+`</div>`;
-  const el=document.getElementById('modepanel'); el.innerHTML=html;
-  el.querySelectorAll('[data-fk]').forEach(b=>b.onclick=()=>{ panelMode=null; selectedKey=b.dataset.fk; sync(); window.scrollTo({top:0,behavior:'smooth'}); });
+  let html=`<div class="sec">✨ 빈 조합 — 레이어 <b style="color:#7dd3fc">${effSym()||'(무수식)'}</b> · ${[...ctxSet].join(', ')||'(없음)'} · <b style="color:#4ade80">빈 키 ${free.length}</b>/${ALLKEYS.length} <span class="muted" style="text-transform:none;letter-spacing:0;font-size:11px">— 위 키보드에서 <b style="color:#4ade80">초록 테두리</b>가 빈 키입니다. 수식키를 눌러 레이어를 바꿔보세요 · 초록 키 클릭 → 그 조합 상세.</span></div>`;
+  if(eff.size===0) html+=`<div class="muted" style="margin:2px 0 4px">💡 새 글로벌 핫키엔 <b>⌥</b> 또는 <b>Hyper(⌃⌥⇧⌘)</b> 레이어 추천 — 시스템·앱과 덜 겹칩니다.</div>`;
+  document.getElementById('modepanel').innerHTML=html;
 }
 function renderStats(){
   const ents=DB.entries, cur=ctxEntries();
@@ -809,8 +810,8 @@ function sync(){
   else if(panelMode==='quiz') renderQuiz();
   else if(panelMode==='ghk'){ if(!mp.querySelector('.ghkform')) renderGHK(); }   // 폼 상태 보존: 최초 1회만
   else mp.innerHTML='';
-  const det=document.getElementById('detail');      // 전체 단축키(overview)/전용 패널이 켜지면 키별 상세는 숨긴다
-  if(overview||panelMode){ det.style.display='none'; }
+  const det=document.getElementById('detail');      // 전체 단축키(overview)/전용 패널이 켜지면 키별 상세는 숨긴다 (단 '빈 조합'은 그리드 위주라 상세 유지)
+  if(overview || (panelMode && panelMode!=='free')){ det.style.display='none'; }
   else { det.style.display=''; if(selectedKey) showDetail(selectedKey);
     else det.innerHTML='<div class="empty">키를 클릭하면 그 키에 걸린 <b>모든 수식키 조합</b>이 여기에 표시되고, 수식키를 누르면 해당 조합이 강조됩니다.</div>'; }
   saveHash();
