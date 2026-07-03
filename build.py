@@ -842,11 +842,25 @@ def _reclass_window_mgmt(e):
     e["scope"] = "macOS 창 관리"; e["group"] = "macOS 창 관리"; e["detail"] = "macOS 시스템 창 타일링 (모든 앱 공통)"
     if e.get("key") in ("Up", "Down", "Left", "Right") and "fn" not in (e.get("mods") or []):
         e["mods"] = (e.get("mods") or []) + ["fn"]   # AX가 못 읽는 Globe 복원 (아래 norm_mods가 정렬)
+# macOS는 '모든 앱'의 메뉴바에 Apple(🍎) 메뉴도 주입 → Force Quit·Lock·Log Out·Sleep…이 앱마다 중복되고
+# 'Log Out <이름>'·'Force Quit <앱>'엔 사용자 이름/앱명까지 박힌다. 하나의 'macOS 시스템' 스코프로 재분류 +
+# 뒤따르는 이름/앱명 스크럽(→ 중복 병합). BTT 앱 메뉴가 'BetterTouchTool' 스코프로 뜨던 잡음도 이걸로 걷힌다.
+def _reclass_apple_menu(e):
+    a = e.get("action") or ""
+    if e.get("source") != "app menu" or not a.startswith("Apple ▸"): return
+    a = re.sub(r"(Log Out|Force Quit|로그아웃|강제 종료) .+", r"\1 …", a)  # 뒤 이름/앱명 제거 → dedup + PII 스크럽
+    e["action"] = a; e["scope"] = "macOS 시스템"; e["group"] = "macOS 시스템"; e["detail"] = "macOS Apple 메뉴 (모든 앱 공통)"
+# 전용 설정 소스가 따로 있는 앱은 앱-메뉴 스캔(전부 표준 boilerplate: Settings/Hide/Quit·Undo/Copy/Paste)을 버려
+# '앱 vs 설정' 이중 스코프 혼란을 없앤다. BetterTouchTool(앱 메뉴) ↔ BTT(설정 100개) 공존 → 앱 메뉴 쪽 드롭.
+_APP_MENU_SUPPRESS = {"BetterTouchTool"}
 _seen, _uniq = set(), []
 for e in entries:
+    if e.get("source") == "app menu" and e.get("scope") in _APP_MENU_SUPPRESS:
+        continue   # 전용 설정 소스가 커버 (BTT) — 껍데기 앱-메뉴 스코프 제거
     if e.get("source") == "app menu" and not e.get("mods") and _is_globe_item(e.get("action")):
         continue   # bare-letter Globe artifact (Enter Full Screen 🌐F 등) — community packs bypass collect_menus, so drop here too
     _reclass_window_mgmt(e)
+    _reclass_apple_menu(e)
     _norm_entry_keys(e)
     fp = json.dumps(e, sort_keys=True, ensure_ascii=False)
     if fp not in _seen: _seen.add(fp); _uniq.append(e)

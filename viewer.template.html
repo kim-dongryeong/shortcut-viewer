@@ -311,7 +311,7 @@ let panelMode=null;   // 새 전용 뷰: 'conflicts'|'free'|'stats'|'quiz'|null
 let theme = localStorage.getItem('SVtheme')==='light' ? 'light' : 'dark';
 document.documentElement.setAttribute('data-theme', theme);
 let hideCommon = localStorage.getItem('SVhideCommon')==='1';   // 누구나 아는 흔한 단축키(⌘C/V/Z…) 숨기기
-let showIcons = localStorage.getItem('SVicons')==='1';          // 컨텍스트 칩에 앱 아이콘 표시
+let showIcons = localStorage.getItem('SVicons')!=='0';          // 컨텍스트 칩에 앱 아이콘 표시 (기본 ON, '0'이면 끔)
 const COMMON_COMBOS = new Set(['cmd|C','cmd|V','cmd|X','cmd|Z','cmd|A','cmd|S','cmd|F','cmd|P','cmd|W','cmd|Q','cmd|N','cmd|O','cmd|T','cmd+shift|Z','cmd+shift|T']);
 function isCommon(e){ return !e.ckey && COMMON_COMBOS.has([...e.mods].sort().join('+')+'|'+e.key); }
 
