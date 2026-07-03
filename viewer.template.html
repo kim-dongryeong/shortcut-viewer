@@ -195,8 +195,6 @@
 <div class="wrap">
   <div class="controls">
     <span id="modchips"></span>
-    <span class="chip alt" data-special="hyper">Hyper</span>
-    <span class="chip alt" data-special="meh">Meh</span>
     <input id="search" placeholder="🔍 검색: 동작/키/조합">
     <button id="ovbtn" title="선택한 컨텍스트의 모든 단축키를 한 번에 (KeyCue 식 치트시트)">📋 전체 단축키</button>
     <button id="favview">⭐ 즐겨찾기</button>
@@ -217,6 +215,9 @@
     <button class="vbtn" data-view="ghk" title="충돌 없는 빈 조합을 골라 그 자리에 진짜 글로벌 핫키를 설정 → 앱에 바로 적용">🌐 글로벌 핫키</button>
   </div>
   <div class="vbar" id="moretools" style="display:none">
+    <span class="chip alt" data-special="hyper" title="⌃⌥⇧⌘ 한 번에">Hyper</span>
+    <span class="chip alt" data-special="meh" title="⌃⌥⇧ 한 번에">Meh</span>
+    <span style="width:1px;height:20px;background:var(--line);margin:0 3px"></span>
     <select id="filtersel">
       <option value="all">전체 표시</option>
       <option value="taken">현재 레이어 점유만</option>
