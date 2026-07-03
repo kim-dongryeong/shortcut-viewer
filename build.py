@@ -811,8 +811,24 @@ def _norm_entry_keys(e):
             if "shift" not in (e.get(mf) or []): e[mf] = (e.get(mf) or []) + ["shift"]
         e[kf] = k
         e[mf] = norm_mods(e.get(mf) or [])
+# macOS가 '모든 앱'의 Window 메뉴에 주입하는 시스템 창-타일링 항목(Move & Resize·Fill·Center·Full Screen Tile…).
+# → 앱마다 26개씩 중복 + OneNote 등으로 오태깅되는 걸, 하나의 'macOS 창 관리' 스코프로 재분류(중복 제거).
+# 또 AX 메뉴 API는 Globe(🌐) 비트를 못 줘서 ⌃⇧↑처럼 오는데, 이 단축키들은 실제로 ⌃⇧🌐+화살표라 fn을 복원한다.
+WIN_MGMT_MARKERS = ("Move & Resize", "Full Screen Tile", "Return to Previous Size")
+WIN_MGMT_LEAVES = {"Fill", "Center", "Left & Right", "Top & Bottom"}
+def _is_window_mgmt(action):
+    a = action or ""
+    if not a.startswith("Window"): return False
+    if any(m in a for m in WIN_MGMT_MARKERS): return True
+    return "▸" in a and a.split("▸")[-1].strip() in WIN_MGMT_LEAVES
+def _reclass_window_mgmt(e):
+    if e.get("source") != "app menu" or not _is_window_mgmt(e.get("action")): return
+    e["scope"] = "macOS 창 관리"; e["group"] = "macOS 창 관리"; e["detail"] = "macOS 시스템 창 타일링 (모든 앱 공통)"
+    if e.get("key") in ("Up", "Down", "Left", "Right") and "fn" not in (e.get("mods") or []):
+        e["mods"] = (e.get("mods") or []) + ["fn"]   # AX가 못 읽는 Globe 복원 (아래 norm_mods가 정렬)
 _seen, _uniq = set(), []
 for e in entries:
+    _reclass_window_mgmt(e)
     _norm_entry_keys(e)
     fp = json.dumps(e, sort_keys=True, ensure_ascii=False)
     if fp not in _seen: _seen.add(fp); _uniq.append(e)
