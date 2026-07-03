@@ -237,13 +237,14 @@ def collect_karabiner():
     p = os.path.join(HOME, ".config/karabiner/karabiner.json")
     if not os.path.exists(p): print("  Karabiner: no config"); return 0
     data = json.load(open(p)); n = 0
+    KSCOPE = "Karabiner-Elements"   # 사용자 remap을 Karabiner-Elements 컨텍스트(+아이콘)에 넣는다 — 'global'에 묻히지 않게(BTT와 동일 취지)
     profs = data.get("profiles", [])
     active = [pr for pr in profs if pr.get("selected")] or profs[:1]   # only the SELECTED profile is live; ignore inactive profiles
     for prof in active:
         for sm in prof.get("simple_modifications", []):
             kc = (sm.get("from") or {}).get("key_code")
             to = ",".join((t.get("key_code") or "?") for t in sm.get("to", []))
-            add([], kara_key(kc), f"→ {to}", "Karabiner", "global", "simple_modification"); n += 1
+            add([], kara_key(kc), f"→ {to}", "Karabiner", KSCOPE, "simple_modification"); n += 1
         KSYM = {'cmd': '⌘', 'opt': '⌥', 'ctrl': '⌃', 'shift': '⇧', 'fn': '🌐'}
         for rule in prof.get("complex_modifications", {}).get("rules", []):
             if rule.get("enabled", True) is False: continue   # Karabiner UI로 끈 규칙(enabled:false)은 실제 비활성 → 제외
@@ -262,7 +263,7 @@ def collect_karabiner():
                     elif t.get("set_variable"): to_parts.append("변수:" + (t["set_variable"].get("name") or ""))
                 to_str = " ".join(to_parts)
                 action = (f"{desc} → {to_str}" if desc and to_str else (f"→ {to_str}" if to_str else (desc or "remap")))
-                add(mods, kara_key(kc), action, "Karabiner", "global", "complex_modification"); n += 1
+                add(mods, kara_key(kc), action, "Karabiner", KSCOPE, "complex_modification"); n += 1
     return n
 
 # BTTPredefinedActionType (ZACTION on the child action row) → human name. Partial enum
@@ -899,16 +900,26 @@ def _app_icon_datauri(bundle):
         subprocess.run(["sips", "-s", "format", "png", "-Z", "40", icns, "--out", tmp], capture_output=True, check=True)
         return "data:image/png;base64," + base64.b64encode(open(tmp, "rb").read()).decode()
     except Exception: return None
+# 앱-메뉴 스캔이 없어 번들 id가 안 잡히는 스코프/칩 → 알맞은 실제 앱(또는 macOS 시스템 앱) 아이콘을 직접 지정.
+SCOPE_ICON_BUNDLE = {
+    "macOS 시스템": "com.apple.systempreferences",   # System Settings (톱니) — Apple 메뉴 항목 모음
+    "macOS 창 관리": "com.apple.exposelauncher",      # Mission Control — 창/스페이스 관리
+}
 def collect_app_icons():
+    _cache = {}
+    def geti(bundle):                                 # 번들당 한 번만 추출(캐시)
+        if bundle not in _cache: _cache[bundle] = _app_icon_datauri(bundle)
+        return _cache[bundle]
     scope_bundle = {}
     for e in entries:
         if e.get("source") == "app menu":
             d = (e.get("detail") or "").strip()
             if "." in d and " " not in d and re.fullmatch(r"[A-Za-z0-9][\w.\-]+", d): scope_bundle.setdefault(e["scope"], d)
     scope_bundle.update({"Code": "com.microsoft.VSCode", "Sublime Text": "com.sublimetext.4", "Obsidian": "md.obsidian", "Codex": "com.openai.codex"})
+    scope_bundle.update(SCOPE_ICON_BUNDLE)
     icons = {}
     for scope, bundle in scope_bundle.items():
-        u = _app_icon_datauri(bundle)
+        u = geti(bundle)
         if u: icons[scope] = u
     # 로컬에 없는(공유·타 기기) 앱은 defaults/<scope>/icon.png 에서 — save_icon.py로 그 앱 있는 맥에서 넣어둔 것
     for scope in {e["scope"] for e in entries}:
@@ -917,6 +928,10 @@ def collect_app_icons():
         if os.path.exists(p):
             try: icons[scope] = "data:image/png;base64," + base64.b64encode(open(p, "rb").read()).decode()
             except Exception: pass
+    # BTT는 '설정' 소스라 앱 메뉴가 없음 → BetterTouchTool 앱 아이콘을 'BTT (전체)'+모든 프리셋 칩에 부여
+    btt = geti("com.hegenberg.BetterTouchTool")
+    if btt:
+        for k in ["BTT (전체)"] + list(bttgroups): icons.setdefault(k, btt)
     return icons
 app_icons = collect_app_icons()
 print(f"  앱 아이콘 {len(app_icons)}개 추출")
