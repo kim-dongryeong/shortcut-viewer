@@ -308,14 +308,6 @@ const FEXT = ['F13','F14','F15','F16','F17','F18','F19','F20'];
 
 let sticky=new Set(), held=new Set(), heldStr='', ctxSet=new Set(['Global']), filter='all', eff=new Set(), overview=false, selectedKey=null;
 let chordPrefix=null, chordReturn=null, CUR=null;   // which-key(연속) 모드: chordPrefix={mods,key}면 그리드가 그 prefix의 후속(2nd) 키 집합으로 바뀐다
-// Karabiner가 CapsLock을 다른 조합으로 통째로 리맵하면 브라우저엔 CapsLock 이벤트가 안 오고 그 조합이 온다(예: caps→⌘Space).
-// shortcuts.json의 'CapsLock → <조합>' 항목에서 그 지문을 읽어, 해당 조합이 눌리면 → CapsLock을 누른 것으로 되돌려 표시한다
-// (그리드에 caps 하이라이트, 유령 수식키는 안 켬). caps 자체가 브라우저에 안 오므로 이 역추적이 유일한 방법.
-const CAPS_REMAP = (()=>{ const MSYM={'⌘':'cmd','⌥':'opt','⌃':'ctrl','⇧':'shift','🌐':'fn'};
-  const e=(DB.entries||[]).find(x=>x.source==='Karabiner' && x.key==='CapsLock' && !(x.mods&&x.mods.length) && (x.action||'').includes('→'));  // 무수식 CapsLock 리맵만 (⇧CapsLock 등 제외)
-  if(!e) return null; let t=(e.action.split('→').pop()||'').trim(); const mods=new Set();
-  while(t && MSYM[t[0]]){ mods.add(MSYM[t[0]]); t=t.slice(1); } t=t.trim();
-  return t ? {mods, key:t} : null; })();
 let panelMode=null;   // 새 전용 뷰: 'conflicts'|'free'|'stats'|'quiz'|null
 let theme = localStorage.getItem('SVtheme')==='light' ? 'light' : 'dark';
 document.documentElement.setAttribute('data-theme', theme);
@@ -843,19 +835,13 @@ function sync(){
 function readHeld(e){ const h=new Set(); if(e.metaKey)h.add('cmd'); if(e.ctrlKey)h.add('ctrl'); if(e.altKey)h.add('opt'); if(e.shiftKey)h.add('shift'); return h; }
 const CODEMAP={Backquote:'`',Minus:'-',Equal:'=',BracketLeft:'[',BracketRight:']',Semicolon:';',Quote:"'",Comma:',',Period:'.',Slash:'/',Space:'Space',Enter:'Return',Tab:'Tab',Escape:'Escape',Backspace:'Delete',Delete:'ForwardDelete',ArrowLeft:'Left',ArrowRight:'Right',ArrowUp:'Up',ArrowDown:'Down',Home:'Home',End:'End',PageUp:'PageUp',PageDown:'PageDown',CapsLock:'CapsLock'};
 function codeToKey(code){ if(!code)return null; if(code==='Backslash')return String.fromCharCode(92); if(code.startsWith('Key'))return code.slice(3); if(code.startsWith('Digit'))return code.slice(5); if(code[0]==='F'&&code.length<=3&&!isNaN(parseInt(code.slice(1),10)))return code; return CODEMAP[code]||null; }
-function isCapsRemap(e){ if(!CAPS_REMAP || codeToKey(e.code)!==CAPS_REMAP.key) return false;   // 이 조합 = 리맵된 CapsLock인가
-  const h=readHeld(e); if(h.size!==CAPS_REMAP.mods.size) return false;
-  for(const m of CAPS_REMAP.mods) if(!h.has(m)) return false; return true; }
 document.addEventListener('keydown',e=>{ if(e.target.tagName==='INPUT')return;
   if(e.key==='Escape'&&chordPrefix){ e.preventDefault(); exitChord(); return; }
   if(e.key==='Escape'&&panelMode){ e.preventDefault(); panelMode=null; sync(); return; }
-  if(isCapsRemap(e)){ e.preventDefault(); let ch=false;   // caps→(리맵조합)이 왔다 → CapsLock 누른 것으로 표시, 유령 수식키는 무시
-    if(heldStr){heldStr='';held=new Set();ch=true;} if(!e.repeat){ selectedKey=(selectedKey==='CapsLock'?null:'CapsLock'); ch=true; } if(ch) sync(); return; }
   if(panelMode==='quiz'){ const mk=codeToKey(e.code); if(mk){ e.preventDefault(); if(!e.repeat){ if(quizState&&!quizState.answered){ const combo=comboSym([...readHeld(e)])+mk; gradeQuiz(combo); } else { newQuizQ(); renderQuiz(); } } } return; }
-  const mapped=codeToKey(e.code); const h=(mapped==='CapsLock')?new Set():readHeld(e);   // Caps가 리맵돼 metaKey 등을 딸려보내는 유령 수식키 무시 (Caps 키 자체를 누른 것)
+  const mapped=codeToKey(e.code); const h=readHeld(e);   // 실제 입력에 충실 — 브라우저가 받은 그대로(예: caps→⌘Space 리맵이면 ⌘Space가 정확)
   const s=[...h].sort().join(); let changed=false; if(s!==heldStr){heldStr=s;held=h;changed=true;} if(mapped){ e.preventDefault(); if(!e.repeat){ selectedKey = (mapped===selectedKey ? null : mapped); changed=true; } } if(changed) sync(); });   // 같은 키 다시 누르면 해제(토글)
-document.addEventListener('keyup',e=>{ if(isCapsRemap(e)){ if(heldStr){heldStr='';held=new Set();sync();} return; }   // 리맵된 caps의 잔여 수식키(예: ⌘Space 뗄 때 아직 ⌘held) 무시
-  const h=(codeToKey(e.code)==='CapsLock')?new Set():readHeld(e); const s=[...h].sort().join(); if(s!==heldStr){heldStr=s;held=h;sync();} });   // Caps 키 이벤트의 유령 수식키(리맵된 metaKey 등) 무시
+document.addEventListener('keyup',e=>{ const h=readHeld(e); const s=[...h].sort().join(); if(s!==heldStr){heldStr=s;held=h;sync();} });
 window.addEventListener('blur',()=>{ if(heldStr){heldStr='';held=new Set();sync();} });
 
 function renderFavs(){
