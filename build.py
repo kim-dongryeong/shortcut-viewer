@@ -244,13 +244,25 @@ def collect_karabiner():
             kc = (sm.get("from") or {}).get("key_code")
             to = ",".join((t.get("key_code") or "?") for t in sm.get("to", []))
             add([], kara_key(kc), f"→ {to}", "Karabiner", "global", "simple_modification"); n += 1
+        KSYM = {'cmd': '⌘', 'opt': '⌥', 'ctrl': '⌃', 'shift': '⇧', 'fn': '🌐'}
         for rule in prof.get("complex_modifications", {}).get("rules", []):
+            if rule.get("enabled", True) is False: continue   # Karabiner UI로 끈 규칙(enabled:false)은 실제 비활성 → 제외
             desc = rule.get("description", "")
             for man in rule.get("manipulators", []):
                 frm = man.get("from") or {}; kc = frm.get("key_code")
                 if not kc: continue
                 mods = [kara_mod(x) for x in (frm.get("modifiers") or {}).get("mandatory", [])]
-                add(mods, kara_key(kc), desc or "remap", "Karabiner", "global", "complex_modification"); n += 1
+                to_parts = []                                  # 어디로 매핑되는지 (예: → ⌘Space)
+                for t in (man.get("to") or []):
+                    tk = t.get("key_code")
+                    if tk:
+                        tm = [kara_mod(x) for x in (t.get("modifiers") or [])]
+                        to_parts.append("".join(KSYM.get(x, x) for x in tm) + kara_key(tk))
+                    elif t.get("shell_command"): to_parts.append("셸 명령")
+                    elif t.get("set_variable"): to_parts.append("변수:" + (t["set_variable"].get("name") or ""))
+                to_str = " ".join(to_parts)
+                action = (f"{desc} → {to_str}" if desc and to_str else (f"→ {to_str}" if to_str else (desc or "remap")))
+                add(mods, kara_key(kc), action, "Karabiner", "global", "complex_modification"); n += 1
     return n
 
 # BTTPredefinedActionType (ZACTION on the child action row) → human name. Partial enum
@@ -715,10 +727,12 @@ def ax_key(m):
     if isinstance(g, int) and g in GLYPH: return GLYPH[g]
     return None
 
-# Standard AppKit Edit-menu items whose REAL shortcut is a Globe/fn key that the Accessibility
-# menu API can't encode (no Globe bit) — so they surface as a bare letter in EVERY app. Drop them;
-# the system source already carries them correctly (🌐E / ⌃⌘Space, 🌐 Dictation).
-_AX_GLOBE_ITEMS = ("Emoji & Symbols", "Start Dictation", "이모지 및 기호", "받아쓰기 시작")
+# Standard AppKit menu items whose REAL shortcut is a Globe/fn key that the Accessibility menu
+# API can't encode (no Globe bit) — so they surface as a BARE letter in EVERY app. Drop those
+# bare-letter artifacts; the system/DEFAULTS source already carries them correctly:
+#   Emoji & Symbols 🌐E · Start Dictation 🌐 · Enter Full Screen 🌐F (전체 화면 전환).
+_AX_GLOBE_ITEMS = ("Emoji & Symbols", "Start Dictation", "이모지 및 기호", "받아쓰기 시작",
+                   "Enter Full Screen", "Exit Full Screen", "전체 화면 시작", "전체 화면 종료", "전체 화면 시작하기")
 def _is_globe_item(text):
     return any(g in (text or "") for g in _AX_GLOBE_ITEMS)
 
@@ -830,6 +844,8 @@ def _reclass_window_mgmt(e):
         e["mods"] = (e.get("mods") or []) + ["fn"]   # AX가 못 읽는 Globe 복원 (아래 norm_mods가 정렬)
 _seen, _uniq = set(), []
 for e in entries:
+    if e.get("source") == "app menu" and not e.get("mods") and _is_globe_item(e.get("action")):
+        continue   # bare-letter Globe artifact (Enter Full Screen 🌐F 등) — community packs bypass collect_menus, so drop here too
     _reclass_window_mgmt(e)
     _norm_entry_keys(e)
     fp = json.dumps(e, sort_keys=True, ensure_ascii=False)

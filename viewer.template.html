@@ -833,7 +833,8 @@ document.addEventListener('keydown',e=>{ if(e.target.tagName==='INPUT')return;
   if(e.key==='Escape'&&chordPrefix){ e.preventDefault(); exitChord(); return; }
   if(e.key==='Escape'&&panelMode){ e.preventDefault(); panelMode=null; sync(); return; }
   if(panelMode==='quiz'){ const mk=codeToKey(e.code); if(mk){ e.preventDefault(); if(!e.repeat){ if(quizState&&!quizState.answered){ const combo=comboSym([...readHeld(e)])+mk; gradeQuiz(combo); } else { newQuizQ(); renderQuiz(); } } } return; }
-  const h=readHeld(e); const s=[...h].sort().join(); const mapped=codeToKey(e.code); let changed=false; if(s!==heldStr){heldStr=s;held=h;changed=true;} if(mapped){ e.preventDefault(); if(!e.repeat){ selectedKey = (mapped===selectedKey ? null : mapped); changed=true; } } if(changed) sync(); });   // 같은 키 다시 누르면 해제(토글)
+  const mapped=codeToKey(e.code); const h=(mapped==='CapsLock')?new Set():readHeld(e);   // Caps가 리맵돼 metaKey 등을 딸려보내는 유령 수식키 무시 (Caps 키 자체를 누른 것)
+  const s=[...h].sort().join(); let changed=false; if(s!==heldStr){heldStr=s;held=h;changed=true;} if(mapped){ e.preventDefault(); if(!e.repeat){ selectedKey = (mapped===selectedKey ? null : mapped); changed=true; } } if(changed) sync(); });   // 같은 키 다시 누르면 해제(토글)
 document.addEventListener('keyup',e=>{ const h=readHeld(e); const s=[...h].sort().join(); if(s!==heldStr){heldStr=s;held=h;sync();} });
 window.addEventListener('blur',()=>{ if(heldStr){heldStr='';held=new Set();sync();} });
 
