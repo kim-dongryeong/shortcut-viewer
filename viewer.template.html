@@ -228,7 +228,7 @@
     </select>
     <button id="commonbtn" class="vbtn" title="누구나 아는 흔한 단축키(⌘C·⌘V·⌘Z…) 숨기기">🙈 흔한 키</button>
     <button id="themebtn" class="vbtn" title="밝은/어두운 테마">☾ 테마</button>
-    <button id="sizebtn" class="vbtn" title="키보드 크기">⇔ 크기</button>
+    <label class="vbtn" style="display:inline-flex;align-items:center;gap:7px;cursor:default" title="키보드 레이아웃 크기 조절">⇔ 크기 <input type="range" id="sizeslider" min="40" max="92" step="2" style="width:96px;vertical-align:middle;cursor:ew-resize"></label>
     <button id="printbtn" class="vbtn" title="전체 단축키를 인쇄/PDF (치트시트 포스터)">🖨 인쇄</button>
     <button id="csvbtn" class="vbtn" title="현재 컨텍스트 단축키를 CSV로 내보내기">⤓ CSV</button>
     <button id="mdbtn" class="vbtn" title="현재 컨텍스트 단축키를 Markdown 표로 내보내기">⤓ MD</button>
@@ -285,9 +285,9 @@ let ovGroup = ['mod','key','source'].includes(localStorage.getItem('SVovGroup'))
 const COLORS = {system:'#3b82f6','app menu':'#9ca3af','app config':'#14b8a6',Karabiner:'#22c55e',BTT:'#f59e0b',Raycast:'#a855f7',web:'#06b6d4',custom:'#ec4899'};
 const MODS = ['ctrl','opt','shift','cmd'];
 const MODSYM = {ctrl:'⌃',opt:'⌥',shift:'⇧',cmd:'⌘',fn:'🌐',caps:'⇪'};
-const KEY_SIZES=[46,56,68];   // 키보드 크기 3단계 (작게/보통/크게)
-let keySizeIdx = [0,1,2].includes(+localStorage.getItem('SVkeySize')) ? +localStorage.getItem('SVkeySize') : 1;
-let U = KEY_SIZES[keySizeIdx];
+const KEY_SIZES=[46,56,68];   // 레거시 프리셋 — 이제 슬라이더로 연속 조절(폭·높이 모두 U가 구동)
+let U = (()=>{ const s=+localStorage.getItem('SVkeyU'); if(s>=36 && s<=110) return s;   // 슬라이더로 저장한 연속 크기(px)
+  const i=[0,1,2].includes(+localStorage.getItem('SVkeySize'))?+localStorage.getItem('SVkeySize'):1; return KEY_SIZES[i]; })();   // 예전 3단계 설정 폴백
 // physical-ish ANSI Mac layout. t:'key' = shortcut key, t:'mod' = modifier toggle, t:'gap' = spacer.
 const LAYOUT = [
   [['key','Escape',1,'esc'],['gap',0,0.4],['key','F1',1],['key','F2',1],['key','F3',1],['key','F4',1],['gap',0,0.3],
@@ -869,7 +869,8 @@ document.getElementById('search').oninput=e=>renderSearch(e.target.value.trim())
 document.getElementById('favview').onclick=renderFavs;
 document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>setView(b.dataset.view));
 document.getElementById('themebtn').onclick=()=>{ theme=theme==='light'?'dark':'light'; document.documentElement.setAttribute('data-theme',theme); localStorage.setItem('SVtheme',theme); };
-document.getElementById('sizebtn').onclick=()=>{ keySizeIdx=(keySizeIdx+1)%3; U=KEY_SIZES[keySizeIdx]; localStorage.setItem('SVkeySize',keySizeIdx); sync(); };
+{ const sl=document.getElementById('sizeslider'); sl.value=U;   // 키보드 크기 슬라이더 — 드래그하면 연속 조절
+  sl.oninput=()=>{ U=+sl.value; localStorage.setItem('SVkeyU',U); sync(); }; }
 document.getElementById('commonbtn').onclick=()=>{ hideCommon=!hideCommon; localStorage.setItem('SVhideCommon',hideCommon?'1':'0'); document.getElementById('commonbtn').classList.toggle('on',hideCommon); sync(); };
 document.getElementById('printbtn').onclick=()=>{ const ov=overview,pm=panelMode; overview=true; panelMode=null; document.getElementById('ovbtn').classList.add('on'); sync(); setTimeout(()=>{ window.print(); overview=ov; panelMode=pm; document.getElementById('ovbtn').classList.toggle('on',overview); sync(); },150); };
 document.getElementById('csvbtn').onclick=()=>exportRows('csv');
