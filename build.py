@@ -912,11 +912,12 @@ apps = sorted({e["scope"] for e in entries + gestures if e["scope"] != "global"}
 bttgroups = sorted({e["group"] for e in entries if e["source"] == "BTT" and e["group"] != "BTT"})
 
 # ---------- 앱 아이콘 추출 (컨텍스트 칩에 표시할 옵션용) — 각 앱의 .icns → 작은 PNG data URI ----------
-def _app_icon_datauri(bundle):
+def _mdfind_app(query):
     try:
-        paths = subprocess.check_output(["mdfind", f"kMDItemCFBundleIdentifier == '{bundle}'"], text=True, stderr=subprocess.DEVNULL).splitlines()
+        paths = subprocess.check_output(["mdfind", query], text=True, stderr=subprocess.DEVNULL).splitlines()
     except Exception: return None
-    app = next((p.strip() for p in paths if p.strip().endswith(".app")), None)
+    return next((p.strip() for p in paths if p.strip().endswith(".app")), None)
+def _icns_datauri(app):                    # .app 경로 → 40px PNG data URI
     if not app: return None
     try: pl = plistlib.load(open(os.path.join(app, "Contents/Info.plist"), "rb"))
     except Exception: return None
@@ -934,6 +935,11 @@ def _app_icon_datauri(bundle):
         subprocess.run(["sips", "-s", "format", "png", "-Z", "40", icns, "--out", tmp], capture_output=True, check=True)
         return "data:image/png;base64," + base64.b64encode(open(tmp, "rb").read()).decode()
     except Exception: return None
+def _app_icon_datauri(bundle):             # 번들 id로
+    return _icns_datauri(_mdfind_app(f"kMDItemCFBundleIdentifier == '{bundle}'"))
+def _name_icon_datauri(name):              # 앱 파일명(<이름>.app) 정확일치로 (app-menu 스코프가 아닌 설치앱 — 예: Safari)
+    if "'" in name or "\\" in name: return None
+    return _icns_datauri(_mdfind_app(f"kMDItemFSName == '{name}.app'"))
 # 앱-메뉴 스캔이 없어 번들 id가 안 잡히는 스코프/칩 → 알맞은 실제 앱(또는 macOS 시스템 앱) 아이콘을 직접 지정.
 SCOPE_ICON_BUNDLE = {
     "macOS 시스템": "com.apple.systempreferences",   # System Settings (톱니) — Apple 메뉴 항목 모음
@@ -954,6 +960,11 @@ def collect_app_icons():
     icons = {}
     for scope, bundle in scope_bundle.items():
         u = geti(bundle)
+        if u: icons[scope] = u
+    # 앱-메뉴 스코프가 아니라 번들 id를 못 얻은 설치앱(app config/gesture 스코프 — 예: Safari)은 '이름'으로 찾는다
+    for scope in {e["scope"] for e in entries} | {g.get("scope") for g in gestures if g.get("scope")}:
+        if not scope or scope == "global" or scope in icons: continue
+        u = _name_icon_datauri(scope)
         if u: icons[scope] = u
     # 로컬에 없는(공유·타 기기) 앱은 defaults/<scope>/icon.png 에서 — save_icon.py로 그 앱 있는 맥에서 넣어둔 것
     for scope in {e["scope"] for e in entries}:
