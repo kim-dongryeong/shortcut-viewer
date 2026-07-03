@@ -945,6 +945,12 @@ SCOPE_ICON_BUNDLE = {
     "macOS 시스템": "com.apple.systempreferences",   # System Settings (톱니) — Apple 메뉴 항목 모음
     "macOS 창 관리": "com.apple.exposelauncher",      # Mission Control — 창/스페이스 관리
 }
+# 로컬 앱이 없는 웹앱/미설치 앱: 공개 브랜드 아이콘 URL. 최초 빌드 때 한 번 받아 defaults/<scope>/icon.png 로
+# 캐시하고(커밋 대상 — 공개 로고, PII 아님) 그 뒤로는 오프라인으로 쓴다. urllib(표준) 사용 — 외부 의존 없음.
+SCOPE_ICON_URL = {
+    "Google Drive (웹)": "https://ssl.gstatic.com/images/branding/product/2x/drive_2020q4_48dp.png",
+    "Notion Calendar":   "https://calendar.notion.so/Cron-favicon-style2-31@2x.png",
+}
 def collect_app_icons():
     _cache = {}
     def geti(bundle):                                 # 번들당 한 번만 추출(캐시)
@@ -973,6 +979,22 @@ def collect_app_icons():
         if os.path.exists(p):
             try: icons[scope] = "data:image/png;base64," + base64.b64encode(open(p, "rb").read()).decode()
             except Exception: pass
+    # 로컬 앱이 아예 없는 웹앱/미설치 앱: 공개 브랜드 아이콘을 웹에서 최초 1회 받아 defaults/<scope>/icon.png 로 캐시
+    for scope, url in SCOPE_ICON_URL.items():
+        if scope in icons: continue
+        cache = os.path.join(DEFAULTS_DIR, scope, "icon.png")
+        if not os.path.exists(cache):
+            try:
+                import urllib.request
+                raw = urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"}), timeout=10).read()
+                os.makedirs(os.path.dirname(cache), exist_ok=True)
+                tmp = os.path.join(tempfile.gettempdir(), "_svweb.img"); open(tmp, "wb").write(raw)
+                subprocess.run(["sips", "-s", "format", "png", "-Z", "40", tmp, "--out", cache], capture_output=True, check=True)
+                print(f"  아이콘 웹 취득 → 캐시: {scope}")
+            except Exception as ex:
+                print(f"  아이콘 웹 취득 실패({scope}): {ex}"); continue
+        try: icons[scope] = "data:image/png;base64," + base64.b64encode(open(cache, "rb").read()).decode()
+        except Exception: pass
     # BTT는 '설정' 소스라 앱 메뉴가 없음 → BetterTouchTool 앱 아이콘을 'BTT (전체)'+모든 프리셋 칩에 부여
     btt = geti("com.hegenberg.BetterTouchTool")
     if btt:
