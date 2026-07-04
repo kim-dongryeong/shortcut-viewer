@@ -571,7 +571,7 @@ function detailRow(mods, key, matches, hit){
     matches = matches.filter(e => DKWS.every(k => (e.action+' '+(e.detail||'')+' '+e.scope).toLowerCase().includes(k.toLowerCase())));
     if(!matches.length) return '';
   }
-  matches=[...matches].sort((a,b)=>(a.ckey?1:0)-(b.ckey?1:0)||chordSym(a).localeCompare(chordSym(b))||a.action.localeCompare(b.action));
+  matches=[...matches].sort((a,b)=>(a.ckey?1:0)-(b.ckey?1:0)||(a.ckey||'').localeCompare(b.ckey||'')||[...(a.cmods||[])].sort().join('+').localeCompare([...(b.cmods||[])].sort().join('+'))||a.action.localeCompare(b.action));   // 무수식 먼저 → 채드는 2nd키 → 2nd수식키 → 동작 순
   const nch=matches.filter(e=>e.ckey).length;
   const body = matches.length
     ? matches.map(e=>{
@@ -982,6 +982,11 @@ function favEntry(p){
       || c.find(x=>x.ckey===p.key && sameSet(x.cmods||[],new Set(p.mods)))   // parsed key/mods가 실은 2nd 누름(ckey/cmods)였던 경우
       || c[0] || null;
 }
+// 즐겨찾기 정렬: 수식키 수 → 첫 키 → 채드 여부 → 2nd 누름 → 동작 (eid당 favEntry 1회만)
+function sortedFavKeys(){ return Object.keys(ANN.fav).map(fk=>({fk, e:favEntry(favParse(fk))}))
+  .sort((A,B)=>{ const a=A.e||{}, b=B.e||{};
+    return (a.mods?a.mods.length:9)-(b.mods?b.mods.length:9) || (a.key||A.fk).localeCompare(b.key||B.fk) || ((a.ckey?1:0)-(b.ckey?1:0)) || chordSym(a).localeCompare(chordSym(b)) || (a.action||'').localeCompare(b.action||''); })
+  .map(x=>x.fk); }
 // 즐겨찾기 한 줄 — 엔트리 단위(별표한 그 단축키 하나) 또는 레거시 조합키 둘 다 처리
 function favRowHTML(fk){
   const p=favParse(fk);
@@ -1008,16 +1013,20 @@ function wireFavRows(root){
 function favHome(det){
   const keys=Object.keys(ANN.fav);
   if(!keys.length){ det.innerHTML='<div class="empty">키를 클릭하면 그 키에 걸린 <b>모든 수식키 조합</b>이 여기에 표시됩니다. 자주 쓰는 <b>단축키 하나</b>를 상세에서 <b style="color:#f59f00">☆</b>로 즐겨찾기하면 이 홈에 모여요.</div>'; return; }
-  det.innerHTML=`<div class="sec">⭐ 즐겨찾기 ${keys.length}개 — 홈</div>`+keys.sort().map(favRowHTML).join('');
+  det.innerHTML=`<div class="sec">⭐ 즐겨찾기 ${keys.length}개 — 홈</div>`+sortedFavKeys().map(favRowHTML).join('');
   wireFavRows(det);
 }
 function renderFavs(){
   const r=document.getElementById('results'), keys=Object.keys(ANN.fav);
   if(!keys.length){ r.innerHTML='<div class="sec">⭐ 즐겨찾기 — 아직 없음. 키 클릭 → 하단 상세에서 각 단축키의 ☆를 눌러 추가하세요.</div>'; r.scrollIntoView({behavior:'smooth',block:'start'}); return; }
-  r.innerHTML=`<div class="sec">⭐ 즐겨찾기 ${keys.length}개 — 외울 단축키 모음</div>`+keys.sort().map(favRowHTML).join('');
+  r.innerHTML=`<div class="sec">⭐ 즐겨찾기 ${keys.length}개 — 외울 단축키 모음</div>`+sortedFavKeys().map(favRowHTML).join('');
   wireFavRows(r); r.scrollIntoView({behavior:'smooth',block:'start'});
 }
-mergeCustom(); restoreHash(); renderMeta(); renderChips(); renderCtx(); sync();
+// 즐겨찾기 정규화: 옛 flat/평탄화 채드 eid를 실제 엔트리의 정식 eid로 교체 → 상세·그리드 별표가 일관되게 표시
+function normalizeFavs(){ let changed=false; const fixed={};
+  for(const fk of Object.keys(ANN.fav)){ const p=favParse(fk); const e=p&&favEntry(p); const nk=e?eid(e):fk; if(nk!==fk) changed=true; fixed[nk]=1; }
+  ANN.fav=fixed; if(changed) saveAnn(); }
+mergeCustom(); normalizeFavs(); restoreHash(); renderMeta(); renderChips(); renderCtx(); sync();
 document.getElementById('addbtn').onclick=addCustom;
 document.getElementById('moretoggle').onclick=()=>{ const m=document.getElementById('moretools'); const show=m.style.display==='none'; m.style.display=show?'flex':'none'; document.getElementById('hint').style.display=show?'block':'none'; document.getElementById('moretoggle').classList.toggle('on',show); };
 document.getElementById('ctxtoggle').onclick=()=>{ const c=document.getElementById('ctxchips'); const show=c.style.display==='none'; c.style.display=show?'inline-flex':'none'; document.getElementById('ctxtoggle').textContent=show?'▴ 접기':'▾ 앱 선택'; };
