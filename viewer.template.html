@@ -121,6 +121,7 @@
   .ovgrp{break-inside:avoid;-webkit-column-break-inside:avoid;margin:0 0 14px}
   .ovgrp .gh{font-weight:700;color:#7dd3fc;border-bottom:1px solid var(--line);padding-bottom:3px;margin-bottom:3px;font-size:13px}
   .cs{display:flex;gap:8px;align-items:baseline;padding:2px 4px;border-radius:5px;cursor:pointer;content-visibility:auto;contain-intrinsic-size:auto 22px}
+  .ovfav{font-size:10px;margin-right:3px}
   .cs:hover{background:#1b1f28}
   .cs.hi{background:#0b2a45;box-shadow:inset 3px 0 0 #38bdf8}
   .cs.hi .csk{color:#7dd3fc}
@@ -158,8 +159,10 @@
   .favbtn.on{filter:drop-shadow(0 0 3px #ffd43b)}
   .notebtn{background:var(--panel);border:1px solid var(--line);border-radius:6px;color:var(--dim);cursor:pointer;font-size:11px;padding:2px 7px;white-space:nowrap}
   .noteshow{color:#ffd8a8;font-size:11px;margin-top:2px}
-  .favmk{display:inline-block;width:15px;text-align:center;font-size:13px;line-height:1.3;flex:none}   /* 빈 별 대신 즐겨찾기 표시 슬롯(정렬 유지) */
-  .favmk.on{filter:drop-shadow(0 0 3px #ffd43b)}
+  .favmk{display:inline-block;width:15px;text-align:center;font-size:13px;line-height:1.3;flex:none;cursor:pointer;color:#f59f00;opacity:.22;transition:opacity .12s,filter .12s,transform .1s}   /* 빈 별 ☆ = 희미하게, hover 시 선명+glow */
+  .dent:hover .favmk{opacity:.85;filter:drop-shadow(0 0 3px rgba(245,159,0,.85))}
+  .favmk:hover{opacity:1;transform:scale(1.18)}
+  .favmk.on{opacity:1;filter:drop-shadow(0 0 3px #ffd43b)}
   .enote{color:#ffd8a8;font-size:11px;margin-top:2px}   /* 엔트리(단축키 하나) 노트 */
   .dent{cursor:default;border-radius:6px}
   .dent.flash,.row.flash{animation:flashhi 5s ease-out;border-radius:7px;position:relative;z-index:1}
@@ -600,7 +603,8 @@ function renderKB(){
   LAYOUT.forEach(row=>{ const d=document.createElement('div'); d.className='krow'; row.forEach(s=>d.appendChild(buildCap(s))); main.appendChild(d); });
   kb.appendChild(main);
   const right=document.createElement('div'); right.className='kbright';
-  const fr=document.createElement('div'); fr.className='krow'; FEXT.forEach(k=>fr.appendChild(cellKey(k,k,widthPx(1)))); right.appendChild(fr);
+  const fex1=document.createElement('div'); fex1.className='krow'; FEXT.slice(0,4).forEach(k=>fex1.appendChild(cellKey(k,k,widthPx(1)))); right.appendChild(fex1);   // F13–F20을 두 줄(4+4)로 — 가로 공간 절약
+  const fex2=document.createElement('div'); fex2.className='krow'; FEXT.slice(4).forEach(k=>fex2.appendChild(cellKey(k,k,widthPx(1)))); right.appendChild(fex2);
   right.appendChild(navBlock());
   right.appendChild(arrowsCluster());
   kb.appendChild(right);
@@ -658,7 +662,7 @@ function detailRow(mods, key, matches, hit){
   const body = matches.length
     ? matches.map(e=>{
         const fk=eid(e), fav=!!ANN.fav[fk], enote=ANN.enote[fk]||'';   // 이 '단축키 하나' 단위 (조합이 같아도 개별) · 빈 별 대신 우클릭 메뉴
-        const star=`<span class="favmk${fav?' on':''}" title="${fav?'즐겨찾기 (우클릭으로 해제·복사·노트)':''}">${fav?'⭐':''}</span>`;
+        const star=`<span class="favmk${fav?' on':''}" data-favtoggle="${favAttr(fk)}" title="${fav?'즐겨찾기 · 클릭/우클릭으로 해제':'즐겨찾기 추가 (클릭 · 우클릭=복사·노트)'}">${fav?'⭐':'☆'}</span>`;
         const src=`<span class="src" style="background:${COLORS[e.source]||'#666'}">${e.source}</span>`;
         const scope=`<span class="scope">${scopeIcon(e.scope)}${e.scope}</span>`+(e.source==='custom'?`<span class="delx" data-delc="${e._cid}" title="내 단축키 삭제">✕</span>`:'');
         const det=e.detail?`<div class="muted" style="font-size:11px">${hlText(e.detail,DKWS)}</div>`:'';
@@ -750,7 +754,7 @@ function ovGroupKey(e){   // 치트시트 묶음 기준
 let OVFLAT=[], OVGEST=[], _ovSig=null;   // overview 재사용용: 렌더된 엔트리/제스처 + 마지막 구조 시그니처
 const OVLIMIT0=1000; let ovLimit=OVLIMIT0;   // 전체단축키 초기 렌더 행 수 캡(먹통·검은 화면 방지) — '더 보기'로 늘림, 컨텍스트 바뀌면 리셋
 // overview는 구조(컨텍스트·그룹·검색)가 바뀔 때만 통째로 다시 그리고, 수식키/키 입력(하이라이트만 바뀜)은 클래스만 토글 → 먹통 방지
-function _ovSignature(){ return [...ctxSet].sort().join(',')+'|'+ovGroup+'|'+((document.getElementById('search').value||'').trim())+'|'+(hideCommon?1:0)+'|'+(ANN.custom||[]).length; }
+function _ovSignature(){ return [...ctxSet].sort().join(',')+'|'+ovGroup+'|'+((document.getElementById('search').value||'').trim())+'|'+(hideCommon?1:0)+'|'+(ANN.custom||[]).length+'|'+Object.keys(ANN.fav).length; }
 function syncOverview(){
   const o=document.getElementById('overview');
   if(!overview){ if(o.innerHTML) o.innerHTML=''; _ovSig=null; return; }
@@ -788,7 +792,8 @@ function renderOverview(){   // KeyCue 식: 선택 컨텍스트의 모든 단축
       const softHi = selectedKey && !hot && e.key===selectedKey;   // 같은 일반키의 다른 수식키 조합 → 약한 강조
       const combo = ovGroup==='mod' ? `${e.key}${e.ckey?' '+chordTag(e):''}` : `${comboSym(e.mods)||''}${e.key}${e.ckey?' '+chordTag(e):''}`;
       const detLine = ovExpand && e.detail ? `<div class="csdet">${hlText(e.detail,OKWS)}</div>` : '';   // 확장 시 2번째 줄
-      rows += `<div class="cs${hot?' hi':''}${softHi?' softhi':''}${ovExpand?' exp':''}" data-ov="${ix}"><span class="csk">${combo}</span><div class="csa" title="${e.action.replace(/"/g,'&quot;')}">${hlText(e.action,OKWS)}${detLine}</div>`
+      const favm = ANN.fav[eid(e)] ? '<span class="ovfav" title="즐겨찾기">⭐</span>' : '';   // 즐겨찾기 표시 — 새 column 없이 동작 앞 인라인
+      rows += `<div class="cs${hot?' hi':''}${softHi?' softhi':''}${ovExpand?' exp':''}" data-ov="${ix}"><span class="csk">${combo}</span><div class="csa" title="${e.action.replace(/"/g,'&quot;')}">${favm}${hlText(e.action,OKWS)}${detLine}</div>`
         +`<span class="csd" style="background:${COLORS[e.source]||'#666'}" title="${e.source}${multi?' · '+e.scope:''}"></span></div>`;
     }
     ovHidden += items.length - shown;
@@ -801,7 +806,7 @@ function renderOverview(){   // KeyCue 식: 선택 컨텍스트의 모든 단축
   const gbody = gst.length ? `<div class="ovgrp"><div class="gh">제스처 · 특수 트리거 <span class="muted" style="font-weight:400;font-size:11px">${gst.length}</span></div>`
     + gst.map((g,gi)=>`<div class="cs${gestureHot(g)?' hi':''}" data-gi="${gi}"><span class="csk">${gestureSym(g)}</span><span class="csa" title="${(g.detail||'').replace(/"/g,'&quot;')}">${hlText(g.action,OKWS)}</span><span class="csd" style="background:${COLORS[g.source]||'#888'}" title="${(g.source||'').replace(/</g,'&lt;')}"></span></div>`).join('')
     + `</div>` : '';
-  o.innerHTML=`<div class="sec">전체 단축키 — ${[...ctxSet].join(', ')||'(없음)'} · ${ent.length}개${gst.length?` + 제스처 ${gst.length}`:''}`
+  o.innerHTML=`<div class="sec">전체 단축키 · ${ent.length}개${gst.length?` + 제스처 ${gst.length}`:''}`
     +`<span class="muted" style="text-transform:none;letter-spacing:0;margin-left:8px;font-size:11px">클릭=그리드 강조 · 더블클릭=그 단축키로 이동</span>`
     +`<span class="ovtab"><button data-ovexp class="${ovExpand?'on':''}" title="각 항목의 2번째 줄(상세)도 표시">${ovExpand?'▾ 확장됨':'▸ 확장'}</button>`+[['mod','수식키별'],['key','키별'],['source','소스별']].map(([g,l])=>`<button data-ovg="${g}" class="${ovGroup===g?'on':''}">${l}</button>`).join('')+`</span></div>`
     +`<div class="ovwrap">${body}${gbody}${ovMore}</div>`;
@@ -1101,7 +1106,7 @@ function favRowHTML(fk){
     const e=favEntry(p)||p, enote=ANN.enote[fk]||'';
     const combo = e.ckey ? `${comboSym(e.mods)||''}${e.key} ▸ ${comboSym(e.cmods||[])}${e.ckey}` : `${comboSym(e.mods)||'(무수식)'}${e.key}`;
     const enh=enote?`<div class="enote">📝 ${enote.replace(/</g,'&lt;')}</div>`:'';
-    return `<div class="row${fk===flashEid?' flash':''}" data-selkey="${(e.key||'').replace(/"/g,'&quot;')}" data-selmods="${(e.mods||[]).join('+')}" data-eid="${favAttr(fk)}" data-copy="${favAttr(copyText(e))}"><button class="favbtn on" data-fav="${favAttr(fk)}" title="즐겨찾기 해제 (우클릭=복사·노트)">⭐</button><span class="kc">${combo}</span>`
+    return `<div class="row${fk===flashEid?' flash':''}" data-selkey="${(e.key||'').replace(/"/g,'&quot;')}" data-selmods="${(e.mods||[]).join('+')}" data-eid="${favAttr(fk)}" data-copy="${favAttr(copyText(e))}" title="클릭=그 키 상세 · 우클릭=해제·복사·노트"><span class="kc">${combo}</span>`
       +`<span class="src" style="background:${COLORS[e.source]||'#666'}">${e.source}</span>`
       +`<div style="flex:1">${(e.action||'').replace(/</g,'&lt;')}${enh}</div><span class="scope">${scopeIcon(e.scope)}${e.scope}</span></div>`;
   }
@@ -1142,7 +1147,10 @@ function showCtxMenu(ev, fk, ctext){   // fk=eid(HTML-디코드된) · ctext=복
   m.querySelector('[data-a="copy"]').onclick=()=>{ copyToClipboard(ctext); hideCtxMenu(); };
   m.querySelector('[data-a="note"]').onclick=()=>{ const cur=ANN.enote[fk]||''; const t=prompt('이 단축키에 노트 (예: 자주 헷갈림 · 대신 ⌥V 사용):', cur); if(t!==null){ const tt=t.trim(); tt?ANN.enote[fk]=tt:delete ANN.enote[fk]; saveAnn(); hideCtxMenu(); sync(); } };
 }
-function wireCtxMenu(root){ root.querySelectorAll('[data-eid]').forEach(el=>el.oncontextmenu=ev=>showCtxMenu(ev, el.dataset.eid, el.dataset.copy||'')); }   // 우클릭 → 메뉴
+function wireCtxMenu(root){
+  root.querySelectorAll('[data-eid]').forEach(el=>el.oncontextmenu=ev=>showCtxMenu(ev, el.dataset.eid, el.dataset.copy||''));   // 우클릭 → 메뉴
+  root.querySelectorAll('[data-favtoggle]').forEach(el=>el.onclick=(ev)=>{ ev.stopPropagation(); const fk=el.dataset.favtoggle; ANN.fav[fk]?delete ANN.fav[fk]:ANN.fav[fk]=1; saveAnn(); sync(); });   // 빈 별/⭐ 클릭 → 토글
+}
 document.addEventListener('click', hideCtxMenu);
 document.addEventListener('scroll', ()=>{ hideCtxMenu(); hideTip(); }, true);
 function favFksFor(){   // favScope에 맞는 즐겨찾기 fk 목록(정렬됨) · 'ctx'면 현재 컨텍스트 스코프만
