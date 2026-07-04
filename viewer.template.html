@@ -433,20 +433,16 @@ function cellKey(key,label,wpx){
   h+=`<div class="foot">`+srcs.map(s=>`<span class="fdot" style="background:${COLORS[s]||'#666'}"></span>`).join('')
     +(chc?`<span class="chordm" title="${chc}개 연속(chord) 시작">▸${chc}</span>`:'')+`</div>`;   // 색동그라미(소스별) — 항상
   if(all.length) el.classList.add('busy');
-  // '활성 레이어' 강조(taken 테두리·액션 라벨·색바)는 수식키를 눌렀거나 전용 패널(빈조합 등)일 때만.
-  // 무수식(수식키 안 누른 쉬는 상태)은 강조하지 않음 → 점·개수 힌트만 남고 하이라이트는 없음.
-  const active = eff.size>0 || !!panelMode;
-  if(active && ms.length){
+  // 현재 레이어(eff)에 걸린 단축키는 라벨·색바로 표시 — 무수식 레이어도 포함(원래 동작). '활성 레이어 강조'는
+  // 상세 패널의 .drow.hi로만 하고, 그건 수식키를 실제로 누른 경우에만(showDetail의 hit 참조).
+  if(ms.length){
     el.classList.add('taken');
     const scc={}; ms.forEach(m=>scc[m.scope]=(scc[m.scope]||0)+1);
     const dup=Object.values(scc).some(v=>v>=2);
     h+=`<div class="act">${ms[0].action.replace(/</g,'&lt;')}`+(ms.length>1?` <span class="ov${dup?' dup':''}">+${ms.length-1}</span>`:``)+`</div>`;
     h+=`<div class="bar" style="background:${COLORS[ms[0].source]||'#666'}"></div>`;
     if(filter==='free') el.classList.add('dim');
-  } else {
-    h+=`<div class="act muted">·</div>`;
-    if(active && filter==='taken') el.classList.add('dim');
-  }
+  } else { h+=`<div class="act muted">·</div>`; if(filter==='taken') el.classList.add('dim'); }
   if(SEARCHKEYS){   // 검색어 매치: 매치 키 강조 / 필터 모드면 비매치 키 숨김
     if(SEARCHKEYS.has(key)) el.classList.add('shit');
     else if(searchGridMode==='filter') el.classList.add('shide');
