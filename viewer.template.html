@@ -18,6 +18,11 @@
   .chip.alt.on{background:#7c3aed;border-color:#7c3aed}
   .chip.held{box-shadow:0 0 0 2px #22d3ee inset}
   mark.hl{color:#111;border-radius:3px;padding:0 2px;font-weight:600}   /* 검색어 하이라이트 (배경색은 인라인) */
+  .searchbox{position:relative;display:inline-flex;align-items:center}
+  .searchbox #search{padding-right:26px}
+  #searchclear{position:absolute;right:5px;border:none;background:transparent;color:var(--dim);cursor:pointer;font-size:14px;line-height:1;padding:3px 5px;border-radius:5px;display:none}
+  #searchclear:hover{color:var(--txt);background:var(--line)}
+  .searchbox.has #searchclear{display:block}
   #ctxchips .chip{padding:5px 9px;font-size:12px}
   #ctxchips .chip.on{background:#0d9488;border-color:#0d9488}
   .ctxbulk{display:flex;gap:6px;flex-basis:100%;margin-bottom:4px;padding-bottom:8px;border-bottom:1px solid var(--line);align-items:center}
@@ -198,7 +203,7 @@
 <div class="wrap">
   <div class="controls">
     <span id="modchips"></span>
-    <input id="search" placeholder="🔍 검색: 동작/키/조합">
+    <span class="searchbox"><input id="search" placeholder="🔍 검색: 동작/키/조합"><button id="searchclear" title="검색어 지우기 (Esc)" tabindex="-1">✕</button></span>
     <button id="ovbtn" title="선택한 컨텍스트의 모든 단축키를 한 번에 (KeyCue 식 치트시트)">📋 전체 단축키</button>
     <button id="favview">⭐ 즐겨찾기</button>
     <button id="moretoggle" title="테마·인쇄·내보내기·내 단축키 등 더 많은 도구">⋯ 더보기</button>
@@ -797,12 +802,18 @@ function renderSearch(q){
   if(!q){ r.innerHTML=''; return; }
   const combo=parseQueryCombo(q);
   const kws = combo ? [] : q.split(/\s+/).filter(Boolean);   // 공백으로 나눈 다중 키워드(모두 포함 = AND)
+  const kf = selectedKey;        // 일반키 선택(그리드 클릭/물리키) → 그 키만 필터
+  const emods=[...eff];          // 눌린·고정 수식키 → 그 조합을 쓰는 결과를 하이라이트
   const hits=DB.entries.filter(e=>{
+    if(!inCtx(e)) return false;   // 다른 필터와 동일하게 컨텍스트(앱 선택) 교집합 — 선택한 컨텍스트 안에서만 검색
+    if(kf && e.key.toLowerCase()!==kf.toLowerCase()) return false;   // 일반키 필터
     if(combo) return e.key.toLowerCase()===combo.key.toLowerCase()&&sameSet(e.mods,new Set(combo.mods));
     const hay=(e.action+' '+e.key+' '+(e.detail||'')+' '+e.scope).toLowerCase();
     return kws.every(k=>hay.includes(k.toLowerCase()));
   }).slice(0,100);
-  r.innerHTML=`<div class="sec">검색결과 ${hits.length}</div>`+hits.map(e=>rowHTML(e,false,kws)).join('');
+  const usesMods=e=> emods.length>0 && emods.every(m=>e.mods.includes(m));   // 수식키 하이라이트 대상
+  const tag=(kf?` · 키 <b style="color:#7dd3fc">${kf}</b>`:'')+(emods.length?` · <b style="color:#7dd3fc">${comboSym(emods)}</b> 강조`:'');
+  r.innerHTML=`<div class="sec">검색결과 ${hits.length}${tag}</div>`+hits.map(e=>rowHTML(e,usesMods(e),kws)).join('');
   r.querySelectorAll('.row').forEach((el,i)=>el.onclick=()=>jumpTo(hits[i]));
 }
 function parseQueryCombo(q){
@@ -847,6 +858,7 @@ function sync(){
   if(overview || (panelMode && panelMode!=='free')){ det.style.display='none'; }
   else { det.style.display=''; if(selectedKey) showDetail(selectedKey);
     else det.innerHTML='<div class="empty">키를 클릭하면 그 키에 걸린 <b>모든 수식키 조합</b>이 여기에 표시되고, 수식키를 누르면 해당 조합이 강조됩니다.</div>'; }
+  const _sq=document.getElementById('search'); if(_sq && _sq.value.trim()) renderSearch(_sq.value.trim());   // 컨텍스트 등이 바뀌면 검색 결과도 교집합으로 갱신
   saveHash();
 }
 function readHeld(e){ const h=new Set(); if(e.metaKey)h.add('cmd'); if(e.ctrlKey)h.add('ctrl'); if(e.altKey)h.add('opt'); if(e.shiftKey)h.add('shift'); return h; }
@@ -883,7 +895,11 @@ mergeCustom(); restoreHash(); renderMeta(); renderChips(); renderCtx(); sync();
 document.getElementById('addbtn').onclick=addCustom;
 document.getElementById('moretoggle').onclick=()=>{ const m=document.getElementById('moretools'); const show=m.style.display==='none'; m.style.display=show?'flex':'none'; document.getElementById('hint').style.display=show?'block':'none'; document.getElementById('moretoggle').classList.toggle('on',show); };
 document.getElementById('ctxtoggle').onclick=()=>{ const c=document.getElementById('ctxchips'); const show=c.style.display==='none'; c.style.display=show?'inline-flex':'none'; document.getElementById('ctxtoggle').textContent=show?'▴ 접기':'▾ 앱 선택'; };
-document.getElementById('search').oninput=e=>renderSearch(e.target.value.trim());
+const searchEl=document.getElementById('search'), searchBox=document.querySelector('.searchbox');
+function clearSearch(){ searchEl.value=''; searchBox.classList.remove('has'); renderSearch(''); }
+searchEl.oninput=e=>{ searchBox.classList.toggle('has',!!e.target.value); renderSearch(e.target.value.trim()); };
+searchEl.addEventListener('keydown',e=>{ if(e.key==='Escape'){ e.preventDefault(); clearSearch(); searchEl.blur(); } });
+document.getElementById('searchclear').onclick=()=>{ clearSearch(); searchEl.focus(); };
 document.getElementById('favview').onclick=renderFavs;
 document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>setView(b.dataset.view));
 document.getElementById('themebtn').onclick=()=>{ theme=theme==='light'?'dark':'light'; document.documentElement.setAttribute('data-theme',theme); localStorage.setItem('SVtheme',theme); };
