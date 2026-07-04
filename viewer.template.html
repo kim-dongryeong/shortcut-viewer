@@ -964,7 +964,8 @@ document.getElementById('moretoggle').onclick=()=>{ const m=document.getElementB
 document.getElementById('ctxtoggle').onclick=()=>{ const c=document.getElementById('ctxchips'); const show=c.style.display==='none'; c.style.display=show?'inline-flex':'none'; document.getElementById('ctxtoggle').textContent=show?'▴ 접기':'▾ 앱 선택'; };
 const searchEl=document.getElementById('search'), searchBox=document.querySelector('.searchbox');
 function clearSearch(){ searchEl.value=''; searchBox.classList.remove('has'); sync(); }
-searchEl.oninput=e=>{ searchBox.classList.toggle('has',!!e.target.value); sync(); };   // sync가 그리드(강조/숨김)+리스트 둘 다 갱신
+let _searchT=null;   // 검색 입력 디바운스 — 전체단축키(1470행) 등 무거운 sync를 타이핑마다 돌리면 느려서, 멈춘 뒤 한 번만
+searchEl.oninput=e=>{ searchBox.classList.toggle('has',!!e.target.value); clearTimeout(_searchT); _searchT=setTimeout(sync,150); };
 searchEl.addEventListener('keydown',e=>{ if(e.key==='Escape'){ e.preventDefault(); clearSearch(); searchEl.blur(); } });
 document.getElementById('searchclear').onclick=()=>{ clearSearch(); searchEl.focus(); };
 document.getElementById('favview').onclick=renderFavs;
