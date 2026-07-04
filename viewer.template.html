@@ -557,9 +557,9 @@ function allModSubsets(){
 }
 function detailRow(mods, key, matches, hit){
   const ak=annKey(mods,key), fav=!!ANN.fav[ak], note=ANN.note[ak]||'';
-  if(DKWS.length && searchListMode==='filter'){   // 숨김 모드: 검색어와 안 맞는 조합 행은 아예 숨김
-    const m = matches.some(e => DKWS.every(k => (e.action+' '+(e.detail||'')+' '+e.scope).toLowerCase().includes(k.toLowerCase())));
-    if(!m) return '';
+  if(DKWS.length && searchListMode==='filter'){   // 숨김 모드: 이 조합에서 검색에 매치되는 단축키만 남기고(엔트리 단위), 하나도 없으면 행 숨김
+    matches = matches.filter(e => DKWS.every(k => (e.action+' '+(e.detail||'')+' '+e.scope).toLowerCase().includes(k.toLowerCase())));
+    if(!matches.length) return '';
   }
   matches=[...matches].sort((a,b)=>(a.ckey?1:0)-(b.ckey?1:0)||chordSym(a).localeCompare(chordSym(b))||a.action.localeCompare(b.action));
   const nch=matches.filter(e=>e.ckey).length;
@@ -848,26 +848,8 @@ function restoreHash(){
     overview=!!s.o; panelMode=s.p||null; if(['mod','key','source'].includes(s.g)) ovGroup=s.g;
   }catch(e){}
 }
-function renderSearch(q){
-  const r=document.getElementById('results');
-  if(!q){ r.innerHTML=''; return; }
-  const combo=parseQueryCombo(q);
-  const kws = combo ? [] : q.split(/\s+/).filter(Boolean);   // 공백으로 나눈 다중 키워드(모두 포함 = AND)
-  const kf = selectedKey;        // 일반키 선택(그리드 클릭/물리키) → 그 키만 필터
-  const emods=[...eff];          // 눌린·고정 수식키 → 그 조합을 쓰는 결과를 하이라이트
-  const hits=DB.entries.filter(e=>{
-    if(!inCtx(e)) return false;   // 다른 필터와 동일하게 컨텍스트(앱 선택) 교집합 — 선택한 컨텍스트 안에서만 검색
-    if(kf && e.key.toLowerCase()!==kf.toLowerCase()) return false;   // 일반키 필터
-    if(combo) return e.key.toLowerCase()===combo.key.toLowerCase()&&sameSet(e.mods,new Set(combo.mods));
-    const hay=(e.action+' '+e.key+' '+(e.detail||'')+' '+e.scope).toLowerCase();
-    return kws.every(k=>hay.includes(k.toLowerCase()));
-  }).slice(0,100);
-  const usesMods=e=> emods.length>0 && emods.every(m=>e.mods.includes(m));   // 수식키 하이라이트 대상
-  const tag=(kf?` · 키 <b style="color:#7dd3fc">${kf}</b>`:'')+(emods.length?` · <b style="color:#7dd3fc">${comboSym(emods)}</b> 강조`:'');
-  r.innerHTML=`<div class="sec">검색결과 ${hits.length}${tag}</div>`+hits.map(e=>rowHTML(e,usesMods(e),kws)).join('');
-  r.querySelectorAll('.row').forEach((el,i)=>el.onclick=(ev)=>{ if(ev.target.closest('.favbtn')) return; jumpTo(hits[i]); });
-  r.querySelectorAll('[data-fav]').forEach(b=>b.onclick=(ev)=>{ ev.stopPropagation(); const ak=b.dataset.fav; ANN.fav[ak]?delete ANN.fav[ak]:ANN.fav[ak]=1; saveAnn(); sync(); });   // 검색 결과에서 바로 즐겨찾기 토글
-}
+// 별도 검색 결과 리스트는 폐지 — 검색은 키보드 그리드 강조 + 선택 키의 상세 리스트 강조/숨김으로만 표시.
+function renderSearch(q){ const r=document.getElementById('results'); if(r) r.innerHTML=''; }
 function parseQueryCombo(q){
   const p=q.replace(/\s/g,'').split('+').filter(Boolean); if(p.length<2) return null;
   const map={cmd:'cmd','⌘':'cmd',command:'cmd',opt:'opt',option:'opt',alt:'opt','⌥':'opt',ctrl:'ctrl',control:'ctrl','⌃':'ctrl',shift:'shift','⇧':'shift',hyper:'HYPER',meh:'MEH'};
