@@ -15,6 +15,7 @@ import AppKit
 import SwiftUI
 import Carbon.HIToolbox
 import ApplicationServices
+import IOKit
 
 // ══════════════════════ key-name ⇄ Carbon virtual keycode ══════════════════════
 let KEYCODE: [String: Int] = [
@@ -29,7 +30,7 @@ let KEYCODE: [String: Int] = [
     "\\":kVK_ANSI_Backslash,";":kVK_ANSI_Semicolon,"'":kVK_ANSI_Quote,",":kVK_ANSI_Comma,
     ".":kVK_ANSI_Period,"/":kVK_ANSI_Slash,"`":kVK_ANSI_Grave,
     "Space":kVK_Space,"Return":kVK_Return,"Tab":kVK_Tab,"Escape":kVK_Escape,
-    "Delete":kVK_Delete,"ForwardDelete":kVK_ForwardDelete,
+    "Delete":kVK_Delete,"ForwardDelete":kVK_ForwardDelete,"CapsLock":kVK_CapsLock,   // CapsLock은 keyDown이 아니라 flagsChanged로 옴 → 반드시 CGEventTap 경로(needsTap)로만 처리
     "Left":kVK_LeftArrow,"Right":kVK_RightArrow,"Up":kVK_UpArrow,"Down":kVK_DownArrow,
     "Home":kVK_Home,"End":kVK_End,"PageUp":kVK_PageUp,"PageDown":kVK_PageDown,
     "F1":kVK_F1,"F2":kVK_F2,"F3":kVK_F3,"F4":kVK_F4,"F5":kVK_F5,"F6":kVK_F6,"F7":kVK_F7,
@@ -74,6 +75,16 @@ func modsFrom(_ f: NSEvent.ModifierFlags) -> [String] {
     if f.contains(.shift)   { m.append("shift") }
     if f.contains(.command) { m.append("cmd") }
     return m
+}
+// CapsLock 상태를 강제로 설정 (opt/cmd/ctrl+CapsLock 핫키가 대문자잠금을 토글하는 부작용을 되돌림)
+func setCapsLockState(_ on: Bool) {
+    let service = IOServiceGetMatchingService(kIOMainPortDefault, IOServiceMatching(kIOHIDSystemClass))
+    guard service != 0 else { return }
+    defer { IOObjectRelease(service) }
+    var conn: io_connect_t = 0
+    guard IOServiceOpen(service, mach_task_self_, UInt32(kIOHIDParamConnectType), &conn) == KERN_SUCCESS else { return }
+    defer { IOServiceClose(conn) }
+    IOHIDSetModifierLockState(conn, Int32(kIOHIDCapsLockState), on)
 }
 func comboLabel(_ mods: [String], _ key: String) -> String {
     let sym = mods.map { m -> String in
@@ -162,7 +173,7 @@ struct Hotkey: Codable, Identifiable {
         sequence = try? c.decodeIfPresent([Combo].self, forKey: .sequence)
     }
     // 이 핫키가 EventTap(Accessibility)을 필요로 하나 — Carbon으로 안 되는 것들
-    var needsTap: Bool { anyCombo || app != nil || trigger != nil || sequence != nil || mods.contains { modSide($0) != nil } }
+    var needsTap: Bool { anyCombo || app != nil || trigger != nil || sequence != nil || key == "CapsLock" || mods.contains { modSide($0) != nil } }
 }
 struct ConfigFile: Codable { var version: Int; var hotkeys: [Hotkey] }
 
@@ -310,6 +321,7 @@ final class Engine {
     private var tapTimes: [Int: [CFAbsoluteTime]] = [:]
     private var holdTimers: [Int: DispatchWorkItem] = [:]
     private var otherKeySincePress = false
+    private var lastCapsFire: CFAbsoluteTime = 0   // opt/cmd/ctrl+CapsLock 디바운스 (CapsLock은 짧게 두 번 튀거나 리셋이 재-트리거될 수 있음)
 
     func set(combos: [ComboBind], gestures: [GestBind]) { self.combos = combos; self.gestures = gestures }
     var hasWork: Bool { !combos.isEmpty || !gestures.isEmpty || diagnostic != nil }
@@ -346,7 +358,10 @@ final class Engine {
         if type == .tapDisabledByTimeout || type == .tapDisabledByUserInput {
             if let tap { CGEvent.tapEnable(tap: tap, enable: true) }; return Unmanaged.passUnretained(event)
         }
-        if type == .flagsChanged { handleFlags(event); return Unmanaged.passUnretained(event) }
+        if type == .flagsChanged {
+            if handleCapsCombo(event) { return nil }   // opt/cmd/ctrl+CapsLock 매치 → 발동하고 이벤트 소비
+            handleFlags(event); return Unmanaged.passUnretained(event)
+        }
         guard type == .keyDown else { return Unmanaged.passUnretained(event) }
         otherKeySincePress = true; cancelHolds(); tapTimes = [:]
         if event.getIntegerValueField(.keyboardEventAutorepeat) != 0 { return Unmanaged.passUnretained(event) }
@@ -382,6 +397,22 @@ final class Engine {
             HUD.show("\(comboLabel(modsFrom(seqs[0].generic), NAMEFOR[Int(seqs[0].keyCode)] ?? "")) — 다음 키…"); return nil
         }
         return Unmanaged.passUnretained(event)
+    }
+    // opt/cmd/ctrl + CapsLock — CapsLock은 keyDown이 아니라 flagsChanged로 오므로 여기서 처리.
+    // 수식키를 누른 채면 Karabiner의 '맨 CapsLock' 룰이 안 걸려 진짜 CapsLock 이벤트가 온다.
+    private func handleCapsCombo(_ event: CGEvent) -> Bool {
+        guard Int(event.getIntegerValueField(.keyboardEventKeycode)) == kVK_CapsLock else { return false }
+        let gf = genericFlags(event)
+        if gf.isEmpty { return false }   // 맨 CapsLock은 평소대로 대문자잠금 토글
+        guard combos.contains(where: { Int($0.keyCode) == kVK_CapsLock && $0.generic == gf && $0.seqRest.isEmpty && frontmostMatches($0.app ?? "") }) else { return false }
+        let now = CFAbsoluteTimeGetCurrent()
+        if now - lastCapsFire < 0.25 { return true }   // 리셋으로 생긴 flagsChanged/더블 트리거는 소비만
+        lastCapsFire = now
+        let hit = combos.first { Int($0.keyCode) == kVK_CapsLock && $0.generic == gf && $0.seqRest.isEmpty && frontmostMatches($0.app ?? "") }!
+        let a = hit.action; DispatchQueue.main.async(execute: a)
+        let toggledOn = event.flags.contains(.maskAlphaShift)   // 이 press가 만든 새 caps 상태 → 되돌린다
+        DispatchQueue.main.async { setCapsLockState(!toggledOn) }
+        return true
     }
     private func handleFlags(_ event: CGEvent) {
         let kc = Int(event.getIntegerValueField(.keyboardEventKeycode))
