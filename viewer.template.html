@@ -629,6 +629,23 @@ function ovGroupKey(e){   // 치트시트 묶음 기준
   if(ovGroup==='source') return {label:e.source, ord:0};
   return {label:comboSym(e.mods)||'(무수식)', ord:e.mods.length};   // 'mod'
 }
+let OVFLAT=[], OVGEST=[], _ovSig=null;   // overview 재사용용: 렌더된 엔트리/제스처 + 마지막 구조 시그니처
+// overview는 구조(컨텍스트·그룹·검색)가 바뀔 때만 통째로 다시 그리고, 수식키/키 입력(하이라이트만 바뀜)은 클래스만 토글 → 먹통 방지
+function _ovSignature(){ return [...ctxSet].sort().join(',')+'|'+ovGroup+'|'+((document.getElementById('search').value||'').trim())+'|'+(hideCommon?1:0)+'|'+(ANN.custom||[]).length; }
+function syncOverview(){
+  const o=document.getElementById('overview');
+  if(!overview){ if(o.innerHTML) o.innerHTML=''; _ovSig=null; return; }
+  const sig=_ovSignature();
+  if(sig!==_ovSig){ renderOverview(); _ovSig=sig; }   // 구조 변경 → 전체 재렌더
+  else paintOverview();                                // 하이라이트만 갱신 (빠름)
+}
+function paintOverview(){
+  const o=document.getElementById('overview'), inputActive = eff.size>0 || selectedKey;
+  o.querySelectorAll('.cs[data-ov]').forEach(el=>{ const e=OVFLAT[+el.dataset.ov]; if(!e) return;
+    const hot = inputActive && sameSet(e.mods,eff) && (selectedKey ? e.key===selectedKey : true);
+    el.classList.toggle('hi',hot); el.classList.toggle('softhi', !!selectedKey && !hot && e.key===selectedKey); });
+  o.querySelectorAll('.cs[data-gi]').forEach(el=>{ const g=OVGEST[+el.dataset.gi]; if(g) el.classList.toggle('hi',gestureHot(g)); });
+}
 function renderOverview(){   // KeyCue 식: 선택 컨텍스트의 모든 단축키를, 묶음 기준대로 다단 치트시트로
   const o=document.getElementById('overview');
   if(!overview){ o.innerHTML=''; return; }
@@ -640,11 +657,11 @@ function renderOverview(){   // KeyCue 식: 선택 컨텍스트의 모든 단축
   const order=Object.keys(groups).sort((a,b)=>(groups[a].ord-groups[b].ord)||a.localeCompare(b));
   const multi=([...ctxSet].filter(c=>c!=='Global').length + (ctxSet.has('Global')?1:0)) > 1;
   const inputActive = eff.size>0 || selectedKey;   // 수식키/일반키 입력 시 해당 조합 하이라이트 (KeyClu 식)
-  const flat=[];
+  OVFLAT=[];
   const body=order.map(label=>{
     const items=groups[label].items.slice().sort((a,b)=>a.mods.length-b.mods.length||a.key.localeCompare(b.key)||a.action.localeCompare(b.action));
     const rows=items.map(e=>{
-      const ix=flat.push(e)-1;
+      const ix=OVFLAT.push(e)-1;
       const hot = inputActive && sameSet(e.mods,eff) && (selectedKey ? e.key===selectedKey : true);
       const softHi = selectedKey && !hot && e.key===selectedKey;   // 같은 일반키의 다른 수식키 조합 → 약한 강조
       const combo = ovGroup==='mod' ? `${e.key}${e.ckey?' '+chordTag(e):''}` : `${comboSym(e.mods)||''}${e.key}${e.ckey?' '+chordTag(e):''}`;
@@ -654,16 +671,16 @@ function renderOverview(){   // KeyCue 식: 선택 컨텍스트의 모든 단축
     const gl=label==='(무수식)'?'(수식키 없음)':label;
     return `<div class="ovgrp"><div class="gh">${gl} <span class="muted" style="font-weight:400;font-size:11px">${items.length}</span></div>${rows}</div>`;
   }).join('');
-  const gst=(DB.gestures||[]).filter(inCtx);   // 제스처(좌우 동시·홀드·멀티탭)도 치트시트에 포함
+  const gst=(DB.gestures||[]).filter(inCtx); OVGEST=gst;   // 제스처(좌우 동시·홀드·멀티탭)도 치트시트에 포함
   const gbody = gst.length ? `<div class="ovgrp"><div class="gh">제스처 · 특수 트리거 <span class="muted" style="font-weight:400;font-size:11px">${gst.length}</span></div>`
-    + gst.map(g=>`<div class="cs${gestureHot(g)?' hi':''}"><span class="csk">${gestureSym(g)}</span><span class="csa" title="${(g.detail||'').replace(/"/g,'&quot;')}">${hlText(g.action,OKWS)}</span><span class="csd" style="background:${COLORS[g.source]||'#888'}" title="${(g.source||'').replace(/</g,'&lt;')}"></span></div>`).join('')
+    + gst.map((g,gi)=>`<div class="cs${gestureHot(g)?' hi':''}" data-gi="${gi}"><span class="csk">${gestureSym(g)}</span><span class="csa" title="${(g.detail||'').replace(/"/g,'&quot;')}">${hlText(g.action,OKWS)}</span><span class="csd" style="background:${COLORS[g.source]||'#888'}" title="${(g.source||'').replace(/</g,'&lt;')}"></span></div>`).join('')
     + `</div>` : '';
   o.innerHTML=`<div class="sec">전체 단축키 — ${[...ctxSet].join(', ')||'(없음)'} · ${ent.length}개${gst.length?` + 제스처 ${gst.length}`:''}`
     +`<span class="muted" style="text-transform:none;letter-spacing:0;margin-left:8px;font-size:11px">수식키/키를 누르면 해당 조합 하이라이트</span>`
     +`<span class="ovtab">`+[['mod','수식키별'],['key','키별'],['source','소스별']].map(([g,l])=>`<button data-ovg="${g}" class="${ovGroup===g?'on':''}">${l}</button>`).join('')+`</span></div>`
     +`<div class="ovwrap">${body}${gbody}</div>`;
-  o.querySelectorAll('[data-ov]').forEach(el=>el.onclick=()=>{ const e=flat[+el.dataset.ov]; chordPrefix=null; chordReturn=null; sticky=new Set(e.mods); held=new Set(); selectedKey=e.key; sync(); if(!overview) window.scrollTo({top:0,behavior:'smooth'}); });
-  o.querySelectorAll('[data-ovg]').forEach(b=>b.onclick=()=>{ ovGroup=b.dataset.ovg; localStorage.setItem('SVovGroup',ovGroup); renderOverview(); });
+  o.querySelectorAll('[data-ov]').forEach(el=>el.onclick=()=>{ const e=OVFLAT[+el.dataset.ov]; chordPrefix=null; chordReturn=null; sticky=new Set(e.mods); held=new Set(); selectedKey=e.key; sync(); if(!overview) window.scrollTo({top:0,behavior:'smooth'}); });
+  o.querySelectorAll('[data-ovg]').forEach(b=>b.onclick=()=>{ ovGroup=b.dataset.ovg; localStorage.setItem('SVovGroup',ovGroup); renderOverview(); _ovSig=_ovSignature(); });
 }
 // ══════ 새 전용 뷰: 충돌 · 빈 조합 · 통계 · 퀴즈 ══════
 function ctxEntries(){ let e=dedupeDisplay(DB.entries.filter(inCtx)); return hideCommon?e.filter(x=>!isCommon(x)):e; }
@@ -881,7 +898,7 @@ function sync(){
     cb.innerHTML=`🔗 연속(chord) 모드 — <b>${comboSym(chordPrefix.mods)}${chordPrefix.key}</b> 다음에 누를 <b>두 번째 키</b>를 고르세요 (후속 ${n}개, 현재 2nd 레이어 <b style="color:#7dd3fc">${effSym()||'(무수식)'}</b>) · <span class="x" id="chordexit">Esc · 일반 모드로</span>`;
     cb.querySelector('#chordexit').onclick=exitChord;
   } else cb.style.display='none';
-  renderKB(); renderGestures(); renderOverview();
+  renderKB(); renderGestures(); syncOverview();   // overview는 구조 바뀔 때만 재렌더, 하이라이트만이면 클래스 토글(빠름)
   document.querySelectorAll('[data-view]').forEach(el=>el.classList.toggle('on', panelMode===el.dataset.view));
   document.getElementById('commonbtn').classList.toggle('on',hideCommon);
   document.getElementById('themebtn').classList.toggle('on',theme==='light');
