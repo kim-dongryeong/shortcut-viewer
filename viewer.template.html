@@ -376,12 +376,13 @@ function renderCtx(){
   const allCtx=['Global',...DB.meta.apps,...customScopes,'BTT (전체)',...(DB.meta.bttgroups||[])];
   const ICONS=DB.meta.icons||{};
   // 전체/해제/반대 + Global(특별 지위)을 '앱 선택'을 펼치지 않아도 바로 클릭하도록 항상 보이는 바에 둔다
-  document.getElementById('ctxbulkbar').innerHTML=`<span class="lbl" style="font-size:11px;color:var(--dim)">선택:</span><button data-bulk="all">전체</button><button data-bulk="none">해제</button><button data-bulk="invert">반대</button><span style="width:1px;height:14px;background:var(--line);margin:0 2px"></span><button data-ctx="Global" class="${ctxSet.has('Global')?'on':''}">Global</button>`;
+  document.getElementById('ctxbulkbar').innerHTML=`<span class="lbl" style="font-size:11px;color:var(--dim)">선택:</span><button data-bulk="all">전체</button><button data-bulk="none">해제</button><button data-bulk="invert">반대</button><button data-bulk="global">Global</button>`;
   const bulk=`<div class="ctxbulk"><span class="lbl">표시:</span><button data-bulk="icons" class="${showIcons?'on':''}">🖼 앱 아이콘</button></div>`;
   document.getElementById('ctxchips').innerHTML=bulk+allCtx.map(a=>{ const ic=(showIcons&&ICONS[a])?`<img class="ctxicon" src="${ICONS[a]}" alt="">`:''; return `<span class="chip" data-ctx="${a.replace(/"/g,'&quot;')}">${ic}${a}</span>`; }).join('');
   document.querySelectorAll('[data-ctx]').forEach(el=>el.onclick=()=>{ const c=el.dataset.ctx; ctxSet.has(c)?ctxSet.delete(c):ctxSet.add(c); sync(); });
   document.querySelectorAll('[data-bulk]').forEach(b=>b.onclick=()=>{ const m=b.dataset.bulk;
     if(m==='icons'){ showIcons=!showIcons; localStorage.setItem('SVicons',showIcons?'1':'0'); renderCtx(); return; }
+    if(m==='global'){ ctxSet.add('Global'); sync(); return; }   // 액션: Global을 선택에 넣어줌 (상태 표시 아님)
     ctxSet = m==='all' ? new Set(allCtx) : m==='none' ? new Set() : new Set(allCtx.filter(c=>!ctxSet.has(c)));
     sync(); });
   document.getElementById('filtersel').onchange=e=>{ filter=e.target.value; sync(); };
@@ -417,24 +418,27 @@ function cellKey(key,label,wpx){
   const all=keyAll(key), ms=matchEff(key);
   const el=document.createElement('div'); el.className='cap'; el.style.width=wpx;
   let h=`<div class="lab">${label.replace(/</g,'&lt;')}</div>`;
-  if(all.length) h+=`<span class="cnt">${all.length}</span>`;
-  const srcs=[...new Set(all.map(e=>e.source))];
-  const chc=all.filter(e=>e.ckey).length;   // chord 시작(연속) 개수
-  h+=`<div class="foot">`+srcs.map(s=>`<span class="fdot" style="background:${COLORS[s]||'#666'}"></span>`).join('')
-    +(chc?`<span class="chordm" title="${chc}개 연속(chord) 시작">▸${chc}</span>`:'')+`</div>`;
-  if(all.length) el.classList.add('busy');
-  const noMod = eff.size===0;   // 무수식(수식키 안 누름) 레이어는 차분하게 — 라벨/색바 생략, 점·개수 힌트만 (수식키 누르면 그 레이어는 꽉 참)
-  if(ms.length){
-    el.classList.add('taken');
-    if(noMod){ h+=`<div class="act muted">·</div>`; }
-    else {
+  // 기본 '쉬는 상태'(수식키 안 누름 · 패널 없음 · 필터 없음)에선 하이라이트/힌트를 전부 끈다 → 그리드가 차분.
+  // 수식키를 누르면 그 레이어만 개수·점·라벨·색바로 표시된다. (즐겨찾기 ⭐/📝, 선택 키, 빈-조합 초록은 아래에서 유지)
+  const calm = eff.size===0 && !panelMode && filter==='all';
+  if(calm){
+    h+=`<div class="act muted">·</div>`;
+  } else {
+    if(all.length) h+=`<span class="cnt">${all.length}</span>`;
+    const srcs=[...new Set(all.map(e=>e.source))];
+    const chc=all.filter(e=>e.ckey).length;   // chord 시작(연속) 개수
+    h+=`<div class="foot">`+srcs.map(s=>`<span class="fdot" style="background:${COLORS[s]||'#666'}"></span>`).join('')
+      +(chc?`<span class="chordm" title="${chc}개 연속(chord) 시작">▸${chc}</span>`:'')+`</div>`;
+    if(all.length) el.classList.add('busy');
+    if(ms.length){
+      el.classList.add('taken');
       const scc={}; ms.forEach(m=>scc[m.scope]=(scc[m.scope]||0)+1);
       const dup=Object.values(scc).some(v=>v>=2);
       h+=`<div class="act">${ms[0].action.replace(/</g,'&lt;')}`+(ms.length>1?` <span class="ov${dup?' dup':''}">+${ms.length-1}</span>`:``)+`</div>`;
       h+=`<div class="bar" style="background:${COLORS[ms[0].source]||'#666'}"></div>`;
-    }
-    if(filter==='free') el.classList.add('dim');
-  } else { h+=`<div class="act muted">·</div>`; if(filter==='taken') el.classList.add('dim'); }
+      if(filter==='free') el.classList.add('dim');
+    } else { h+=`<div class="act muted">·</div>`; if(filter==='taken') el.classList.add('dim'); }
+  }
   if(key===selectedKey) el.classList.add('sel');
   if(panelMode==='free' && !ms.length) el.classList.add('freehl');   // 빈 조합 모드: 이 레이어에서 빈 키를 초록 테두리로 그리드에 직접 표시
   const _ak=annKey([...eff],key);
