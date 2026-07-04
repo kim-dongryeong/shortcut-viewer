@@ -492,32 +492,54 @@ final class Engine {
 }
 
 // tiny floating HUD for sequence/leader mode
+// 세련된 HUD — macOS 시스템 HUD 풍(블러 hudWindow 재질 · 라운드 · 페이드 · 하단중앙).
 enum HUD {
     static var panel: NSPanel?
+    static var label: NSTextField?
     static var hideToken = 0
-    // icon="🔗" 접두(리더용, 기본). autoHide=초 지정하면 그 뒤 자동으로 사라짐(toast) — 마우스 액션 등.
+    static let W: CGFloat = 340, H: CGFloat = 62
+    private static func ensure() {
+        guard panel == nil else { return }
+        let p = NSPanel(contentRect: NSRect(x: 0, y: 0, width: W, height: H), styleMask: [.borderless, .nonactivatingPanel], backing: .buffered, defer: false)
+        p.level = .floating; p.isOpaque = false; p.backgroundColor = .clear; p.hasShadow = true
+        p.ignoresMouseEvents = true; p.collectionBehavior = [.canJoinAllSpaces, .stationary, .ignoresCycle]
+        p.appearance = NSAppearance(named: .darkAqua)
+        let fx = NSVisualEffectView(frame: NSRect(x: 0, y: 0, width: W, height: H))
+        fx.material = .hudWindow; fx.blendingMode = .behindWindow; fx.state = .active
+        fx.wantsLayer = true; fx.layer?.cornerRadius = 16; fx.layer?.masksToBounds = true
+        fx.layer?.borderWidth = 1; fx.layer?.borderColor = NSColor(white: 1, alpha: 0.10).cgColor
+        let lbl = NSTextField(labelWithString: "")
+        lbl.font = .systemFont(ofSize: 18, weight: .semibold); lbl.textColor = .white
+        lbl.alignment = .center; lbl.lineBreakMode = .byTruncatingTail; lbl.drawsBackground = false; lbl.isBezeled = false
+        lbl.frame = NSRect(x: 14, y: (H - 26) / 2, width: W - 28, height: 26); lbl.autoresizingMask = [.width]
+        fx.addSubview(lbl)
+        p.contentView = fx; panel = p; label = lbl
+    }
+    // icon="🔗" 접두(리더용, 기본). autoHide=초 지정하면 그 뒤 자동으로 사라짐(toast).
     static func show(_ text: String, icon: String = "🔗", autoHide: TimeInterval? = nil) {
         DispatchQueue.main.async {
-            if panel == nil {
-                let p = NSPanel(contentRect: NSRect(x: 0, y: 0, width: 360, height: 54), styleMask: [.borderless, .nonactivatingPanel], backing: .buffered, defer: false)
-                p.level = .floating; p.isOpaque = false; p.backgroundColor = .clear; p.hasShadow = true; p.ignoresMouseEvents = true; panel = p
+            ensure()
+            guard let p = panel, let lbl = label else { return }
+            lbl.stringValue = (icon.isEmpty ? "" : icon + "  ") + text
+            if let scr = NSScreen.main {   // 하단 중앙(시스템 HUD처럼)
+                p.setFrameOrigin(NSPoint(x: scr.frame.midX - W / 2, y: scr.frame.minY + scr.frame.height * 0.16))
             }
-            guard let p = panel, let host = p.contentView else { return }
-            let bg = NSView(frame: NSRect(x: 0, y: 0, width: 360, height: 54)); bg.wantsLayer = true
-            bg.layer?.backgroundColor = NSColor(red: 0.17, green: 0.11, blue: 0.36, alpha: 0.96).cgColor; bg.layer?.cornerRadius = 13
-            let label = NSTextField(labelWithString: (icon.isEmpty ? "" : icon + " ") + text)
-            label.font = .systemFont(ofSize: 15, weight: .semibold); label.textColor = .white; label.frame = NSRect(x: 16, y: 16, width: 328, height: 22)
-            bg.addSubview(label); p.contentView = bg; _ = host
-            if let scr = NSScreen.main { p.setFrameOrigin(NSPoint(x: scr.frame.midX - 180, y: scr.frame.midY - 140)) }
-            p.orderFrontRegardless()
+            p.alphaValue = 0; p.orderFrontRegardless()
+            NSAnimationContext.runAnimationGroup { c in c.duration = 0.12; p.animator().alphaValue = 1 }
             hideToken += 1
-            if let t = autoHide {   // 이후 새 show/hide가 없으면 t초 뒤 자동으로 닫음
+            if let t = autoHide {
                 let tok = hideToken
-                DispatchQueue.main.asyncAfter(deadline: .now() + t) { if tok == hideToken { panel?.orderOut(nil) } }
+                DispatchQueue.main.asyncAfter(deadline: .now() + t) { if tok == hideToken { hide() } }
             }
         }
     }
-    static func hide() { DispatchQueue.main.async { hideToken += 1; panel?.orderOut(nil) } }
+    static func hide() {
+        DispatchQueue.main.async {
+            hideToken += 1
+            guard let p = panel else { return }
+            NSAnimationContext.runAnimationGroup({ c in c.duration = 0.2; p.animator().alphaValue = 0 }, completionHandler: { p.orderOut(nil) })
+        }
+    }
 }
 
 enum Accessibility {
