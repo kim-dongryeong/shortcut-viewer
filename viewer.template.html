@@ -240,9 +240,13 @@
     <button id="commonbtn" class="vbtn" title="누구나 아는 흔한 단축키(⌘C·⌘V·⌘Z…) 숨기기">🙈 흔한 키</button>
     <button id="themebtn" class="vbtn" title="밝은/어두운 테마">☾ 테마</button>
     <button id="capturebtn" class="vbtn" title="키 입력을 낚아채 레이아웃에 반영(기본 켬). 끄면 ⌘C 복사·텍스트 편집이 정상 동작합니다.">⌨ 입력 감지</button>
-    <select id="searchmode" title="검색어 입력 시 키보드 그리드 표시 방식">
+    <select id="searchmode" title="검색어 입력 시 키보드 그리드(레이아웃) 표시 방식">
       <option value="highlight">🔍 그리드 강조</option>
       <option value="filter">🔍 그리드 강조+숨김</option>
+    </select>
+    <select id="searchlist" title="검색어 입력 시 아래 '수식키 조합별 단축키 리스트' 표시 방식">
+      <option value="highlight">🔍 리스트 강조</option>
+      <option value="filter">🔍 리스트 강조+숨김</option>
     </select>
     <label class="vbtn" style="display:inline-flex;align-items:center;gap:7px;cursor:default" title="키보드 레이아웃 크기 조절">⇔ 크기 <input type="range" id="sizeslider" min="40" max="92" step="2" style="width:96px;vertical-align:middle;cursor:ew-resize"></label>
     <button id="printbtn" class="vbtn" title="전체 단축키를 인쇄/PDF (치트시트 포스터)">🖨 인쇄</button>
@@ -330,8 +334,10 @@ document.documentElement.setAttribute('data-theme', theme);
 let hideCommon = localStorage.getItem('SVhideCommon')==='1';   // 누구나 아는 흔한 단축키(⌘C/V/Z…) 숨기기
 let showIcons = localStorage.getItem('SVicons')!=='0';          // 컨텍스트 칩에 앱 아이콘 표시 (기본 ON, '0'이면 끔)
 let captureKeys = localStorage.getItem('SVcapture')!=='0';      // 키 입력을 낚아채 레이아웃에 반영 (기본 ON). 끄면 ⌘C 복사 등 정상 동작
-let searchGridMode = localStorage.getItem('SVsearchGrid')==='filter' ? 'filter' : 'highlight';   // 검색어 입력 시 그리드: 강조만 / 강조+숨김
+let searchGridMode = localStorage.getItem('SVsearchGrid')==='filter' ? 'filter' : 'highlight';   // 검색어 입력 시 키보드 그리드: 강조만 / 강조+숨김
 let SEARCHKEYS = null;   // 현재 검색어가 매치하는 키 집합(그리드 강조/숨김용). null=검색 없음
+let searchListMode = localStorage.getItem('SVsearchList')==='filter' ? 'filter' : 'highlight';   // 상세(수식키 조합별) 리스트: 강조만 / 강조+숨김
+let DKWS = [];   // 현재 검색 키워드(상세 리스트 하이라이트용) — showDetail에서 세팅
 const COMMON_COMBOS = new Set(['cmd|C','cmd|V','cmd|X','cmd|Z','cmd|A','cmd|S','cmd|F','cmd|P','cmd|W','cmd|Q','cmd|N','cmd|O','cmd|T','cmd+shift|Z','cmd+shift|T']);
 function isCommon(e){ return !e.ckey && COMMON_COMBOS.has([...e.mods].sort().join('+')+'|'+e.key); }
 
@@ -551,14 +557,18 @@ function allModSubsets(){
 }
 function detailRow(mods, key, matches, hit){
   const ak=annKey(mods,key), fav=!!ANN.fav[ak], note=ANN.note[ak]||'';
+  if(DKWS.length && searchListMode==='filter'){   // 숨김 모드: 검색어와 안 맞는 조합 행은 아예 숨김
+    const m = matches.some(e => DKWS.every(k => (e.action+' '+(e.detail||'')+' '+e.scope).toLowerCase().includes(k.toLowerCase())));
+    if(!m) return '';
+  }
   matches=[...matches].sort((a,b)=>(a.ckey?1:0)-(b.ckey?1:0)||chordSym(a).localeCompare(chordSym(b))||a.action.localeCompare(b.action));
   const nch=matches.filter(e=>e.ckey).length;
   const body = matches.length
     ? matches.map(e=>{
         const src=`<span class="src" style="background:${COLORS[e.source]||'#666'}">${e.source}</span>`;
         const scope=`<span class="scope">${e.scope}</span>`+(e.source==='custom'?`<span class="delx" data-delc="${e._cid}" title="내 단축키 삭제">✕</span>`:'');
-        const det=e.detail?`<div class="muted" style="font-size:11px">${e.detail.replace(/</g,'&lt;')}</div>`:'';
-        const act=(e.ckey?chordTag(e)+' ':'')+e.action.replace(/</g,'&lt;');
+        const det=e.detail?`<div class="muted" style="font-size:11px">${hlText(e.detail,DKWS)}</div>`:'';
+        const act=(e.ckey?chordTag(e)+' ':'')+hlText(e.action,DKWS);
         return prefScopeRight
           ? `<div class="dent" style="display:flex;gap:6px;align-items:flex-start">${src}<span style="flex:1">${act}${det}</span>${scope}</div>`
           : `<div class="dent">${src} ${act} ${scope}${det}</div>`;
@@ -573,6 +583,8 @@ function detailRow(mods, key, matches, hit){
 }
 function showDetail(key){
   const all=keyAll(key), d=document.getElementById('detail');
+  const _dq=(document.getElementById('search').value||'').trim();   // 검색어 → 상세 리스트 하이라이트/숨김
+  DKWS = (_dq && !parseQueryCombo(_dq)) ? _dq.split(/\s+/).filter(Boolean) : [];
   const byCombo={};
   all.forEach(e=>{ const k=[...e.mods].sort().join(','); (byCombo[k]=byCombo[k]||[]).push(e); });
   let rows='';
@@ -945,8 +957,10 @@ document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>setView(b.data
 document.getElementById('themebtn').onclick=()=>{ theme=theme==='light'?'dark':'light'; document.documentElement.setAttribute('data-theme',theme); localStorage.setItem('SVtheme',theme); };
 { const sl=document.getElementById('sizeslider'); sl.value=U;   // 키보드 크기 슬라이더 — 드래그하면 연속 조절
   sl.oninput=()=>{ U=+sl.value; localStorage.setItem('SVkeyU',U); sync(); }; }
-{ const sm=document.getElementById('searchmode'); sm.value=searchGridMode;   // 검색 표시 방식: 강조 / 강조+숨김
+{ const sm=document.getElementById('searchmode'); sm.value=searchGridMode;   // 그리드(키보드) 검색 표시: 강조 / 강조+숨김
   sm.onchange=()=>{ searchGridMode=sm.value; localStorage.setItem('SVsearchGrid',searchGridMode); sync(); }; }
+{ const sl2=document.getElementById('searchlist'); sl2.value=searchListMode;   // 상세 리스트 검색 표시: 강조 / 강조+숨김
+  sl2.onchange=()=>{ searchListMode=sl2.value; localStorage.setItem('SVsearchList',searchListMode); if(selectedKey) showDetail(selectedKey); }; }
 document.getElementById('commonbtn').onclick=()=>{ hideCommon=!hideCommon; localStorage.setItem('SVhideCommon',hideCommon?'1':'0'); document.getElementById('commonbtn').classList.toggle('on',hideCommon); sync(); };
 document.getElementById('capturebtn').onclick=()=>{ captureKeys=!captureKeys; localStorage.setItem('SVcapture',captureKeys?'1':'0'); if(!captureKeys){ held=new Set(); heldStr=''; } sync(); };
 document.getElementById('printbtn').onclick=()=>{ const ov=overview,pm=panelMode; overview=true; panelMode=null; document.getElementById('ovbtn').classList.add('on'); sync(); setTimeout(()=>{ window.print(); overview=ov; panelMode=pm; document.getElementById('ovbtn').classList.toggle('on',overview); sync(); },150); };
