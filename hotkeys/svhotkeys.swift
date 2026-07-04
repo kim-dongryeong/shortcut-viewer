@@ -38,6 +38,8 @@ let KEYCODE: [String: Int] = [
     "F14":kVK_F14,"F15":kVK_F15,"F16":kVK_F16,"F17":kVK_F17,"F18":kVK_F18,"F19":kVK_F19,"F20":kVK_F20,
 ]
 let NAMEFOR: [Int: String] = { var m = [Int: String](); for (k, v) in KEYCODE { m[v] = k }; return m }()
+// 녹화가 안 되는 특수 키 — 에디터에서 드롭다운으로 고른다 (keyDown 이벤트가 안 오거나 OS가 가로챔)
+let SPECIAL_KEYS: [(String, String)] = [("CapsLock", "CapsLock ⇪ (특수)")]
 let MODSYM: [String: String] = ["cmd":"⌘","opt":"⌥","ctrl":"⌃","shift":"⇧"]
 let MOD_ORDER = ["ctrl","opt","shift","cmd"]
 let MOD_BASE = ["cmd","opt","ctrl","shift"]
@@ -669,6 +671,7 @@ struct EditSheet: View {
     @State private var gMod = "cmd"; @State private var gKind = "double"; @State private var gSide = "either"; @State private var gMs = 400.0
     @State private var seq2Display = ""; @State private var seq2Mods: [String] = []; @State private var seq2Key = ""
     @State private var appScope = ""
+    @State private var specialKey = ""   // 특수 키(CapsLock 등) 드롭다운 선택 — 비면 녹화로 지정
     func updateConflict() {
         guard !hotkey.key.isEmpty else { conflictText = ""; return }
         KnownShortcuts.shared.load()
@@ -754,10 +757,39 @@ struct EditSheet: View {
                 }
                 if triggerKind == "combo" {
                     field("단축키 조합") {
-                        HStack(spacing: 8) {
-                            RecorderField(display: $comboDisplay) { mods, key in hotkey.mods = mods; hotkey.key = key; updateConflict() }.frame(width: 160, height: 30)
-                            Button { suggestFree() } label: { Image(systemName: "sparkles") }.buttonStyle(.bordered).help("빈 키 추천")
-                            Picker("", selection: $lrSide) { Text("좌우 무관").tag("either"); Text("왼쪽만").tag("left"); Text("오른쪽만").tag("right") }.labelsHidden().frame(width: 110)
+                        VStack(alignment: .leading, spacing: 8) {
+                            HStack(spacing: 8) {
+                                RecorderField(display: $comboDisplay) { mods, key in hotkey.mods = mods; hotkey.key = key; specialKey = ""; updateConflict() }.frame(width: 160, height: 30)
+                                Button { suggestFree() } label: { Image(systemName: "sparkles") }.buttonStyle(.bordered).help("빈 키 추천")
+                                Picker("", selection: $lrSide) { Text("좌우 무관").tag("either"); Text("왼쪽만").tag("left"); Text("오른쪽만").tag("right") }.labelsHidden().frame(width: 110)
+                            }
+                            // 특수 키(CapsLock 등)는 녹화가 안 되니 드롭다운으로 고르고 수식키는 토글로
+                            HStack(spacing: 8) {
+                                Text("특수 키").font(.caption).foregroundColor(.secondary)
+                                Picker("", selection: $specialKey) {
+                                    Text("— (녹화로 지정)").tag("")
+                                    ForEach(SPECIAL_KEYS, id: \.0) { Text($0.1).tag($0.0) }
+                                }.labelsHidden().frame(width: 160)
+                                .onChange(of: specialKey) { v in
+                                    guard !v.isEmpty else { return }
+                                    if hotkey.mods.isEmpty { hotkey.mods = ["opt"] }
+                                    hotkey.key = v; comboDisplay = comboLabel(hotkey.mods, v); updateConflict()
+                                }
+                                if !specialKey.isEmpty {
+                                    ForEach(["ctrl","opt","shift","cmd"], id: \.self) { m in
+                                        Toggle(MODSYM[m] ?? m, isOn: Binding(
+                                            get: { hotkey.mods.map(modBase).contains(m) },
+                                            set: { on in
+                                                if on { if !hotkey.mods.map(modBase).contains(m) { hotkey.mods.append(m) } }
+                                                else { hotkey.mods.removeAll { modBase($0) == m } }
+                                                comboDisplay = comboLabel(hotkey.mods, hotkey.key); updateConflict()
+                                            })).toggleStyle(.button).tint(ACCENT)
+                                    }
+                                }
+                            }
+                            if !specialKey.isEmpty {
+                                Text("CapsLock 등 특수 키는 녹화가 안 돼 드롭다운으로 고릅니다. 수식키를 하나 이상 함께 켜세요(⌥ 추천). 손쉬운 사용 권한이 필요합니다.").font(.caption).foregroundColor(.secondary)
+                            }
                         }
                     }
                     if !conflictText.isEmpty {
@@ -827,6 +859,7 @@ struct EditSheet: View {
                 comboDisplay = comboLabel(seq[0].mods, seq[0].key); seq2Mods = seq[1].mods; seq2Key = seq[1].key; seq2Display = comboLabel(seq[1].mods, seq[1].key)
             } else {
                 comboDisplay = hotkey.key.isEmpty ? "" : comboLabel(hotkey.mods, hotkey.key)
+                if SPECIAL_KEYS.contains(where: { $0.0 == hotkey.key }) { specialKey = hotkey.key }   // 특수 키 편집 시 드롭다운에 반영
                 if hotkey.mods.contains(where: { modSide($0) == "left" }) { lrSide = "left" }
                 else if hotkey.mods.contains(where: { modSide($0) == "right" }) { lrSide = "right" }
             }
