@@ -105,6 +105,9 @@
   .cs .csk{font-weight:700;min-width:72px;white-space:nowrap}
   .cs .csa{flex:1;min-width:0;color:#cdd3df;font-size:12.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .cs .csd{width:7px;height:7px;border-radius:50%;flex:none;align-self:center}
+  .cs.exp{align-items:flex-start}
+  .cs.exp .csa{white-space:normal;overflow:visible;text-overflow:clip}   /* 확장 시 액션 줄바꿈 + 2번째 줄 */
+  .csdet{font-size:10.5px;color:var(--dim);white-space:normal;line-height:1.35;margin-top:1px}
   .ovtab{display:inline-flex;gap:4px;margin-left:10px;text-transform:none;letter-spacing:0}
   .ovtab button{font-size:11px;padding:2px 9px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--dim);cursor:pointer}
   .ovtab button.on{background:#0b2a45;border-color:#38bdf8;color:#7dd3fc}
@@ -248,10 +251,6 @@
       <option value="highlight">🔍 그리드 강조</option>
       <option value="filter">🔍 그리드 강조+숨김</option>
     </select>
-    <select id="searchlist" title="검색어 입력 시 아래 '수식키 조합별 단축키 리스트' 표시 방식">
-      <option value="highlight">🔍 리스트 강조</option>
-      <option value="filter">🔍 리스트 강조+숨김</option>
-    </select>
     <label class="vbtn" style="display:inline-flex;align-items:center;gap:7px;cursor:default" title="키보드 레이아웃 크기 조절">⇔ 크기 <input type="range" id="sizeslider" min="40" max="92" step="2" style="width:96px;vertical-align:middle;cursor:ew-resize"></label>
     <button id="printbtn" class="vbtn" title="전체 단축키를 인쇄/PDF (치트시트 포스터)">🖨 인쇄</button>
     <button id="csvbtn" class="vbtn" title="현재 컨텍스트 단축키를 CSV로 내보내기">⤓ CSV</button>
@@ -348,6 +347,7 @@ let SEARCHKEYS = null;   // 현재 검색어가 매치하는 키 집합(그리�
 let searchListMode = localStorage.getItem('SVsearchList')==='filter' ? 'filter' : 'highlight';   // 상세(수식키 조합별) 리스트: 강조만 / 강조+숨김
 let DKWS = [];   // 현재 검색 키워드(상세 리스트 하이라이트용) — showDetail에서 세팅
 let DFILTER = false;   // true면 detailRow가 searchListMode와 무관하게 매치 항목만(모아 보기용)
+let ovExpand = localStorage.getItem('SVovExpand')==='1';   // 전체단축키: 각 항목의 2번째 줄(detail)도 표시
 const COMMON_COMBOS = new Set(['cmd|C','cmd|V','cmd|X','cmd|Z','cmd|A','cmd|S','cmd|F','cmd|P','cmd|W','cmd|Q','cmd|N','cmd|O','cmd|T','cmd+shift|Z','cmd+shift|T']);
 function isCommon(e){ return !e.ckey && COMMON_COMBOS.has([...e.mods].sort().join('+')+'|'+e.key); }
 
@@ -615,7 +615,9 @@ function showDetail(key){
   const extra=Object.values(byCombo).flat();
   const extraHTML = extra.length ? `<div class="grp">기타(fn 등 포함)</div>`+
     extra.sort((a,b)=>a.mods.length-b.mods.length).map(e=>detailRow(e.mods,key,[e],sameSet(e.mods,eff))).join('') : '';
-  d.innerHTML=`<div style="margin-bottom:6px">${chordPrefix?`<span class="chord">${comboSym(chordPrefix.mods)}${chordPrefix.key} ▸</span> `:''}<b>${key}</b> 키 · 수식키 조합 16개 전부 (현재 레이어 <b style="color:#7dd3fc">${effSym()||'(무수식)'}</b> 강조) · ☆=즐겨찾기 · +노트</div>`+rows+extraHTML;
+  const listToggle = DKWS.length ? `<button id="listmodebtn" class="vbtn" style="font-size:11px;padding:2px 9px;margin-left:8px" title="검색어에 맞는 단축키만 남기고 나머지 숨김 (강조 ↔ 강조+숨김)">${searchListMode==='filter'?'☑':'☐'} 검색 결과만 보기</button>` : '';
+  d.innerHTML=`<div style="margin-bottom:6px">${chordPrefix?`<span class="chord">${comboSym(chordPrefix.mods)}${chordPrefix.key} ▸</span> `:''}<b>${key}</b> 키 · 수식키 조합 16개 전부 (현재 레이어 <b style="color:#7dd3fc">${effSym()||'(무수식)'}</b> 강조) · ☆=즐겨찾기 · +노트${listToggle}</div>`+rows+extraHTML;
+  { const b=document.getElementById('listmodebtn'); if(b) b.onclick=()=>{ searchListMode=searchListMode==='filter'?'highlight':'filter'; localStorage.setItem('SVsearchList',searchListMode); const s2=document.getElementById('searchlist'); if(s2) s2.value=searchListMode; showDetail(selectedKey); }; }
   d.querySelectorAll('[data-fav]').forEach(b=>b.onclick=()=>{ const ak=b.dataset.fav; ANN.fav[ak]?delete ANN.fav[ak]:ANN.fav[ak]=1; saveAnn(); sync(); });
   d.querySelectorAll('[data-chord]').forEach(b=>b.onclick=()=>{ const [ms,k]=b.dataset.chord.split('|'); enterChord(ms?ms.split('+'):[], k); });
   d.querySelectorAll('[data-note]').forEach(b=>b.onclick=()=>{ const ak=b.dataset.note; const t=prompt('이 단축키에 노트 (예: cmd+opt+V는 엑셀과 충돌이라 opt+V로 변경):', ANN.note[ak]||''); if(t!==null){ const tt=t.trim(); tt?ANN.note[ak]=tt:delete ANN.note[ak]; saveAnn(); sync(); showDetail(selectedKey); } });
@@ -709,7 +711,8 @@ function renderOverview(){   // KeyCue 식: 선택 컨텍스트의 모든 단축
       const hot = inputActive && sameSet(e.mods,eff) && (selectedKey ? e.key===selectedKey : true);
       const softHi = selectedKey && !hot && e.key===selectedKey;   // 같은 일반키의 다른 수식키 조합 → 약한 강조
       const combo = ovGroup==='mod' ? `${e.key}${e.ckey?' '+chordTag(e):''}` : `${comboSym(e.mods)||''}${e.key}${e.ckey?' '+chordTag(e):''}`;
-      return `<div class="cs${hot?' hi':''}${softHi?' softhi':''}" data-ov="${ix}"><span class="csk">${combo}</span><span class="csa" title="${e.action.replace(/"/g,'&quot;')}">${hlText(e.action,OKWS)}</span>`
+      const detLine = ovExpand && e.detail ? `<div class="csdet">${hlText(e.detail,OKWS)}</div>` : '';   // 확장 시 2번째 줄
+      return `<div class="cs${hot?' hi':''}${softHi?' softhi':''}${ovExpand?' exp':''}" data-ov="${ix}"><span class="csk">${combo}</span><div class="csa" title="${e.action.replace(/"/g,'&quot;')}">${hlText(e.action,OKWS)}${detLine}</div>`
         +`<span class="csd" style="background:${COLORS[e.source]||'#666'}" title="${e.source}${multi?' · '+e.scope:''}"></span></div>`;
     }).join('');
     const gl=label==='(무수식)'?'(수식키 없음)':label;
@@ -720,11 +723,15 @@ function renderOverview(){   // KeyCue 식: 선택 컨텍스트의 모든 단축
     + gst.map((g,gi)=>`<div class="cs${gestureHot(g)?' hi':''}" data-gi="${gi}"><span class="csk">${gestureSym(g)}</span><span class="csa" title="${(g.detail||'').replace(/"/g,'&quot;')}">${hlText(g.action,OKWS)}</span><span class="csd" style="background:${COLORS[g.source]||'#888'}" title="${(g.source||'').replace(/</g,'&lt;')}"></span></div>`).join('')
     + `</div>` : '';
   o.innerHTML=`<div class="sec">전체 단축키 — ${[...ctxSet].join(', ')||'(없음)'} · ${ent.length}개${gst.length?` + 제스처 ${gst.length}`:''}`
-    +`<span class="muted" style="text-transform:none;letter-spacing:0;margin-left:8px;font-size:11px">수식키/키를 누르면 해당 조합 하이라이트</span>`
-    +`<span class="ovtab">`+[['mod','수식키별'],['key','키별'],['source','소스별']].map(([g,l])=>`<button data-ovg="${g}" class="${ovGroup===g?'on':''}">${l}</button>`).join('')+`</span></div>`
+    +`<span class="muted" style="text-transform:none;letter-spacing:0;margin-left:8px;font-size:11px">클릭=그리드 강조 · 더블클릭=그 단축키로 이동</span>`
+    +`<span class="ovtab"><button data-ovexp class="${ovExpand?'on':''}" title="각 항목의 2번째 줄(상세)도 표시">${ovExpand?'▾ 확장됨':'▸ 확장'}</button>`+[['mod','수식키별'],['key','키별'],['source','소스별']].map(([g,l])=>`<button data-ovg="${g}" class="${ovGroup===g?'on':''}">${l}</button>`).join('')+`</span></div>`
     +`<div class="ovwrap">${body}${gbody}</div>`;
-  o.querySelectorAll('[data-ov]').forEach(el=>el.onclick=()=>{ const e=OVFLAT[+el.dataset.ov]; chordPrefix=null; chordReturn=null; sticky=new Set(e.mods); held=new Set(); selectedKey=e.key; sync(); if(!overview) window.scrollTo({top:0,behavior:'smooth'}); });
+  o.querySelectorAll('[data-ov]').forEach(el=>{
+    el.onclick=()=>{ const e=OVFLAT[+el.dataset.ov]; chordPrefix=null; chordReturn=null; sticky=new Set(e.mods); held=new Set(); selectedKey=e.key; sync(); };   // 클릭: 그리드에 강조
+    el.ondblclick=()=>{ const e=OVFLAT[+el.dataset.ov]; chordPrefix=null; chordReturn=null; sticky=new Set(e.mods); held=new Set(); selectedKey=e.key; overview=false; document.getElementById('ovbtn').classList.remove('on'); sync(); window.scrollTo({top:0,behavior:'smooth'}); };   // 더블클릭: 그 단축키로 이동(전체단축키 끄기)
+  });
   o.querySelectorAll('[data-ovg]').forEach(b=>b.onclick=()=>{ ovGroup=b.dataset.ovg; localStorage.setItem('SVovGroup',ovGroup); renderOverview(); _ovSig=_ovSignature(); });
+  o.querySelector('[data-ovexp]').onclick=()=>{ ovExpand=!ovExpand; localStorage.setItem('SVovExpand',ovExpand?'1':'0'); renderOverview(); _ovSig=_ovSignature(); };
 }
 // ══════ 새 전용 뷰: 충돌 · 빈 조합 · 통계 · 퀴즈 ══════
 function ctxEntries(){ let e=dedupeDisplay(DB.entries.filter(inCtx)); return hideCommon?e.filter(x=>!isCommon(x)):e; }
@@ -1054,8 +1061,6 @@ document.getElementById('themebtn').onclick=()=>{ theme=theme==='light'?'dark':'
   sl.oninput=()=>{ U=+sl.value; localStorage.setItem('SVkeyU',U); sync(); }; }
 { const sm=document.getElementById('searchmode'); sm.value=searchGridMode;   // 그리드(키보드) 검색 표시: 강조 / 강조+숨김
   sm.onchange=()=>{ searchGridMode=sm.value; localStorage.setItem('SVsearchGrid',searchGridMode); sync(); }; }
-{ const sl2=document.getElementById('searchlist'); sl2.value=searchListMode;   // 상세 리스트 검색 표시: 강조 / 강조+숨김
-  sl2.onchange=()=>{ searchListMode=sl2.value; localStorage.setItem('SVsearchList',searchListMode); if(selectedKey) showDetail(selectedKey); }; }
 document.getElementById('commonbtn').onclick=()=>{ hideCommon=!hideCommon; localStorage.setItem('SVhideCommon',hideCommon?'1':'0'); document.getElementById('commonbtn').classList.toggle('on',hideCommon); sync(); };
 document.getElementById('capturebtn').onclick=()=>{ captureKeys=!captureKeys; localStorage.setItem('SVcapture',captureKeys?'1':'0'); if(!captureKeys){ held=new Set(); heldStr=''; } sync(); };
 document.getElementById('printbtn').onclick=()=>{ const ov=overview,pm=panelMode; overview=true; panelMode=null; document.getElementById('ovbtn').classList.add('on'); sync(); setTimeout(()=>{ window.print(); overview=ov; panelMode=pm; document.getElementById('ovbtn').classList.toggle('on',overview); sync(); },150); };
