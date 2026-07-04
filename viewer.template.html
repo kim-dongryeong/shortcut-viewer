@@ -891,7 +891,8 @@ function sync(){
   const det=document.getElementById('detail');      // 전체 단축키(overview)/전용 패널이 켜지면 키별 상세는 숨긴다 (단 '빈 조합'은 그리드 위주라 상세 유지)
   if(overview || (panelMode && panelMode!=='free')){ det.style.display='none'; }
   else { det.style.display=''; if(selectedKey) showDetail(selectedKey);
-    else det.innerHTML='<div class="empty">키를 클릭하면 그 키에 걸린 <b>모든 수식키 조합</b>이 여기에 표시되고, 수식키를 누르면 해당 조합이 강조됩니다.</div>'; }
+    else if((document.getElementById('search').value||'').trim()) det.innerHTML='<div class="empty">🔍 위 키보드에서 <b style="color:#f59e0b">주황 테두리</b>가 검색어에 매치된 키입니다. 클릭하면 그 키의 상세가 여기에 표시됩니다.</div>';
+    else favHome(det); }   // 쉬는 상태(검색·선택 없음) = 즐겨찾기 홈
   const _sq=document.getElementById('search'); if(_sq) renderSearch(_sq.value.trim());   // 컨텍스트/레이어 바뀌면 검색 리스트도 갱신 (빈 검색어면 비움)
   saveHash();
 }
@@ -908,6 +909,26 @@ document.addEventListener('keydown',e=>{ if(e.target.tagName==='INPUT')return;
 document.addEventListener('keyup',e=>{ if(!captureKeys) return; const h=readHeld(e); const s=[...h].sort().join(); if(s!==heldStr){heldStr=s;held=h;sync();} });
 window.addEventListener('blur',()=>{ if(heldStr){heldStr='';held=new Set();sync();} });
 
+// 쉬는 상태(검색·선택 키 없음)의 상세 영역에 즐겨찾기 홈을 렌더 — 없으면 안내
+function favHome(det){
+  const keys=Object.keys(ANN.fav);
+  if(!keys.length){ det.innerHTML='<div class="empty">키를 클릭하면 그 키에 걸린 <b>모든 수식키 조합</b>이 여기에 표시됩니다. 자주 쓰는 건 상세에서 <b style="color:#f59f00">☆</b>를 눌러 즐겨찾기하면 이 홈에 모여요.</div>'; return; }
+  let html=`<div class="sec">⭐ 즐겨찾기 ${keys.length}개 — 홈</div>`;
+  keys.sort().forEach(ak=>{
+    const i=ak.indexOf('|'), modstr=ak.slice(0,i), key=ak.slice(i+1), mods=modstr?modstr.split('+'):[];
+    const matches=DB.entries.filter(e=>e.key===key && sameSet(e.mods,new Set(mods)));
+    const acts=[...new Set(matches.map(e=>(e.ckey?'▸'+chordSym(e)+' ':'')+e.action))];   // 중복 동작 제거
+    const actTxt=acts.slice(0,3).map(a=>a.replace(/</g,'&lt;')).join(' / ');
+    const act=acts.length?actTxt+(acts.length>3?` <span class="muted">…(+${acts.length-3})</span>`:''):'(빈 조합)';
+    const scps=[...new Set(matches.map(e=>e.scope))], note=ANN.note[ak]||'';
+    html+=`<div class="row" data-jump="${ak}"><button class="favbtn on" data-fav="${ak}" title="즐겨찾기 해제">⭐</button><span class="kc">${comboSym(mods)||'(무수식)'}${key}</span>`
+      +`<div style="flex:1">${act}${note?`<div class="noteshow">📝 ${note.replace(/</g,'&lt;')}</div>`:''}</div>`
+      +`<span class="scope">${scps[0]||'free'}${scps.length>1?` +${scps.length-1}`:''}</span></div>`;
+  });
+  det.innerHTML=html;
+  det.querySelectorAll('[data-jump]').forEach(el=>el.onclick=(ev)=>{ if(ev.target.closest('.favbtn'))return; const ak=el.dataset.jump,i=ak.indexOf('|'); chordPrefix=null; chordReturn=null; sticky=new Set(ak.slice(0,i)?ak.slice(0,i).split('+'):[]); held=new Set(); selectedKey=ak.slice(i+1); sync(); window.scrollTo({top:0,behavior:'smooth'}); });
+  det.querySelectorAll('[data-fav]').forEach(b=>b.onclick=(ev)=>{ ev.stopPropagation(); delete ANN.fav[b.dataset.fav]; saveAnn(); sync(); });
+}
 function renderFavs(){
   const r=document.getElementById('results');
   const keys=Object.keys(ANN.fav);
