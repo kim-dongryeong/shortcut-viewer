@@ -46,6 +46,13 @@
   .kb{display:flex;align-items:flex-start;gap:28px;flex-wrap:wrap}
   .kbmain{display:flex;flex-direction:column}
   .kbright{display:flex;flex-direction:column}
+  /* 즐겨찾기 리스트 위치 옵션 */
+  #kbwrap{display:flex;align-items:flex-start;gap:18px;flex-wrap:wrap}
+  #kbwrap>#favpanel{flex:0 1 340px;min-width:280px;align-self:stretch;max-height:calc(var(--caph,54px)*7 + 60px);overflow:auto;border:1px solid var(--line);border-radius:12px;padding:8px 12px;background:var(--panel)}
+  #favpanel:empty{display:none}
+  #listwrap.favpos-split{display:flex;flex-direction:row-reverse;align-items:flex-start;gap:20px}
+  #listwrap.favpos-split>#detail{flex:1 1 0;min-width:0}
+  #listwrap.favpos-split>#favpanel{flex:0 0 38%;max-width:460px;min-width:300px;position:sticky;top:8px;max-height:calc(100vh - 24px);overflow:auto;border-left:1px solid var(--line);padding-left:18px}
   .krow{display:flex;align-items:flex-start}
   .cap{position:relative;height:var(--caph,54px);margin:3px;border:1px solid var(--line);border-radius:8px;background:var(--panel);
        padding:4px 6px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;transition:transform .04s;flex:none}
@@ -277,6 +284,7 @@
     <button id="mdbtn" class="vbtn" title="현재 컨텍스트 단축키를 Markdown 표로 내보내기">⤓ MD</button>
     <button id="addbtn" class="vbtn" title="어떤 소스에도 없는 단축키를 직접 추가 (Raycast 등)">＋ 내 단축키</button>
     <button id="scopepos" class="vbtn" title="상세 패널 스코프 위치 좌/우 토글">스코프 ⇄</button>
+    <label class="vbtn" style="display:inline-flex;align-items:center;gap:6px;cursor:default" title="즐겨찾기 리스트 위치">⭐ 위치 <select id="favposselect" style="background:var(--panel);color:var(--txt);border:1px solid var(--line);border-radius:6px;padding:1px 3px"><option value="split">아래 좌우분할</option><option value="kbright">키보드 오른쪽</option><option value="below">아래 전체폭</option></select></label>
     <button id="annexport" class="vbtn" title="즐겨찾기·노트·내 단축키 내보내기">⬇︎ 내보내기</button>
     <label class="impbtn vbtn" title="즐겨찾기·노트 가져오기">⬆︎ 가져오기<input id="annimport" type="file" accept="application/json" style="display:none"></label>
   </div>
@@ -286,14 +294,16 @@
 
   <div class="legend" id="legend"></div>
   <div id="chordbar" style="display:none"></div>
-  <div class="kb" id="kb"></div>
+  <div id="kbwrap"><div class="kb" id="kb"></div></div>
   <div id="extras"></div>
   <div id="gestures"></div>
 
   <div class="panel">
     <div id="modepanel"></div>
-    <div id="favpanel"></div>
-    <div id="detail"><div class="empty">키를 클릭하면 그 키에 걸린 <b>모든 수식키 조합</b>이 여기에 표시되고, 수식키를 누르면 해당 조합이 강조됩니다.</div></div>
+    <div id="listwrap">
+      <div id="favpanel"></div>
+      <div id="detail"><div class="empty">키를 클릭하면 그 키에 걸린 <b>모든 수식키 조합</b>이 여기에 표시되고, 수식키를 누르면 해당 조합이 강조됩니다.</div></div>
+    </div>
     <div id="overview"></div>
     <div id="results"></div>
   </div>
@@ -998,8 +1008,11 @@ function sync(){
   else mp.innerHTML='';
   document.getElementById('favall').classList.toggle('on',favMode==='all');
   document.getElementById('favctx').classList.toggle('on',favMode==='ctx');
-  const fp=document.getElementById('favpanel'), det=document.getElementById('detail');   // 전체 단축키(overview)/전용 패널이 켜지면 키별 상세는 숨긴다 (단 '빈 조합'은 그리드 위주라 상세 유지)
-  const showFav = !!favMode && !overview && !(panelMode && panelMode!=='free');   // 즐겨찾기 리스트를 기본 단축키 리스트 '위'에 (전체단축키·전용 뷰 땐 숨김)
+  const fp=document.getElementById('favpanel'), det=document.getElementById('detail'), lw=document.getElementById('listwrap'), kbw=document.getElementById('kbwrap');   // 전체 단축키(overview)/전용 패널이 켜지면 키별 상세는 숨긴다 (단 '빈 조합'은 그리드 위주라 상세 유지)
+  const showFav = !!favMode && !overview && !(panelMode && panelMode!=='free');   // 즐겨찾기 리스트: 위치(favPos)에 따라 상세 위/좌우/키보드 오른쪽
+  lw.className = 'favpos-'+(favPos==='kbright'?'below':favPos);
+  if(favPos==='kbright' && showFav){ if(fp.parentNode!==kbw) kbw.appendChild(fp); }   // 키보드 오른쪽으로 이동(renderKB의 kb.innerHTML=''에 안 지워지도록 kbwrap의 형제)
+  else if(fp.parentNode!==lw) lw.insertBefore(fp, lw.firstChild);
   if(showFav) renderFavPanel(fp); else fp.innerHTML='';
   if(overview || (panelMode && panelMode!=='free')){ det.style.display='none'; }
   else { det.style.display=''; if(selectedKey) showDetail(selectedKey);
@@ -1139,6 +1152,8 @@ document.getElementById('themebtn').onclick=()=>{ theme=theme==='light'?'dark':'
   sl.oninput=()=>{ U=+sl.value; localStorage.setItem('SVkeyU',U); sync(); }; }
 { const sm=document.getElementById('searchmode'); sm.value=searchGridMode;   // 그리드(키보드) 검색 표시: 강조 / 강조+숨김
   sm.onchange=()=>{ searchGridMode=sm.value; localStorage.setItem('SVsearchGrid',searchGridMode); sync(); }; }
+{ const fpz=document.getElementById('favposselect'); fpz.value=favPos;   // 즐겨찾기 리스트 위치
+  fpz.onchange=()=>{ favPos=fpz.value; localStorage.setItem('SVfavPos',favPos); sync(); }; }
 document.getElementById('commonbtn').onclick=()=>{ hideCommon=!hideCommon; localStorage.setItem('SVhideCommon',hideCommon?'1':'0'); document.getElementById('commonbtn').classList.toggle('on',hideCommon); sync(); };
 document.getElementById('capturebtn').onclick=()=>{ captureKeys=!captureKeys; localStorage.setItem('SVcapture',captureKeys?'1':'0'); if(!captureKeys){ held=new Set(); heldStr=''; } sync(); };
 document.getElementById('printbtn').onclick=()=>{ const ov=overview,pm=panelMode; overview=true; panelMode=null; document.getElementById('ovbtn').classList.add('on'); sync(); setTimeout(()=>{ window.print(); overview=ov; panelMode=pm; document.getElementById('ovbtn').classList.toggle('on',overview); sync(); },150); };
