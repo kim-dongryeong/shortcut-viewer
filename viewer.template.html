@@ -58,6 +58,9 @@
   .ov.dup{color:#ef4444;background:#3a1414}   /* 같은 앱 내 충돌 = 빨강 (BTT 주황과 구분) */
   .cap.busy:not(.taken){border-color:#33405e}
   .cap.dim{opacity:.3}
+  .cap.shit{border-color:#fbbf24!important;box-shadow:0 0 0 2px #f59e0b,0 0 12px rgba(245,158,11,.5);z-index:2}   /* 검색어 매치 키 강조 */
+  .cap.shit .lab{color:#fcd34d}
+  .cap.shide{opacity:.08;filter:grayscale(1)}   /* 검색 필터 모드: 비매치 키 숨김(강하게 흐림) */
   .cap.freehl{border-color:#3d9e6b!important}   /* 빈 키: 차분한 초록 테두리 (글로우 없음) */
   .cap.freehl .lab{color:#7fca9f}
   .cap .bar{position:absolute;left:0;bottom:0;height:3px;width:100%}
@@ -237,6 +240,10 @@
     <button id="commonbtn" class="vbtn" title="누구나 아는 흔한 단축키(⌘C·⌘V·⌘Z…) 숨기기">🙈 흔한 키</button>
     <button id="themebtn" class="vbtn" title="밝은/어두운 테마">☾ 테마</button>
     <button id="capturebtn" class="vbtn" title="키 입력을 낚아채 레이아웃에 반영(기본 켬). 끄면 ⌘C 복사·텍스트 편집이 정상 동작합니다.">⌨ 입력 감지</button>
+    <select id="searchmode" title="검색어 입력 시 키보드 그리드 표시 방식">
+      <option value="highlight">🔍 그리드 강조</option>
+      <option value="filter">🔍 그리드 강조+숨김</option>
+    </select>
     <label class="vbtn" style="display:inline-flex;align-items:center;gap:7px;cursor:default" title="키보드 레이아웃 크기 조절">⇔ 크기 <input type="range" id="sizeslider" min="40" max="92" step="2" style="width:96px;vertical-align:middle;cursor:ew-resize"></label>
     <button id="printbtn" class="vbtn" title="전체 단축키를 인쇄/PDF (치트시트 포스터)">🖨 인쇄</button>
     <button id="csvbtn" class="vbtn" title="현재 컨텍스트 단축키를 CSV로 내보내기">⤓ CSV</button>
@@ -323,6 +330,8 @@ document.documentElement.setAttribute('data-theme', theme);
 let hideCommon = localStorage.getItem('SVhideCommon')==='1';   // 누구나 아는 흔한 단축키(⌘C/V/Z…) 숨기기
 let showIcons = localStorage.getItem('SVicons')!=='0';          // 컨텍스트 칩에 앱 아이콘 표시 (기본 ON, '0'이면 끔)
 let captureKeys = localStorage.getItem('SVcapture')!=='0';      // 키 입력을 낚아채 레이아웃에 반영 (기본 ON). 끄면 ⌘C 복사 등 정상 동작
+let searchGridMode = localStorage.getItem('SVsearchGrid')==='filter' ? 'filter' : 'highlight';   // 검색어 입력 시 그리드: 강조만 / 강조+숨김
+let SEARCHKEYS = null;   // 현재 검색어가 매치하는 키 집합(그리드 강조/숨김용). null=검색 없음
 const COMMON_COMBOS = new Set(['cmd|C','cmd|V','cmd|X','cmd|Z','cmd|A','cmd|S','cmd|F','cmd|P','cmd|W','cmd|Q','cmd|N','cmd|O','cmd|T','cmd+shift|Z','cmd+shift|T']);
 function isCommon(e){ return !e.ckey && COMMON_COMBOS.has([...e.mods].sort().join('+')+'|'+e.key); }
 
@@ -418,26 +427,29 @@ function cellKey(key,label,wpx){
   const all=keyAll(key), ms=matchEff(key);
   const el=document.createElement('div'); el.className='cap'; el.style.width=wpx;
   let h=`<div class="lab">${label.replace(/</g,'&lt;')}</div>`;
-  // 기본 '쉬는 상태'(수식키 안 누름 · 패널 없음 · 필터 없음)에선 하이라이트/힌트를 전부 끈다 → 그리드가 차분.
-  // 수식키를 누르면 그 레이어만 개수·점·라벨·색바로 표시된다. (즐겨찾기 ⭐/📝, 선택 키, 빈-조합 초록은 아래에서 유지)
-  const calm = eff.size===0 && !panelMode && filter==='all';
-  if(calm){
-    h+=`<div class="act muted">·</div>`;
+  if(all.length) h+=`<span class="cnt">${all.length}</span>`;   // 개수 힌트 — 항상 (이 키에 단축키 몇 개)
+  const srcs=[...new Set(all.map(e=>e.source))];
+  const chc=all.filter(e=>e.ckey).length;   // chord 시작(연속) 개수
+  h+=`<div class="foot">`+srcs.map(s=>`<span class="fdot" style="background:${COLORS[s]||'#666'}"></span>`).join('')
+    +(chc?`<span class="chordm" title="${chc}개 연속(chord) 시작">▸${chc}</span>`:'')+`</div>`;   // 색동그라미(소스별) — 항상
+  if(all.length) el.classList.add('busy');
+  // '활성 레이어' 강조(taken 테두리·액션 라벨·색바)는 수식키를 눌렀거나 전용 패널(빈조합 등)일 때만.
+  // 무수식(수식키 안 누른 쉬는 상태)은 강조하지 않음 → 점·개수 힌트만 남고 하이라이트는 없음.
+  const active = eff.size>0 || !!panelMode;
+  if(active && ms.length){
+    el.classList.add('taken');
+    const scc={}; ms.forEach(m=>scc[m.scope]=(scc[m.scope]||0)+1);
+    const dup=Object.values(scc).some(v=>v>=2);
+    h+=`<div class="act">${ms[0].action.replace(/</g,'&lt;')}`+(ms.length>1?` <span class="ov${dup?' dup':''}">+${ms.length-1}</span>`:``)+`</div>`;
+    h+=`<div class="bar" style="background:${COLORS[ms[0].source]||'#666'}"></div>`;
+    if(filter==='free') el.classList.add('dim');
   } else {
-    if(all.length) h+=`<span class="cnt">${all.length}</span>`;
-    const srcs=[...new Set(all.map(e=>e.source))];
-    const chc=all.filter(e=>e.ckey).length;   // chord 시작(연속) 개수
-    h+=`<div class="foot">`+srcs.map(s=>`<span class="fdot" style="background:${COLORS[s]||'#666'}"></span>`).join('')
-      +(chc?`<span class="chordm" title="${chc}개 연속(chord) 시작">▸${chc}</span>`:'')+`</div>`;
-    if(all.length) el.classList.add('busy');
-    if(ms.length){
-      el.classList.add('taken');
-      const scc={}; ms.forEach(m=>scc[m.scope]=(scc[m.scope]||0)+1);
-      const dup=Object.values(scc).some(v=>v>=2);
-      h+=`<div class="act">${ms[0].action.replace(/</g,'&lt;')}`+(ms.length>1?` <span class="ov${dup?' dup':''}">+${ms.length-1}</span>`:``)+`</div>`;
-      h+=`<div class="bar" style="background:${COLORS[ms[0].source]||'#666'}"></div>`;
-      if(filter==='free') el.classList.add('dim');
-    } else { h+=`<div class="act muted">·</div>`; if(filter==='taken') el.classList.add('dim'); }
+    h+=`<div class="act muted">·</div>`;
+    if(active && filter==='taken') el.classList.add('dim');
+  }
+  if(SEARCHKEYS){   // 검색어 매치: 매치 키 강조 / 필터 모드면 비매치 키 숨김
+    if(SEARCHKEYS.has(key)) el.classList.add('shit');
+    else if(searchGridMode==='filter') el.classList.add('shide');
   }
   if(key===selectedKey) el.classList.add('sel');
   if(panelMode==='free' && !ms.length) el.classList.add('freehl');   // 빈 조합 모드: 이 레이어에서 빈 키를 초록 테두리로 그리드에 직접 표시
@@ -473,7 +485,23 @@ function navBlock(){
   wrap.appendChild(r1); wrap.appendChild(r2);
   return wrap;
 }
+// 검색어가 매치하는 '키' 집합 (선택 컨텍스트 안, 어느 수식키 레이어든) → 그리드에서 그 키를 강조/숨김
+function gridSearchKeys(q){
+  if(!q) return null;
+  const combo=parseQueryCombo(q), kws = combo ? [] : q.split(/\s+/).filter(Boolean);
+  const s=new Set();
+  DB.entries.forEach(e=>{
+    if(!inCtx(e)) return;
+    let m;
+    if(combo) m = e.key.toLowerCase()===combo.key.toLowerCase()&&sameSet(e.mods,new Set(combo.mods));
+    else { const hay=(e.action+' '+e.key+' '+(e.detail||'')+' '+e.scope).toLowerCase(); m=kws.every(k=>hay.includes(k.toLowerCase())); }
+    if(m) s.add(e.key);
+  });
+  return s;
+}
 function renderKB(){
+  const _sq=(document.getElementById('search').value||'').trim();
+  SEARCHKEYS = _sq ? gridSearchKeys(_sq) : null;   // 검색어 있으면 매치 키 계산 → cellKey에서 강조/숨김
   document.documentElement.style.setProperty('--caph',(U-2)+'px');   // 키 높이(기본 U=56 → 54px, 원래 크기) · 크기 3단계에 비례
   const kb=document.getElementById('kb'); kb.innerHTML='';
   const main=document.createElement('div'); main.className='kbmain';
@@ -553,7 +581,7 @@ function showDetail(key){
   all.forEach(e=>{ const k=[...e.mods].sort().join(','); (byCombo[k]=byCombo[k]||[]).push(e); });
   let rows='';
   for(const mods of allModSubsets()){
-    const k=[...mods].sort().join(','), hit=sameSet(mods,eff);
+    const k=[...mods].sort().join(','), hit=eff.size>0 && sameSet(mods,eff);   // 수식키를 실제로 누른 레이어만 강조 (무수식 쉬는 상태는 강조 안 함)
     rows += detailRow(mods, key, byCombo[k]||[], hit); delete byCombo[k];
   }
   const extra=Object.values(byCombo).flat();
@@ -874,7 +902,7 @@ function sync(){
   if(overview || (panelMode && panelMode!=='free')){ det.style.display='none'; }
   else { det.style.display=''; if(selectedKey) showDetail(selectedKey);
     else det.innerHTML='<div class="empty">키를 클릭하면 그 키에 걸린 <b>모든 수식키 조합</b>이 여기에 표시되고, 수식키를 누르면 해당 조합이 강조됩니다.</div>'; }
-  const _sq=document.getElementById('search'); if(_sq && _sq.value.trim()) renderSearch(_sq.value.trim());   // 컨텍스트 등이 바뀌면 검색 결과도 교집합으로 갱신
+  const _sq=document.getElementById('search'); if(_sq) renderSearch(_sq.value.trim());   // 컨텍스트/레이어 바뀌면 검색 리스트도 갱신 (빈 검색어면 비움)
   saveHash();
 }
 function readHeld(e){ const h=new Set(); if(e.metaKey)h.add('cmd'); if(e.ctrlKey)h.add('ctrl'); if(e.altKey)h.add('opt'); if(e.shiftKey)h.add('shift'); return h; }
@@ -912,8 +940,8 @@ document.getElementById('addbtn').onclick=addCustom;
 document.getElementById('moretoggle').onclick=()=>{ const m=document.getElementById('moretools'); const show=m.style.display==='none'; m.style.display=show?'flex':'none'; document.getElementById('hint').style.display=show?'block':'none'; document.getElementById('moretoggle').classList.toggle('on',show); };
 document.getElementById('ctxtoggle').onclick=()=>{ const c=document.getElementById('ctxchips'); const show=c.style.display==='none'; c.style.display=show?'inline-flex':'none'; document.getElementById('ctxtoggle').textContent=show?'▴ 접기':'▾ 앱 선택'; };
 const searchEl=document.getElementById('search'), searchBox=document.querySelector('.searchbox');
-function clearSearch(){ searchEl.value=''; searchBox.classList.remove('has'); renderSearch(''); }
-searchEl.oninput=e=>{ searchBox.classList.toggle('has',!!e.target.value); renderSearch(e.target.value.trim()); };
+function clearSearch(){ searchEl.value=''; searchBox.classList.remove('has'); sync(); }
+searchEl.oninput=e=>{ searchBox.classList.toggle('has',!!e.target.value); sync(); };   // sync가 그리드(강조/숨김)+리스트 둘 다 갱신
 searchEl.addEventListener('keydown',e=>{ if(e.key==='Escape'){ e.preventDefault(); clearSearch(); searchEl.blur(); } });
 document.getElementById('searchclear').onclick=()=>{ clearSearch(); searchEl.focus(); };
 document.getElementById('favview').onclick=renderFavs;
@@ -921,6 +949,8 @@ document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>setView(b.data
 document.getElementById('themebtn').onclick=()=>{ theme=theme==='light'?'dark':'light'; document.documentElement.setAttribute('data-theme',theme); localStorage.setItem('SVtheme',theme); };
 { const sl=document.getElementById('sizeslider'); sl.value=U;   // 키보드 크기 슬라이더 — 드래그하면 연속 조절
   sl.oninput=()=>{ U=+sl.value; localStorage.setItem('SVkeyU',U); sync(); }; }
+{ const sm=document.getElementById('searchmode'); sm.value=searchGridMode;   // 검색 표시 방식: 강조 / 강조+숨김
+  sm.onchange=()=>{ searchGridMode=sm.value; localStorage.setItem('SVsearchGrid',searchGridMode); sync(); }; }
 document.getElementById('commonbtn').onclick=()=>{ hideCommon=!hideCommon; localStorage.setItem('SVhideCommon',hideCommon?'1':'0'); document.getElementById('commonbtn').classList.toggle('on',hideCommon); sync(); };
 document.getElementById('capturebtn').onclick=()=>{ captureKeys=!captureKeys; localStorage.setItem('SVcapture',captureKeys?'1':'0'); if(!captureKeys){ held=new Set(); heldStr=''; } sync(); };
 document.getElementById('printbtn').onclick=()=>{ const ov=overview,pm=panelMode; overview=true; panelMode=null; document.getElementById('ovbtn').classList.add('on'); sync(); setTimeout(()=>{ window.print(); overview=ov; panelMode=pm; document.getElementById('ovbtn').classList.toggle('on',overview); sync(); },150); };
