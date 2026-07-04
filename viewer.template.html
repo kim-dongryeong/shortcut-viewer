@@ -35,8 +35,15 @@
   select,input,button{background:var(--panel);color:var(--txt);border:1px solid var(--line);border-radius:9px;padding:8px 11px;font-size:14px}
   button{cursor:pointer}
   button.on{background:#2563eb;border-color:#2563eb}
-  #favall.on,#favctx.on{background:#7c5e10;border-color:#e0a82e;color:#ffe9b3}   /* 즐겨찾기 뷰 버튼 켬 = 금색 */
-  html[data-theme="light"] #favall.on,html[data-theme="light"] #favctx.on{background:#fde5b8;border-color:#c98a13;color:#7a4e00}
+  .favseg{display:inline-flex;border:1px solid var(--line);border-radius:7px;overflow:hidden}
+  .favseg button{background:var(--panel);border:none;color:var(--dim);font-size:12px;padding:3px 10px;cursor:pointer}
+  .favseg button.on{background:#7c5e10;color:#ffe9b3}
+  html[data-theme="light"] .favseg button.on{background:#fde5b8;color:#7a4e00}
+  .favgridtog{background:var(--panel);border:1px solid var(--line);border-radius:7px;color:var(--dim);font-size:12px;padding:3px 10px;cursor:pointer;margin-left:8px}
+  .favgridtog.on{background:#3a2a52;border-color:#c084fc;color:#e9d5ff}
+  .favhdr{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+  .favttl{font-weight:700;font-size:13px}
+  .favcnt{font-size:11px;margin-left:auto}
   input{min-width:200px}
   .combo{font-size:14px;color:var(--dim)}
   .combo b{color:var(--txt)}
@@ -68,8 +75,8 @@
   .ov.dup{color:#ef4444;background:#3a1414}   /* 같은 앱 내 충돌 = 빨강 (BTT 주황과 구분) */
   .cap.busy:not(.taken){border-color:#33405e}
   .cap.dim{opacity:.3}
-  .cap.favmark{border-color:#e0a82e!important;box-shadow:inset 0 0 0 2px rgba(224,168,46,.4)}   /* 즐겨찾기 걸린 키 — 금색(검색/선택이 있으면 그쪽이 덮어씀) */
-  .cap.favmark .lab{color:#f5c451}
+  .cap.favmark{border-color:#c084fc!important;box-shadow:inset 0 0 0 2px rgba(192,132,252,.45)}   /* 즐겨찾기 걸린 키 — 보라(검색=금색과 구분 · 검색/선택이 있으면 그쪽이 덮어씀) */
+  .cap.favmark .lab{color:#d8b4fe}
   .cap.shit{border-color:#fbbf24!important;box-shadow:0 0 0 2px #f59e0b,0 0 12px rgba(245,158,11,.5);z-index:2}   /* 검색어 매치 키 강조 */
   .cap.shit .lab{color:#fcd34d}
   .cap.shide{opacity:.08;filter:grayscale(1)}   /* 검색 필터 모드: 비매치 키 숨김(강하게 흐림) */
@@ -109,6 +116,8 @@
   .tip .tl b{min-width:58px;color:#cfe}
   .grp{margin:10px 0 4px;font-weight:700}
   .ovwrap{column-width:310px;column-gap:20px;margin-top:6px}
+  .ovmore{column-span:all;text-align:center;margin:6px 0 2px}
+  .ovmore button{font-size:13px;padding:8px 18px;border:1px solid #38bdf8;border-radius:9px;background:#0b2a45;color:#7dd3fc;cursor:pointer}
   .ovgrp{break-inside:avoid;-webkit-column-break-inside:avoid;margin:0 0 14px}
   .ovgrp .gh{font-weight:700;color:#7dd3fc;border-bottom:1px solid var(--line);padding-bottom:3px;margin-bottom:3px;font-size:13px}
   .cs{display:flex;gap:8px;align-items:baseline;padding:2px 4px;border-radius:5px;cursor:pointer;content-visibility:auto;contain-intrinsic-size:auto 22px}
@@ -153,8 +162,8 @@
   .favmk.on{filter:drop-shadow(0 0 3px #ffd43b)}
   .enote{color:#ffd8a8;font-size:11px;margin-top:2px}   /* 엔트리(단축키 하나) 노트 */
   .dent{cursor:default;border-radius:6px}
-  .dent.flash,.row.flash{animation:flashhi 2.5s ease-out}
-  @keyframes flashhi{0%,32%{background:rgba(245,200,80,.32);box-shadow:inset 3px 0 0 #e0a82e}100%{background:transparent;box-shadow:none}}
+  .dent.flash,.row.flash{animation:flashhi 5s ease-out;border-radius:7px;position:relative;z-index:1}
+  @keyframes flashhi{0%,44%{box-shadow:0 0 0 2px #38bdf8,0 0 16px 3px rgba(56,189,248,.75)}100%{box-shadow:0 0 0 0 rgba(56,189,248,0)}}
   #ctxmenu{position:fixed;z-index:60;display:none;background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:4px;box-shadow:0 8px 28px rgba(0,0,0,.5);min-width:170px}
   #ctxmenu button{display:block;width:100%;text-align:left;background:none;border:none;color:var(--txt);font-size:13px;padding:7px 12px;border-radius:6px;cursor:pointer}
   #ctxmenu button:hover{background:#2563eb;color:#fff}
@@ -243,8 +252,6 @@
     <span id="modchips"></span>
     <span class="searchbox"><input id="search" placeholder="🔍 검색: 동작/키/조합"><button id="searchclear" title="검색어 지우기 (Esc)" tabindex="-1">✕</button></span>
     <button id="ovbtn" title="선택한 컨텍스트의 모든 단축키를 한 번에 (KeyCue 식 치트시트)">📋 전체 단축키</button>
-    <button id="favall" title="모든 즐겨찾기를 키보드에 ⭐로 표시하고 아래에 리스트로 보여줍니다 (현재 컨텍스트와 무관). 다시 누르면 끕니다.">⭐ 전체 즐겨찾기</button>
-    <button id="favctx" title="현재 선택한 컨텍스트에 해당하는 즐겨찾기만 키보드·리스트로 보여줍니다. 다시 누르면 끕니다.">⭐ 현재 컨텍스트</button>
     <button id="moretoggle" title="테마·인쇄·내보내기·내 단축키 등 더 많은 도구">⋯ 더보기</button>
   </div>
   <div class="controls" style="margin-top:-4px">
@@ -257,7 +264,7 @@
   <div class="vbar" id="vbar">
     <span class="meta">보기:</span>
     <button class="vbtn" data-view="free" title="현재 수식키 레이어에서 비어 있는(할당 가능한) 키">✨ 빈 조합</button>
-    <button class="vbtn" data-view="ghk" title="충돌 없는 빈 조합을 골라 그 자리에 진짜 글로벌 핫키를 설정 → 앱에 바로 적용">🌐 글로벌 핫키</button>
+    <button class="vbtn" data-view="ghk" title="충돌 없는 빈 조합을 골라 그 자리에 진짜 글로벌 핫키를 설정 → 앱에 바로 적용">⚡ 글로벌 핫키</button>
   </div>
   <div class="vbar" id="moretools" style="display:none">
     <button class="vbtn" data-view="conflicts" title="현재 컨텍스트에서 한 조합에 2개 이상 서로 다른 동작이 걸린 것">⚠️ 충돌</button>
@@ -345,9 +352,9 @@ function eid(e){ const M=e._okey!==undefined;   // 채드 리매핑 엔트리(_o
   const mods=M?e._omods:e.mods, key=M?e._okey:e.key, cmods=M?e._ocmods:e.cmods, ckey=M?e._ockey:e.ckey;
   return JSON.stringify([[...(mods||[])].sort().join('+'), key, cmods?[...cmods].sort().join('+'):'', ckey||'', e.action||'', e.source||'', e.scope||'']); }
 function favParse(fk){ try{ const a=JSON.parse(fk); if(Array.isArray(a)&&a.length>=7) return {mods:a[0]?a[0].split('+'):[], key:a[1], cmods:a[2]?a[2].split('+'):null, ckey:a[3]||null, action:a[4], source:a[5], scope:a[6]}; }catch(_){} return null; }   // 엔트리 즐겨찾기 키 파싱(레거시 조합키면 null)
-function scopeIcon(scope){   // 스코프(앱) 옆 아이콘 — 🖼 앱 아이콘 토글과 연동. global은 🌐
+function scopeIcon(scope){   // 스코프(앱) 옆 아이콘 — 🖼 앱 아이콘 토글과 연동. global은 ✳️(fn 🌐·글로벌 핫키 ⚡와 구분)
   if(!showIcons || !scope) return '';
-  if(scope==='global'||scope==='Global') return '<span class="glico">🌐</span>';
+  if(scope==='global'||scope==='Global') return '<span class="glico" title="전역(모든 앱)">✳️</span>';
   const u=(DB.meta.icons||{})[scope];
   return u ? `<img class="scopeicon" src="${u}" alt="">` : ''; }
 let prefScopeRight = localStorage.getItem('SVscopeRight')!=='0';  // 상세 패널 스코프(global/chrome 등) 위치: 오른쪽 정렬(기본) vs 왼쪽 인라인
@@ -386,8 +393,9 @@ let showIcons = localStorage.getItem('SVicons')!=='0';          // 컨텍스트 
 let captureKeys = localStorage.getItem('SVcapture')!=='0';      // 키 입력을 낚아채 레이아웃에 반영 (기본 ON). 끄면 ⌘C 복사 등 정상 동작
 let searchGridMode = localStorage.getItem('SVsearchGrid')==='filter' ? 'filter' : 'highlight';   // 검색어 입력 시 키보드 그리드: 강조만 / 강조+숨김
 let SEARCHKEYS = null;   // 현재 검색어가 매치하는 키 집합(그리드 강조/숨김용). null=검색 없음
-let favMode = (localStorage.getItem('SVfavMode') ?? 'all') || null;   // 'all'=전체 즐겨찾기 · 'ctx'=현재 컨텍스트 · null=끔. 첫 방문 기본 '전체'
-let FAVKEYS = null;   // favMode일 때 즐겨찾기가 걸린 그리드 키 집합(키보드 ⭐ 강조용). null=끔
+let favScope = localStorage.getItem('SVfavScope')==='ctx' ? 'ctx' : 'all';   // 즐겨찾기 리스트/강조 범위: '전체' vs '현재 컨텍스트' (즐겨찾기 패널 안에서 전환)
+let favOnGrid = localStorage.getItem('SVfavOnGrid')!=='0';   // '키보드에서 보기' — 즐겨찾기 키를 그리드에 표시 (기본 ON)
+let FAVKEYS = null;   // favOnGrid일 때 즐겨찾기가 걸린 그리드 키 집합(키보드 강조용). null=끔
 let flashEid = null;   // '전체 단축키'에서 더블클릭해 넘어온 단축키 — 상세에서 잠깐 하이라이트할 eid
 let favPos = localStorage.getItem('SVfavPos') || 'split';   // 즐겨찾기 리스트 위치: 'split'(아래 좌우분할)·'kbright'(키보드 오른쪽)·'below'(아래 전체폭)
 let showNumpad = localStorage.getItem('SVnumpad')==='1';   // 숫자 키패드(텐키) 표시 — 풀사이즈 키보드용 (기본 꺼짐)
@@ -582,9 +590,10 @@ function gridSearchKeys(q){
   return s;
 }
 function renderKB(){
+  hideTip();   // 그리드를 새로 그리면(수식키 누름 등) hover 중이던 셀이 사라져 mouseleave가 안 와 툴팁이 멈추는 것 방지
   const _sq=(document.getElementById('search').value||'').trim();
   SEARCHKEYS = _sq ? gridSearchKeys(_sq) : null;   // 검색어 있으면 매치 키 계산 → cellKey에서 강조/숨김
-  FAVKEYS = favMode ? favGridKeys() : null;   // 즐겨찾기 모드면 별표 걸린 키 계산 → cellKey에서 금색 강조
+  FAVKEYS = favOnGrid ? favGridKeys() : null;   // '키보드에서 보기' 켜짐 → 즐겨찾기 키 계산 → cellKey에서 강조
   document.documentElement.style.setProperty('--caph',(U-2)+'px');   // 키 높이(기본 U=56 → 54px, 원래 크기) · 크기 3단계에 비례
   const kb=document.getElementById('kb'); kb.innerHTML='';
   const main=document.createElement('div'); main.className='kbmain';
@@ -739,13 +748,14 @@ function ovGroupKey(e){   // 치트시트 묶음 기준
   return {label:comboSym(e.mods)||'(무수식)', ord:e.mods.length};   // 'mod'
 }
 let OVFLAT=[], OVGEST=[], _ovSig=null;   // overview 재사용용: 렌더된 엔트리/제스처 + 마지막 구조 시그니처
+const OVLIMIT0=1000; let ovLimit=OVLIMIT0;   // 전체단축키 초기 렌더 행 수 캡(먹통·검은 화면 방지) — '더 보기'로 늘림, 컨텍스트 바뀌면 리셋
 // overview는 구조(컨텍스트·그룹·검색)가 바뀔 때만 통째로 다시 그리고, 수식키/키 입력(하이라이트만 바뀜)은 클래스만 토글 → 먹통 방지
 function _ovSignature(){ return [...ctxSet].sort().join(',')+'|'+ovGroup+'|'+((document.getElementById('search').value||'').trim())+'|'+(hideCommon?1:0)+'|'+(ANN.custom||[]).length; }
 function syncOverview(){
   const o=document.getElementById('overview');
   if(!overview){ if(o.innerHTML) o.innerHTML=''; _ovSig=null; return; }
   const sig=_ovSignature();
-  if(sig!==_ovSig){ renderOverview(); _ovSig=sig; }   // 구조 변경 → 전체 재렌더
+  if(sig!==_ovSig){ ovLimit=OVLIMIT0; renderOverview(); _ovSig=sig; }   // 구조 변경 → 캡 리셋 후 전체 재렌더
   else paintOverview();                                // 하이라이트만 갱신 (빠름)
 }
 function paintOverview(){
@@ -767,20 +777,26 @@ function renderOverview(){   // KeyCue 식: 선택 컨텍스트의 모든 단축
   const multi=([...ctxSet].filter(c=>c!=='Global').length + (ctxSet.has('Global')?1:0)) > 1;
   const inputActive = eff.size>0 || selectedKey;   // 수식키/일반키 입력 시 해당 조합 하이라이트 (KeyClu 식)
   OVFLAT=[];
+  let ovRendered=0, ovHidden=0;   // 캡: ovLimit개까지만 DOM에 그리고 나머지는 '더 보기'로
   const body=order.map(label=>{
     const items=groups[label].items.slice().sort((a,b)=>a.mods.length-b.mods.length||a.key.localeCompare(b.key)||a.action.localeCompare(b.action));
-    const rows=items.map(e=>{
-      const ix=OVFLAT.push(e)-1;
+    let rows='', shown=0;
+    for(const e of items){
+      if(ovRendered>=ovLimit) break;
+      const ix=OVFLAT.push(e)-1; ovRendered++; shown++;
       const hot = inputActive && sameSet(e.mods,eff) && (selectedKey ? e.key===selectedKey : true);
       const softHi = selectedKey && !hot && e.key===selectedKey;   // 같은 일반키의 다른 수식키 조합 → 약한 강조
       const combo = ovGroup==='mod' ? `${e.key}${e.ckey?' '+chordTag(e):''}` : `${comboSym(e.mods)||''}${e.key}${e.ckey?' '+chordTag(e):''}`;
       const detLine = ovExpand && e.detail ? `<div class="csdet">${hlText(e.detail,OKWS)}</div>` : '';   // 확장 시 2번째 줄
-      return `<div class="cs${hot?' hi':''}${softHi?' softhi':''}${ovExpand?' exp':''}" data-ov="${ix}"><span class="csk">${combo}</span><div class="csa" title="${e.action.replace(/"/g,'&quot;')}">${hlText(e.action,OKWS)}${detLine}</div>`
+      rows += `<div class="cs${hot?' hi':''}${softHi?' softhi':''}${ovExpand?' exp':''}" data-ov="${ix}"><span class="csk">${combo}</span><div class="csa" title="${e.action.replace(/"/g,'&quot;')}">${hlText(e.action,OKWS)}${detLine}</div>`
         +`<span class="csd" style="background:${COLORS[e.source]||'#666'}" title="${e.source}${multi?' · '+e.scope:''}"></span></div>`;
-    }).join('');
+    }
+    ovHidden += items.length - shown;
+    if(!shown) return '';
     const gl=label==='(무수식)'?'(수식키 없음)':label;
-    return `<div class="ovgrp"><div class="gh">${gl} <span class="muted" style="font-weight:400;font-size:11px">${items.length}</span></div>${rows}</div>`;
+    return `<div class="ovgrp"><div class="gh">${gl} <span class="muted" style="font-weight:400;font-size:11px">${shown<items.length?shown+'/':''}${items.length}</span></div>${rows}</div>`;
   }).join('');
+  const ovMore = ovHidden>0 ? `<div class="ovmore"><button data-ovmore>＋ 나머지 ${ovHidden}개 더 보기 <span class="muted">(지금 ${ovRendered}개 · 컨텍스트를 줄이면 더 빠릅니다)</span></button></div>` : '';
   const gst=(DB.gestures||[]).filter(inCtx); OVGEST=gst;   // 제스처(좌우 동시·홀드·멀티탭)도 치트시트에 포함
   const gbody = gst.length ? `<div class="ovgrp"><div class="gh">제스처 · 특수 트리거 <span class="muted" style="font-weight:400;font-size:11px">${gst.length}</span></div>`
     + gst.map((g,gi)=>`<div class="cs${gestureHot(g)?' hi':''}" data-gi="${gi}"><span class="csk">${gestureSym(g)}</span><span class="csa" title="${(g.detail||'').replace(/"/g,'&quot;')}">${hlText(g.action,OKWS)}</span><span class="csd" style="background:${COLORS[g.source]||'#888'}" title="${(g.source||'').replace(/</g,'&lt;')}"></span></div>`).join('')
@@ -788,14 +804,15 @@ function renderOverview(){   // KeyCue 식: 선택 컨텍스트의 모든 단축
   o.innerHTML=`<div class="sec">전체 단축키 — ${[...ctxSet].join(', ')||'(없음)'} · ${ent.length}개${gst.length?` + 제스처 ${gst.length}`:''}`
     +`<span class="muted" style="text-transform:none;letter-spacing:0;margin-left:8px;font-size:11px">클릭=그리드 강조 · 더블클릭=그 단축키로 이동</span>`
     +`<span class="ovtab"><button data-ovexp class="${ovExpand?'on':''}" title="각 항목의 2번째 줄(상세)도 표시">${ovExpand?'▾ 확장됨':'▸ 확장'}</button>`+[['mod','수식키별'],['key','키별'],['source','소스별']].map(([g,l])=>`<button data-ovg="${g}" class="${ovGroup===g?'on':''}">${l}</button>`).join('')+`</span></div>`
-    +`<div class="ovwrap">${body}${gbody}</div>`;
+    +`<div class="ovwrap">${body}${gbody}${ovMore}</div>`;
   o.querySelectorAll('[data-ov]').forEach(el=>{
     el.onclick=()=>{ const e=OVFLAT[+el.dataset.ov]; chordPrefix=null; chordReturn=null; sticky=new Set(e.mods); held=new Set(); selectedKey=e.key; sync(); };   // 클릭: 그리드에 강조
     el.ondblclick=()=>{ const e=OVFLAT[+el.dataset.ov]; chordPrefix=null; chordReturn=null; sticky=new Set(e.mods); held=new Set(); selectedKey=e.key; overview=false; document.getElementById('ovbtn').classList.remove('on'); flashEid=eid(e); sync(); window.scrollTo({top:0,behavior:'smooth'});   // 더블클릭: 그 단축키로 이동(전체단축키 끄기) + 잠깐 하이라이트
-      const fe=flashEid; setTimeout(()=>{ if(flashEid===fe){ flashEid=null; document.querySelectorAll('.dent.flash,.row.flash').forEach(x=>x.classList.remove('flash')); } }, 2600); };
+      const fe=flashEid; setTimeout(()=>{ if(flashEid===fe){ flashEid=null; document.querySelectorAll('.dent.flash,.row.flash').forEach(x=>x.classList.remove('flash')); } }, 5200); };
   });
   o.querySelectorAll('[data-ovg]').forEach(b=>b.onclick=()=>{ ovGroup=b.dataset.ovg; localStorage.setItem('SVovGroup',ovGroup); renderOverview(); _ovSig=_ovSignature(); });
   o.querySelector('[data-ovexp]').onclick=()=>{ ovExpand=!ovExpand; localStorage.setItem('SVovExpand',ovExpand?'1':'0'); renderOverview(); _ovSig=_ovSignature(); };
+  { const mb=o.querySelector('[data-ovmore]'); if(mb) mb.onclick=()=>{ ovLimit+=3000; renderOverview(); _ovSig=_ovSignature(); }; }   // 더 보기: 캡 올리고 재렌더
 }
 // ══════ 새 전용 뷰: 충돌 · 빈 조합 · 통계 · 퀴즈 ══════
 function ctxEntries(){ let e=dedupeDisplay(DB.entries.filter(inCtx)); return hideCommon?e.filter(x=>!isCommon(x)):e; }
@@ -937,7 +954,7 @@ function ghkRenderBackend(){ const p=document.getElementById('ghkPre'); if(p) p.
 function renderGHK(){ const el=document.getElementById('modepanel');
   const opts=GHK_ACTIONS.map(a=>`<option value="${a[0]}">${a[1]}</option>`).join('');
   const list=(ANN.ghk||[]).map((g,i)=>{ const ic=GHK_ICON[g.action.type]||['•','#888']; return `<div class="ghkitem"><span class="gk">${comboSym(g.mods)}${g.key}</span><span class="ghkicon" style="background:${ic[1]}">${ic[0]}</span><span class="gt">${((g.title||'')||'(제목 없음)').replace(/</g,'&lt;')}<div class="muted" style="font-size:11px">${g.action.value?(g.action.value.replace(/</g,'&lt;').slice(0,52)):ghkLabel(g.action.type)}</div></span><span class="gy">${ghkLabel(g.action.type)}</span><span class="delx" data-delg="${i}" title="삭제">✕</span></div>`; }).join('')||'<div class="muted" style="padding:6px 0">아직 없음 — 위 폼에서 추가하세요.</div>';
-  el.innerHTML=`<div class="sec">🌐 글로벌 핫키 만들기 <span class="muted" style="text-transform:none;letter-spacing:0;font-size:11px">— 충돌 없는 빈 조합을 골라 앱 열기·명령 실행 등을 어디서나. 내보낸 hotkeys.json을 데몬/Karabiner/skhd/Hammerspoon 중 하나가 실행.</span></div>
+  el.innerHTML=`<div class="sec">⚡ 글로벌 핫키 만들기 <span class="muted" style="text-transform:none;letter-spacing:0;font-size:11px">— 충돌 없는 빈 조합을 골라 앱 열기·명령 실행 등을 어디서나. 내보낸 hotkeys.json을 데몬/Karabiner/skhd/Hammerspoon 중 하나가 실행.</span></div>
     <div class="ghkform">
       <div class="ghkrow"><label>제목</label><input type="text" id="ghkTitle" placeholder="예: Finder 열기"></div>
       <div class="ghkrow"><label>조합</label><span class="ghkmods">${['ctrl','opt','shift','cmd'].map(m=>`<span class="mb${ghkDraftMods.has(m)?' on':''}" data-gm="${m}">${MODSYM[m]}</span>`).join('')}</span><input type="text" id="ghkKey" class="ghkkey" maxlength="9" placeholder="키"><button id="ghkPick" title="현재 레이어의 빈 키 추천">✨ 빈 키 추천</button></div>
@@ -1028,10 +1045,8 @@ function sync(){
   else if(panelMode==='quiz') renderQuiz();
   else if(panelMode==='ghk'){ if(!mp.querySelector('.ghkform')) renderGHK(); }   // 폼 상태 보존: 최초 1회만
   else mp.innerHTML='';
-  document.getElementById('favall').classList.toggle('on',favMode==='all');
-  document.getElementById('favctx').classList.toggle('on',favMode==='ctx');
   const fp=document.getElementById('favpanel'), det=document.getElementById('detail'), lw=document.getElementById('listwrap'), kbw=document.getElementById('kbwrap');   // 전체 단축키(overview)/전용 패널이 켜지면 키별 상세는 숨긴다 (단 '빈 조합'은 그리드 위주라 상세 유지)
-  const showFav = !!favMode && !overview && !(panelMode && panelMode!=='free');   // 즐겨찾기 리스트: 위치(favPos)에 따라 상세 위/좌우/키보드 오른쪽
+  const showFav = !overview && !(panelMode && panelMode!=='free');   // 즐겨찾기 패널은 항상 존재 (전체단축키·전용 뷰 땐 숨김) · 위치는 favPos(상세 위/좌우/키보드 오른쪽)
   lw.className = 'favpos-'+(favPos==='kbright'?'below':favPos);
   if(favPos==='kbright' && showFav){ if(fp.parentNode!==kbw) kbw.appendChild(fp); }   // 키보드 오른쪽으로 이동(renderKB의 kb.innerHTML=''에 안 지워지도록 kbwrap의 형제)
   else if(fp.parentNode!==lw) lw.insertBefore(fp, lw.firstChild);
@@ -1129,10 +1144,10 @@ function showCtxMenu(ev, fk, ctext){   // fk=eid(HTML-디코드된) · ctext=복
 }
 function wireCtxMenu(root){ root.querySelectorAll('[data-eid]').forEach(el=>el.oncontextmenu=ev=>showCtxMenu(ev, el.dataset.eid, el.dataset.copy||'')); }   // 우클릭 → 메뉴
 document.addEventListener('click', hideCtxMenu);
-document.addEventListener('scroll', hideCtxMenu, true);
-function favFksFor(){   // favMode에 맞는 즐겨찾기 fk 목록(정렬됨) · 'ctx'면 현재 컨텍스트 스코프만
+document.addEventListener('scroll', ()=>{ hideCtxMenu(); hideTip(); }, true);
+function favFksFor(){   // favScope에 맞는 즐겨찾기 fk 목록(정렬됨) · 'ctx'면 현재 컨텍스트 스코프만
   const all=sortedFavKeys();
-  if(favMode!=='ctx') return all;
+  if(favScope!=='ctx') return all;
   return all.filter(fk=>{ const p=favParse(fk);
     if(p){ const e=favEntry(p); return e?inCtx(e):false; }
     const i=fk.indexOf('|'), key=fk.slice(i+1), ms=fk.slice(0,i)?fk.slice(0,i).split('+'):[];
@@ -1143,16 +1158,24 @@ function favGridKeys(){   // 즐겨찾기가 걸린 '그리드 키'(첫 누름) 
   favFksFor().forEach(fk=>{ const p=favParse(fk); if(p){ const e=favEntry(p)||p; if(e.key) out.add(e.key); } else out.add(fk.slice(fk.indexOf('|')+1)); });
   return out;
 }
-function renderFavPanel(fp){   // 상세(기본 단축키 리스트) 위에 뜨는 즐겨찾기 리스트 — favMode에 따라 전체/현재 컨텍스트
-  const tot=Object.keys(ANN.fav).length;
-  if(!tot){ fp.innerHTML='<div class="sec">⭐ 즐겨찾기 — 아직 없음. 키 클릭 → 하단 상세에서 각 단축키의 <b style="color:#f59f00">☆</b>를 눌러 추가하세요.</div>'; return; }
-  const fks=favFksFor();
-  const label = favMode==='ctx' ? `현재 컨텍스트 <span style="color:#7dd3fc">${[...ctxSet].join(', ')||'없음'}</span>` : '전체';
-  if(!fks.length){ fp.innerHTML=`<div class="sec">⭐ 즐겨찾기 · ${label} — 이 컨텍스트에 해당하는 즐겨찾기가 없습니다 <span class="muted" style="text-transform:none;letter-spacing:0">(전체 ${tot}개 · '전체 즐겨찾기'로 전환)</span></div>`; return; }
-  fp.innerHTML=`<div class="sec">⭐ 즐겨찾기 · ${label} ${fks.length}개 <span class="muted" style="text-transform:none;letter-spacing:0">— 위 키보드에 <b style="color:#e0a82e">금색</b>으로 표시</span></div>`+fks.map(favRowHTML).join('');
-  wireFavRows(fp);
+function favPanelHeader(cnt){   // 항상 존재하는 즐겨찾기 패널의 헤더 — 전체/현재 컨텍스트 스위치 + '키보드에서 보기' 토글
+  return `<div class="favhdr"><span class="favttl">⭐ 즐겨찾기</span>`
+    + `<span class="favseg"><button data-favscope="all" class="${favScope==='all'?'on':''}">전체</button><button data-favscope="ctx" class="${favScope==='ctx'?'on':''}">현재 컨텍스트</button></span>`
+    + `<button class="favgridtog${favOnGrid?' on':''}" data-favgrid title="즐겨찾기 키를 키보드 그리드에 표시(보라 테두리)">⌨︎ 키보드에서 보기${favOnGrid?' ✓':''}</button>`
+    + `<span class="favcnt muted">${cnt}</span></div>`;
 }
-function setFavMode(m){ favMode=(favMode===m?null:m); localStorage.setItem('SVfavMode',favMode||''); sync(); }   // 스크롤 이동 안 함
+function wireFavHdr(fp){
+  fp.querySelectorAll('[data-favscope]').forEach(b=>b.onclick=()=>{ favScope=b.dataset.favscope; localStorage.setItem('SVfavScope',favScope); sync(); });
+  const g=fp.querySelector('[data-favgrid]'); if(g) g.onclick=()=>{ favOnGrid=!favOnGrid; localStorage.setItem('SVfavOnGrid',favOnGrid?'1':'0'); sync(); };
+}
+function renderFavPanel(fp){   // 즐겨찾기 패널 — 항상 존재. favScope(전체/현재 컨텍스트)에 따라 목록, favOnGrid면 키보드 강조
+  const tot=Object.keys(ANN.fav).length;
+  if(!tot){ fp.innerHTML=favPanelHeader('아직 없음')+`<div class="muted" style="padding:6px 2px;font-size:12px">단축키를 <b>우클릭 → ‘즐겨찾기 추가’</b> 하면 여기에 모입니다.</div>`; wireFavHdr(fp); return; }
+  const fks=favFksFor();
+  if(!fks.length){ fp.innerHTML=favPanelHeader(`0 · 전체 ${tot}`)+`<div class="muted" style="padding:6px 2px;font-size:12px">이 컨텍스트에 해당하는 즐겨찾기가 없습니다. <b>‘전체’</b>로 전환하세요.</div>`; wireFavHdr(fp); return; }
+  fp.innerHTML=favPanelHeader(`${fks.length}개`)+fks.map(favRowHTML).join('');
+  wireFavHdr(fp); wireFavRows(fp);
+}
 // 즐겨찾기 정규화: 옛 flat/평탄화 채드 eid를 실제 엔트리의 정식 eid로 교체 → 상세·그리드 별표가 일관되게 표시
 function normalizeFavs(){ let changed=false; const fixed={};
   for(const fk of Object.keys(ANN.fav)){ const p=favParse(fk); const e=p&&favEntry(p); const nk=e?eid(e):fk; if(nk!==fk) changed=true; fixed[nk]=1; }
@@ -1167,8 +1190,6 @@ let _searchT=null;   // 검색 입력 디바운스 — 전체단축키(1470행) 
 searchEl.oninput=e=>{ searchBox.classList.toggle('has',!!e.target.value); clearTimeout(_searchT); _searchT=setTimeout(sync,150); };
 searchEl.addEventListener('keydown',e=>{ if(e.key==='Escape'){ e.preventDefault(); clearSearch(); searchEl.blur(); } });
 document.getElementById('searchclear').onclick=()=>{ clearSearch(); searchEl.focus(); };
-document.getElementById('favall').onclick=()=>setFavMode('all');
-document.getElementById('favctx').onclick=()=>setFavMode('ctx');
 document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>setView(b.dataset.view));
 document.getElementById('themebtn').onclick=()=>{ theme=theme==='light'?'dark':'light'; document.documentElement.setAttribute('data-theme',theme); localStorage.setItem('SVtheme',theme); };
 { const sl=document.getElementById('sizeslider'); sl.value=U;   // 키보드 크기 슬라이더 — 드래그하면 연속 조절
