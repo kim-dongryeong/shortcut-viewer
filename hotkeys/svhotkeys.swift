@@ -249,6 +249,9 @@ enum Runner {
         case "show_viewer":
             let p = (a.value.isEmpty ? "~/dev/shortcut-viewer/viewer.html" : a.value) as NSString
             NSWorkspace.shared.open(URL(fileURLWithPath: p.expandingTildeInPath))
+        case "mouse_save":  Mouse.saveSlot(a.value.isEmpty ? "1" : a.value)   // 마우스 북마크 (BTT/AHK식)
+        case "mouse_goto":  Mouse.goto(a.value.isEmpty ? "1" : a.value)
+        case "mouse_click": Mouse.clickBookmark(a.value.isEmpty ? "1" : a.value)
         default: NSLog("unknown action type: \(a.type)")
         }
     }
@@ -266,6 +269,54 @@ enum Runner {
         down?.flags = .maskCommand; up?.flags = .maskCommand
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
             down?.post(tap: .cgAnnotatedSessionEventTap); up?.post(tap: .cgAnnotatedSessionEventTap)
+        }
+    }
+}
+
+// ══════════════════════ 마우스 북마크 (BTT/AHK식) ══════════════════════
+// 화면 위치를 슬롯에 저장 → 나중에 커서 이동/클릭. 좌표는 CG 전역(top-left origin) 통일 → 저장·복귀 일관.
+// 클릭 합성엔 손쉬운 사용(Accessibility) 권한 필요(paste_text와 동일).
+enum Mouse {
+    static let file = ("~/.config/shortcut-viewer/mouse_bookmarks.json" as NSString).expandingTildeInPath
+    static var slots: [String: [Double]] = load()
+    static func load() -> [String: [Double]] {
+        guard let d = try? Data(contentsOf: URL(fileURLWithPath: file)),
+              let o = (try? JSONSerialization.jsonObject(with: d)) as? [String: [Double]] else { return [:] }
+        return o
+    }
+    static func persist() {
+        if let d = try? JSONSerialization.data(withJSONObject: slots, options: [.prettyPrinted, .sortedKeys]) {
+            try? FileManager.default.createDirectory(atPath: (file as NSString).deletingLastPathComponent, withIntermediateDirectories: true)
+            try? d.write(to: URL(fileURLWithPath: file))
+        }
+    }
+    static func current() -> CGPoint { CGEvent(source: nil)?.location ?? .zero }
+    static func move(to p: CGPoint) {
+        CGWarpMouseCursorPosition(p)
+        CGAssociateMouseAndMouseCursorPosition(1)   // warp 후 재연결(안 하면 커서가 잠깐 굳음)
+    }
+    static func click(at p: CGPoint) {
+        let src = CGEventSource(stateID: .combinedSessionState)
+        CGEvent(mouseEventSource: src, mouseType: .leftMouseDown, mouseCursorPosition: p, mouseButton: .left)?.post(tap: .cghidEventTap)
+        CGEvent(mouseEventSource: src, mouseType: .leftMouseUp,   mouseCursorPosition: p, mouseButton: .left)?.post(tap: .cghidEventTap)
+    }
+    static func point(_ slot: String) -> CGPoint? { guard let a = slots[slot], a.count == 2 else { return nil }; return CGPoint(x: a[0], y: a[1]) }
+    static func saveSlot(_ slot: String) {   // 현재 커서 위치를 슬롯에 저장
+        let p = current(); slots[slot] = [Double(p.x), Double(p.y)]; persist()
+        HUD.show("🖱️ 마우스 북마크 \(slot) 저장")
+    }
+    static func goto(_ slot: String) {       // 슬롯 위치로 커서만 이동
+        guard let p = point(slot) else { HUD.show("🖱️ 북마크 \(slot) 없음"); return }
+        move(to: p)
+    }
+    static func clickBookmark(_ slot: String) {   // 현재 위치 기억 → 슬롯으로 이동 → 클릭 → 원위치 복귀
+        guard let target = point(slot) else { HUD.show("🖱️ 북마크 \(slot) 없음"); return }
+        HUD.show("🖱️ 북마크 \(slot) 클릭")
+        DispatchQueue.global().async {
+            let orig = current()
+            move(to: target); Thread.sleep(forTimeInterval: 0.08)
+            click(at: target); Thread.sleep(forTimeInterval: 0.06)
+            move(to: orig)
         }
     }
 }
@@ -532,7 +583,8 @@ let ACCENT = Color(red: 0.55, green: 0.36, blue: 0.96)
 let ACTION_TYPES: [(String, String)] = [
     ("open_app","앱 열기"), ("open_url","웹사이트 열기"), ("open_folder","폴더 열기"),
     ("open_file","파일 열기"), ("run_shell","명령 실행 (zsh)"), ("applescript","AppleScript"),
-    ("paste_text","텍스트 붙여넣기"), ("show_viewer","단축키 뷰어 열기")]
+    ("paste_text","텍스트 붙여넣기"), ("show_viewer","단축키 뷰어 열기"),
+    ("mouse_save","🖱️ 마우스 위치 저장 (북마크)"), ("mouse_goto","🖱️ 북마크로 커서 이동"), ("mouse_click","🖱️ 북마크 클릭 후 커서 복귀")]
 func actionLabel(_ t: String) -> String { ACTION_TYPES.first { $0.0 == t }?.1 ?? t }
 func actionMeta(_ t: String) -> (icon: String, color: Color) {
     switch t {
@@ -544,6 +596,9 @@ func actionMeta(_ t: String) -> (icon: String, color: Color) {
     case "applescript": return ("wand.and.stars", .purple)
     case "paste_text":  return ("doc.on.clipboard.fill", .pink)
     case "show_viewer": return ("keyboard.fill", .green)
+    case "mouse_save":  return ("mappin.circle.fill", .red)
+    case "mouse_goto":  return ("cursorarrow.rays", .red)
+    case "mouse_click": return ("cursorarrow.click.2", .red)
     default:            return ("bolt.fill", .secondary)
     }
 }
@@ -704,6 +759,7 @@ struct EditSheet: View {
         case "run_shell": return "screencapture -i -c"
         case "applescript": return "tell application \"Notes\" to make new note"
         case "paste_text": return "붙여넣을 텍스트"
+        case "mouse_save", "mouse_goto", "mouse_click": return "북마크 슬롯 (예: 1)"
         default: return ""
         }
     }

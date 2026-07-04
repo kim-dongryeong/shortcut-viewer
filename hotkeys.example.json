@@ -1,6 +1,6 @@
 {
   "_readme": "SV Hotkeys 설정. 이 파일을 ~/.config/shortcut-viewer/hotkeys.json 으로 복사하면 데몬이 읽습니다(뷰어에서 '글로벌 핫키' 내보내기로 자동 생성 가능). mods=[cmd,opt,ctrl,shift], key=뷰어와 같은 이름(A~Z,0~9,Space,Return,F1…,Left…). anyCombo=true면 다른 앱도 잡는 조합까지 가로챔(Accessibility 필요). 초보자는 ⌥ 또는 ⌃⌥ 레이어를 추천 — 시스템·앱과 안 겹칩니다.",
-  "_action_types": "open_app(앱이름/경로/번들id) · open_url · open_folder(폴더경로) · open_file · run_shell(zsh 명령) · applescript · paste_text(클립보드+⌘V, Accessibility 필요) · show_viewer(Shortcut Viewer 열기)",
+  "_action_types": "open_app(앱이름/경로/번들id) · open_url · open_folder(폴더경로) · open_file · run_shell(zsh 명령) · applescript · paste_text(클립보드+⌘V, Accessibility 필요) · show_viewer(Shortcut Viewer 열기) · mouse_save(value=슬롯, 현재 마우스 위치 저장) · mouse_goto(슬롯 위치로 커서 이동) · mouse_click(슬롯으로 이동→클릭→커서 복귀, Accessibility 필요)",
   "version": 1,
   "hotkeys": [
     {"id":"viewer",   "title":"내 단축키 전체 보기 (Shortcut Viewer)", "mods":["opt"],        "key":"Space", "action":{"type":"show_viewer","value":""}},
@@ -23,6 +23,9 @@
     {"id":"ropt_j",    "title":"오른쪽 ⌥+J (L/R 구분)",      "mods":["ropt"], "key":"J", "enabled":false, "action":{"type":"open_app","value":"Finder"}},
     {"id":"lcmd2",     "title":"왼쪽 ⌘ 더블탭 → 뷰어",       "trigger":{"kind":"double","mod":"cmd","side":"left"}, "enabled":false, "action":{"type":"show_viewer","value":""}},
     {"id":"shift_hold","title":"⇧ 길게 누름 → 영역 스크린샷", "trigger":{"kind":"hold","mod":"shift","ms":450}, "enabled":false, "action":{"type":"run_shell","value":"screencapture -i -c"}},
-    {"id":"leader_c",  "title":"리더: ⌥Space → C → 계산기",  "sequence":[{"mods":["opt"],"key":"Space"},{"mods":[],"key":"C"}], "enabled":false, "action":{"type":"open_app","value":"Calculator"}}
+    {"id":"leader_c",  "title":"리더: ⌥Space → C → 계산기",  "sequence":[{"mods":["opt"],"key":"Space"},{"mods":[],"key":"C"}], "enabled":false, "action":{"type":"open_app","value":"Calculator"}},
+
+    {"id":"mb1_save", "title":"고급② 마우스 북마크 1 저장 (⌃⌥1)", "mods":["ctrl","opt"], "key":"1", "enabled":false, "action":{"type":"mouse_save","value":"1"}},
+    {"id":"mb1_use",  "title":"고급② 마우스 북마크 1 클릭+복귀 (⌥1)", "mods":["opt"], "key":"1", "enabled":false, "action":{"type":"mouse_click","value":"1"}}
   ]
 }
