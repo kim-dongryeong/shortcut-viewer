@@ -403,7 +403,7 @@ function renderCtx(){
     ctxSet = m==='all' ? new Set(allCtx) : m==='none' ? new Set() : new Set(allCtx.filter(c=>!ctxSet.has(c)));
     sync(); });
   document.getElementById('filtersel').onchange=e=>{ filter=e.target.value; sync(); };
-  document.getElementById('ovbtn').onclick=()=>{ overview=!overview; if(overview) panelMode=null; document.getElementById('ovbtn').classList.toggle('on',overview); sync(); if(overview) document.getElementById('overview').scrollIntoView({behavior:'smooth',block:'start'}); };
+  document.getElementById('ovbtn').onclick=()=>{ overview=!overview; if(overview) panelMode=null; document.getElementById('ovbtn').classList.toggle('on',overview); sync(); };   // 스크롤 이동 안 함
 }
 function enterChord(mods,key){          // ⌘K ▸ … 로 들어가 후속 키를 그리드에서 고르는 모드
   chordReturn={sticky:new Set(sticky), key:selectedKey, overview};
@@ -633,6 +633,8 @@ function renderOverview(){   // KeyCue 식: 선택 컨텍스트의 모든 단축
   const o=document.getElementById('overview');
   if(!overview){ o.innerHTML=''; return; }
   const ent=ctxEntries();
+  const _oq=(document.getElementById('search').value||'').trim();   // 전체단축키 상태에서 검색 → 있는 그대로 키워드 하이라이트
+  const OKWS = (_oq && !parseQueryCombo(_oq)) ? _oq.split(/\s+/).filter(Boolean) : [];
   const groups={};
   ent.forEach(e=>{ const g=ovGroupKey(e); (groups[g.label]=groups[g.label]||{ord:g.ord,items:[]}).items.push(e); });
   const order=Object.keys(groups).sort((a,b)=>(groups[a].ord-groups[b].ord)||a.localeCompare(b));
@@ -646,7 +648,7 @@ function renderOverview(){   // KeyCue 식: 선택 컨텍스트의 모든 단축
       const hot = inputActive && sameSet(e.mods,eff) && (selectedKey ? e.key===selectedKey : true);
       const softHi = selectedKey && !hot && e.key===selectedKey;   // 같은 일반키의 다른 수식키 조합 → 약한 강조
       const combo = ovGroup==='mod' ? `${e.key}${e.ckey?' '+chordTag(e):''}` : `${comboSym(e.mods)||''}${e.key}${e.ckey?' '+chordTag(e):''}`;
-      return `<div class="cs${hot?' hi':''}${softHi?' softhi':''}" data-ov="${ix}"><span class="csk">${combo}</span><span class="csa" title="${e.action.replace(/"/g,'&quot;')}">${e.action.replace(/</g,'&lt;')}</span>`
+      return `<div class="cs${hot?' hi':''}${softHi?' softhi':''}" data-ov="${ix}"><span class="csk">${combo}</span><span class="csa" title="${e.action.replace(/"/g,'&quot;')}">${hlText(e.action,OKWS)}</span>`
         +`<span class="csd" style="background:${COLORS[e.source]||'#666'}" title="${e.source}${multi?' · '+e.scope:''}"></span></div>`;
     }).join('');
     const gl=label==='(무수식)'?'(수식키 없음)':label;
@@ -654,7 +656,7 @@ function renderOverview(){   // KeyCue 식: 선택 컨텍스트의 모든 단축
   }).join('');
   const gst=(DB.gestures||[]).filter(inCtx);   // 제스처(좌우 동시·홀드·멀티탭)도 치트시트에 포함
   const gbody = gst.length ? `<div class="ovgrp"><div class="gh">제스처 · 특수 트리거 <span class="muted" style="font-weight:400;font-size:11px">${gst.length}</span></div>`
-    + gst.map(g=>`<div class="cs${gestureHot(g)?' hi':''}"><span class="csk">${gestureSym(g)}</span><span class="csa" title="${(g.detail||'').replace(/"/g,'&quot;')}">${g.action.replace(/</g,'&lt;')}</span><span class="csd" style="background:${COLORS[g.source]||'#888'}" title="${(g.source||'').replace(/</g,'&lt;')}"></span></div>`).join('')
+    + gst.map(g=>`<div class="cs${gestureHot(g)?' hi':''}"><span class="csk">${gestureSym(g)}</span><span class="csa" title="${(g.detail||'').replace(/"/g,'&quot;')}">${hlText(g.action,OKWS)}</span><span class="csd" style="background:${COLORS[g.source]||'#888'}" title="${(g.source||'').replace(/</g,'&lt;')}"></span></div>`).join('')
     + `</div>` : '';
   o.innerHTML=`<div class="sec">전체 단축키 — ${[...ctxSet].join(', ')||'(없음)'} · ${ent.length}개${gst.length?` + 제스처 ${gst.length}`:''}`
     +`<span class="muted" style="text-transform:none;letter-spacing:0;margin-left:8px;font-size:11px">수식키/키를 누르면 해당 조합 하이라이트</span>`
