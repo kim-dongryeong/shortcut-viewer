@@ -301,7 +301,10 @@ function addCustom(){
 }
 function delCustom(id){ ANN.custom=(ANN.custom||[]).filter(c=>c.id!==id); saveAnn(); mergeCustom(); renderCtx(); if(selectedKey) showDetail(selectedKey); sync(); }
 function saveAnn(){ try { localStorage.setItem('SVann', JSON.stringify(ANN)); } catch(e){} }
-function annKey(mods, key){ return [...mods].sort().join('+') + '|' + key; }
+function annKey(mods, key){ return [...mods].sort().join('+') + '|' + key; }   // 조합 단위(노트·레거시 즐겨찾기)
+// 즐겨찾기는 '단축키 원소 하나' 단위 — 조합이 같아도 동작/소스/스코프로 구분 (VS Code ⌥K 2개 등을 따로 별표)
+function eid(e){ return JSON.stringify([[...(e.mods||[])].sort().join('+'), e.key, e.cmods?[...e.cmods].sort().join('+'):'', e.ckey||'', e.action||'', e.source||'', e.scope||'']); }
+function favParse(fk){ try{ const a=JSON.parse(fk); if(Array.isArray(a)&&a.length>=7) return {mods:a[0]?a[0].split('+'):[], key:a[1], cmods:a[2]?a[2].split('+'):null, ckey:a[3]||null, action:a[4], source:a[5], scope:a[6]}; }catch(_){} return null; }   // 엔트리 즐겨찾기 키 파싱(레거시 조합키면 null)
 let prefScopeRight = localStorage.getItem('SVscopeRight')!=='0';  // 상세 패널 스코프(global/chrome 등) 위치: 오른쪽 정렬(기본) vs 왼쪽 인라인
 let ovGroup = ['mod','key','source'].includes(localStorage.getItem('SVovGroup')) ? localStorage.getItem('SVovGroup') : 'mod';  // 전체 단축키 치트시트 묶음 기준 (잘못된 저장값은 'mod'로)
 const COLORS = {system:'#3b82f6','app menu':'#9ca3af','app config':'#14b8a6',Karabiner:'#22c55e',BTT:'#f59e0b',Raycast:'#a855f7',web:'#06b6d4',custom:'#ec4899'};
@@ -459,7 +462,8 @@ function cellKey(key,label,wpx){
   if(key===selectedKey) el.classList.add('sel');
   if(panelMode==='free' && !ms.length) el.classList.add('freehl');   // 빈 조합 모드: 이 레이어에서 빈 키를 초록 테두리로 그리드에 직접 표시
   const _ak=annKey([...eff],key);
-  if(ANN.fav[_ak]||ANN.note[_ak]) h+=`<span class="annm">${ANN.fav[_ak]?'⭐':''}${ANN.note[_ak]?'📝':''}</span>`;
+  const _fav = ANN.fav[_ak] || ms.some(e=>ANN.fav[eid(e)]);   // 조합의 단축키 중 하나라도 별표면 표시 (엔트리 단위 + 레거시 조합)
+  if(_fav||ANN.note[_ak]) h+=`<span class="annm">${_fav?'⭐':''}${ANN.note[_ak]?'📝':''}</span>`;
   el.innerHTML=h;
   el.onclick=()=>{ selectedKey = (key===selectedKey ? null : key); sync(); };   // 같은 키 다시 클릭하면 해제
   el.onmouseenter=ev=>showTip(ev,key,all); el.onmousemove=moveTip; el.onmouseleave=hideTip;
@@ -558,8 +562,9 @@ function allModSubsets(){
   out.sort((a,b)=> a.length-b.length || a.join().localeCompare(b.join()));
   return out;
 }
+function favAttr(fk){ return fk.replace(/&/g,'&amp;').replace(/"/g,'&quot;'); }   // eid를 data-fav 속성으로 안전하게
 function detailRow(mods, key, matches, hit){
-  const ak=annKey(mods,key), fav=!!ANN.fav[ak], note=ANN.note[ak]||'';
+  const ak=annKey(mods,key), note=ANN.note[ak]||'';   // 노트는 조합 단위 유지
   if(DKWS.length && (searchListMode==='filter' || DFILTER)){   // 숨김 모드: 이 조합에서 검색에 매치되는 단축키만 남기고(엔트리 단위), 하나도 없으면 행 숨김
     matches = matches.filter(e => DKWS.every(k => (e.action+' '+(e.detail||'')+' '+e.scope).toLowerCase().includes(k.toLowerCase())));
     if(!matches.length) return '';
@@ -568,17 +573,16 @@ function detailRow(mods, key, matches, hit){
   const nch=matches.filter(e=>e.ckey).length;
   const body = matches.length
     ? matches.map(e=>{
+        const fk=eid(e), fav=!!ANN.fav[fk];   // 이 '단축키 하나'를 별표 (조합이 같아도 개별)
+        const star=`<button class="favbtn${fav?' on':''}" data-fav="${favAttr(fk)}" title="이 단축키 즐겨찾기">${fav?'⭐':'☆'}</button>`;
         const src=`<span class="src" style="background:${COLORS[e.source]||'#666'}">${e.source}</span>`;
         const scope=`<span class="scope">${e.scope}</span>`+(e.source==='custom'?`<span class="delx" data-delc="${e._cid}" title="내 단축키 삭제">✕</span>`:'');
         const det=e.detail?`<div class="muted" style="font-size:11px">${hlText(e.detail,DKWS)}</div>`:'';
         const act=(e.ckey?chordTag(e)+' ':'')+hlText(e.action,DKWS);
-        return prefScopeRight
-          ? `<div class="dent" style="display:flex;gap:6px;align-items:flex-start">${src}<span style="flex:1">${act}${det}</span>${scope}</div>`
-          : `<div class="dent">${src} ${act} ${scope}${det}</div>`;
+        return `<div class="dent" style="display:flex;gap:6px;align-items:flex-start">${star}${src}<span style="flex:1">${act}${det}</span>${scope}</div>`;
       }).join('')
     : `<span class="muted">— 비어 있음 (할당 가능)</span>`;
   return `<div class="drow${hit?' hi':''}">`
-    +`<button class="favbtn${fav?' on':''}" data-fav="${ak}" title="즐겨찾기">${fav?'⭐':'☆'}</button>`
     +`<span class="kc">${chordPrefix?`<span class="chord">${comboSym(chordPrefix.mods)}${chordPrefix.key} ▸</span> `:''}${comboSym(mods)||'(무수식)'}${key}${nch?` <span class="chord" title="이 조합으로 시작하는 연속(chord) ${nch}개">▸${nch}</span>`:''}</span>`
     +(nch?`<button class="chordbtn" data-chord="${[...mods].join('+')}|${key}" title="이 조합으로 시작하는 연속 입력을 키보드에서 골라보기">▸ 연속 입력</button>`:'')
     +`<div class="dbody">${body}`+(note?`<div class="noteshow">📝 ${note.replace(/</g,'&lt;')}</div>`:'')+`</div>`
@@ -751,7 +755,9 @@ function renderStats(){
 let quizState=null;
 function quizPool(){
   const favKeys=Object.keys(ANN.fav); let pool=[];
-  favKeys.forEach(ak=>{ const i=ak.indexOf('|'), key=ak.slice(i+1), mods=ak.slice(0,i)?ak.slice(0,i).split('+'):[]; const m=DB.entries.find(e=>e.key===key&&sameSet(e.mods,new Set(mods))); if(m) pool.push(m); });
+  favKeys.forEach(fk=>{ const p=favParse(fk);
+    if(p){ const m=DB.entries.find(e=>e.key===p.key&&sameSet(e.mods,new Set(p.mods))&&e.action===p.action&&e.scope===p.scope) || DB.entries.find(e=>e.key===p.key&&sameSet(e.mods,new Set(p.mods))); if(m) pool.push(m); }
+    else { const i=fk.indexOf('|'), key=fk.slice(i+1), mods=fk.slice(0,i)?fk.slice(0,i).split('+'):[]; const m=DB.entries.find(e=>e.key===key&&sameSet(e.mods,new Set(mods))); if(m) pool.push(m); } });
   if(!pool.length) pool=ctxEntries().filter(e=>e.mods.length>0);
   return pool;
 }
@@ -966,41 +972,39 @@ document.addEventListener('keyup',e=>{ if(!captureKeys) return; const h=readHeld
 window.addEventListener('blur',()=>{ if(heldStr){heldStr='';held=new Set();sync();} });
 
 // 쉬는 상태(검색·선택 키 없음)의 상세 영역에 즐겨찾기 홈을 렌더 — 없으면 안내
+// 즐겨찾기 한 줄 — 엔트리 단위(별표한 그 단축키 하나) 또는 레거시 조합키 둘 다 처리
+function favRowHTML(fk){
+  const p=favParse(fk);
+  if(p){   // 엔트리 단위
+    const combo = p.ckey ? `${comboSym(p.mods)||''}${p.key} ▸ ${comboSym(p.cmods||[])}${p.ckey}` : `${comboSym(p.mods)||'(무수식)'}${p.key}`;
+    return `<div class="row" data-selkey="${(p.key||'').replace(/"/g,'&quot;')}" data-selmods="${(p.mods||[]).join('+')}"><button class="favbtn on" data-fav="${favAttr(fk)}" title="즐겨찾기 해제">⭐</button><span class="kc">${combo}</span>`
+      +`<span class="src" style="background:${COLORS[p.source]||'#666'}">${p.source}</span>`
+      +`<div style="flex:1">${(p.action||'').replace(/</g,'&lt;')}</div><span class="scope">${p.scope}</span></div>`;
+  }
+  const i=fk.indexOf('|'), modstr=fk.slice(0,i), key=fk.slice(i+1), mods=modstr?modstr.split('+'):[];   // 레거시 조합
+  const matches=DB.entries.filter(e=>e.key===key && sameSet(e.mods,new Set(mods)));
+  const acts=[...new Set(matches.map(e=>(e.ckey?'▸'+chordSym(e)+' ':'')+e.action))];
+  const actTxt=acts.slice(0,3).map(a=>a.replace(/</g,'&lt;')).join(' / ');
+  const act=acts.length?actTxt+(acts.length>3?` <span class="muted">…(+${acts.length-3})</span>`:''):'(빈 조합)';
+  const scps=[...new Set(matches.map(e=>e.scope))];
+  return `<div class="row" data-selkey="${(key||'').replace(/"/g,'&quot;')}" data-selmods="${mods.join('+')}"><button class="favbtn on" data-fav="${favAttr(fk)}" title="즐겨찾기 해제">⭐</button><span class="kc">${comboSym(mods)||'(무수식)'}${key} <span class="muted" style="font-size:10px">(조합 전체)</span></span>`
+    +`<div style="flex:1">${act}</div><span class="scope">${scps[0]||'free'}${scps.length>1?` +${scps.length-1}`:''}</span></div>`;
+}
+function wireFavRows(root){
+  root.querySelectorAll('[data-selkey]').forEach(el=>el.onclick=(ev)=>{ if(ev.target.closest('.favbtn'))return; chordPrefix=null; chordReturn=null; sticky=new Set(el.dataset.selmods?el.dataset.selmods.split('+'):[]); held=new Set(); selectedKey=el.dataset.selkey; sync(); window.scrollTo({top:0,behavior:'smooth'}); });
+  root.querySelectorAll('[data-fav]').forEach(b=>b.onclick=(ev)=>{ ev.stopPropagation(); delete ANN.fav[b.dataset.fav]; saveAnn(); sync(); });
+}
 function favHome(det){
   const keys=Object.keys(ANN.fav);
-  if(!keys.length){ det.innerHTML='<div class="empty">키를 클릭하면 그 키에 걸린 <b>모든 수식키 조합</b>이 여기에 표시됩니다. 자주 쓰는 건 상세에서 <b style="color:#f59f00">☆</b>를 눌러 즐겨찾기하면 이 홈에 모여요.</div>'; return; }
-  let html=`<div class="sec">⭐ 즐겨찾기 ${keys.length}개 — 홈</div>`;
-  keys.sort().forEach(ak=>{
-    const i=ak.indexOf('|'), modstr=ak.slice(0,i), key=ak.slice(i+1), mods=modstr?modstr.split('+'):[];
-    const matches=DB.entries.filter(e=>e.key===key && sameSet(e.mods,new Set(mods)));
-    const acts=[...new Set(matches.map(e=>(e.ckey?'▸'+chordSym(e)+' ':'')+e.action))];   // 중복 동작 제거
-    const actTxt=acts.slice(0,3).map(a=>a.replace(/</g,'&lt;')).join(' / ');
-    const act=acts.length?actTxt+(acts.length>3?` <span class="muted">…(+${acts.length-3})</span>`:''):'(빈 조합)';
-    const scps=[...new Set(matches.map(e=>e.scope))], note=ANN.note[ak]||'';
-    html+=`<div class="row" data-jump="${ak}"><button class="favbtn on" data-fav="${ak}" title="즐겨찾기 해제">⭐</button><span class="kc">${comboSym(mods)||'(무수식)'}${key}</span>`
-      +`<div style="flex:1">${act}${note?`<div class="noteshow">📝 ${note.replace(/</g,'&lt;')}</div>`:''}</div>`
-      +`<span class="scope">${scps[0]||'free'}${scps.length>1?` +${scps.length-1}`:''}</span></div>`;
-  });
-  det.innerHTML=html;
-  det.querySelectorAll('[data-jump]').forEach(el=>el.onclick=(ev)=>{ if(ev.target.closest('.favbtn'))return; const ak=el.dataset.jump,i=ak.indexOf('|'); chordPrefix=null; chordReturn=null; sticky=new Set(ak.slice(0,i)?ak.slice(0,i).split('+'):[]); held=new Set(); selectedKey=ak.slice(i+1); sync(); window.scrollTo({top:0,behavior:'smooth'}); });
-  det.querySelectorAll('[data-fav]').forEach(b=>b.onclick=(ev)=>{ ev.stopPropagation(); delete ANN.fav[b.dataset.fav]; saveAnn(); sync(); });
+  if(!keys.length){ det.innerHTML='<div class="empty">키를 클릭하면 그 키에 걸린 <b>모든 수식키 조합</b>이 여기에 표시됩니다. 자주 쓰는 <b>단축키 하나</b>를 상세에서 <b style="color:#f59f00">☆</b>로 즐겨찾기하면 이 홈에 모여요.</div>'; return; }
+  det.innerHTML=`<div class="sec">⭐ 즐겨찾기 ${keys.length}개 — 홈</div>`+keys.sort().map(favRowHTML).join('');
+  wireFavRows(det);
 }
 function renderFavs(){
-  const r=document.getElementById('results');
-  const keys=Object.keys(ANN.fav);
-  if(!keys.length){ r.innerHTML='<div class="sec">⭐ 즐겨찾기 — 아직 없음. 키 클릭 → 하단 상세에서 ☆를 눌러 추가하세요.</div>'; r.scrollIntoView({behavior:'smooth',block:'start'}); return; }
-  let html=`<div class="sec">⭐ 즐겨찾기 ${keys.length}개 — 외울 단축키 모음</div>`;
-  keys.sort().forEach(ak=>{
-    const i=ak.indexOf('|'), modstr=ak.slice(0,i), key=ak.slice(i+1), mods=modstr?modstr.split('+'):[];
-    const matches=DB.entries.filter(e=>e.key===key && sameSet(e.mods,new Set(mods)));
-    const act=matches.length?matches.map(e=>(e.ckey?'▸'+chordSym(e)+' ':'')+e.action).join(' / '):'(빈 조합)', note=ANN.note[ak]||'';
-    html+=`<div class="row" data-jump="${ak}"><span class="kc">${comboSym(mods)||'(무수식)'}${key}</span>`
-      +`<div style="flex:1">${act.replace(/</g,'&lt;')}${note?`<div class="noteshow">📝 ${note.replace(/</g,'&lt;')}</div>`:''}</div>`
-      +`<span class="scope">${matches[0]?matches[0].scope:'free'}</span></div>`;
-  });
-  r.innerHTML=html;
-  r.querySelectorAll('[data-jump]').forEach(el=>el.onclick=()=>{ const ak=el.dataset.jump,i=ak.indexOf('|'); chordPrefix=null; chordReturn=null; sticky=new Set(ak.slice(0,i)?ak.slice(0,i).split('+'):[]); held=new Set(); selectedKey=ak.slice(i+1); sync(); window.scrollTo({top:0,behavior:'smooth'}); });
-  r.scrollIntoView({behavior:'smooth',block:'start'});
+  const r=document.getElementById('results'), keys=Object.keys(ANN.fav);
+  if(!keys.length){ r.innerHTML='<div class="sec">⭐ 즐겨찾기 — 아직 없음. 키 클릭 → 하단 상세에서 각 단축키의 ☆를 눌러 추가하세요.</div>'; r.scrollIntoView({behavior:'smooth',block:'start'}); return; }
+  r.innerHTML=`<div class="sec">⭐ 즐겨찾기 ${keys.length}개 — 외울 단축키 모음</div>`+keys.sort().map(favRowHTML).join('');
+  wireFavRows(r); r.scrollIntoView({behavior:'smooth',block:'start'});
 }
 mergeCustom(); restoreHash(); renderMeta(); renderChips(); renderCtx(); sync();
 document.getElementById('addbtn').onclick=addCustom;
