@@ -836,7 +836,7 @@ function renderConflicts(){
 function renderFree(){
   const taken=new Set(ctxEntries().filter(e=>sameSet(e.mods,eff)).map(e=>e.key));
   const free=ALLKEYS.filter(k=>!taken.has(k));
-  let html=`<div class="sec">✨ 빈 조합 — 레이어 <b style="color:#7dd3fc">${effSym()||'(무수식)'}</b> · ${[...ctxSet].join(', ')||'(없음)'} · <b style="color:#4ade80">빈 키 ${free.length}</b>/${ALLKEYS.length} <span class="muted" style="text-transform:none;letter-spacing:0;font-size:11px">— 위 키보드에서 <b style="color:#4ade80">초록 테두리</b>가 빈 키입니다. 수식키를 눌러 레이어를 바꿔보세요 · 초록 키 클릭 → 그 조합 상세.</span></div>`;
+  let html=`<div class="sec">✨ 빈 조합 — 레이어 <b style="color:#7dd3fc">${effSym()||'(무수식)'}</b> · <b style="color:#4ade80">빈 키 ${free.length}</b>/${ALLKEYS.length} <span class="muted" style="text-transform:none;letter-spacing:0;font-size:11px">— 위 키보드에서 <b style="color:#4ade80">초록 테두리</b>가 빈 키입니다. 수식키를 눌러 레이어를 바꿔보세요 · 초록 키 클릭 → 그 조합 상세.</span></div>`;
   if(eff.size===0) html+=`<div class="muted" style="margin:2px 0 4px">💡 새 글로벌 핫키엔 <b>⌥</b> 또는 <b>Hyper(⌃⌥⇧⌘)</b> 레이어 추천 — 시스템·앱과 덜 겹칩니다.</div>`;
   document.getElementById('modepanel').innerHTML=html;
 }
