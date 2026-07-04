@@ -340,6 +340,7 @@ let searchGridMode = localStorage.getItem('SVsearchGrid')==='filter' ? 'filter' 
 let SEARCHKEYS = null;   // 현재 검색어가 매치하는 키 집합(그리드 강조/숨김용). null=검색 없음
 let searchListMode = localStorage.getItem('SVsearchList')==='filter' ? 'filter' : 'highlight';   // 상세(수식키 조합별) 리스트: 강조만 / 강조+숨김
 let DKWS = [];   // 현재 검색 키워드(상세 리스트 하이라이트용) — showDetail에서 세팅
+let DFILTER = false;   // true면 detailRow가 searchListMode와 무관하게 매치 항목만(모아 보기용)
 const COMMON_COMBOS = new Set(['cmd|C','cmd|V','cmd|X','cmd|Z','cmd|A','cmd|S','cmd|F','cmd|P','cmd|W','cmd|Q','cmd|N','cmd|O','cmd|T','cmd+shift|Z','cmd+shift|T']);
 function isCommon(e){ return !e.ckey && COMMON_COMBOS.has([...e.mods].sort().join('+')+'|'+e.key); }
 
@@ -559,7 +560,7 @@ function allModSubsets(){
 }
 function detailRow(mods, key, matches, hit){
   const ak=annKey(mods,key), fav=!!ANN.fav[ak], note=ANN.note[ak]||'';
-  if(DKWS.length && searchListMode==='filter'){   // 숨김 모드: 이 조합에서 검색에 매치되는 단축키만 남기고(엔트리 단위), 하나도 없으면 행 숨김
+  if(DKWS.length && (searchListMode==='filter' || DFILTER)){   // 숨김 모드: 이 조합에서 검색에 매치되는 단축키만 남기고(엔트리 단위), 하나도 없으면 행 숨김
     matches = matches.filter(e => DKWS.every(k => (e.action+' '+(e.detail||'')+' '+e.scope).toLowerCase().includes(k.toLowerCase())));
     if(!matches.length) return '';
   }
@@ -602,6 +603,32 @@ function showDetail(key){
   d.querySelectorAll('[data-chord]').forEach(b=>b.onclick=()=>{ const [ms,k]=b.dataset.chord.split('|'); enterChord(ms?ms.split('+'):[], k); });
   d.querySelectorAll('[data-note]').forEach(b=>b.onclick=()=>{ const ak=b.dataset.note; const t=prompt('이 단축키에 노트 (예: cmd+opt+V는 엑셀과 충돌이라 opt+V로 변경):', ANN.note[ak]||''); if(t!==null){ const tt=t.trim(); tt?ANN.note[ak]=tt:delete ANN.note[ak]; saveAnn(); sync(); showDetail(selectedKey); } });
   d.querySelectorAll('[data-delc]').forEach(b=>b.onclick=()=>{ if(confirm('이 내 단축키를 삭제할까요?')) delCustom(b.dataset.delc); });
+}
+// 검색만 있고 키/수식키 미선택 → 매치되는 모든 일반 키의 상세를 '강조+숨김'(매치만)으로 모아서 표시
+function showSearchGathered(det){
+  const q=(document.getElementById('search').value||'').trim();
+  DKWS = (q && !parseQueryCombo(q)) ? q.split(/\s+/).filter(Boolean) : [];
+  if(!DKWS.length){ det.innerHTML='<div class="empty">키를 클릭하면 그 키에 걸린 <b>모든 수식키 조합</b>이 여기에 표시됩니다.</div>'; return; }
+  let mkeys=[...(gridSearchKeys(q)||[])].sort((a,b)=>a.length-b.length||a.localeCompare(b));
+  const CAP=40, more=Math.max(0,mkeys.length-CAP); mkeys=mkeys.slice(0,CAP);
+  DFILTER=true;   // 모아 보기는 항상 매치 단축키만
+  let html=`<div class="sec">🔍 "${q.replace(/</g,'&lt;')}" — 매치 키 <b style="color:#7dd3fc">${mkeys.length+more}</b>개 · 각 키의 매치 단축키만 (☆ 즐겨찾기 · 키 제목 클릭 → 그 키 상세)</div>`;
+  mkeys.forEach(key=>{
+    const all=keyAll(key), byCombo={};
+    all.forEach(e=>{ const k=[...e.mods].sort().join(','); (byCombo[k]=byCombo[k]||[]).push(e); });
+    let rows='';
+    for(const mods of allModSubsets()){ const k=[...mods].sort().join(','); rows += detailRow(mods,key,byCombo[k]||[],false); delete byCombo[k]; }
+    Object.values(byCombo).flat().sort((a,b)=>a.mods.length-b.mods.length).forEach(e=>{ rows += detailRow(e.mods,key,[e],false); });
+    if(rows) html += `<div class="grp" data-selk="${key.replace(/"/g,'&quot;')}" style="cursor:pointer" title="이 키 상세 보기">${key.replace(/</g,'&lt;')} 키</div>`+rows;
+  });
+  DFILTER=false;
+  if(more) html+=`<div class="muted" style="padding:8px 4px">… 그 외 ${more}개 키 더 (검색어를 좁혀보세요)</div>`;
+  det.innerHTML=html;
+  det.querySelectorAll('[data-fav]').forEach(b=>b.onclick=()=>{ const ak=b.dataset.fav; ANN.fav[ak]?delete ANN.fav[ak]:ANN.fav[ak]=1; saveAnn(); sync(); });
+  det.querySelectorAll('[data-chord]').forEach(b=>b.onclick=()=>{ const [ms,k]=b.dataset.chord.split('|'); enterChord(ms?ms.split('+'):[], k); });
+  det.querySelectorAll('[data-note]').forEach(b=>b.onclick=()=>{ const ak=b.dataset.note; const t=prompt('노트:', ANN.note[ak]||''); if(t!==null){ const tt=t.trim(); tt?ANN.note[ak]=tt:delete ANN.note[ak]; saveAnn(); sync(); } });
+  det.querySelectorAll('[data-delc]').forEach(b=>b.onclick=()=>{ if(confirm('이 내 단축키를 삭제할까요?')) delCustom(b.dataset.delc); });
+  det.querySelectorAll('[data-selk]').forEach(el=>el.onclick=()=>{ selectedKey=el.dataset.selk; sync(); });
 }
 function gestureSym(g){   // 비-정적 트리거 표기: L⌘+R⌘(좌우 동시) / ⌘⌘·⌥×3(멀티탭) / L⌘·R⌘ + hold
   const s = g.mod==='caps' ? '⇪' : (MODSYM[g.mod]||g.mod);
@@ -913,7 +940,7 @@ function sync(){
   const det=document.getElementById('detail');      // 전체 단축키(overview)/전용 패널이 켜지면 키별 상세는 숨긴다 (단 '빈 조합'은 그리드 위주라 상세 유지)
   if(overview || (panelMode && panelMode!=='free')){ det.style.display='none'; }
   else { det.style.display=''; if(selectedKey) showDetail(selectedKey);
-    else if((document.getElementById('search').value||'').trim()) det.innerHTML='<div class="empty">🔍 위 키보드에서 <b style="color:#f59e0b">주황 테두리</b>가 검색어에 매치된 키입니다. 클릭하면 그 키의 상세가 여기에 표시됩니다.</div>';
+    else if((document.getElementById('search').value||'').trim()) showSearchGathered(det);   // 검색만 → 매치 키들의 상세를 모아서(강조+숨김)
     else favHome(det); }   // 쉬는 상태(검색·선택 없음) = 즐겨찾기 홈
   const _sq=document.getElementById('search'); if(_sq) renderSearch(_sq.value.trim());   // 컨텍스트/레이어 바뀌면 검색 리스트도 갱신 (빈 검색어면 비움)
   saveHash();
