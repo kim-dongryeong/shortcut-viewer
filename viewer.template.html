@@ -27,8 +27,9 @@
   #ctxchips .chip.on{background:#0d9488;border-color:#0d9488}
   .ctxbulk{display:flex;gap:6px;flex-basis:100%;margin-bottom:4px;padding-bottom:8px;border-bottom:1px solid var(--line);align-items:center}
   .ctxbulk .lbl{font-size:11px;color:var(--dim);margin-right:2px}
-  .ctxbulk button{font-size:11px;padding:3px 10px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--dim);cursor:pointer}
-  .ctxbulk button:hover{color:var(--txt);border-color:#0d9488}
+  .ctxbulk button,.ctxbulkbar button{font-size:11px;padding:3px 10px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--dim);cursor:pointer}
+  .ctxbulk button:hover,.ctxbulkbar button:hover{color:var(--txt);border-color:#0d9488}
+  .ctxbulkbar{display:inline-flex;gap:6px;align-items:center}
   .ctxbulk button.on{background:#0d9488;border-color:#0d9488;color:#fff}
   .ctxicon{width:15px;height:15px;border-radius:3px;vertical-align:-3px;margin-right:5px;object-fit:contain}
   select,input,button{background:var(--panel);color:var(--txt);border:1px solid var(--line);border-radius:9px;padding:8px 11px;font-size:14px}
@@ -211,6 +212,7 @@
   <div class="controls" style="margin-top:-4px">
     <span class="meta" style="align-self:center">컨텍스트:</span>
     <button id="ctxtoggle" title="앱/컨텍스트 목록 펼치기">▾ 앱 선택</button>
+    <span id="ctxbulkbar" class="ctxbulkbar"></span>
     <span id="ctxsummary" class="meta" style="align-self:center;color:#7dd3fc"></span>
     <span id="ctxchips" style="display:none;flex-wrap:wrap;gap:5px;flex-basis:100%;margin-top:6px;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--panel)"></span>
   </div>
@@ -373,7 +375,9 @@ function renderCtx(){
   const customScopes=[...new Set((ANN.custom||[]).map(c=>c.scope).filter(s=>s&&s.toLowerCase()!=='global'&&!DB.meta.apps.includes(s)))];
   const allCtx=['Global',...DB.meta.apps,...customScopes,'BTT (전체)',...(DB.meta.bttgroups||[])];
   const ICONS=DB.meta.icons||{};
-  const bulk=`<div class="ctxbulk"><span class="lbl">선택:</span><button data-bulk="all">전체 선택</button><button data-bulk="none">전체 해제</button><button data-bulk="invert">반대 선택</button><span style="flex:1"></span><button data-bulk="icons" class="${showIcons?'on':''}">🖼 앱 아이콘</button></div>`;
+  // 전체/해제/반대 선택은 '앱 선택'을 펼치지 않아도 바로 클릭하도록 항상 보이는 바에 둔다
+  document.getElementById('ctxbulkbar').innerHTML=`<span class="lbl" style="font-size:11px;color:var(--dim)">선택:</span><button data-bulk="all">전체</button><button data-bulk="none">해제</button><button data-bulk="invert">반대</button>`;
+  const bulk=`<div class="ctxbulk"><span class="lbl">표시:</span><button data-bulk="icons" class="${showIcons?'on':''}">🖼 앱 아이콘</button></div>`;
   document.getElementById('ctxchips').innerHTML=bulk+allCtx.map(a=>{ const ic=(showIcons&&ICONS[a])?`<img class="ctxicon" src="${ICONS[a]}" alt="">`:''; return `<span class="chip" data-ctx="${a.replace(/"/g,'&quot;')}">${ic}${a}</span>`; }).join('');
   document.querySelectorAll('[data-ctx]').forEach(el=>el.onclick=()=>{ const c=el.dataset.ctx; ctxSet.has(c)?ctxSet.delete(c):ctxSet.add(c); sync(); });
   document.querySelectorAll('[data-bulk]').forEach(b=>b.onclick=()=>{ const m=b.dataset.bulk;
