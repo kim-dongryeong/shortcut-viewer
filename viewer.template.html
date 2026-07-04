@@ -98,6 +98,8 @@
   .cs:hover{background:#1b1f28}
   .cs.hi{background:#0b2a45;box-shadow:inset 3px 0 0 #38bdf8}
   .cs.hi .csk{color:#7dd3fc}
+  .cs.softhi{background:rgba(56,189,248,.12)}   /* 같은 일반키의 다른 수식키 조합 = 약한 강조 */
+  .cs.softhi .csk{color:#9dd8f5}
   .cs .csk{font-weight:700;min-width:72px;white-space:nowrap}
   .cs .csa{flex:1;min-width:0;color:#cdd3df;font-size:12.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .cs .csd{width:7px;height:7px;border-radius:50%;flex:none;align-self:center}
@@ -642,8 +644,9 @@ function renderOverview(){   // KeyCue 식: 선택 컨텍스트의 모든 단축
     const rows=items.map(e=>{
       const ix=flat.push(e)-1;
       const hot = inputActive && sameSet(e.mods,eff) && (selectedKey ? e.key===selectedKey : true);
+      const softHi = selectedKey && !hot && e.key===selectedKey;   // 같은 일반키의 다른 수식키 조합 → 약한 강조
       const combo = ovGroup==='mod' ? `${e.key}${e.ckey?' '+chordTag(e):''}` : `${comboSym(e.mods)||''}${e.key}${e.ckey?' '+chordTag(e):''}`;
-      return `<div class="cs${hot?' hi':''}" data-ov="${ix}"><span class="csk">${combo}</span><span class="csa" title="${e.action.replace(/"/g,'&quot;')}">${e.action.replace(/</g,'&lt;')}</span>`
+      return `<div class="cs${hot?' hi':''}${softHi?' softhi':''}" data-ov="${ix}"><span class="csk">${combo}</span><span class="csa" title="${e.action.replace(/"/g,'&quot;')}">${e.action.replace(/</g,'&lt;')}</span>`
         +`<span class="csd" style="background:${COLORS[e.source]||'#666'}" title="${e.source}${multi?' · '+e.scope:''}"></span></div>`;
     }).join('');
     const gl=label==='(무수식)'?'(수식키 없음)':label;
