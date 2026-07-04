@@ -423,12 +423,16 @@ function cellKey(key,label,wpx){
   h+=`<div class="foot">`+srcs.map(s=>`<span class="fdot" style="background:${COLORS[s]||'#666'}"></span>`).join('')
     +(chc?`<span class="chordm" title="${chc}개 연속(chord) 시작">▸${chc}</span>`:'')+`</div>`;
   if(all.length) el.classList.add('busy');
+  const noMod = eff.size===0;   // 무수식(수식키 안 누름) 레이어는 차분하게 — 라벨/색바 생략, 점·개수 힌트만 (수식키 누르면 그 레이어는 꽉 참)
   if(ms.length){
     el.classList.add('taken');
-    const scc={}; ms.forEach(m=>scc[m.scope]=(scc[m.scope]||0)+1);
-    const dup=Object.values(scc).some(v=>v>=2);
-    h+=`<div class="act">${ms[0].action.replace(/</g,'&lt;')}`+(ms.length>1?` <span class="ov${dup?' dup':''}">+${ms.length-1}</span>`:``)+`</div>`;
-    h+=`<div class="bar" style="background:${COLORS[ms[0].source]||'#666'}"></div>`;
+    if(noMod){ h+=`<div class="act muted">·</div>`; }
+    else {
+      const scc={}; ms.forEach(m=>scc[m.scope]=(scc[m.scope]||0)+1);
+      const dup=Object.values(scc).some(v=>v>=2);
+      h+=`<div class="act">${ms[0].action.replace(/</g,'&lt;')}`+(ms.length>1?` <span class="ov${dup?' dup':''}">+${ms.length-1}</span>`:``)+`</div>`;
+      h+=`<div class="bar" style="background:${COLORS[ms[0].source]||'#666'}"></div>`;
+    }
     if(filter==='free') el.classList.add('dim');
   } else { h+=`<div class="act muted">·</div>`; if(filter==='taken') el.classList.add('dim'); }
   if(key===selectedKey) el.classList.add('sel');
