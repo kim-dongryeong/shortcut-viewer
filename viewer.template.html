@@ -35,6 +35,8 @@
   select,input,button{background:var(--panel);color:var(--txt);border:1px solid var(--line);border-radius:9px;padding:8px 11px;font-size:14px}
   button{cursor:pointer}
   button.on{background:#2563eb;border-color:#2563eb}
+  #favall.on,#favctx.on{background:#7c5e10;border-color:#e0a82e;color:#ffe9b3}   /* 즐겨찾기 뷰 버튼 켬 = 금색 */
+  html[data-theme="light"] #favall.on,html[data-theme="light"] #favctx.on{background:#fde5b8;border-color:#c98a13;color:#7a4e00}
   input{min-width:200px}
   .combo{font-size:14px;color:var(--dim)}
   .combo b{color:var(--txt)}
@@ -58,6 +60,8 @@
   .ov.dup{color:#ef4444;background:#3a1414}   /* 같은 앱 내 충돌 = 빨강 (BTT 주황과 구분) */
   .cap.busy:not(.taken){border-color:#33405e}
   .cap.dim{opacity:.3}
+  .cap.favmark{border-color:#e0a82e!important;box-shadow:inset 0 0 0 2px rgba(224,168,46,.4)}   /* 즐겨찾기 걸린 키 — 금색(검색/선택이 있으면 그쪽이 덮어씀) */
+  .cap.favmark .lab{color:#f5c451}
   .cap.shit{border-color:#fbbf24!important;box-shadow:0 0 0 2px #f59e0b,0 0 12px rgba(245,158,11,.5);z-index:2}   /* 검색어 매치 키 강조 */
   .cap.shit .lab{color:#fcd34d}
   .cap.shide{opacity:.08;filter:grayscale(1)}   /* 검색 필터 모드: 비매치 키 숨김(강하게 흐림) */
@@ -219,7 +223,8 @@
     <span id="modchips"></span>
     <span class="searchbox"><input id="search" placeholder="🔍 검색: 동작/키/조합"><button id="searchclear" title="검색어 지우기 (Esc)" tabindex="-1">✕</button></span>
     <button id="ovbtn" title="선택한 컨텍스트의 모든 단축키를 한 번에 (KeyCue 식 치트시트)">📋 전체 단축키</button>
-    <button id="favview">⭐ 즐겨찾기</button>
+    <button id="favall" title="모든 즐겨찾기를 키보드에 ⭐로 표시하고 아래에 리스트로 보여줍니다 (현재 컨텍스트와 무관). 다시 누르면 끕니다.">⭐ 전체 즐겨찾기</button>
+    <button id="favctx" title="현재 선택한 컨텍스트에 해당하는 즐겨찾기만 키보드·리스트로 보여줍니다. 다시 누르면 끕니다.">⭐ 현재 컨텍스트</button>
     <button id="moretoggle" title="테마·인쇄·내보내기·내 단축키 등 더 많은 도구">⋯ 더보기</button>
   </div>
   <div class="controls" style="margin-top:-4px">
@@ -275,6 +280,7 @@
 
   <div class="panel">
     <div id="modepanel"></div>
+    <div id="favpanel"></div>
     <div id="detail"><div class="empty">키를 클릭하면 그 키에 걸린 <b>모든 수식키 조합</b>이 여기에 표시되고, 수식키를 누르면 해당 조합이 강조됩니다.</div></div>
     <div id="overview"></div>
     <div id="results"></div>
@@ -352,6 +358,8 @@ let showIcons = localStorage.getItem('SVicons')!=='0';          // 컨텍스트 
 let captureKeys = localStorage.getItem('SVcapture')!=='0';      // 키 입력을 낚아채 레이아웃에 반영 (기본 ON). 끄면 ⌘C 복사 등 정상 동작
 let searchGridMode = localStorage.getItem('SVsearchGrid')==='filter' ? 'filter' : 'highlight';   // 검색어 입력 시 키보드 그리드: 강조만 / 강조+숨김
 let SEARCHKEYS = null;   // 현재 검색어가 매치하는 키 집합(그리드 강조/숨김용). null=검색 없음
+let favMode = (localStorage.getItem('SVfavMode') ?? 'all') || null;   // 'all'=전체 즐겨찾기 · 'ctx'=현재 컨텍스트 · null=끔. 첫 방문 기본 '전체'
+let FAVKEYS = null;   // favMode일 때 즐겨찾기가 걸린 그리드 키 집합(키보드 ⭐ 강조용). null=끔
 let searchListMode = localStorage.getItem('SVsearchList')==='filter' ? 'filter' : 'highlight';   // 상세(수식키 조합별) 리스트: 강조만 / 강조+숨김
 let DKWS = [];   // 현재 검색 키워드(상세 리스트 하이라이트용) — showDetail에서 세팅
 let DFILTER = false;   // true면 detailRow가 searchListMode와 무관하게 매치 항목만(모아 보기용)
@@ -480,6 +488,7 @@ function cellKey(key,label,wpx){
     if(SEARCHKEYS.has(key)) el.classList.add('shit');
     else if(searchGridMode==='filter') el.classList.add('shide');
   }
+  if(FAVKEYS && FAVKEYS.has(key)) el.classList.add('favmark');   // 즐겨찾기 걸린 키 — 금색 강조 (레이어 무관)
   if(key===selectedKey) el.classList.add('sel');
   if(panelMode==='free' && !ms.length) el.classList.add('freehl');   // 빈 조합 모드: 이 레이어에서 빈 키를 초록 테두리로 그리드에 직접 표시
   const _ak=annKey([...eff],key);
@@ -532,6 +541,7 @@ function gridSearchKeys(q){
 function renderKB(){
   const _sq=(document.getElementById('search').value||'').trim();
   SEARCHKEYS = _sq ? gridSearchKeys(_sq) : null;   // 검색어 있으면 매치 키 계산 → cellKey에서 강조/숨김
+  FAVKEYS = favMode ? favGridKeys() : null;   // 즐겨찾기 모드면 별표 걸린 키 계산 → cellKey에서 금색 강조
   document.documentElement.style.setProperty('--caph',(U-2)+'px');   // 키 높이(기본 U=56 → 54px, 원래 크기) · 크기 3단계에 비례
   const kb=document.getElementById('kb'); kb.innerHTML='';
   const main=document.createElement('div'); main.className='kbmain';
@@ -971,11 +981,16 @@ function sync(){
   else if(panelMode==='quiz') renderQuiz();
   else if(panelMode==='ghk'){ if(!mp.querySelector('.ghkform')) renderGHK(); }   // 폼 상태 보존: 최초 1회만
   else mp.innerHTML='';
-  const det=document.getElementById('detail');      // 전체 단축키(overview)/전용 패널이 켜지면 키별 상세는 숨긴다 (단 '빈 조합'은 그리드 위주라 상세 유지)
+  document.getElementById('favall').classList.toggle('on',favMode==='all');
+  document.getElementById('favctx').classList.toggle('on',favMode==='ctx');
+  const fp=document.getElementById('favpanel'), det=document.getElementById('detail');   // 전체 단축키(overview)/전용 패널이 켜지면 키별 상세는 숨긴다 (단 '빈 조합'은 그리드 위주라 상세 유지)
+  const showFav = !!favMode && !overview && !(panelMode && panelMode!=='free');   // 즐겨찾기 리스트를 기본 단축키 리스트 '위'에 (전체단축키·전용 뷰 땐 숨김)
+  if(showFav) renderFavPanel(fp); else fp.innerHTML='';
   if(overview || (panelMode && panelMode!=='free')){ det.style.display='none'; }
   else { det.style.display=''; if(selectedKey) showDetail(selectedKey);
     else if((document.getElementById('search').value||'').trim()) showSearchGathered(det);   // 검색만 → 매치 키들의 상세를 모아서(강조+숨김)
-    else favHome(det); }   // 쉬는 상태(검색·선택 없음) = 즐겨찾기 홈
+    else if(showFav) det.innerHTML='';   // 쉬는 상태 + 즐겨찾기 모드 → 위 favpanel이 곧 홈이므로 상세는 비움
+    else det.innerHTML='<div class="empty">키를 클릭하면 그 키에 걸린 <b>모든 수식키 조합</b>이 여기에 표시됩니다. 자주 쓰는 <b>단축키 하나</b>를 상세에서 <b style="color:#f59f00">☆</b>로 즐겨찾기하세요.</div>'; }
   const _sq=document.getElementById('search'); if(_sq) renderSearch(_sq.value.trim());   // 컨텍스트/레이어 바뀌면 검색 리스트도 갱신 (빈 검색어면 비움)
   saveHash();
 }
@@ -1036,18 +1051,29 @@ function wireFavRows(root){
   root.querySelectorAll('[data-selkey]').forEach(el=>el.onclick=(ev)=>{ if(ev.target.closest('.favbtn'))return; chordPrefix=null; chordReturn=null; sticky=new Set(el.dataset.selmods?el.dataset.selmods.split('+'):[]); held=new Set(); selectedKey=el.dataset.selkey; sync(); window.scrollTo({top:0,behavior:'smooth'}); });
   root.querySelectorAll('[data-fav]').forEach(b=>b.onclick=(ev)=>{ ev.stopPropagation(); delete ANN.fav[b.dataset.fav]; saveAnn(); sync(); });
 }
-function favHome(det){
-  const keys=Object.keys(ANN.fav);
-  if(!keys.length){ det.innerHTML='<div class="empty">키를 클릭하면 그 키에 걸린 <b>모든 수식키 조합</b>이 여기에 표시됩니다. 자주 쓰는 <b>단축키 하나</b>를 상세에서 <b style="color:#f59f00">☆</b>로 즐겨찾기하면 이 홈에 모여요.</div>'; return; }
-  det.innerHTML=`<div class="sec">⭐ 즐겨찾기 ${keys.length}개 — 홈</div>`+sortedFavKeys().map(favRowHTML).join('');
-  wireFavRows(det);
+function favFksFor(){   // favMode에 맞는 즐겨찾기 fk 목록(정렬됨) · 'ctx'면 현재 컨텍스트 스코프만
+  const all=sortedFavKeys();
+  if(favMode!=='ctx') return all;
+  return all.filter(fk=>{ const p=favParse(fk);
+    if(p){ const e=favEntry(p); return e?inCtx(e):false; }
+    const i=fk.indexOf('|'), key=fk.slice(i+1), ms=fk.slice(0,i)?fk.slice(0,i).split('+'):[];
+    return DB.entries.some(x=>x.key===key && sameSet(x.mods,new Set(ms)) && inCtx(x)); });
 }
-function renderFavs(){
-  const r=document.getElementById('results'), keys=Object.keys(ANN.fav);
-  if(!keys.length){ r.innerHTML='<div class="sec">⭐ 즐겨찾기 — 아직 없음. 키 클릭 → 하단 상세에서 각 단축키의 ☆를 눌러 추가하세요.</div>'; r.scrollIntoView({behavior:'smooth',block:'start'}); return; }
-  r.innerHTML=`<div class="sec">⭐ 즐겨찾기 ${keys.length}개 — 외울 단축키 모음</div>`+sortedFavKeys().map(favRowHTML).join('');
-  wireFavRows(r); r.scrollIntoView({behavior:'smooth',block:'start'});
+function favGridKeys(){   // 즐겨찾기가 걸린 '그리드 키'(첫 누름) 집합 — 키보드 금색 강조용
+  const out=new Set();
+  favFksFor().forEach(fk=>{ const p=favParse(fk); if(p){ const e=favEntry(p)||p; if(e.key) out.add(e.key); } else out.add(fk.slice(fk.indexOf('|')+1)); });
+  return out;
 }
+function renderFavPanel(fp){   // 상세(기본 단축키 리스트) 위에 뜨는 즐겨찾기 리스트 — favMode에 따라 전체/현재 컨텍스트
+  const tot=Object.keys(ANN.fav).length;
+  if(!tot){ fp.innerHTML='<div class="sec">⭐ 즐겨찾기 — 아직 없음. 키 클릭 → 하단 상세에서 각 단축키의 <b style="color:#f59f00">☆</b>를 눌러 추가하세요.</div>'; return; }
+  const fks=favFksFor();
+  const label = favMode==='ctx' ? `현재 컨텍스트 <span style="color:#7dd3fc">${[...ctxSet].join(', ')||'없음'}</span>` : '전체';
+  if(!fks.length){ fp.innerHTML=`<div class="sec">⭐ 즐겨찾기 · ${label} — 이 컨텍스트에 해당하는 즐겨찾기가 없습니다 <span class="muted" style="text-transform:none;letter-spacing:0">(전체 ${tot}개 · '전체 즐겨찾기'로 전환)</span></div>`; return; }
+  fp.innerHTML=`<div class="sec">⭐ 즐겨찾기 · ${label} ${fks.length}개 <span class="muted" style="text-transform:none;letter-spacing:0">— 위 키보드에 <b style="color:#e0a82e">금색</b>으로 표시</span></div>`+fks.map(favRowHTML).join('');
+  wireFavRows(fp);
+}
+function setFavMode(m){ favMode=(favMode===m?null:m); localStorage.setItem('SVfavMode',favMode||''); sync(); if(favMode){ const fp=document.getElementById('favpanel'); if(fp.textContent) fp.scrollIntoView({behavior:'smooth',block:'start'}); } }
 // 즐겨찾기 정규화: 옛 flat/평탄화 채드 eid를 실제 엔트리의 정식 eid로 교체 → 상세·그리드 별표가 일관되게 표시
 function normalizeFavs(){ let changed=false; const fixed={};
   for(const fk of Object.keys(ANN.fav)){ const p=favParse(fk); const e=p&&favEntry(p); const nk=e?eid(e):fk; if(nk!==fk) changed=true; fixed[nk]=1; }
@@ -1062,7 +1088,8 @@ let _searchT=null;   // 검색 입력 디바운스 — 전체단축키(1470행) 
 searchEl.oninput=e=>{ searchBox.classList.toggle('has',!!e.target.value); clearTimeout(_searchT); _searchT=setTimeout(sync,150); };
 searchEl.addEventListener('keydown',e=>{ if(e.key==='Escape'){ e.preventDefault(); clearSearch(); searchEl.blur(); } });
 document.getElementById('searchclear').onclick=()=>{ clearSearch(); searchEl.focus(); };
-document.getElementById('favview').onclick=renderFavs;
+document.getElementById('favall').onclick=()=>setFavMode('all');
+document.getElementById('favctx').onclick=()=>setFavMode('ctx');
 document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>setView(b.dataset.view));
 document.getElementById('themebtn').onclick=()=>{ theme=theme==='light'?'dark':'light'; document.documentElement.setAttribute('data-theme',theme); localStorage.setItem('SVtheme',theme); };
 { const sl=document.getElementById('sizeslider'); sl.value=U;   // 키보드 크기 슬라이더 — 드래그하면 연속 조절
