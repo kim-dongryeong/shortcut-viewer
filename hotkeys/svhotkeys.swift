@@ -303,15 +303,15 @@ enum Mouse {
     static func point(_ slot: String) -> CGPoint? { guard let a = slots[slot], a.count == 2 else { return nil }; return CGPoint(x: a[0], y: a[1]) }
     static func saveSlot(_ slot: String) {   // 현재 커서 위치를 슬롯에 저장
         let p = current(); slots[slot] = [Double(p.x), Double(p.y)]; persist()
-        HUD.show("🖱️ 마우스 북마크 \(slot) 저장")
+        HUD.show("🖱️ 마우스 북마크 \(slot) 저장", icon: "", autoHide: 1.0)
     }
     static func goto(_ slot: String) {       // 슬롯 위치로 커서만 이동
-        guard let p = point(slot) else { HUD.show("🖱️ 북마크 \(slot) 없음"); return }
+        guard let p = point(slot) else { HUD.show("🖱️ 북마크 \(slot) 없음", icon: "", autoHide: 1.2); return }
         move(to: p)
     }
     static func clickBookmark(_ slot: String) {   // 현재 위치 기억 → 슬롯으로 이동 → 클릭 → 원위치 복귀
-        guard let target = point(slot) else { HUD.show("🖱️ 북마크 \(slot) 없음"); return }
-        HUD.show("🖱️ 북마크 \(slot) 클릭")
+        guard let target = point(slot) else { HUD.show("🖱️ 북마크 \(slot) 없음", icon: "", autoHide: 1.2); return }
+        HUD.show("🖱️ 북마크 \(slot) 클릭", icon: "", autoHide: 0.9)
         DispatchQueue.global().async {
             let orig = current()
             move(to: target); Thread.sleep(forTimeInterval: 0.08)
@@ -494,7 +494,9 @@ final class Engine {
 // tiny floating HUD for sequence/leader mode
 enum HUD {
     static var panel: NSPanel?
-    static func show(_ text: String) {
+    static var hideToken = 0
+    // icon="🔗" 접두(리더용, 기본). autoHide=초 지정하면 그 뒤 자동으로 사라짐(toast) — 마우스 액션 등.
+    static func show(_ text: String, icon: String = "🔗", autoHide: TimeInterval? = nil) {
         DispatchQueue.main.async {
             if panel == nil {
                 let p = NSPanel(contentRect: NSRect(x: 0, y: 0, width: 360, height: 54), styleMask: [.borderless, .nonactivatingPanel], backing: .buffered, defer: false)
@@ -503,14 +505,19 @@ enum HUD {
             guard let p = panel, let host = p.contentView else { return }
             let bg = NSView(frame: NSRect(x: 0, y: 0, width: 360, height: 54)); bg.wantsLayer = true
             bg.layer?.backgroundColor = NSColor(red: 0.17, green: 0.11, blue: 0.36, alpha: 0.96).cgColor; bg.layer?.cornerRadius = 13
-            let label = NSTextField(labelWithString: "🔗 " + text)
+            let label = NSTextField(labelWithString: (icon.isEmpty ? "" : icon + " ") + text)
             label.font = .systemFont(ofSize: 15, weight: .semibold); label.textColor = .white; label.frame = NSRect(x: 16, y: 16, width: 328, height: 22)
             bg.addSubview(label); p.contentView = bg; _ = host
             if let scr = NSScreen.main { p.setFrameOrigin(NSPoint(x: scr.frame.midX - 180, y: scr.frame.midY - 140)) }
             p.orderFrontRegardless()
+            hideToken += 1
+            if let t = autoHide {   // 이후 새 show/hide가 없으면 t초 뒤 자동으로 닫음
+                let tok = hideToken
+                DispatchQueue.main.asyncAfter(deadline: .now() + t) { if tok == hideToken { panel?.orderOut(nil) } }
+            }
         }
     }
-    static func hide() { DispatchQueue.main.async { panel?.orderOut(nil) } }
+    static func hide() { DispatchQueue.main.async { hideToken += 1; panel?.orderOut(nil) } }
 }
 
 enum Accessibility {
