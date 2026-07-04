@@ -651,7 +651,7 @@ function renderOverview(){   // KeyCue 식: 선택 컨텍스트의 모든 단축
 // ══════ 새 전용 뷰: 충돌 · 빈 조합 · 통계 · 퀴즈 ══════
 function ctxEntries(){ let e=dedupeDisplay(DB.entries.filter(inCtx)); return hideCommon?e.filter(x=>!isCommon(x)):e; }
 function comboFull(e){ return (comboSym(e.mods)||'')+e.key+(e.ckey?' ▸'+chordSym(e):''); }
-function setView(v){ panelMode=(panelMode===v?null:v); if(panelMode){ overview=false; document.getElementById('ovbtn').classList.remove('on'); if(v==='quiz') quizState=null; } sync(); if(panelMode) document.getElementById('modepanel').scrollIntoView({behavior:'smooth',block:'start'}); }
+function setView(v){ panelMode=(panelMode===v?null:v); if(panelMode){ overview=false; document.getElementById('ovbtn').classList.remove('on'); if(v==='quiz') quizState=null; } sync(); if(panelMode && v!=='free') document.getElementById('modepanel').scrollIntoView({behavior:'smooth',block:'start'}); }   // '빈 조합'은 그리드의 초록 테두리를 봐야 하므로 스크롤하지 않음
 const ALLKEYS=(()=>{ const k=[]; LAYOUT.forEach(r=>r.forEach(s=>{ if(s[0]==='key') k.push(s[1]); })); return [...new Set([...k,...NAV,'Up','Down','Left','Right',...FEXT])]; })();
 const HOMEROW=new Set(['A','S','D','F','G','H','J','K','L',';',"'"]);
 
