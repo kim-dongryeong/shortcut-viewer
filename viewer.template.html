@@ -510,8 +510,11 @@ function hlText(text, kws){   // 각 키워드 매치를 서로 다른 색 <mark
     return `<mark class="hl" style="background:${HLCOLORS[(i<0?0:i)%HLCOLORS.length]}">${m}</mark>`; });
 }
 function rowHTML(e,hi,kws){
-  return `<div class="row${hi?' hi':''}"><span class="src" style="background:${COLORS[e.source]||'#666'}">${e.source}</span>`+
+  const ak=annKey([...e.mods],e.key), fav=!!ANN.fav[ak];   // 상세 행과 같은 포맷: 별 · 단축키 · 종류 · 동작
+  return `<div class="row${hi?' hi':''}">`+
+    `<button class="favbtn${fav?' on':''}" data-fav="${ak}" title="즐겨찾기">${fav?'⭐':'☆'}</button>`+
     `<span class="kc">${comboSym(e.mods)}${e.key}${e.ckey?' '+chordTag(e):''}</span>`+
+    `<span class="src" style="background:${COLORS[e.source]||'#666'}">${e.source}</span>`+
     `<div style="flex:1"><div>${hlText(e.action,kws)}</div>`+
     `<div class="muted" style="font-size:11px">${hlText(e.detail||'',kws)}</div></div>`+
     `<span class="scope">${e.scope}</span></div>`;
@@ -826,7 +829,8 @@ function renderSearch(q){
   const usesMods=e=> emods.length>0 && emods.every(m=>e.mods.includes(m));   // 수식키 하이라이트 대상
   const tag=(kf?` · 키 <b style="color:#7dd3fc">${kf}</b>`:'')+(emods.length?` · <b style="color:#7dd3fc">${comboSym(emods)}</b> 강조`:'');
   r.innerHTML=`<div class="sec">검색결과 ${hits.length}${tag}</div>`+hits.map(e=>rowHTML(e,usesMods(e),kws)).join('');
-  r.querySelectorAll('.row').forEach((el,i)=>el.onclick=()=>jumpTo(hits[i]));
+  r.querySelectorAll('.row').forEach((el,i)=>el.onclick=(ev)=>{ if(ev.target.closest('.favbtn')) return; jumpTo(hits[i]); });
+  r.querySelectorAll('[data-fav]').forEach(b=>b.onclick=(ev)=>{ ev.stopPropagation(); const ak=b.dataset.fav; ANN.fav[ak]?delete ANN.fav[ak]:ANN.fav[ak]=1; saveAnn(); sync(); });   // 검색 결과에서 바로 즐겨찾기 토글
 }
 function parseQueryCombo(q){
   const p=q.replace(/\s/g,'').split('+').filter(Boolean); if(p.length<2) return null;
