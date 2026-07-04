@@ -40,7 +40,7 @@
   .favseg button.on{background:#7c5e10;color:#ffe9b3}
   html[data-theme="light"] .favseg button.on{background:#fde5b8;color:#7a4e00}
   .favgridtog{background:var(--panel);border:1px solid var(--line);border-radius:7px;color:var(--dim);font-size:12px;padding:3px 10px;cursor:pointer;margin-left:8px}
-  .favgridtog.on{background:#3a2a52;border-color:#c084fc;color:#e9d5ff}
+  .favgridtog.on{background:#4a3a10;border-color:#e0a82e;color:#ffe9b3}
   .favhdr{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
   .favttl{font-weight:700;font-size:13px}
   .favcnt{font-size:11px;margin-left:auto}
@@ -75,10 +75,10 @@
   .ov.dup{color:#ef4444;background:#3a1414}   /* 같은 앱 내 충돌 = 빨강 (BTT 주황과 구분) */
   .cap.busy:not(.taken){border-color:#33405e}
   .cap.dim{opacity:.3}
-  .cap.favmark{border-color:#c084fc!important;box-shadow:inset 0 0 0 2px rgba(192,132,252,.45)}   /* 즐겨찾기 걸린 키 — 보라(검색=금색과 구분 · 검색/선택이 있으면 그쪽이 덮어씀) */
-  .cap.favmark .lab{color:#d8b4fe}
-  .cap.shit{border-color:#fbbf24!important;box-shadow:0 0 0 2px #f59e0b,0 0 12px rgba(245,158,11,.5);z-index:2}   /* 검색어 매치 키 강조 */
-  .cap.shit .lab{color:#fcd34d}
+  .cap.favmark{border-color:#e0a82e!important;box-shadow:inset 0 0 0 2px rgba(224,168,46,.5)}   /* 즐겨찾기 걸린 키 — 금색(별 ⭐ · 검색=보라와 구분 · 검색/선택이 있으면 그쪽이 덮어씀) */
+  .cap.favmark .lab{color:#f5c451}
+  .cap.shit{border-color:#c084fc!important;box-shadow:0 0 0 2px #a855f7,0 0 12px rgba(168,85,247,.55);z-index:2}   /* 검색어 매치 키 강조 — 보라(즐겨찾기 금색과 구분) */
+  .cap.shit .lab{color:#d8b4fe}
   .cap.shide{opacity:.08;filter:grayscale(1)}   /* 검색 필터 모드: 비매치 키 숨김(강하게 흐림) */
   .cap.freehl{border-color:#3d9e6b!important}   /* 빈 키: 차분한 초록 테두리 (글로우 없음) */
   .cap.freehl .lab{color:#7fca9f}
@@ -1161,7 +1161,7 @@ function favGridKeys(){   // 즐겨찾기가 걸린 '그리드 키'(첫 누름) 
 function favPanelHeader(cnt){   // 항상 존재하는 즐겨찾기 패널의 헤더 — 전체/현재 컨텍스트 스위치 + '키보드에서 보기' 토글
   return `<div class="favhdr"><span class="favttl">⭐ 즐겨찾기</span>`
     + `<span class="favseg"><button data-favscope="all" class="${favScope==='all'?'on':''}">전체</button><button data-favscope="ctx" class="${favScope==='ctx'?'on':''}">현재 컨텍스트</button></span>`
-    + `<button class="favgridtog${favOnGrid?' on':''}" data-favgrid title="즐겨찾기 키를 키보드 그리드에 표시(보라 테두리)">⌨︎ 키보드에서 보기${favOnGrid?' ✓':''}</button>`
+    + `<button class="favgridtog${favOnGrid?' on':''}" data-favgrid title="즐겨찾기 키를 키보드 그리드에 표시(금색 테두리)">⌨︎ 키보드에서 보기${favOnGrid?' ✓':''}</button>`
     + `<span class="favcnt muted">${cnt}</span></div>`;
 }
 function wireFavHdr(fp){
