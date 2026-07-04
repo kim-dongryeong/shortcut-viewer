@@ -46,6 +46,7 @@
   .kb{display:flex;align-items:flex-start;gap:28px;flex-wrap:wrap}
   .kbmain{display:flex;flex-direction:column}
   .kbright{display:flex;flex-direction:column}
+  .kbnum{display:flex;flex-direction:column;padding-top:2px}
   /* 즐겨찾기 리스트 위치 옵션 */
   #kbwrap{display:flex;align-items:flex-start;gap:18px;flex-wrap:wrap}
   #kbwrap>#favpanel{flex:0 1 340px;min-width:280px;align-self:stretch;max-height:calc(var(--caph,54px)*7 + 60px);overflow:auto;border:1px solid var(--line);border-radius:12px;padding:8px 12px;background:var(--panel)}
@@ -283,6 +284,7 @@
     <button id="csvbtn" class="vbtn" title="현재 컨텍스트 단축키를 CSV로 내보내기">⤓ CSV</button>
     <button id="mdbtn" class="vbtn" title="현재 컨텍스트 단축키를 Markdown 표로 내보내기">⤓ MD</button>
     <button id="addbtn" class="vbtn" title="어떤 소스에도 없는 단축키를 직접 추가 (Raycast 등)">＋ 내 단축키</button>
+    <button id="numpadbtn" class="vbtn" title="숫자 키패드(텐키) 표시 — 풀사이즈 키보드용. AE·VS Code 등 numpad 단축키를 그리드에서 봅니다.">🔢 숫자패드</button>
     <button id="scopepos" class="vbtn" title="상세 패널 스코프 위치 좌/우 토글">스코프 ⇄</button>
     <label class="vbtn" style="display:inline-flex;align-items:center;gap:6px;cursor:default" title="즐겨찾기 리스트 위치">⭐ 위치 <select id="favposselect" style="background:var(--panel);color:var(--txt);border:1px solid var(--line);border-radius:6px;padding:1px 3px"><option value="split">아래 좌우분할</option><option value="kbright">키보드 오른쪽</option><option value="below">아래 전체폭</option></select></label>
     <button id="annexport" class="vbtn" title="즐겨찾기·노트·내 단축키 내보내기">⬇︎ 내보내기</button>
@@ -316,6 +318,10 @@ const DB = /*__DATA__*/;
 let ANN = {fav:{}, note:{}, enote:{}, custom:[], ghk:[]};   // enote = 엔트리(단축키 하나) 단위 노트 (eid 키) · note = 조합 단위(레거시)
 try { const base=DB.ann||{}; Object.assign(ANN.fav, base.fav||{}); Object.assign(ANN.note, base.note||{}); Object.assign(ANN.enote, base.enote||{}); if(Array.isArray(base.custom)) ANN.custom=base.custom; if(Array.isArray(base.ghk)) ANN.ghk=base.ghk; } catch(e){}  // baked-in (annotations.json)
 try { const s=JSON.parse(localStorage.getItem('SVann')||'null'); if(s){ Object.assign(ANN.fav,s.fav||{}); Object.assign(ANN.note,s.note||{}); Object.assign(ANN.enote,s.enote||{}); if(Array.isArray(s.custom)) ANN.custom=s.custom; if(Array.isArray(s.ghk)) ANN.ghk=s.ghk; } } catch(e){}  // live localStorage overlay
+// ── 숫자 키패드(텐키) 키 이름 정규화: 소스마다 제각각(keypad_0·numpad0·keypad_plus·numpad_add…)을 그리드 셀 이름으로 통일 ──
+const KEYPAD_MAP={ numpad0:'Keypad0', keypad_0:'Keypad0', keypad_1:'Keypad1', keypad_2:'Keypad2', keypad_3:'Keypad3', keypad_4:'Keypad4', keypad_5:'Keypad5', keypad_6:'Keypad6', keypad_7:'Keypad7', keypad_8:'Keypad8', keypad_9:'Keypad9',
+  numpad_add:'KeypadPlus', keypad_plus:'KeypadPlus', numpad_subtract:'KeypadMinus', keypad_minus:'KeypadMinus', keypad_multiply:'KeypadMultiply', keypad_slash:'KeypadDivide', keypad_decimal:'KeypadDecimal', keypad_comma:'KeypadComma', keypad_enter:'KeypadEnter', keypad_clear:'KeypadClear', keypad_equals:'KeypadEquals' };
+DB.entries.forEach(e=>{ const m=KEYPAD_MAP[e.key]; if(m) e.key=m; });
 // ── 내 단축키(custom): 어떤 소스에도 없는 걸 직접 기록 → DB.entries에 병합 (localStorage에 저장·export 포함) ──
 function mergeCustom(){
   DB.entries = DB.entries.filter(e=>e.source!=='custom');
@@ -384,6 +390,7 @@ let favMode = (localStorage.getItem('SVfavMode') ?? 'all') || null;   // 'all'=�
 let FAVKEYS = null;   // favMode일 때 즐겨찾기가 걸린 그리드 키 집합(키보드 ⭐ 강조용). null=끔
 let flashEid = null;   // '전체 단축키'에서 더블클릭해 넘어온 단축키 — 상세에서 잠깐 하이라이트할 eid
 let favPos = localStorage.getItem('SVfavPos') || 'split';   // 즐겨찾기 리스트 위치: 'split'(아래 좌우분할)·'kbright'(키보드 오른쪽)·'below'(아래 전체폭)
+let showNumpad = localStorage.getItem('SVnumpad')==='1';   // 숫자 키패드(텐키) 표시 — 풀사이즈 키보드용 (기본 꺼짐)
 let searchListMode = localStorage.getItem('SVsearchList')==='filter' ? 'filter' : 'highlight';   // 상세(수식키 조합별) 리스트: 강조만 / 강조+숨김
 let DKWS = [];   // 현재 검색 키워드(상세 리스트 하이라이트용) — showDetail에서 세팅
 let DFILTER = false;   // true면 detailRow가 searchListMode와 무관하게 매치 항목만(모아 보기용)
@@ -535,6 +542,18 @@ function arrowsCluster(){
   wrap.appendChild(top); wrap.appendChild(bot);
   return wrap;
 }
+function numpadCluster(){   // 숫자 키패드(텐키) — 풀사이즈 키보드 오른쪽. 정규화된 Keypad* 키로 매칭
+  const wrap=document.createElement('div');
+  const rows=[
+    [['KeypadClear','⌧'],['KeypadEquals','='],['KeypadDivide','/'],['KeypadMultiply','×']],
+    [['Keypad7','7'],['Keypad8','8'],['Keypad9','9'],['KeypadMinus','−']],
+    [['Keypad4','4'],['Keypad5','5'],['Keypad6','6'],['KeypadPlus','+']],
+    [['Keypad1','1'],['Keypad2','2'],['Keypad3','3'],['KeypadEnter','⌤']],
+    [['Keypad0','0',2],['KeypadDecimal','.']],
+  ];
+  rows.forEach(r=>{ const d=document.createElement('div'); d.className='krow'; r.forEach(([k,lab,w])=>d.appendChild(cellKey(k,lab,widthPx(w||1)))); wrap.appendChild(d); });
+  return wrap;
+}
 function navBlock(){
   const wrap=document.createElement('div'); wrap.style.marginTop='12px';
   const r1=document.createElement('div'); r1.className='krow';
@@ -572,9 +591,11 @@ function renderKB(){
   LAYOUT.forEach(row=>{ const d=document.createElement('div'); d.className='krow'; row.forEach(s=>d.appendChild(buildCap(s))); main.appendChild(d); });
   kb.appendChild(main);
   const right=document.createElement('div'); right.className='kbright';
-  right.appendChild(navBlock());   // F13–F20 확장 F키 행은 그리드에서 생략(거의 안 쓰임) — 상세/검색/전체단축키에는 그대로
+  const fr=document.createElement('div'); fr.className='krow'; FEXT.forEach(k=>fr.appendChild(cellKey(k,k,widthPx(1)))); right.appendChild(fr);
+  right.appendChild(navBlock());
   right.appendChild(arrowsCluster());
   kb.appendChild(right);
+  if(showNumpad){ const np=document.createElement('div'); np.className='kbnum'; np.appendChild(numpadCluster()); kb.appendChild(np); }   // 숫자 키패드: 세 번째 열(내비/화살표 오른쪽)
   document.getElementById('extras').innerHTML='';
 }
 
@@ -997,6 +1018,7 @@ function sync(){
   renderKB(); renderGestures(); syncOverview();   // overview는 구조 바뀔 때만 재렌더, 하이라이트만이면 클래스 토글(빠름)
   document.querySelectorAll('[data-view]').forEach(el=>el.classList.toggle('on', panelMode===el.dataset.view));
   document.getElementById('commonbtn').classList.toggle('on',hideCommon);
+  document.getElementById('numpadbtn').classList.toggle('on',showNumpad);
   document.getElementById('themebtn').classList.toggle('on',theme==='light');
   document.getElementById('capturebtn').classList.toggle('on',captureKeys);
   const mp=document.getElementById('modepanel');
@@ -1023,7 +1045,8 @@ function sync(){
   saveHash();
 }
 function readHeld(e){ const h=new Set(); if(e.metaKey)h.add('cmd'); if(e.ctrlKey)h.add('ctrl'); if(e.altKey)h.add('opt'); if(e.shiftKey)h.add('shift'); return h; }
-const CODEMAP={Backquote:'`',Minus:'-',Equal:'=',BracketLeft:'[',BracketRight:']',Semicolon:';',Quote:"'",Comma:',',Period:'.',Slash:'/',Space:'Space',Enter:'Return',Tab:'Tab',Escape:'Escape',Backspace:'Delete',Delete:'ForwardDelete',ArrowLeft:'Left',ArrowRight:'Right',ArrowUp:'Up',ArrowDown:'Down',Home:'Home',End:'End',PageUp:'PageUp',PageDown:'PageDown',CapsLock:'CapsLock'};
+const CODEMAP={Backquote:'`',Minus:'-',Equal:'=',BracketLeft:'[',BracketRight:']',Semicolon:';',Quote:"'",Comma:',',Period:'.',Slash:'/',Space:'Space',Enter:'Return',Tab:'Tab',Escape:'Escape',Backspace:'Delete',Delete:'ForwardDelete',ArrowLeft:'Left',ArrowRight:'Right',ArrowUp:'Up',ArrowDown:'Down',Home:'Home',End:'End',PageUp:'PageUp',PageDown:'PageDown',CapsLock:'CapsLock',
+  Numpad0:'Keypad0',Numpad1:'Keypad1',Numpad2:'Keypad2',Numpad3:'Keypad3',Numpad4:'Keypad4',Numpad5:'Keypad5',Numpad6:'Keypad6',Numpad7:'Keypad7',Numpad8:'Keypad8',Numpad9:'Keypad9',NumpadAdd:'KeypadPlus',NumpadSubtract:'KeypadMinus',NumpadMultiply:'KeypadMultiply',NumpadDivide:'KeypadDivide',NumpadDecimal:'KeypadDecimal',NumpadEnter:'KeypadEnter',NumpadEqual:'KeypadEquals',NumpadComma:'KeypadComma',NumLock:'KeypadClear'};
 function codeToKey(code){ if(!code)return null; if(code==='Backslash')return String.fromCharCode(92); if(code.startsWith('Key'))return code.slice(3); if(code.startsWith('Digit'))return code.slice(5); if(code[0]==='F'&&code.length<=3&&!isNaN(parseInt(code.slice(1),10)))return code; return CODEMAP[code]||null; }
 const MODCODE={MetaLeft:'cmd',MetaRight:'cmd',ControlLeft:'ctrl',ControlRight:'ctrl',AltLeft:'opt',AltRight:'opt',ShiftLeft:'shift',ShiftRight:'shift'};   // 물리 수식키 코드 → 수식키
 document.addEventListener('keydown',e=>{ if(e.target.tagName==='INPUT')return;
@@ -1154,6 +1177,7 @@ document.getElementById('themebtn').onclick=()=>{ theme=theme==='light'?'dark':'
   sm.onchange=()=>{ searchGridMode=sm.value; localStorage.setItem('SVsearchGrid',searchGridMode); sync(); }; }
 { const fpz=document.getElementById('favposselect'); fpz.value=favPos;   // 즐겨찾기 리스트 위치
   fpz.onchange=()=>{ favPos=fpz.value; localStorage.setItem('SVfavPos',favPos); sync(); }; }
+document.getElementById('numpadbtn').onclick=()=>{ showNumpad=!showNumpad; localStorage.setItem('SVnumpad',showNumpad?'1':'0'); document.getElementById('numpadbtn').classList.toggle('on',showNumpad); sync(); };
 document.getElementById('commonbtn').onclick=()=>{ hideCommon=!hideCommon; localStorage.setItem('SVhideCommon',hideCommon?'1':'0'); document.getElementById('commonbtn').classList.toggle('on',hideCommon); sync(); };
 document.getElementById('capturebtn').onclick=()=>{ captureKeys=!captureKeys; localStorage.setItem('SVcapture',captureKeys?'1':'0'); if(!captureKeys){ held=new Set(); heldStr=''; } sync(); };
 document.getElementById('printbtn').onclick=()=>{ const ov=overview,pm=panelMode; overview=true; panelMode=null; document.getElementById('ovbtn').classList.add('on'); sync(); setTimeout(()=>{ window.print(); overview=ov; panelMode=pm; document.getElementById('ovbtn').classList.toggle('on',overview); sync(); },150); };
