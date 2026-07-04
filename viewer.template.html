@@ -899,13 +899,20 @@ function sync(){
 function readHeld(e){ const h=new Set(); if(e.metaKey)h.add('cmd'); if(e.ctrlKey)h.add('ctrl'); if(e.altKey)h.add('opt'); if(e.shiftKey)h.add('shift'); return h; }
 const CODEMAP={Backquote:'`',Minus:'-',Equal:'=',BracketLeft:'[',BracketRight:']',Semicolon:';',Quote:"'",Comma:',',Period:'.',Slash:'/',Space:'Space',Enter:'Return',Tab:'Tab',Escape:'Escape',Backspace:'Delete',Delete:'ForwardDelete',ArrowLeft:'Left',ArrowRight:'Right',ArrowUp:'Up',ArrowDown:'Down',Home:'Home',End:'End',PageUp:'PageUp',PageDown:'PageDown',CapsLock:'CapsLock'};
 function codeToKey(code){ if(!code)return null; if(code==='Backslash')return String.fromCharCode(92); if(code.startsWith('Key'))return code.slice(3); if(code.startsWith('Digit'))return code.slice(5); if(code[0]==='F'&&code.length<=3&&!isNaN(parseInt(code.slice(1),10)))return code; return CODEMAP[code]||null; }
+const MODCODE={MetaLeft:'cmd',MetaRight:'cmd',ControlLeft:'ctrl',ControlRight:'ctrl',AltLeft:'opt',AltRight:'opt',ShiftLeft:'shift',ShiftRight:'shift'};   // 물리 수식키 코드 → 수식키
 document.addEventListener('keydown',e=>{ if(e.target.tagName==='INPUT')return;
   if(e.key==='Escape'&&chordPrefix){ e.preventDefault(); exitChord(); return; }
   if(e.key==='Escape'&&panelMode){ e.preventDefault(); panelMode=null; sync(); return; }
   if(panelMode==='quiz'){ const mk=codeToKey(e.code); if(mk){ e.preventDefault(); if(!e.repeat){ if(quizState&&!quizState.answered){ const combo=comboSym([...readHeld(e)])+mk; gradeQuiz(combo); } else { newQuizQ(); renderQuiz(); } } } return; }
   if(!captureKeys) return;   // 입력 감지 OFF — ⌘C 복사·텍스트 편집 등 브라우저 기본 동작을 막지 않음
-  const mapped=codeToKey(e.code); const h=readHeld(e);   // 실제 입력에 충실 — 브라우저가 받은 그대로(예: caps→⌘Space 리맵이면 ⌘Space가 정확)
-  const s=[...h].sort().join(); let changed=false; if(s!==heldStr){heldStr=s;held=h;changed=true;} if(mapped){ e.preventDefault(); if(!e.repeat){ selectedKey = (mapped===selectedKey ? null : mapped); changed=true; } } if(changed) sync(); });   // 같은 키 다시 누르면 해제(토글)
+  const h=readHeld(e);   // 실제 입력에 충실 — 브라우저가 받은 그대로(예: caps→⌘Space 리맵이면 ⌘Space가 정확)
+  const mp2=MODCODE[e.code]; let stickyChanged=false;
+  if(mp2 && !e.repeat && sticky.has(mp2)){ sticky.delete(mp2); h.delete(mp2); stickyChanged=true; }   // 클릭으로 고정(sticky)한 수식키를 물리 수식키로 즉시 해제
+  const mapped=codeToKey(e.code);
+  const s=[...h].sort().join(); let changed=false;
+  if(s!==heldStr || stickyChanged){ heldStr=s; held=h; changed=true; }
+  if(mapped){ e.preventDefault(); if(!e.repeat){ selectedKey = (mapped===selectedKey ? null : mapped); changed=true; } }
+  if(changed) sync(); });   // 같은 키 다시 누르면 해제(토글)
 document.addEventListener('keyup',e=>{ if(!captureKeys) return; const h=readHeld(e); const s=[...h].sort().join(); if(s!==heldStr){heldStr=s;held=h;sync();} });
 window.addEventListener('blur',()=>{ if(heldStr){heldStr='';held=new Set();sync();} });
 
