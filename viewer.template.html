@@ -303,7 +303,9 @@ function delCustom(id){ ANN.custom=(ANN.custom||[]).filter(c=>c.id!==id); saveAn
 function saveAnn(){ try { localStorage.setItem('SVann', JSON.stringify(ANN)); } catch(e){} }
 function annKey(mods, key){ return [...mods].sort().join('+') + '|' + key; }   // 조합 단위(노트·레거시 즐겨찾기)
 // 즐겨찾기는 '단축키 원소 하나' 단위 — 조합이 같아도 동작/소스/스코프로 구분 (VS Code ⌥K 2개 등을 따로 별표)
-function eid(e){ return JSON.stringify([[...(e.mods||[])].sort().join('+'), e.key, e.cmods?[...e.cmods].sort().join('+'):'', e.ckey||'', e.action||'', e.source||'', e.scope||'']); }
+function eid(e){ const M=e._okey!==undefined;   // 채드 리매핑 엔트리(_o*)는 원래 채드(⌘K→M) 식별자로 별표해야 평탄화 안 됨
+  const mods=M?e._omods:e.mods, key=M?e._okey:e.key, cmods=M?e._ocmods:e.cmods, ckey=M?e._ockey:e.ckey;
+  return JSON.stringify([[...(mods||[])].sort().join('+'), key, cmods?[...cmods].sort().join('+'):'', ckey||'', e.action||'', e.source||'', e.scope||'']); }
 function favParse(fk){ try{ const a=JSON.parse(fk); if(Array.isArray(a)&&a.length>=7) return {mods:a[0]?a[0].split('+'):[], key:a[1], cmods:a[2]?a[2].split('+'):null, ckey:a[3]||null, action:a[4], source:a[5], scope:a[6]}; }catch(_){} return null; }   // 엔트리 즐겨찾기 키 파싱(레거시 조합키면 null)
 let prefScopeRight = localStorage.getItem('SVscopeRight')!=='0';  // 상세 패널 스코프(global/chrome 등) 위치: 오른쪽 정렬(기본) vs 왼쪽 인라인
 let ovGroup = ['mod','key','source'].includes(localStorage.getItem('SVovGroup')) ? localStorage.getItem('SVovGroup') : 'mod';  // 전체 단축키 치트시트 묶음 기준 (잘못된 저장값은 'mod'로)
@@ -351,7 +353,7 @@ function recompute(){
   eff=new Set([...sticky,...held]);
   CUR = chordPrefix
     ? DB.entries.filter(e=> e.ckey && e.key===chordPrefix.key && sameSet(e.mods,new Set(chordPrefix.mods)) && inCtx(e))
-                .map(e=>({mods:e.cmods||[], key:e.ckey, action:e.action, source:e.source, scope:e.scope, detail:e.detail}))  // 후속 누름을 일반 엔트리처럼 리매핑 → 그리드/상세 로직 재사용
+                .map(e=>({mods:e.cmods||[], key:e.ckey, action:e.action, source:e.source, scope:e.scope, detail:e.detail, _omods:e.mods, _okey:e.key, _ocmods:e.cmods, _ockey:e.ckey}))  // 후속 누름을 일반 엔트리처럼 리매핑(_o*=원래 채드 식별자, 즐겨찾기 eid용)
     : ctxEntries();
 }
 function sameSet(arr,set){ if(arr.length!==set.size) return false; for(const m of arr) if(!set.has(m)) return false; return true; }
@@ -756,7 +758,7 @@ let quizState=null;
 function quizPool(){
   const favKeys=Object.keys(ANN.fav); let pool=[];
   favKeys.forEach(fk=>{ const p=favParse(fk);
-    if(p){ const m=DB.entries.find(e=>e.key===p.key&&sameSet(e.mods,new Set(p.mods))&&e.action===p.action&&e.scope===p.scope) || DB.entries.find(e=>e.key===p.key&&sameSet(e.mods,new Set(p.mods))); if(m) pool.push(m); }
+    if(p){ const m=favEntry(p); if(m) pool.push(m); }
     else { const i=fk.indexOf('|'), key=fk.slice(i+1), mods=fk.slice(0,i)?fk.slice(0,i).split('+'):[]; const m=DB.entries.find(e=>e.key===key&&sameSet(e.mods,new Set(mods))); if(m) pool.push(m); } });
   if(!pool.length) pool=ctxEntries().filter(e=>e.mods.length>0);
   return pool;
@@ -972,14 +974,23 @@ document.addEventListener('keyup',e=>{ if(!captureKeys) return; const h=readHeld
 window.addEventListener('blur',()=>{ if(heldStr){heldStr='';held=new Set();sync();} });
 
 // 쉬는 상태(검색·선택 키 없음)의 상세 영역에 즐겨찾기 홈을 렌더 — 없으면 안내
+// 즐겨찾기 파싱값 → 실제 DB 엔트리 찾기 (잘못 저장된 flat-chord도 진짜 채드로 복구)
+function favEntry(p){
+  if(!p) return null;
+  const c = DB.entries.filter(x=>x.action===p.action && x.source===p.source && x.scope===p.scope);
+  return c.find(x=>x.key===p.key && sameSet(x.mods,new Set(p.mods)) && (p.ckey? x.ckey===p.ckey : !x.ckey))
+      || c.find(x=>x.ckey===p.key && sameSet(x.cmods||[],new Set(p.mods)))   // parsed key/mods가 실은 2nd 누름(ckey/cmods)였던 경우
+      || c[0] || null;
+}
 // 즐겨찾기 한 줄 — 엔트리 단위(별표한 그 단축키 하나) 또는 레거시 조합키 둘 다 처리
 function favRowHTML(fk){
   const p=favParse(fk);
-  if(p){   // 엔트리 단위
-    const combo = p.ckey ? `${comboSym(p.mods)||''}${p.key} ▸ ${comboSym(p.cmods||[])}${p.ckey}` : `${comboSym(p.mods)||'(무수식)'}${p.key}`;
-    return `<div class="row" data-selkey="${(p.key||'').replace(/"/g,'&quot;')}" data-selmods="${(p.mods||[]).join('+')}"><button class="favbtn on" data-fav="${favAttr(fk)}" title="즐겨찾기 해제">⭐</button><span class="kc">${combo}</span>`
-      +`<span class="src" style="background:${COLORS[p.source]||'#666'}">${p.source}</span>`
-      +`<div style="flex:1">${(p.action||'').replace(/</g,'&lt;')}</div><span class="scope">${p.scope}</span></div>`;
+  if(p){   // 엔트리 단위 — 실제 엔트리(채드 포함)로 표시
+    const e=favEntry(p)||p;
+    const combo = e.ckey ? `${comboSym(e.mods)||''}${e.key} ▸ ${comboSym(e.cmods||[])}${e.ckey}` : `${comboSym(e.mods)||'(무수식)'}${e.key}`;
+    return `<div class="row" data-selkey="${(e.key||'').replace(/"/g,'&quot;')}" data-selmods="${(e.mods||[]).join('+')}"><button class="favbtn on" data-fav="${favAttr(fk)}" title="즐겨찾기 해제">⭐</button><span class="kc">${combo}</span>`
+      +`<span class="src" style="background:${COLORS[e.source]||'#666'}">${e.source}</span>`
+      +`<div style="flex:1">${(e.action||'').replace(/</g,'&lt;')}</div><span class="scope">${e.scope}</span></div>`;
   }
   const i=fk.indexOf('|'), modstr=fk.slice(0,i), key=fk.slice(i+1), mods=modstr?modstr.split('+'):[];   // 레거시 조합
   const matches=DB.entries.filter(e=>e.key===key && sameSet(e.mods,new Set(mods)));
