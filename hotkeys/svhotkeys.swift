@@ -950,10 +950,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         menu.addItem(mk("Shortcut Viewer 열기", #selector(openViewer)))
         menu.addItem(mk("다시 읽기 (Reload)", #selector(reloadNow)))
         menu.addItem(.separator())
-        menu.addItem(mk("종료", #selector(NSApplication.terminate(_:))))
+        menu.addItem(mk("종료", #selector(quitApp)))
         status.menu = menu
     }
     func mk(_ t: String, _ s: Selector) -> NSMenuItem { let m = NSMenuItem(title: t, action: s, keyEquivalent: ""); m.target = self; return m }
+    @objc func quitApp() { NSApp.terminate(nil) }   // 종료가 회색이던 버그 수정 — target=self(AppDelegate)가 terminate:에 응답 못 해 비활성됐음
 
     @objc func fireNow(_ s: NSMenuItem) { if let a = s.representedObject as? HKAction { Runner.run(a) } }
     @objc func reloadNow() { Store.shared.load(); reregister() }
