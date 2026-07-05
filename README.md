@@ -92,6 +92,13 @@ collectors (build.py + axmenudump.swift)  →  shortcuts.json  →  viewer.html
 - **`axmenudump.swift`** — reads running apps' menu shortcuts via the Accessibility API (`swiftc axmenudump.swift -o axmenudump`; `refresh.sh` builds it for you).
 - **`viewer.template.html`** — the interactive keyboard-grid UI; data is injected at the `/*__DATA__*/` marker.
 
+## Public cheat sheets (web)
+
+Beyond the personal viewer, `python3 gen_seo.py` generates a **static, SEO-friendly site** into `docs/`
+— one searchable page per app (*"`<App>` keyboard shortcuts for Mac"*) plus an index, `sitemap.xml`, and
+`robots.txt`. It's built **only** from the shareable, PII-free corpus (`defaults/` + `web_shortcuts.json`,
+never your personal scan), so it's safe to publish. Enable **GitHub Pages ▸ `main` ▸ `/docs`** to serve it.
+
 ## Limitations (honest)
 
 - **No tool can enumerate every global hotkey** on macOS — third-party apps' `RegisterEventHotKey` registrations aren't exposed by any public API. We read every source we *can*; the rest go in the manual files.

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://kim-dongryeong.github.io/shortcut-viewer/sitemap.xml
