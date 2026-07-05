@@ -858,11 +858,13 @@ PUA_KEY = {chr(0xF700): "Up", chr(0xF701): "Down", chr(0xF702): "Left", chr(0xF7
 PUA_KEY.update({chr(0xF704 + i): "F" + str(i + 1) for i in range(20)})   # NSF1FunctionKey(0xF704)…NSF20
 SHIFTED = {'+': '=', '_': '-', '~': '`', '!': '1', '@': '2', '#': '3', '$': '4', '%': '5', '^': '6', '&': '7', '*': '8',
            '(': '9', ')': '0', '{': '[', '}': ']', '|': '\\', ':': ';', '"': "'", '<': ',', '>': '.', '?': '/'}   # 물리 키 = base + shift (원 표기는 detail에 남음)
+from svkeys import KEYPAD_KEY   # keypad_*/numpad* → Keypad* (공유 테이블)
 def _norm_entry_keys(e):
     for kf, mf in (("key", "mods"), ("ckey", "cmods")):
         k = e.get(kf)
         if not k: continue
         k = PUA_KEY.get(k, k)
+        k = KEYPAD_KEY.get(k, k)   # numpad 정확도: 데이터 단계에서 canonical화 (뷰어 JS 임시맵 제거)
         if k in SHIFTED:
             k = SHIFTED[k]
             if "shift" not in (e.get(mf) or []): e[mf] = (e.get(mf) or []) + ["shift"]

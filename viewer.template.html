@@ -185,6 +185,10 @@
   .vbtn.on{background:#0b2a45;border-color:#38bdf8;color:#7dd3fc}
   html[data-theme="light"] .vbtn.on{background:#e0f2fe;color:#0369a1}
   .conf{border:1px solid var(--line);border-left:3px solid #f59e0b;border-radius:8px;padding:8px 12px;margin:6px 0;background:var(--panel)}
+  .conf.creal{border-left-color:#ff6b6b} .conf.cglobal{border-left-color:#f59f00} .conf.cctx{border-left-color:#74c0fc}
+  .confbadge{font-size:10.5px;font-weight:700;padding:1px 7px;border-radius:6px;vertical-align:2px}
+  .confbadge.creal{background:#5b1a1a;color:#ffb3b3} .confbadge.cglobal{background:#5b4410;color:#ffe08a} .confbadge.cctx{background:#123a5b;color:#a5d8ff}
+  html[data-theme="light"] .confbadge.creal{background:#ffe3e3;color:#c92a2a} html[data-theme="light"] .confbadge.cglobal{background:#fff3bf;color:#b35c00} html[data-theme="light"] .confbadge.cctx{background:#d0ebff;color:#1971c2}
   .conf .ck{font-weight:800;font-size:15px;margin-bottom:4px}
   .conf .cl{display:flex;gap:8px;align-items:baseline;padding:2px 0}
   .conf .cl .src{font-size:11px;padding:1px 6px;border-radius:5px;color:#0b0d11;font-weight:700}
@@ -328,10 +332,7 @@ const DB = /*__DATA__*/;
 let ANN = {fav:{}, note:{}, enote:{}, custom:[], ghk:[]};   // enote = 엔트리(단축키 하나) 단위 노트 (eid 키) · note = 조합 단위(레거시)
 try { const base=DB.ann||{}; Object.assign(ANN.fav, base.fav||{}); Object.assign(ANN.note, base.note||{}); Object.assign(ANN.enote, base.enote||{}); if(Array.isArray(base.custom)) ANN.custom=base.custom; if(Array.isArray(base.ghk)) ANN.ghk=base.ghk; } catch(e){}  // baked-in (annotations.json)
 try { const s=JSON.parse(localStorage.getItem('SVann')||'null'); if(s){ Object.assign(ANN.fav,s.fav||{}); Object.assign(ANN.note,s.note||{}); Object.assign(ANN.enote,s.enote||{}); if(Array.isArray(s.custom)) ANN.custom=s.custom; if(Array.isArray(s.ghk)) ANN.ghk=s.ghk; } } catch(e){}  // live localStorage overlay
-// ── 숫자 키패드(텐키) 키 이름 정규화: 소스마다 제각각(keypad_0·numpad0·keypad_plus·numpad_add…)을 그리드 셀 이름으로 통일 ──
-const KEYPAD_MAP={ numpad0:'Keypad0', keypad_0:'Keypad0', keypad_1:'Keypad1', keypad_2:'Keypad2', keypad_3:'Keypad3', keypad_4:'Keypad4', keypad_5:'Keypad5', keypad_6:'Keypad6', keypad_7:'Keypad7', keypad_8:'Keypad8', keypad_9:'Keypad9',
-  numpad_add:'KeypadPlus', keypad_plus:'KeypadPlus', numpad_subtract:'KeypadMinus', keypad_minus:'KeypadMinus', keypad_multiply:'KeypadMultiply', keypad_slash:'KeypadDivide', keypad_decimal:'KeypadDecimal', keypad_comma:'KeypadComma', keypad_enter:'KeypadEnter', keypad_clear:'KeypadClear', keypad_equals:'KeypadEquals' };
-DB.entries.forEach(e=>{ const m=KEYPAD_MAP[e.key]; if(m) e.key=m; });
+// (숫자 키패드 키 이름 정규화는 이제 build.py/render.py의 svkeys.KEYPAD_KEY에서 처리 → 데이터가 이미 canonical Keypad*)
 // ── 내 단축키(custom): 어떤 소스에도 없는 걸 직접 기록 → DB.entries에 병합 (localStorage에 저장·export 포함) ──
 function mergeCustom(){
   DB.entries = DB.entries.filter(e=>e.source!=='custom');
@@ -470,7 +471,7 @@ function renderCtx(){
   // 전체/해제/반대 + Global(특별 지위)을 '앱 선택'을 펼치지 않아도 바로 클릭하도록 항상 보이는 바에 둔다
   document.getElementById('ctxbulkbar').innerHTML=`<span class="lbl" style="font-size:11px;color:var(--dim)">선택:</span><button data-bulk="all">전체</button><button data-bulk="none">해제</button><button data-bulk="invert">반대</button><button data-bulk="global">Global</button>`;
   const bulk=`<div class="ctxbulk"><span class="lbl">표시:</span><button data-bulk="icons" class="${showIcons?'on':''}">🖼 앱 아이콘</button></div>`;
-  document.getElementById('ctxchips').innerHTML=bulk+allCtx.map(a=>{ const ic=(showIcons&&ICONS[a])?`<img class="ctxicon" src="${ICONS[a]}" alt="">`:''; return `<span class="chip" data-ctx="${a.replace(/"/g,'&quot;')}">${ic}${a}</span>`; }).join('');
+  document.getElementById('ctxchips').innerHTML=bulk+allCtx.map(a=>{ const ic=(showIcons&&ICONS[a])?`<img class="ctxicon" src="${attr(ICONS[a])}" alt="">`:''; return `<span class="chip" data-ctx="${attr(a)}">${ic}${esc(a)}</span>`; }).join('');
   document.querySelectorAll('[data-ctx]').forEach(el=>el.onclick=()=>{ const c=el.dataset.ctx; ctxSet.has(c)?ctxSet.delete(c):ctxSet.add(c); sync(); });
   document.querySelectorAll('[data-bulk]').forEach(b=>b.onclick=()=>{ const m=b.dataset.bulk;
     if(m==='icons'){ showIcons=!showIcons; localStorage.setItem('SVicons',showIcons?'1':'0'); renderCtx(); return; }
@@ -626,6 +627,9 @@ function showTip(ev,key,all){
 function moveTip(ev){ tip.style.left=Math.min(ev.clientX+14,innerWidth-370)+'px'; tip.style.top=Math.min(ev.clientY+14,innerHeight-tip.offsetHeight-10)+'px'; }
 function hideTip(){ tip.style.display='none'; }
 
+// XSS 방어: 공유 defaults·custom scope의 앱/스코프 이름이 innerHTML로 들어갈 때 이스케이프 (코덱스 P1)
+function esc(s){ return String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+function attr(s){ return esc(s); }
 const HLCOLORS = ['#fde047','#7dd3fc','#86efac','#f0abfc','#fdba74','#fca5a5'];   // 검색어별 하이라이트 색 (노랑·하늘·초록·분홍·주황·빨강)
 function hlText(text, kws){   // 각 키워드 매치를 서로 다른 색 <mark>로 (한 번에 치환해 태그 안쪽 오염 방지)
   const safe=String(text||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');
@@ -642,7 +646,7 @@ function rowHTML(e,hi,kws){
     `<span class="src" style="background:${COLORS[e.source]||'#666'}">${e.source}</span>`+
     `<div style="flex:1"><div>${hlText(e.action,kws)}</div>`+
     `<div class="muted" style="font-size:11px">${hlText(e.detail||'',kws)}</div></div>`+
-    `<span class="scope">${scopeIcon(e.scope)}${e.scope}</span></div>`;
+    `<span class="scope">${scopeIcon(e.scope)}${esc(e.scope)}</span></div>`;
 }
 function allModSubsets(){
   const M=['ctrl','opt','shift','cmd']; const out=[[]];
@@ -664,7 +668,7 @@ function detailRow(mods, key, matches, hit){
         const fk=eid(e), fav=!!ANN.fav[fk], enote=ANN.enote[fk]||'';   // 이 '단축키 하나' 단위 (조합이 같아도 개별) · 빈 별 대신 우클릭 메뉴
         const star=`<span class="favmk${fav?' on':''}" data-favtoggle="${favAttr(fk)}" title="${fav?'즐겨찾기 · 클릭/우클릭으로 해제':'즐겨찾기 추가 (클릭 · 우클릭=복사·노트)'}">${fav?'⭐':'☆'}</span>`;
         const src=`<span class="src" style="background:${COLORS[e.source]||'#666'}">${e.source}</span>`;
-        const scope=`<span class="scope">${scopeIcon(e.scope)}${e.scope}</span>`+(e.source==='custom'?`<span class="delx" data-delc="${e._cid}" title="내 단축키 삭제">✕</span>`:'');
+        const scope=`<span class="scope">${scopeIcon(e.scope)}${esc(e.scope)}</span>`+(e.source==='custom'?`<span class="delx" data-delc="${e._cid}" title="내 단축키 삭제">✕</span>`:'');
         const det=e.detail?`<div class="muted" style="font-size:11px">${hlText(e.detail,DKWS)}</div>`:'';
         const enh=enote?`<div class="enote">📝 ${enote.replace(/</g,'&lt;')}</div>`:'';
         const act=(e.ckey?chordTag(e)+' ':'')+hlText(e.action,DKWS);
@@ -826,15 +830,34 @@ function setView(v){ panelMode=(panelMode===v?null:v); if(panelMode){ overview=f
 const ALLKEYS=(()=>{ const k=[]; LAYOUT.forEach(r=>r.forEach(s=>{ if(s[0]==='key') k.push(s[1]); })); return [...new Set([...k,...NAV,'Up','Down','Left','Right',...FEXT])]; })();
 const HOMEROW=new Set(['A','S','D','F','G','H','J','K','L',';',"'"]);
 
+// 충돌 분류(코덱스 P1): 같은 조합이라도 (a)같은 앱 안 2+동작=확정 (b)글로벌 vs 앱=가로채기 위험 (c)when/앱 다름=컨텍스트 분기
+function classifyConflict(g){
+  if(new Set(g.map(e=>ovNorm(e.action))).size < 2) return null;   // 같은 동작만 = 표시 중복(충돌 아님)
+  const byScope={}; g.forEach(e=>{ (byScope[e.scope]=byScope[e.scope]||[]).push(e); });
+  for(const s in byScope){ const es=byScope[s];
+    if(new Set(es.map(e=>ovNorm(e.action))).size>=2)   // 한 스코프 안에서 2+ 다른 동작
+      return (new Set(es.map(e=>e.detail||'')).size>=2) ? 'ctx' : 'real';   // when/detail 다르면 컨텍스트 분기, 같으면 확정
+  }
+  const isG=e=>e.scope==='global'||e.scope==='Global';
+  if(g.some(isG) && g.some(e=>!isG(e))) return 'global';   // 글로벌 핫키가 앱 단축키를 먹을 수 있음
+  return 'ctx';   // 서로 다른 앱 → 컨텍스트 의존(동시 활성 아님)
+}
+const CONF_CAT={ real:{label:'확정 충돌', cls:'creal', hint:'같은 앱/스코프에서 한 조합에 2개+ 다른 동작 — 실제 충돌'},
+                 global:{label:'글로벌 가로채기 위험', cls:'cglobal', hint:'글로벌 핫키가 앱 단축키를 가로챌 수 있음'},
+                 ctx:{label:'컨텍스트 분기', cls:'cctx', hint:'앱·조건(when)이 달라 동시 활성 아님 — 실제 충돌 아님'} };
 function renderConflicts(){
   const ents=ctxEntries(), by={};
   ents.forEach(e=>{ const k=[...e.mods].sort().join(',')+'|'+e.key+'|'+(e.ckey?comboSym(e.cmods||[])+e.ckey:''); (by[k]=by[k]||[]).push(e); });
-  const conflicts=[];
-  for(const k in by){ const g=by[k]; if(new Set(g.map(e=>ovNorm(e.action))).size>=2) conflicts.push(g); }
-  conflicts.sort((a,b)=>a[0].mods.length-b[0].mods.length||comboFull(a[0]).localeCompare(comboFull(b[0])));
-  let html=`<div class="sec">⚠️ 충돌 — ${[...ctxSet].join(', ')||'(없음)'} · ${conflicts.length}개 조합에 2+ 다른 동작 <span class="muted" style="text-transform:none;letter-spacing:0;font-size:11px">(같은 앱이면 실제 충돌 · 스코프가 다르면 컨텍스트 의존)</span></div>`;
-  html+= conflicts.length ? conflicts.map(g=>`<div class="conf"><div class="ck">${comboFull(g[0])} <span class="muted" style="font-weight:400;font-size:12px">${g.length}개</span></div>`
-      + g.map(e=>`<div class="cl"><span class="src" style="background:${COLORS[e.source]||'#666'}">${e.source}</span><span style="flex:1">${e.action.replace(/</g,'&lt;')}</span><span class="scope">${scopeIcon(e.scope)}${e.scope}</span></div>`).join('')+`</div>`).join('')
+  const groups=[]; for(const k in by){ const cat=classifyConflict(by[k]); if(cat) groups.push({g:by[k], cat}); }
+  const ord={real:0,global:1,ctx:2};
+  groups.sort((a,b)=>ord[a.cat]-ord[b.cat]||a.g[0].mods.length-b.g[0].mods.length||comboFull(a.g[0]).localeCompare(comboFull(b.g[0])));
+  const cnt={real:0,global:0,ctx:0}; groups.forEach(x=>cnt[x.cat]++);
+  let html=`<div class="sec">⚠️ 충돌 · ${groups.length}개 <span class="muted" style="text-transform:none;letter-spacing:0;font-size:11px">— <b style="color:#ff6b6b">확정 ${cnt.real}</b> · <b style="color:#f59f00">글로벌 가로채기 ${cnt.global}</b> · <b style="color:#74c0fc">컨텍스트 분기 ${cnt.ctx}</b></span></div>`;
+  html+= groups.length ? groups.map(({g,cat})=>{ const c=CONF_CAT[cat];
+      return `<div class="conf ${c.cls}"><div class="ck">${comboFull(g[0])} <span class="confbadge ${c.cls}">${c.label}</span> <span class="muted" style="font-weight:400;font-size:12px">${g.length}개</span></div>`
+        + `<div class="muted" style="font-size:11px;margin:0 0 3px">${c.hint}</div>`
+        + g.map(e=>`<div class="cl"><span class="src" style="background:${COLORS[e.source]||'#666'}">${esc(e.source)}</span><span style="flex:1">${hlText(e.action,[])}${e.detail?`<span class="muted" style="font-size:10.5px"> · ${esc(e.detail)}</span>`:''}</span><span class="scope">${scopeIcon(e.scope)}${esc(e.scope)}</span></div>`).join('')+`</div>`;
+    }).join('')
     : `<div class="empty">선택한 컨텍스트에 충돌 없음 ✓</div>`;
   document.getElementById('modepanel').innerHTML=html;
 }
@@ -1108,7 +1131,7 @@ function favRowHTML(fk){
     const enh=enote?`<div class="enote">📝 ${enote.replace(/</g,'&lt;')}</div>`:'';
     return `<div class="row${fk===flashEid?' flash':''}" data-selkey="${(e.key||'').replace(/"/g,'&quot;')}" data-selmods="${(e.mods||[]).join('+')}" data-eid="${favAttr(fk)}" data-copy="${favAttr(copyText(e))}" title="클릭=그 키 상세 · 우클릭=해제·복사·노트"><span class="kc">${combo}</span>`
       +`<span class="src" style="background:${COLORS[e.source]||'#666'}">${e.source}</span>`
-      +`<div style="flex:1">${(e.action||'').replace(/</g,'&lt;')}${enh}</div><span class="scope">${scopeIcon(e.scope)}${e.scope}</span></div>`;
+      +`<div style="flex:1">${(e.action||'').replace(/</g,'&lt;')}${enh}</div><span class="scope">${scopeIcon(e.scope)}${esc(e.scope)}</span></div>`;
   }
   const i=fk.indexOf('|'), modstr=fk.slice(0,i), key=fk.slice(i+1), mods=modstr?modstr.split('+'):[];   // 레거시 조합
   const matches=DB.entries.filter(e=>e.key===key && sameSet(e.mods,new Set(mods)));
@@ -1117,7 +1140,7 @@ function favRowHTML(fk){
   const act=acts.length?actTxt+(acts.length>3?` <span class="muted">…(+${acts.length-3})</span>`:''):'(빈 조합)';
   const scps=[...new Set(matches.map(e=>e.scope))];
   return `<div class="row" data-selkey="${(key||'').replace(/"/g,'&quot;')}" data-selmods="${mods.join('+')}"><button class="favbtn on" data-fav="${favAttr(fk)}" title="즐겨찾기 해제">⭐</button><span class="kc">${comboSym(mods)||'(무수식)'}${key} <span class="muted" style="font-size:10px">(조합 전체)</span></span>`
-    +`<div style="flex:1">${act}</div><span class="scope">${scopeIcon(scps[0])}${scps[0]||'free'}${scps.length>1?` +${scps.length-1}`:''}</span></div>`;
+    +`<div style="flex:1">${act}</div><span class="scope">${scopeIcon(scps[0])}${esc(scps[0]||'free')}${scps.length>1?` +${scps.length-1}`:''}</span></div>`;
 }
 function wireFavRows(root){
   root.querySelectorAll('[data-selkey]').forEach(el=>el.onclick=(ev)=>{ if(ev.target.closest('.favbtn'))return; chordPrefix=null; chordReturn=null; sticky=new Set(el.dataset.selmods?el.dataset.selmods.split('+'):[]); held=new Set(); selectedKey=el.dataset.selkey; sync(); window.scrollTo({top:0,behavior:'smooth'}); });
