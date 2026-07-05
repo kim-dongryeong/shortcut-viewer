@@ -1214,7 +1214,7 @@ document.getElementById('csvbtn').onclick=()=>exportRows('csv');
 document.getElementById('mdbtn').onclick=()=>exportRows('md');
 document.getElementById('scopepos').onclick=()=>{ prefScopeRight=!prefScopeRight; localStorage.setItem('SVscopeRight',prefScopeRight?'1':'0'); if(selectedKey)showDetail(selectedKey); };
 document.getElementById('annexport').onclick=()=>{ const b=new Blob([JSON.stringify(ANN,null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download='shortcut-annotations.json'; a.click(); };
-document.getElementById('annimport').onchange=e=>{ const f=e.target.files[0]; if(!f)return; const rd=new FileReader(); rd.onload=()=>{ try{ const j=JSON.parse(rd.result); Object.assign(ANN.fav,j.fav||{}); Object.assign(ANN.note,j.note||{}); saveAnn(); sync(); alert('가져왔습니다 ✓'); }catch(_){ alert('JSON 파싱 실패'); } }; rd.readAsText(f); };
+document.getElementById('annimport').onchange=e=>{ const f=e.target.files[0]; if(!f)return; const rd=new FileReader(); rd.onload=()=>{ try{ const j=JSON.parse(rd.result); Object.assign(ANN.fav,j.fav||{}); Object.assign(ANN.note,j.note||{}); Object.assign(ANN.enote,j.enote||{}); if(Array.isArray(j.custom)) ANN.custom=j.custom; if(Array.isArray(j.ghk)) ANN.ghk=j.ghk; mergeCustom(); normalizeFavs(); saveAnn(); sync(); alert('가져왔습니다 ✓ (즐겨찾기·노트·엔트리노트·내단축키·글로벌핫키)'); }catch(_){ alert('JSON 파싱 실패'); } }; rd.readAsText(f); };
 </script>
 </body>
 </html>

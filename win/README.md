@@ -7,7 +7,7 @@ macOS의 **SV Hotkeys**(글로벌 핫키 + 마우스 북마크)에 대응하는 
 | 층 | macOS | 이 폴더(Windows) |
 |---|---|---|
 | 핫키·마우스 실행 | SV Hotkeys (Swift) | **C#/.NET** — `SvHotkeysWin/Program.cs` |
-| 수집기(뷰어 데이터) | `build.py`+`axmenudump` | (TODO) `build_win.py` — 레지스트리·AHK·PowerToys 파싱 |
+| 수집기(뷰어 데이터) | `build.py`+`axmenudump` | `build_win.py` (스켈레톤) — AHK·PowerToys·시스템 시드 |
 | 뷰어 화면 | `viewer.html` | **공유** (같은 HTML 그리드) |
 
 ## 기능(초안)
@@ -28,7 +28,7 @@ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true --self-contained 
 
 ## TODO / 업그레이드 포인트
 - `mouse_event` → **`SendInput`** 로 교체(권장 API).
-- 바인딩을 코드 하드코딩 대신 **`hotkeys.json`** 에서 읽기(맥과 설정 공유).
+- ✅ 바인딩을 **`hotkeys.json`** 에서 읽음(맥과 스키마 공유). `%APPDATA%\shortcut-viewer\hotkeys.json`, 없으면 마우스 10칸 기본.
 - 우클릭/더블클릭 액션, `goto`(이동만) 등 액션 확장.
 - **배포**: 미서명 exe는 SmartScreen "알 수 없는 앱" 경고 → 원하면 Windows 코드서명 인증서(연 $$). v1은 미서명으로 시작 가능.
 - **수집기**(`build_win.py`) 신설: 레지스트리 핫키·AutoHotKey 스크립트·PowerToys Keyboard Manager·앱 accelerator → 뷰어 스키마(`mods,key,action,source,scope`).

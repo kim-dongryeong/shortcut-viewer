@@ -2,7 +2,7 @@
 
 A unified **macOS** keyboard-shortcut viewer: aggregates shortcuts from every source (macOS system,
 app menus, VS Code/Obsidian keymaps, Karabiner, BetterTouchTool, Raycast, manual globals) onto one
-interactive **keyboard-grid** HTML viewer with conflict + free-combo finding. MIT, open source.
+interactive **keyboard-grid** HTML viewer with conflict + free-combo finding. GPL-3.0, open source.
 
 ## Architecture / data flow
 
@@ -61,4 +61,4 @@ Read the PNG to confirm. To screenshot a specific state, `sed`-replace the defau
 ## Toolchain & style
 
 macOS (Apple Silicon, 14+), `swift` (Xcode CLT), system `/usr/bin/python3`, `jq`. No external Python deps.
-Match the existing compact style in `build.py` / `viewer.template.html`. License: MIT.
+Match the existing compact style in `build.py` / `viewer.template.html`. License: GPL-3.0-or-later.

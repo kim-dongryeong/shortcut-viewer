@@ -102,4 +102,6 @@ collectors (build.py + axmenudump.swift)  →  shortcuts.json  →  viewer.html
 
 ## License
 
-MIT © 2026 KDR
+GPL-3.0-or-later © 2026 KDR
+
+> 무료·오픈으로 배포하되 누가 닫아서(비공개) 상품으로 팔지 못하게 copyleft(GPL-3.0)를 택했습니다. 자유롭게 쓰고·고치고·배포할 수 있으나, 배포하는 파생물은 소스를 함께 공개해야 합니다.

@@ -1009,12 +1009,16 @@ meta = {"generated": datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
 
 # Favorites/notes: bake annotations.json (exported from the viewer) into the data so they survive
 # even if the browser's localStorage is cleared/blocked, and are portable across machines.
-ann = {"fav": {}, "note": {}}
+ann = {"fav": {}, "note": {}, "enote": {}, "custom": [], "ghk": []}
 _ap = os.path.join(PROJ, "annotations.json")
 if os.path.exists(_ap):
-    try:
-        _a = json.load(open(_ap)); ann = {"fav": _a.get("fav", {}), "note": _a.get("note", {})}
-        print(f"  annotations  fav {len(ann['fav'])} · note {len(ann['note'])} (from annotations.json)")
+    try:   # 5개 필드 전부 보존 (이전엔 fav/note만 구워 enote/custom/ghk 유실)
+        _a = json.load(open(_ap))
+        for _k in ("fav", "note", "enote"):
+            if isinstance(_a.get(_k), dict): ann[_k] = _a[_k]
+        for _k in ("custom", "ghk"):
+            if isinstance(_a.get(_k), list): ann[_k] = _a[_k]
+        print(f"  annotations  fav {len(ann['fav'])} · note {len(ann['note'])} · enote {len(ann['enote'])} · custom {len(ann['custom'])} · ghk {len(ann['ghk'])} (from annotations.json)")
     except Exception: pass
 
 data = {"meta": meta, "entries": entries, "gestures": gestures, "ann": ann}
