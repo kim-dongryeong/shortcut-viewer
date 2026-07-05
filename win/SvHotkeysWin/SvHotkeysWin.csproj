@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- SV Hotkeys (Windows) — 초안 skeleton. macOS의 SV Hotkeys에 대응하는 Windows 네이티브 앱.
+       빌드(Windows + .NET 8 SDK):   dotnet build -c Release
+       단일 실행파일(자체포함):        dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true --self-contained true
+       (AHK-컴파일 exe와 달리 .NET exe는 백신 오탐이 훨씬 적음.) -->
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>SvHotkeysWin</AssemblyName>
+    <RootNamespace>SvHotkeysWin</RootNamespace>
+  </PropertyGroup>
+</Project>
