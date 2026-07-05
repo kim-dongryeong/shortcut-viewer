@@ -200,6 +200,23 @@
   .statrow .sl{min-width:150px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .statbar{height:14px;border-radius:4px;background:#38bdf8;min-width:2px}
   .statrow .sv{color:var(--txt);font-variant-numeric:tabular-nums;min-width:44px}
+  /* 진단(Health Report) 카드 */
+  .hstat{display:flex;gap:10px;flex-wrap:wrap;margin:4px 0 6px}
+  .hstat .hb{flex:1;min-width:96px;border:1px solid var(--line);border-radius:10px;padding:9px 12px;background:var(--panel)}
+  .hstat .hb b{display:block;font-size:22px;font-variant-numeric:tabular-nums;line-height:1.1}
+  .hstat .hb span{font-size:11px;color:var(--dim)}
+  .hcov{height:9px;border-radius:5px;background:var(--line);overflow:hidden;margin:2px 0 2px}
+  .hcov i{display:block;height:100%;background:linear-gradient(90deg,#22c55e,#38bdf8);border-radius:5px}
+  .hgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px;margin:4px 0 6px}
+  .hs{display:flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:9px;padding:8px 11px;background:var(--panel)}
+  .hs .hd{width:9px;height:9px;border-radius:3px;flex:none}
+  .hs .hn{flex:1;min-width:0}
+  .hs .hn b{font-size:13px} .hs .hn small{display:block;color:var(--dim);font-size:10.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .hs .hv{font-variant-numeric:tabular-nums;font-weight:700;color:var(--txt)}
+  .hs.miss{opacity:.62;border-style:dashed} .hs.miss .hv{color:var(--dim);font-weight:400}
+  .henv{font-size:12px;color:var(--dim);line-height:1.7} .henv b{color:var(--txt);font-weight:600}
+  .hlink{background:none;border:1px solid var(--line);color:var(--txt);border-radius:7px;padding:3px 10px;font-size:12px;cursor:pointer}
+  .hlink:hover{border-color:var(--dim)}
   .quiz{max-width:560px;margin:10px 0;border:1px solid var(--line);border-radius:12px;padding:20px;background:var(--panel);text-align:center}
   .quiz .qa{font-size:20px;font-weight:700;margin:6px 0 14px}
   .quiz .qp{font-size:26px;font-weight:800;color:#7dd3fc;letter-spacing:1px;min-height:34px}
@@ -275,6 +292,7 @@
   </div>
   <div class="vbar" id="moretools" style="display:none">
     <button class="vbtn" data-view="conflicts" title="현재 컨텍스트에서 한 조합에 2개 이상 서로 다른 동작이 걸린 것">⚠️ 충돌</button>
+    <button class="vbtn" data-view="health" title="수집 현황·소스 커버리지·충돌 요약·스캔 환경 한눈에 보기">🩺 진단</button>
     <button class="vbtn" data-view="stats" title="앱별 개수·수식키 분포·바쁜 키 통계">📊 통계</button>
     <button class="vbtn" data-view="quiz" title="현재 컨텍스트/즐겨찾기 단축키로 플래시카드 연습">🎓 퀴즈</button>
     <span style="width:1px;height:20px;background:var(--line);margin:0 3px"></span>
@@ -580,15 +598,16 @@ function navBlock(){
   return wrap;
 }
 // 검색어가 매치하는 '키' 집합 (선택 컨텍스트 안, 어느 수식키 레이어든) → 그리드에서 그 키를 강조/숨김
+function entHay(e){ return e._hay || (e._hay = (e.action+' '+e.key+' '+(e.detail||'')+' '+e.scope+' '+e.source).toLowerCase()); }  // 검색 haystack 사전계산·메모(코덱스 perf 1차) — custom 추가분도 지연계산
 function gridSearchKeys(q){
   if(!q) return null;
-  const combo=parseQueryCombo(q), kws = combo ? [] : q.split(/\s+/).filter(Boolean);
+  const combo=parseQueryCombo(q), kws = combo ? [] : q.split(/\s+/).filter(Boolean).map(k=>k.toLowerCase());  // 키워드는 한 번만 lower
   const s=new Set();
   DB.entries.forEach(e=>{
     if(!inCtx(e)) return;
     let m;
     if(combo) m = e.key.toLowerCase()===combo.key.toLowerCase()&&sameSet(e.mods,new Set(combo.mods));
-    else { const hay=(e.action+' '+e.key+' '+(e.detail||'')+' '+e.scope).toLowerCase(); m=kws.every(k=>hay.includes(k.toLowerCase())); }
+    else { const hay=entHay(e); m=kws.every(k=>hay.includes(k)); }
     if(m) s.add(e.key);
   });
   return s;
@@ -861,6 +880,45 @@ function renderConflicts(){
     : `<div class="empty">선택한 컨텍스트에 충돌 없음 ✓</div>`;
   document.getElementById('modepanel').innerHTML=html;
 }
+// 진단(코덱스 P1 "첫 화면 진단 카드"): SV가 모을 수 있는 소스 레지스트리 — 라벨 + 설정법. count는 런타임 집계.
+const SRC_INFO=[
+  {k:'system',    label:'macOS 시스템',        how:'자동 · symbolichotkeys + 내장 기본값'},
+  {k:'app menu',  label:'앱 메뉴바',           how:'./refresh.sh (손쉬운 사용 권한) · 실행 중인 앱 메뉴 스캔'},
+  {k:'app config',label:'앱 자체 키맵',         how:'dump_vscode.sh · dump_codex.sh · Adobe dump_*.py'},
+  {k:'web',       label:'웹앱 공식 문서',       how:'web_shortcuts.json · Sheets/Docs/Drive…'},
+  {k:'BTT',       label:'BetterTouchTool',     how:'자동 · 설치 시 btt_data_store 직접 읽음'},
+  {k:'Karabiner', label:'Karabiner-Elements',  how:'자동 · karabiner.json'},
+  {k:'Raycast',   label:'Raycast',             how:'raycast_manual.json (DB 암호화 → 수동)'},
+  {k:'custom',    label:'내 단축키',            how:'뷰어에서 직접 추가(+)'},
+];
+function renderHealth(){
+  const ents=dedupeDisplay(DB.entries), env=DB.meta.env||{};
+  const cnt={}; ents.forEach(e=>{ cnt[e.source]=(cnt[e.source]||0)+1; });
+  const gcnt=(DB.gestures||[]).length;
+  const by={}; ents.forEach(e=>{ const k=[...e.mods].sort().join(',')+'|'+e.key+'|'+(e.ckey?comboSym(e.cmods||[])+e.ckey:''); (by[k]=by[k]||[]).push(e); });
+  const conf={real:0,global:0,ctx:0}; for(const k in by){ const c=classifyConflict(by[k]); if(c) conf[c]++; }
+  const present=SRC_INFO.filter(s=>cnt[s.k]), missing=SRC_INFO.filter(s=>!cnt[s.k]);
+  const cov=Math.round(present.length/SRC_INFO.length*100);
+  const stat=(n,l)=>`<div class="hb"><b>${n}</b><span>${l}</span></div>`;
+  const srcCard=(s,on)=>`<div class="hs${on?'':' miss'}"><span class="hd" style="background:${on?(COLORS[s.k]||'#888'):'var(--line)'}"></span><span class="hn"><b>${esc(s.label)}</b><small>${on?esc(s.how):'미설정 — '+esc(s.how)}</small></span><span class="hv">${on?cnt[s.k]:'—'}</span></div>`;
+  let h=`<div class="sec">🩺 진단 · Health Report</div>`
+    +`<div class="hstat">${stat(ents.length,'표시 단축키')}${stat(present.length+'/'+SRC_INFO.length,'수집 소스')}${stat(DB.meta.apps.length,'앱 컨텍스트')}${stat(gcnt,'제스처')}${stat(conf.real,'확정 충돌')}</div>`
+    +`<div class="grp">수집 커버리지 <span class="muted" style="font-weight:400">${cov}% · 생성 ${esc(DB.meta.generated||'')}</span></div>`
+    +`<div class="hcov"><i style="width:${cov}%"></i></div>`
+    +`<div class="grp">수집된 소스 <span class="muted" style="font-weight:400;font-size:11px">${present.length}종</span></div><div class="hgrid">${present.map(s=>srcCard(s,true)).join('')}</div>`;
+  if(missing.length) h+=`<div class="grp">아직 없는 소스 <span class="muted" style="font-weight:400;font-size:11px">— 이렇게 추가</span></div><div class="hgrid">${missing.map(s=>srcCard(s,false)).join('')}</div>`;
+  h+=`<div class="grp">충돌 진단</div>`
+    +`<div class="statrow"><span class="sl" style="color:#ff6b6b">확정 충돌</span><span class="statbar" style="background:#ff6b6b;width:${Math.max(2,conf.real*3)}px"></span><span class="sv">${conf.real}</span></div>`
+    +`<div class="statrow"><span class="sl" style="color:#f59f00">글로벌 가로채기</span><span class="statbar" style="background:#f59f00;width:${Math.max(2,conf.global*3)}px"></span><span class="sv">${conf.global}</span></div>`
+    +`<div class="statrow"><span class="sl" style="color:#74c0fc">컨텍스트 분기</span><span class="statbar" style="background:#74c0fc;width:${Math.max(2,conf.ctx*3)}px"></span><span class="sv">${conf.ctx}</span></div>`
+    +`<div style="margin:8px 0 2px"><button class="hlink" id="hgoconf">⚠️ 충돌 자세히 보기 ▸</button></div>`;
+  const av=env.apps||{}, apps=Object.keys(av);
+  h+=`<div class="grp">환경 <span class="muted" style="font-weight:400;font-size:11px">— 이 스캔이 만들어진 곳 (호스트/사용자 정보 없음)</span></div>`
+    +`<div class="henv">macOS <b>${esc(env.macos||'?')}</b>${env.build?' ('+esc(env.build)+')':''} · <b>${esc(env.arch||'')}</b>${env.model?' · '+esc(env.model):''}${env.locale?' · '+esc(env.locale):''}`
+    + (apps.length?`<br>앱 버전 — `+apps.map(a=>`${esc(a)} <b>${esc(av[a])}</b>`).join(' · '):'')+`</div>`;
+  const el=document.getElementById('modepanel'); el.innerHTML=h;
+  const gc=el.querySelector('#hgoconf'); if(gc) gc.onclick=()=>setView('conflicts');
+}
 function renderFree(){
   const taken=new Set(ctxEntries().filter(e=>sameSet(e.mods,eff)).map(e=>e.key));
   const free=ALLKEYS.filter(k=>!taken.has(k));
@@ -1070,6 +1128,7 @@ function sync(){
   if(panelMode==='conflicts') renderConflicts();
   else if(panelMode==='free') renderFree();
   else if(panelMode==='stats') renderStats();
+  else if(panelMode==='health') renderHealth();
   else if(panelMode==='quiz') renderQuiz();
   else if(panelMode==='ghk'){ if(!mp.querySelector('.ghkform')) renderGHK(); }   // 폼 상태 보존: 최초 1회만
   else mp.innerHTML='';
