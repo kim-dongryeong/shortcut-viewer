@@ -8,6 +8,11 @@ by source. Find conflicts, and find the **free** combos.
 
 ![Shortcut Viewer](screenshot.png)
 
+> **🔎 Just want the shortcuts? No install.** Browse searchable cheat sheets for 15+ apps in any browser →
+> **[kim-dongryeong.github.io/shortcut-viewer](https://kim-dongryeong.github.io/shortcut-viewer/)**
+>
+> **🖥 Want the full tool?** It scans *your own* Mac and merges every source onto one grid — [install below ↓](#download--install).
+
 ## Why
 
 Every other tool shows you a slice:
@@ -32,21 +37,28 @@ keyboard grid** — with conflict + free-combo finding, per-app context filterin
 | Raycast | `raycast_manual.json` (its DB is encrypted) |
 | Manual globals | `manual_globals.json` (app-registered global hotkeys, e.g. Google Drive) |
 
-## Requirements
+## Download & install
 
-- macOS (built/tested on Apple Silicon, macOS 14+)
-- Xcode command-line tools (`swift`), Python 3, `jq`
-- Any browser to open `viewer.html`
-
-## Quick start
+**There's no dmg (yet)** — install from source. The tool has to *scan your machine* (system config,
+app menus, BetterTouchTool's database, Karabiner, …), so it runs on your Mac, not from a download. The
+audience is macOS power users, so source install is the honest fit; a Developer-ID-signed dmg may come
+if it grows. Prerequisites: **macOS 14+**, Xcode command-line tools (`swift`), **Python 3**, and **`jq`**.
 
 ```sh
-./refresh.sh        # scan every source → shortcuts.json → viewer.html
-open viewer.html
+xcode-select --install     # once, if you don't have swift
+brew install jq            # once, if you don't have jq
+git clone https://github.com/kim-dongryeong/shortcut-viewer.git
+cd shortcut-viewer
+./refresh.sh               # scan every source → shortcuts.json → viewer.html
+open viewer.html           # opens the grid in your default browser
 ```
 
-- `refresh.sh` re-scans everything (needs Accessibility for app menus).
+- The **viewer** is a local `viewer.html` file — it opens in **any browser** (Safari/Chrome/Firefox),
+  works **offline**, no server, printable to PDF. It's a self-contained local web app, not a website.
+- `refresh.sh` re-scans everything (grant your terminal **Accessibility** for the app-menu scan — see below).
 - `render.py` only re-renders the viewer from existing `shortcuts.json` (no re-scan) — for UI tweaks.
+- **Global hotkeys** (optional, native): `./install_hotkeys.sh` builds & installs **SV Hotkeys.app**
+  (menu-bar app, auto-starts at login; no Accessibility needed for ⌘/⌥/⌃ combos).
 
 ### One-time setup for full coverage
 
