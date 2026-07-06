@@ -13,9 +13,12 @@ Format loosely follows [Keep a Changelog](https://keepachangelog.com/); versioni
   Replaces the single 🔢 numpad toggle; the old setting migrates automatically.
 - **Numpad matches the real Apple layout** — `KeypadEnter` (⌤) is now the tall two-row key at the
   bottom-right (was a stray single key beside `3`), so Karabiner shortcuts bound to it have a home.
-- When **numpad + F13–F20 are both shown**, F13–F20 spread into one row (F13–F15 above the nav cluster à la
-  Apple Extended Keyboard II, F16–F19 above the numpad) instead of a 4×2 block — matching a full-size board.
-  (F16–F20 never existed on Apple hardware — macOS/Karabiner-only — so F20 sits just past the numpad's edge.)
+- When **numpad + F13–F20 are both shown**, F13–F20 spread into one row (F13–F15 above the nav cluster,
+  F16–F19 above the numpad) instead of a 4×2 block — matching Apple's full-size Magic Keyboard with Numeric
+  Keypad, which has **F1–F19**. F20 has no Apple key (macOS/Karabiner-only) so it sits just past the numpad's edge.
+- **Nav/PrtSc keys align to a clean grid** — Insert · ⌦ · Home/End · PgUp/PgDn · PrtSc/ScrLk/Pause now take the
+  same standard width as the arrow keys, *except* under the 4-wide F13–F20 two-row block (numpad off), where
+  they stay slightly wider to fill it.
 
 ## [1.0.0] — first public release
 
