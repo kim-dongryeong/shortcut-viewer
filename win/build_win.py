@@ -6,12 +6,13 @@
 #
 # ⚠️ Windows에서 실행. 이 파일은 설계 스켈레톤(수집기 본체는 TODO). 파이썬 표준 라이브러리만.
 #
-# 실행 흐름:  python build_win.py   →  shortcuts.json  →  python ../render.py  →  ../viewer.html
+# 실행 흐름:  python build_win.py [out.json]   →  shortcuts.json  →  python ../render.py  →  ../viewer.html
 #
 # 수식키 매핑(윈→공유 스키마): Ctrl→ctrl · Alt→opt · Shift→shift · Win→cmd
-#   (기존 뷰어 그리드/빈조합 로직을 그대로 쓰려고 맥 토큰에 매핑. 라벨은 뷰어에서 Win 모드로 표기 — TODO.)
+#   (기존 뷰어 그리드/빈조합 로직을 그대로 쓰려고 맥 토큰에 매핑. 뷰어는 meta.platform=="windows"를 보고
+#    자동으로 Windows 키보드로 전환 — ⊞Win·Alt·Ctrl 키캡, 104키 하단행·넘패드, "Ctrl+Shift+S" 표기.)
 
-import json, os, re, glob
+import datetime, glob, json, os, platform, re, sys
 
 PROJ = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(PROJ)   # repo 루트(공유 뷰어 템플릿 위치)
@@ -37,7 +38,7 @@ _AHK_LINE = re.compile(r'^\s*([\^!+#<>*~$]*)([A-Za-z0-9]|[a-z]+|F\d{1,2})::(.+?)
 
 def collect_ahk(paths):
     for p in paths:
-        for f in glob.glob(os.path.expanduser(p)):
+        for f in glob.glob(os.path.expandvars(p)):   # %USERPROFILE% 등 확장 (expanduser는 %VAR%를 못 푼다)
             try:
                 for line in open(f, encoding="utf-8-sig", errors="ignore"):
                     m = _AHK_LINE.match(line)
@@ -69,10 +70,23 @@ def collect_powertoys():
 
 # ── 3) 시스템 기본 단축키 시드 (맥 build.py의 DEFAULTS 대응) ──────────────────
 def collect_system_defaults():
-    W = [  # (mods, key, action)
+    W = [  # (mods, key, action) — Win→cmd, Alt→opt
         (["cmd"], "E", "파일 탐색기"), (["cmd"], "R", "실행(Run)"), (["cmd"], "D", "바탕화면 표시"),
         (["cmd"], "L", "화면 잠금"), (["cmd"], "Tab", "작업 보기"), (["cmd", "shift"], "S", "영역 캡처"),
         (["ctrl", "shift"], "Escape", "작업 관리자"), (["cmd"], "V", "클립보드 기록"),
+        (["opt"], "Tab", "앱 전환"), (["opt"], "F4", "창/앱 닫기"),
+        (["cmd"], "I", "설정"), (["cmd"], "A", "빠른 설정"), (["cmd"], "N", "알림 센터"),
+        (["cmd"], "X", "빠른 링크 메뉴"), (["cmd"], "S", "검색"), (["cmd"], ".", "이모지 패널"),
+        (["cmd"], "P", "디스플레이 전환(프로젝션)"), (["cmd"], "K", "캐스트/장치 연결"),
+        (["cmd"], "G", "게임 바"), (["cmd"], "H", "음성 입력"), (["cmd"], "U", "접근성 설정"),
+        (["cmd"], "M", "모든 창 최소화"), (["cmd"], ",", "바탕화면 훔쳐보기(Peek)"),
+        (["cmd"], "W", "위젯"), (["cmd"], "Z", "스냅 레이아웃"),
+        (["cmd"], "Left", "창 왼쪽 스냅"), (["cmd"], "Right", "창 오른쪽 스냅"),
+        (["cmd"], "Up", "창 최대화"), (["cmd"], "Down", "창 최소화/복원"),
+        (["cmd"], "Home", "활성 창 외 모두 최소화"),
+        (["cmd", "ctrl"], "D", "새 가상 데스크톱"), (["cmd", "ctrl"], "F4", "가상 데스크톱 닫기"),
+        (["cmd", "ctrl"], "Left", "이전 가상 데스크톱"), (["cmd", "ctrl"], "Right", "다음 가상 데스크톱"),
+        ([], "PrintScreen", "화면 캡처(캡처 도구)"), (["cmd"], "PrintScreen", "스크린샷을 파일로 저장"),
     ]
     for mods, key, action in W:
         add(mods, key, action, source="system", detail="Windows 기본 단축키", group="Windows 시스템")
@@ -94,11 +108,14 @@ def main():
 
     # TODO: 최종 정규화 pass (맥 build.py와 공유 — keys.py로 분리해 양쪽에서 import; 코덱스 리뷰 참고)
     from collections import Counter
-    meta = {"total": len(entries), "platform": "windows",
-            "counts": dict(Counter(e["source"] for e in entries))}
+    apps = sorted({e["scope"] for e in entries if e["scope"].lower() != "global"})
+    meta = {"generated": datetime.datetime.now().strftime("%Y-%m-%d %H:%M"), "platform": "windows",
+            "counts": dict(Counter(e["source"] for e in entries)), "apps": apps, "bttgroups": [],
+            "total": len(entries), "icons": {}, "env": {"os": platform.platform()}, "menu_scan": {}}
     data = {"meta": meta, "entries": entries, "gestures": [], "ann": {"fav": {}, "note": {}, "enote": {}, "custom": [], "ghk": []}}
-    json.dump(data, open(os.path.join(ROOT, "shortcuts.json"), "w"), ensure_ascii=False, indent=1)
-    print(f"shortcuts.json — {len(entries)}개 (Windows). 이제: python render.py 로 viewer.html 생성")
+    out = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, "shortcuts.json")   # 테스트용: 다른 경로에 쓸 수 있게
+    json.dump(data, open(out, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    print(f"{out} — {len(entries)}개 (Windows). 이제: python render.py 로 viewer.html 생성")
 
 if __name__ == "__main__":
     main()

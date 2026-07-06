@@ -385,8 +385,11 @@ function scopeIcon(scope){   // 스코프(앱) 옆 아이콘 — 🖼 앱 아이
 let prefScopeRight = localStorage.getItem('SVscopeRight')!=='0';  // 상세 패널 스코프(global/chrome 등) 위치: 오른쪽 정렬(기본) vs 왼쪽 인라인
 let ovGroup = ['mod','key','source'].includes(localStorage.getItem('SVovGroup')) ? localStorage.getItem('SVovGroup') : 'mod';  // 전체 단축키 치트시트 묶음 기준 (잘못된 저장값은 'mod'로)
 const COLORS = {system:'#3b82f6','app menu':'#9ca3af','app config':'#14b8a6',Karabiner:'#22c55e',BTT:'#f59e0b',Raycast:'#a855f7',web:'#06b6d4',custom:'#ec4899'};
-const MODS = ['ctrl','opt','shift','cmd'];
-const MODSYM = {ctrl:'⌃',opt:'⌥',shift:'⇧',cmd:'⌘',fn:'🌐',caps:'⇪'};
+const IS_WIN = (DB.meta||{}).platform==='windows';   // win/build_win.py 데이터 → Windows 키보드 표기 (Win→cmd·Alt→opt 토큰은 공유, 라벨만 전환)
+const MODS = IS_WIN ? ['cmd','ctrl','opt','shift'] : ['ctrl','opt','shift','cmd'];   // 표기 순서: mac ⌃⌥⇧⌘ · win Win+Ctrl+Alt+Shift
+const MODSYM = IS_WIN ? {ctrl:'Ctrl',opt:'Alt',shift:'Shift',cmd:'Win',fn:'Fn',caps:'⇪'}
+                      : {ctrl:'⌃',opt:'⌥',shift:'⇧',cmd:'⌘',fn:'🌐',caps:'⇪'};
+const MODSEP = IS_WIN ? '+' : '';   // win은 Ctrl+Shift+S처럼 + 구분
 const KEY_SIZES=[46,56,68];   // 레거시 프리셋 — 이제 슬라이더로 연속 조절(폭·높이 모두 U가 구동)
 let U = (()=>{ const s=+localStorage.getItem('SVkeyU'); if(s>=36 && s<=110) return s;   // 슬라이더로 저장한 연속 크기(px)
   const i=[0,1,2].includes(+localStorage.getItem('SVkeySize'))?+localStorage.getItem('SVkeySize'):1; return KEY_SIZES[i]; })();   // 예전 3단계 설정 폴백
@@ -405,6 +408,12 @@ const LAYOUT = [
   [['mod','fn',1,'fn'],['mod','ctrl',1.1,'⌃ ctrl'],['mod','opt',1.1,'⌥ opt'],['mod','cmd',1.25,'⌘ cmd'],['key','Space',6.5,''],
    ['mod','cmd',1.25,'⌘ cmd'],['mod','opt',1.1,'⌥ opt']],
 ];
+if(IS_WIN){   // Windows 물리 배열 — ⌫/↵ 키캡 + 표준 104 하단행(Ctrl·⊞Win·Alt·Space·Alt·⊞Win·☰메뉴·Ctrl, fn 없음)
+  LAYOUT[1][13]=['key','Delete',2,'⌫ backspace'];
+  LAYOUT[3][12]=['key','Return',2.25,'↵ enter'];
+  LAYOUT[5]=[['mod','ctrl',1.25,'Ctrl'],['mod','cmd',1.25,'⊞ Win'],['mod','opt',1.25,'Alt'],['key','Space',6.25,''],
+             ['mod','opt',1.25,'Alt'],['mod','cmd',1.25,'⊞ Win'],['key','Menu',1.25,'☰ menu'],['mod','ctrl',1.25,'Ctrl']];
+}
 const NAV = ['Home','End','PageUp','PageDown','ForwardDelete'];
 const FEXT = ['F13','F14','F15','F16','F17','F18','F19','F20'];
 
@@ -425,19 +434,27 @@ let FAVKEYS = null;   // favOnGrid일 때 즐겨찾기가 걸린 그리드 키 �
 let flashEid = null;   // '전체 단축키'에서 더블클릭해 넘어온 단축키 — 상세에서 잠깐 하이라이트할 eid
 let favPos = localStorage.getItem('SVfavPos') || 'split';   // 즐겨찾기 리스트 위치: 'split'(아래 좌우분할)·'kbright'(키보드 오른쪽)·'below'(아래 전체폭)
 // ── 키보드 레이아웃 프리셋 — 실제 키보드에 있는 키 블록만 그리드(와 빈 조합 찾기)에 표시 ──
-const LAYOUT_PARTS=[['fext','F13–F20'],['nav','⌦·Home·End·PgUp/Dn'],['numpad','🔢 숫자패드'],['insert','Insert'],['prtsc','PrtSc·ScrLk·Pause'],['rctrl','오른쪽 ⌃']];
-const LAYOUT_PRESETS={'mac-basic':[],'mac-full':['fext','nav','numpad'],'logi-tkl':['nav','insert','rctrl'],'generic-tkl':['nav','insert','prtsc','rctrl']};
+const LAYOUT_PARTS = IS_WIN
+  ? [['nav','Del·Home·End·PgUp/Dn'],['numpad','🔢 숫자패드'],['insert','Insert'],['prtsc','PrtSc·ScrLk·Pause']]   // win: 오른쪽 Ctrl은 하단행에 내장, F13–F20 없음
+  : [['fext','F13–F20'],['nav','⌦·Home·End·PgUp/Dn'],['numpad','🔢 숫자패드'],['insert','Insert'],['prtsc','PrtSc·ScrLk·Pause'],['rctrl','오른쪽 ⌃']];
+const LAYOUT_PRESETS = IS_WIN
+  ? {'win-full':['nav','numpad','insert','prtsc'],'win-tkl':['nav','insert','prtsc'],'win-laptop':['nav','insert']}
+  : {'mac-basic':[],'mac-full':['fext','nav','numpad'],'logi-tkl':['nav','insert','rctrl'],'generic-tkl':['nav','insert','prtsc','rctrl']};
 let kbLayout = localStorage.getItem('SVkbLayout');
-let customParts = new Set(['fext','nav']);
+let customParts = new Set(IS_WIN?['nav','insert','prtsc']:['fext','nav']);
 try{ const s=JSON.parse(localStorage.getItem('SVkbParts')||'null'); if(Array.isArray(s)) customParts=new Set(s); }catch(e){}
-if(kbLayout!=='custom' && !LAYOUT_PRESETS[kbLayout]){ kbLayout='custom';   // 첫 방문/구버전(SVnumpad) 마이그레이션 — 기존 화면(F13–F20+내비 ±숫자패드) 그대로
-  if(localStorage.getItem('SVnumpad')==='1') customParts.add('numpad'); }
+if(kbLayout!=='custom' && !LAYOUT_PRESETS[kbLayout]){
+  if(IS_WIN) kbLayout='win-full';   // win 첫 방문 기본: 풀사이즈(104키)
+  else { kbLayout='custom';   // mac 첫 방문/구버전(SVnumpad) 마이그레이션 — 기존 화면(F13–F20+내비 ±숫자패드) 그대로
+    if(localStorage.getItem('SVnumpad')==='1') customParts.add('numpad'); } }
 function kbParts(){ return kbLayout==='custom' ? customParts : new Set(LAYOUT_PRESETS[kbLayout]); }
 let searchListMode = localStorage.getItem('SVsearchList')==='filter' ? 'filter' : 'highlight';   // 상세(수식키 조합별) 리스트: 강조만 / 강조+숨김
 let DKWS = [];   // 현재 검색 키워드(상세 리스트 하이라이트용) — showDetail에서 세팅
 let DFILTER = false;   // true면 detailRow가 searchListMode와 무관하게 매치 항목만(모아 보기용)
 let ovExpand = localStorage.getItem('SVovExpand')==='1';   // 전체단축키: 각 항목의 2번째 줄(detail)도 표시
-const COMMON_COMBOS = new Set(['cmd|C','cmd|V','cmd|X','cmd|Z','cmd|A','cmd|S','cmd|F','cmd|P','cmd|W','cmd|Q','cmd|N','cmd|O','cmd|T','cmd+shift|Z','cmd+shift|T']);
+const CMOD = IS_WIN?'ctrl':'cmd';   // '흔한 단축키'의 기본 수식키 — mac ⌘ · win Ctrl
+const COMMON_COMBOS = new Set(['C','V','X','Z','A','S','F','P','W','Q','N','O','T'].map(k=>CMOD+'|'+k)
+  .concat(['Z','T'].map(k=>[CMOD,'shift'].sort().join('+')+'|'+k)));
 function isCommon(e){ return !e.ckey && COMMON_COMBOS.has([...e.mods].sort().join('+')+'|'+e.key); }
 
 function recompute(){
@@ -451,7 +468,7 @@ function sameSet(arr,set){ if(arr.length!==set.size) return false; for(const m o
 function inCtx(e){ return (e.scope==='global' && ctxSet.has('Global')) || ctxSet.has(e.scope) || ctxSet.has(e.group) || (ctxSet.has('BTT (전체)') && e.source==='BTT'); }
 function keyAll(key){ return (CUR||(CUR=ctxEntries())).filter(e=>e.key===key); }
 function matchEff(key){ return keyAll(key).filter(e=>sameSet(e.mods,eff)); }
-function comboSym(mods){ return [...MODS,'fn'].filter(m=>mods.includes(m)).map(m=>MODSYM[m]).join(''); }
+function comboSym(mods){ const s=[...MODS,'fn'].filter(m=>mods.includes(m)).map(m=>MODSYM[m]).join(MODSEP); return s&&IS_WIN ? s+'+' : s; }   // 뒤에 키가 붙는 프리픽스 — win은 "Ctrl+Alt+"
 function chordSym(e){ return e&&e.ckey ? (comboSym(e.cmods||[])+e.ckey) : ''; }                 // 2nd press, 예: ⌘I
 // 키 정렬 순서 — 알파벳/숫자/F키 다음에 화살표·nav를 각각 '뭉쳐서'. 화살표가 D/L/R/U로 흩어지지 않게.
 const _ARROW={Up:0,Down:1,Left:2,Right:3}, _NAV={Home:0,End:1,PageUp:2,PageDown:3,Delete:4,ForwardDelete:5,Return:6,Tab:7,Space:8,Escape:9};
@@ -475,7 +492,7 @@ function dedupeDisplay(ents){
   }
   return drop.size ? ents.filter(e=>!drop.has(e)) : ents;
 }
-function effSym(){ return [...MODS,'fn'].filter(m=>eff.has(m)).map(m=>MODSYM[m]).join(''); }
+function effSym(){ return [...MODS,'fn'].filter(m=>eff.has(m)).map(m=>MODSYM[m]).join(MODSEP); }   // 단독 표시용(레이어 라벨) — 뒤에 + 안 붙임
 
 function renderMeta(){
   const c=DB.meta.counts;
@@ -486,7 +503,9 @@ function renderMeta(){
     + `<span><span class="dot" style="background:#ef4444"></span>같은 앱 내 충돌(+N)</span>`;
 }
 function renderChips(){
-  document.getElementById('modchips').innerHTML = ['ctrl','opt','shift','cmd','fn'].map(m=>`<span class="chip" data-mod="${m}">${MODSYM[m]} ${m}</span>`).join('');
+  const chips = IS_WIN ? [['ctrl','Ctrl'],['opt','Alt'],['shift','Shift'],['cmd','⊞ Win']]   // win: fn 칩 없음(하드웨어 Fn은 OS 단축키에 안 씀)
+                       : ['ctrl','opt','shift','cmd','fn'].map(m=>[m,`${MODSYM[m]} ${m}`]);
+  document.getElementById('modchips').innerHTML = chips.map(([m,lab])=>`<span class="chip" data-mod="${m}">${lab}</span>`).join('');
   document.querySelectorAll('[data-mod]').forEach(el=>el.onclick=()=>toggleMod(el.dataset.mod));
   document.querySelectorAll('[data-special]').forEach(el=>el.onclick=()=>{
     const set=el.dataset.special==='hyper'?['ctrl','opt','shift','cmd']:['ctrl','opt','shift'];
@@ -585,8 +604,23 @@ function arrowsCluster(){
   return wrap;
 }
 function numpadRow(r){ const d=document.createElement('div'); d.className='krow'; r.forEach(([k,lab,w])=>d.appendChild(cellKey(k,lab,widthPx(w||1)))); return d; }
-function numpadCluster(){   // 숫자 키패드(텐키) — Apple 풀사이즈 배열: KeypadEnter는 오른쪽 아래 2행 세로 키
+function tallKey(key,label){ const el=cellKey(key,label,widthPx(1)); el.style.height='calc(var(--caph,54px)*2 + 6px)'; return el; }   // 2행 높이(캡 사이 마진 6px 포함) 세로 키
+function numpadCluster(){   // 숫자 키패드(텐키) — Apple: KeypadEnter만 세로 · Windows: NumLock행 + '+'와 Enter가 세로
   const wrap=document.createElement('div');
+  if(IS_WIN){
+    wrap.appendChild(numpadRow([['KeypadClear','Num'],['KeypadDivide','/'],['KeypadMultiply','×'],['KeypadMinus','−']]));
+    const mid=document.createElement('div'); mid.className='krow';   // [7 8 9 / 4 5 6] + 세로 '+'
+    const l1=document.createElement('div'); l1.style.cssText='display:flex;flex-direction:column';
+    l1.appendChild(numpadRow([['Keypad7','7'],['Keypad8','8'],['Keypad9','9']]));
+    l1.appendChild(numpadRow([['Keypad4','4'],['Keypad5','5'],['Keypad6','6']]));
+    mid.appendChild(l1); mid.appendChild(tallKey('KeypadPlus','+')); wrap.appendChild(mid);
+    const bot=document.createElement('div'); bot.className='krow';   // [1 2 3 / 0(2칸) .] + 세로 Enter
+    const l2=document.createElement('div'); l2.style.cssText='display:flex;flex-direction:column';
+    l2.appendChild(numpadRow([['Keypad1','1'],['Keypad2','2'],['Keypad3','3']]));
+    l2.appendChild(numpadRow([['Keypad0','0',2],['KeypadDecimal','.']]));
+    bot.appendChild(l2); bot.appendChild(tallKey('KeypadEnter','↵')); wrap.appendChild(bot);
+    return wrap;
+  }
   [ [['KeypadClear','⌧'],['KeypadEquals','='],['KeypadDivide','/'],['KeypadMultiply','×']],
     [['Keypad7','7'],['Keypad8','8'],['Keypad9','9'],['KeypadMinus','−']],
     [['Keypad4','4'],['Keypad5','5'],['Keypad6','6'],['KeypadPlus','+']],
@@ -595,8 +629,7 @@ function numpadCluster(){   // 숫자 키패드(텐키) — Apple 풀사이즈 �
   const lcol=document.createElement('div'); lcol.style.cssText='display:flex;flex-direction:column';
   lcol.appendChild(numpadRow([['Keypad1','1'],['Keypad2','2'],['Keypad3','3']]));
   lcol.appendChild(numpadRow([['Keypad0','0',2],['KeypadDecimal','.']]));
-  const ent=cellKey('KeypadEnter','⌤',widthPx(1)); ent.style.height='calc(var(--caph,54px)*2 + 6px)';   // 2행 높이(캡 사이 마진 6px 포함)
-  bottom.appendChild(lcol); bottom.appendChild(ent); wrap.appendChild(bottom);
+  bottom.appendChild(lcol); bottom.appendChild(tallKey('KeypadEnter','⌤')); wrap.appendChild(bottom);
   return wrap;
 }
 function navBlock(parts, wide){   // 내비 블록 — nav=⌦·Home/End/PgUp/PgDn · insert=Insert(PC/TKL 배열: Home 왼쪽 자리)
@@ -609,7 +642,7 @@ function navBlock(parts, wide){   // 내비 블록 — nav=⌦·Home/End/PgUp/Pg
   if(nav){ r1.appendChild(cellKey('Home','Home',widthPx(w2))); r1.appendChild(cellKey('PageUp','PgUp',widthPx(w2))); }
   wrap.appendChild(r1);
   if(nav){ const r2=document.createElement('div'); r2.className='krow';
-    r2.appendChild(cellKey('ForwardDelete','⌦',widthPx(w1)));
+    r2.appendChild(cellKey('ForwardDelete',IS_WIN?'Del':'⌦',widthPx(w1)));
     r2.appendChild(cellKey('End','End',widthPx(w2)));
     r2.appendChild(cellKey('PageDown','PgDn',widthPx(w2)));
     wrap.appendChild(r2); }
@@ -639,7 +672,7 @@ function renderKB(){
   const kb=document.getElementById('kb'); kb.innerHTML='';
   const parts=kbParts();
   const main=document.createElement('div'); main.className='kbmain';
-  const rows=parts.has('rctrl') ? [...LAYOUT.slice(0,-1),[...LAYOUT[LAYOUT.length-1],['mod','ctrl',1.1,'⌃ ctrl']]] : LAYOUT;   // 로지텍/PC 배열: 오른쪽 ⌥ 옆에 오른쪽 ⌃
+  const rows=(!IS_WIN&&parts.has('rctrl')) ? [...LAYOUT.slice(0,-1),[...LAYOUT[LAYOUT.length-1],['mod','ctrl',1.1,'⌃ ctrl']]] : LAYOUT;   // 로지텍/PC 배열: 오른쪽 ⌥ 옆에 오른쪽 ⌃ (win은 하단행에 내장)
   rows.forEach(row=>{ const d=document.createElement('div'); d.className='krow'; row.forEach(s=>d.appendChild(buildCap(s))); main.appendChild(d); });
   kb.appendChild(main);
   const fext=parts.has('fext'), numpad=parts.has('numpad'), spread=fext&&numpad;   // 둘 다 켜지면 풀사이즈처럼 F13–F20을 한 줄로 펼쳐 숫자패드 위에
@@ -1029,7 +1062,7 @@ function renderFree(){
   const taken=new Set(ctxEntries().filter(e=>sameSet(e.mods,eff)).map(e=>e.key));
   const all=allKeys(), free=all.filter(k=>!taken.has(k));
   let html=`<div class="sec">✨ 빈 조합 — 레이어 <b style="color:#7dd3fc">${effSym()||'(무수식)'}</b> · <b style="color:#4ade80">빈 키 ${free.length}</b>/${all.length} <span class="muted" style="text-transform:none;letter-spacing:0;font-size:11px">— 위 키보드에서 <b style="color:#4ade80">초록 테두리</b>가 빈 키입니다. 수식키를 눌러 레이어를 바꿔보세요 · 초록 키 클릭 → 그 조합 상세.</span></div>`;
-  if(eff.size===0) html+=`<div class="muted" style="margin:2px 0 4px">💡 새 글로벌 핫키엔 <b>⌥</b> 또는 <b>Hyper(⌃⌥⇧⌘)</b> 레이어 추천 — 시스템·앱과 덜 겹칩니다.</div>`;
+  if(eff.size===0) html+=`<div class="muted" style="margin:2px 0 4px">💡 새 글로벌 핫키엔 <b>${IS_WIN?'Alt':'⌥'}</b> 또는 <b>Hyper(${IS_WIN?'Ctrl+Alt+Shift+Win':'⌃⌥⇧⌘'})</b> 레이어 추천 — 시스템·앱과 덜 겹칩니다.</div>`;
   document.getElementById('modepanel').innerHTML=html;
 }
 function renderStats(){
@@ -1200,7 +1233,7 @@ function restoreHash(){
 function renderSearch(q){ const r=document.getElementById('results'); if(r) r.innerHTML=''; }
 function parseQueryCombo(q){
   const p=q.replace(/\s/g,'').split('+').filter(Boolean); if(p.length<2) return null;
-  const map={cmd:'cmd','⌘':'cmd',command:'cmd',opt:'opt',option:'opt',alt:'opt','⌥':'opt',ctrl:'ctrl',control:'ctrl','⌃':'ctrl',shift:'shift','⇧':'shift',hyper:'HYPER',meh:'MEH'};
+  const map={cmd:'cmd','⌘':'cmd',command:'cmd',win:'cmd','⊞':'cmd',windows:'cmd',start:'cmd',meta:'cmd',opt:'opt',option:'opt',alt:'opt','⌥':'opt',ctrl:'ctrl',control:'ctrl','⌃':'ctrl',shift:'shift','⇧':'shift',hyper:'HYPER',meh:'MEH'};
   let mods=[]; for(const m of p.slice(0,-1)){const v=map[m.toLowerCase()];if(v==='HYPER')mods.push('ctrl','opt','shift','cmd');else if(v==='MEH')mods.push('ctrl','opt','shift');else if(v)mods.push(v);}
   let key=p[p.length-1]; key=key.length===1?key.toUpperCase():(key.charAt(0).toUpperCase()+key.slice(1));
   return {mods:[...new Set(mods)],key};
@@ -1252,7 +1285,7 @@ function sync(){
   saveHash();
 }
 function readHeld(e){ const h=new Set(); if(e.metaKey)h.add('cmd'); if(e.ctrlKey)h.add('ctrl'); if(e.altKey)h.add('opt'); if(e.shiftKey)h.add('shift'); return h; }
-const CODEMAP={Backquote:'`',Minus:'-',Equal:'=',BracketLeft:'[',BracketRight:']',Semicolon:';',Quote:"'",Comma:',',Period:'.',Slash:'/',Space:'Space',Enter:'Return',Tab:'Tab',Escape:'Escape',Backspace:'Delete',Delete:'ForwardDelete',ArrowLeft:'Left',ArrowRight:'Right',ArrowUp:'Up',ArrowDown:'Down',Home:'Home',End:'End',PageUp:'PageUp',PageDown:'PageDown',CapsLock:'CapsLock',Insert:'Insert',PrintScreen:'PrintScreen',ScrollLock:'ScrollLock',Pause:'Pause',
+const CODEMAP={Backquote:'`',Minus:'-',Equal:'=',BracketLeft:'[',BracketRight:']',Semicolon:';',Quote:"'",Comma:',',Period:'.',Slash:'/',Space:'Space',Enter:'Return',Tab:'Tab',Escape:'Escape',Backspace:'Delete',Delete:'ForwardDelete',ArrowLeft:'Left',ArrowRight:'Right',ArrowUp:'Up',ArrowDown:'Down',Home:'Home',End:'End',PageUp:'PageUp',PageDown:'PageDown',CapsLock:'CapsLock',Insert:'Insert',PrintScreen:'PrintScreen',ScrollLock:'ScrollLock',Pause:'Pause',ContextMenu:'Menu',
   Numpad0:'Keypad0',Numpad1:'Keypad1',Numpad2:'Keypad2',Numpad3:'Keypad3',Numpad4:'Keypad4',Numpad5:'Keypad5',Numpad6:'Keypad6',Numpad7:'Keypad7',Numpad8:'Keypad8',Numpad9:'Keypad9',NumpadAdd:'KeypadPlus',NumpadSubtract:'KeypadMinus',NumpadMultiply:'KeypadMultiply',NumpadDivide:'KeypadDivide',NumpadDecimal:'KeypadDecimal',NumpadEnter:'KeypadEnter',NumpadEqual:'KeypadEquals',NumpadComma:'KeypadComma',NumLock:'KeypadClear'};
 function codeToKey(code){ if(!code)return null; if(code==='Backslash')return String.fromCharCode(92); if(code.startsWith('Key'))return code.slice(3); if(code.startsWith('Digit'))return code.slice(5); if(code[0]==='F'&&code.length<=3&&!isNaN(parseInt(code.slice(1),10)))return code; return CODEMAP[code]||null; }
 const MODCODE={MetaLeft:'cmd',MetaRight:'cmd',ControlLeft:'ctrl',ControlRight:'ctrl',AltLeft:'opt',AltRight:'opt',ShiftLeft:'shift',ShiftRight:'shift'};   // 물리 수식키 코드 → 수식키
@@ -1404,6 +1437,13 @@ function renderLayoutParts(){   // 커스텀 레이아웃: 키 블록별 on/off 
   box.querySelectorAll('[data-part]').forEach(el=>el.onclick=()=>{ const p=el.dataset.part;
     customParts.has(p)?customParts.delete(p):customParts.add(p);
     localStorage.setItem('SVkbParts',JSON.stringify([...customParts])); renderLayoutParts(); sync(); });
+}
+if(IS_WIN){   // Win 모드: 프리셋 이름·mac 글리프 툴팁 교체
+  document.getElementById('layoutsel').innerHTML='<option value="win-full">풀사이즈(104키)</option><option value="win-tkl">텐키리스(87키)</option><option value="win-laptop">노트북</option><option value="custom">커스텀…</option>';
+  document.querySelector('[data-special="hyper"]').title='Ctrl+Alt+Shift+Win 한 번에';
+  document.querySelector('[data-special="meh"]').title='Ctrl+Alt+Shift 한 번에';
+  document.getElementById('commonbtn').title='누구나 아는 흔한 단축키(Ctrl+C·Ctrl+V·Ctrl+Z…) 숨기기';
+  document.getElementById('capturebtn').title='키 입력을 낚아채 레이아웃에 반영(기본 켬). 끄면 Ctrl+C 복사·텍스트 편집이 정상 동작합니다.';
 }
 { const ls=document.getElementById('layoutsel'); ls.value=kbLayout;   // 키보드 레이아웃 프리셋 선택
   ls.onchange=()=>{ kbLayout=ls.value; localStorage.setItem('SVkbLayout',kbLayout); renderLayoutParts(); sync(); };

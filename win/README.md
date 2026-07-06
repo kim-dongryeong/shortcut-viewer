@@ -8,7 +8,7 @@ macOS의 **SV Hotkeys**(글로벌 핫키 + 마우스 북마크)에 대응하는 
 |---|---|---|
 | 핫키·마우스 실행 | SV Hotkeys (Swift) | **C#/.NET** — `SvHotkeysWin/Program.cs` |
 | 수집기(뷰어 데이터) | `build.py`+`axmenudump` | `build_win.py` (스켈레톤) — AHK·PowerToys·시스템 시드 |
-| 뷰어 화면 | `viewer.html` | **공유** (같은 HTML 그리드) |
+| 뷰어 화면 | `viewer.html` | **공유** — `meta.platform=="windows"`면 뷰어가 자동으로 Windows 키보드로 전환: ⊞Win·Alt·Ctrl 키캡, 104키 하단행(☰메뉴 포함)·Win 넘패드(NumLock), `Ctrl+Shift+S` 표기, win-full/tkl/노트북 프리셋 |
 
 ## 기능(초안)
 - **글로벌 핫키**: Win32 `RegisterHotKey` + 숨은 message-only 창 → `WM_HOTKEY`.
