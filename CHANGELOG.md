@@ -19,6 +19,10 @@ Format loosely follows [Keep a Changelog](https://keepachangelog.com/); versioni
 - **Nav/PrtSc keys align to a clean grid** — Insert · ⌦ · Home/End · PgUp/PgDn · PrtSc/ScrLk/Pause now take the
   same standard width as the arrow keys, *except* under the 4-wide F13–F20 two-row block (numpad off), where
   they stay slightly wider to fill it.
+- **Right cluster aligns to the real keyboard rows** — the nav/arrow/numpad clusters now sit at the exact
+  vertical rows of a physical board: PrtSc·F13–F20 on the function row, Home/PgUp on the Backspace row,
+  End/PgDn on the `\` row, the numpad directly under the F-keys, and the arrows pinned to the bottom two rows
+  (as on a MacBook). Applies to every preset — full-size, both tenkeyless, and custom.
 
 ## [1.0.0] — first public release
 
