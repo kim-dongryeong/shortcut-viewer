@@ -748,6 +748,9 @@ def _is_window_mgmt(action):
     if any(m in a for m in WIN_MGMT_MARKERS): return True
     return "▸" in a and a.split("▸")[-1].strip() in WIN_MGMT_LEAVES
 
+# 메뉴 스캔 신선도(staleness) — 이번 실행이 실제 스캔인지, 이전 스캔 재사용인지 기록(코덱스 리뷰).
+MENU_SCAN = {"no_access": False, "reused": 0, "kept_apps": 0, "as_of": None}
+
 def collect_menus():
     binp = os.path.join(PROJ, "axmenudump")
     if not os.path.exists(binp): print("  app menus: axmenudump not compiled"); return 0
@@ -758,11 +761,13 @@ def collect_menus():
         prev = os.path.join(PROJ, "shortcuts.json")
         if os.path.exists(prev):
             try:
-                old = [e for e in json.load(open(prev)).get("entries", [])
+                _prev = json.load(open(prev))
+                old = [e for e in _prev.get("entries", [])
                        if e.get("source") == "app menu" and "공유" not in e.get("detail", "")   # don't re-absorb community seeds (collect_community re-adds them fresh)
                        and not (not e.get("mods") and _is_globe_item(e.get("action")))]
                 for e in old:
                     e["group"] = e.get("group") or "app menu"; entries.append(e)
+                MENU_SCAN.update(no_access=True, reused=len(old), as_of=(_prev.get("meta") or {}).get("generated"))
                 print(f"  app menus: no Accessibility this run — reused {len(old)} from last scan"); return len(old)
             except Exception: pass
         print("  app menus: Accessibility not granted, no previous scan to reuse"); return 0
@@ -804,6 +809,7 @@ def collect_menus():
                     kept.append(app)
             if kept:
                 n = len([e for e in entries if e.get("source") == "app menu"])
+                MENU_SCAN["kept_apps"] = len(kept)
                 print(f"  app menus: 이전 스캔이 더 완전한 {len(kept)}개 앱 유지(안정화): {', '.join(sorted(kept)[:8])}{' …' if len(kept) > 8 else ''}")
         except Exception as ex:
             print("  app menus: 안정화 단계 건너뜀:", ex)
@@ -1007,21 +1013,15 @@ print(f"  앱 아이콘 {len(app_icons)}개 추출")
 
 meta = {"generated": datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
         "counts": counts, "apps": apps, "bttgroups": bttgroups, "total": len(entries),
-        "icons": app_icons, "env": collect_env()}
+        "icons": app_icons, "env": collect_env(), "menu_scan": MENU_SCAN}
 
 # Favorites/notes: bake annotations.json (exported from the viewer) into the data so they survive
 # even if the browser's localStorage is cleared/blocked, and are portable across machines.
-ann = {"fav": {}, "note": {}, "enote": {}, "custom": [], "ghk": []}
+from svann import load_annotations   # 5필드 보존 로더(build/render 공유 — 코덱스 P0)
 _ap = os.path.join(PROJ, "annotations.json")
+ann = load_annotations(_ap)
 if os.path.exists(_ap):
-    try:   # 5개 필드 전부 보존 (이전엔 fav/note만 구워 enote/custom/ghk 유실)
-        _a = json.load(open(_ap))
-        for _k in ("fav", "note", "enote"):
-            if isinstance(_a.get(_k), dict): ann[_k] = _a[_k]
-        for _k in ("custom", "ghk"):
-            if isinstance(_a.get(_k), list): ann[_k] = _a[_k]
-        print(f"  annotations  fav {len(ann['fav'])} · note {len(ann['note'])} · enote {len(ann['enote'])} · custom {len(ann['custom'])} · ghk {len(ann['ghk'])} (from annotations.json)")
-    except Exception: pass
+    print(f"  annotations  fav {len(ann['fav'])} · note {len(ann['note'])} · enote {len(ann['enote'])} · custom {len(ann['custom'])} · ghk {len(ann['ghk'])} (from annotations.json)")
 
 data = {"meta": meta, "entries": entries, "gestures": gestures, "ann": ann}
 json.dump(data, open(os.path.join(PROJ, "shortcuts.json"), "w"), ensure_ascii=False, indent=1)

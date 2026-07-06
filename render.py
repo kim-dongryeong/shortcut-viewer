@@ -10,18 +10,10 @@ data = json.load(open(os.path.join(PROJ, "shortcuts.json")))
 for _e in data.get("entries", []):
     for _kf in ("key", "ckey"):
         if _e.get(_kf) in KEYPAD_KEY: _e[_kf] = KEYPAD_KEY[_e[_kf]]
+from svann import load_annotations   # 5필드 보존 로더(build/render 공유 — 코덱스 P0)
 _ap = os.path.join(PROJ, "annotations.json")   # pick up favorites/notes edits without a re-scan
 if os.path.exists(_ap):
-    try:   # 5개 필드 전부 보존 (fav/note/enote=dict · custom/ghk=list) — 이전엔 fav/note만 구워 enote/custom/ghk 유실됐음
-        _a = json.load(open(_ap))
-        data["ann"] = {
-            "fav":    _a.get("fav", {})    if isinstance(_a.get("fav"),    dict) else {},
-            "note":   _a.get("note", {})   if isinstance(_a.get("note"),   dict) else {},
-            "enote":  _a.get("enote", {})  if isinstance(_a.get("enote"),  dict) else {},
-            "custom": _a.get("custom", []) if isinstance(_a.get("custom"), list) else [],
-            "ghk":    _a.get("ghk", [])    if isinstance(_a.get("ghk"),    list) else [],
-        }
-    except Exception: pass
+    data["ann"] = load_annotations(_ap)   # fav/note/enote=dict · custom/ghk=list
 tpl = open(os.path.join(PROJ, "viewer.template.html")).read()
 open(os.path.join(PROJ, "viewer.html"), "w").write(tpl.replace("/*__DATA__*/", json.dumps(data, ensure_ascii=False)))
 print(f"Rendered viewer.html from shortcuts.json — {data['meta']['total']} shortcuts (no re-scan).")

@@ -892,12 +892,41 @@ const SRC_INFO=[
   {k:'Raycast',   label:'Raycast',             how:'raycast_manual.json (DB 암호화 → 수동)'},
   {k:'custom',    label:'내 단축키',            how:'뷰어에서 직접 추가(+)'},
 ];
+// 출처 신뢰도(confidence) — source+detail에서 파생(재스캔 불필요). "왜 내 앱과 다를 수 있나"를 정직하게.
+const CONF=[
+  {k:'official', label:'공식 기본값·문서', color:'#22c55e'},
+  {k:'scanned',  label:'내 기기 스캔',     color:'#3b82f6'},
+  {k:'shared',   label:'타 기기 공유',     color:'#a855f7'},
+  {k:'seeded',   label:'버전 시드',        color:'#f59e0b'},
+  {k:'manual',   label:'수동 입력',        color:'#ec4899'},
+];
+function confOf(e){
+  const s=e.source, d=(e.detail||'').toLowerCase();
+  if(s==='custom'||s==='Raycast') return 'manual';
+  if(d.includes('seed')) return 'seeded';
+  if(d.includes('shared')||d.includes('공유')) return 'shared';
+  if(s==='web'||s==='app config') return 'official';   // 제조사 공식 문서 / 앱 자체 키맵
+  return 'scanned';                                    // system·app menu·BTT·Karabiner 로컬 스캔
+}
+function copyText(t, btn){   // 클립보드 복사(navigator.clipboard → execCommand fallback; file://에서도 동작)
+  const done=()=>{ if(btn){ const o=btn.innerHTML; btn.innerHTML='✓ 복사됨'; setTimeout(()=>btn.innerHTML=o,1400); } };
+  try{ if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(done,()=>fallbackCopy(t,done)); return; } }catch(e){}
+  fallbackCopy(t,done);
+}
+function fallbackCopy(t, done){
+  try{ const ta=document.createElement('textarea'); ta.value=t; ta.style.cssText='position:fixed;opacity:0'; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); done&&done(); }catch(e){}
+}
 function renderHealth(){
   const ents=dedupeDisplay(DB.entries), env=DB.meta.env||{};
   const cnt={}; ents.forEach(e=>{ cnt[e.source]=(cnt[e.source]||0)+1; });
   const gcnt=(DB.gestures||[]).length;
   const by={}; ents.forEach(e=>{ const k=[...e.mods].sort().join(',')+'|'+e.key+'|'+(e.ckey?comboSym(e.cmods||[])+e.ckey:''); (by[k]=by[k]||[]).push(e); });
   const conf={real:0,global:0,ctx:0}; for(const k in by){ const c=classifyConflict(by[k]); if(c) conf[c]++; }
+  const confdn={}; ents.forEach(e=>{ const c=confOf(e); confdn[c]=(confdn[c]||0)+1; });
+  const keyc={}; ents.forEach(e=>{ if(e.key) keyc[e.key]=(keyc[e.key]||0)+1; });
+  const busiest=Object.entries(keyc).sort((a,b)=>b[1]-a[1]).slice(0,3).map(x=>x[0]);
+  const ms=DB.meta.menu_scan||{};
+  const staleHtml=(ms.no_access||ms.kept_apps)?`<div style="margin:7px 0;padding:7px 10px;background:#3a2d15;border:1px solid #6b5320;border-radius:8px;color:#f4d58a;font-size:12px">⚠️ 앱 메뉴 스캔: ${ms.no_access?`이번엔 손쉬운 사용 권한 없이 실행돼 <b>이전 스캔 재사용</b>${ms.as_of?` (${esc(ms.as_of)})`:''}`:`일부 앱은 <b>이전 스캔 유지</b>(안정화 ${ms.kept_apps}개)`} · 최신화하려면 권한 있는 터미널에서 <code>./refresh.sh</code></div>`:'';
   const present=SRC_INFO.filter(s=>cnt[s.k]), missing=SRC_INFO.filter(s=>!cnt[s.k]);
   const cov=Math.round(present.length/SRC_INFO.length*100);
   const stat=(n,l)=>`<div class="hb"><b>${n}</b><span>${l}</span></div>`;
@@ -906,6 +935,7 @@ function renderHealth(){
     +`<div class="hstat">${stat(ents.length,'표시 단축키')}${stat(present.length+'/'+SRC_INFO.length,'수집 소스')}${stat(DB.meta.apps.length,'앱 컨텍스트')}${stat(gcnt,'제스처')}${stat(conf.real,'확정 충돌')}</div>`
     +`<div class="grp">수집 커버리지 <span class="muted" style="font-weight:400">${cov}% · 생성 ${esc(DB.meta.generated||'')}</span></div>`
     +`<div class="hcov"><i style="width:${cov}%"></i></div>`
+    +staleHtml
     +`<div class="grp">수집된 소스 <span class="muted" style="font-weight:400;font-size:11px">${present.length}종</span></div><div class="hgrid">${present.map(s=>srcCard(s,true)).join('')}</div>`;
   if(missing.length) h+=`<div class="grp">아직 없는 소스 <span class="muted" style="font-weight:400;font-size:11px">— 이렇게 추가</span></div><div class="hgrid">${missing.map(s=>srcCard(s,false)).join('')}</div>`;
   h+=`<div class="grp">충돌 진단</div>`
@@ -917,8 +947,18 @@ function renderHealth(){
   h+=`<div class="grp">환경 <span class="muted" style="font-weight:400;font-size:11px">— 이 스캔이 만들어진 곳 (호스트/사용자 정보 없음)</span></div>`
     +`<div class="henv">macOS <b>${esc(env.macos||'?')}</b>${env.build?' ('+esc(env.build)+')':''} · <b>${esc(env.arch||'')}</b>${env.model?' · '+esc(env.model):''}${env.locale?' · '+esc(env.locale):''}`
     + (apps.length?`<br>앱 버전 — `+apps.map(a=>`${esc(a)} <b>${esc(av[a])}</b>`).join(' · '):'')+`</div>`;
+  h+=`<div class="grp">출처 신뢰도 <span class="muted" style="font-weight:400;font-size:11px">— 이 단축키를 어디서 얻었나 (공개 데이터셋 품질)</span></div>`
+    + CONF.filter(c=>confdn[c.k]).map(c=>`<div class="statrow"><span class="sl" style="color:${c.color}">${esc(c.label)}</span><span class="statbar" style="background:${c.color};width:${Math.max(2,Math.round(confdn[c.k]/Math.max(1,ents.length)*220))}px"></span><span class="sv">${confdn[c.k]}</span></div>`).join('');
+  const summary=`⌨️ My Mac Shortcut Health — Shortcut Viewer\n`
+    +`• ${ents.length.toLocaleString()} shortcuts · ${DB.meta.apps.length} app contexts · ${present.length}/${SRC_INFO.length} sources (${cov}%)\n`
+    +`• Conflicts: ${conf.real} real · ${conf.global} global-intercept · ${conf.ctx} context\n`
+    +(busiest.length?`• Busiest keys: ${busiest.join(', ')}\n`:'')
+    +`• Sources: ${present.map(s=>s.label).join(', ')}\n`
+    +`→ github.com/kim-dongryeong/shortcut-viewer`;
+  h+=`<div style="margin:11px 0 2px"><button class="hlink" id="hcopy">📋 진단 요약 복사 <span class="muted" style="font-weight:400">— 개인정보 없이 공유</span></button></div>`;
   const el=document.getElementById('modepanel'); el.innerHTML=h;
   const gc=el.querySelector('#hgoconf'); if(gc) gc.onclick=()=>setView('conflicts');
+  const cp=el.querySelector('#hcopy'); if(cp) cp.onclick=()=>copyText(summary, cp);
 }
 function renderFree(){
   const taken=new Set(ctxEntries().filter(e=>sameSet(e.mods,eff)).map(e=>e.key));
