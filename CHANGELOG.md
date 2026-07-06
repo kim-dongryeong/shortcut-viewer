@@ -3,6 +3,15 @@
 All notable changes to **Shortcut Viewer** are documented here.
 Format loosely follows [Keep a Changelog](https://keepachangelog.com/); versioning is [SemVer](https://semver.org/).
 
+## [Unreleased]
+
+### Viewer
+- **Keyboard layout presets** — pick the keyboard you actually have; blocks it doesn't have disappear from
+  the grid *and* the free-combo finder: MacBook built-in · Mac full-size (numpad) · Logitech tenkeyless
+  (Insert + right ⌃) · generic tenkeyless (adds PrtSc·ScrLk·Pause) · **custom** (toggle each block:
+  F13–F20 · ⌦/Home/End/PgUp/PgDn · numpad · Insert · PrtSc·ScrLk·Pause · right ⌃).
+  Replaces the single 🔢 numpad toggle; the old setting migrates automatically.
+
 ## [1.0.0] — first public release
 
 The first open-source release. A unified **macOS** keyboard-shortcut viewer: it aggregates shortcuts from
