@@ -584,16 +584,19 @@ function arrowsCluster(){
   wrap.appendChild(top); wrap.appendChild(bot);
   return wrap;
 }
-function numpadCluster(){   // 숫자 키패드(텐키) — 풀사이즈 키보드 오른쪽. 정규화된 Keypad* 키로 매칭
+function numpadRow(r){ const d=document.createElement('div'); d.className='krow'; r.forEach(([k,lab,w])=>d.appendChild(cellKey(k,lab,widthPx(w||1)))); return d; }
+function numpadCluster(){   // 숫자 키패드(텐키) — Apple 풀사이즈 배열: KeypadEnter는 오른쪽 아래 2행 세로 키
   const wrap=document.createElement('div');
-  const rows=[
-    [['KeypadClear','⌧'],['KeypadEquals','='],['KeypadDivide','/'],['KeypadMultiply','×']],
+  [ [['KeypadClear','⌧'],['KeypadEquals','='],['KeypadDivide','/'],['KeypadMultiply','×']],
     [['Keypad7','7'],['Keypad8','8'],['Keypad9','9'],['KeypadMinus','−']],
     [['Keypad4','4'],['Keypad5','5'],['Keypad6','6'],['KeypadPlus','+']],
-    [['Keypad1','1'],['Keypad2','2'],['Keypad3','3'],['KeypadEnter','⌤']],
-    [['Keypad0','0',2],['KeypadDecimal','.']],
-  ];
-  rows.forEach(r=>{ const d=document.createElement('div'); d.className='krow'; r.forEach(([k,lab,w])=>d.appendChild(cellKey(k,lab,widthPx(w||1)))); wrap.appendChild(d); });
+  ].forEach(r=>wrap.appendChild(numpadRow(r)));
+  const bottom=document.createElement('div'); bottom.className='krow';   // 왼쪽: [1 2 3]·[0(2칸) .] / 오른쪽: 세로 ⌤
+  const lcol=document.createElement('div'); lcol.style.cssText='display:flex;flex-direction:column';
+  lcol.appendChild(numpadRow([['Keypad1','1'],['Keypad2','2'],['Keypad3','3']]));
+  lcol.appendChild(numpadRow([['Keypad0','0',2],['KeypadDecimal','.']]));
+  const ent=cellKey('KeypadEnter','⌤',widthPx(1)); ent.style.height='calc(var(--caph,54px)*2 + 6px)';   // 2행 높이(캡 사이 마진 6px 포함)
+  bottom.appendChild(lcol); bottom.appendChild(ent); wrap.appendChild(bottom);
   return wrap;
 }
 function navBlock(parts){   // 내비 블록 — nav=⌦·Home/End/PgUp/PgDn · insert=Insert(PC/TKL 배열: Home 왼쪽 자리)
@@ -638,21 +641,40 @@ function renderKB(){
   const rows=parts.has('rctrl') ? [...LAYOUT.slice(0,-1),[...LAYOUT[LAYOUT.length-1],['mod','ctrl',1.1,'⌃ ctrl']]] : LAYOUT;   // 로지텍/PC 배열: 오른쪽 ⌥ 옆에 오른쪽 ⌃
   rows.forEach(row=>{ const d=document.createElement('div'); d.className='krow'; row.forEach(s=>d.appendChild(buildCap(s))); main.appendChild(d); });
   kb.appendChild(main);
-  const right=document.createElement('div'); right.className='kbright';
-  if(parts.has('fext')){
-    const fex1=document.createElement('div'); fex1.className='krow'; FEXT.slice(0,4).forEach(k=>fex1.appendChild(cellKey(k,k,widthPx(1)))); right.appendChild(fex1);   // F13–F20을 두 줄(4+4)로 — 가로 공간 절약
-    const fex2=document.createElement('div'); fex2.className='krow'; FEXT.slice(4).forEach(k=>fex2.appendChild(cellKey(k,k,widthPx(1)))); right.appendChild(fex2);
+  const fext=parts.has('fext'), numpad=parts.has('numpad'), spread=fext&&numpad;   // 둘 다 켜지면 풀사이즈처럼 F13–F20을 한 줄로 펼쳐 숫자패드 위에
+  const GAP=28;   // 내비 열 ↔ 숫자패드 열 간격 (.kb의 열 간격과 동일)
+  const fexKey=k=>cellKey(k,k,widthPx(1)), krow=()=>{ const d=document.createElement('div'); d.className='krow'; return d; };
+  const prtscRow=()=>{ const pr=krow(); [['PrintScreen','PrtSc',1.1],['ScrollLock','ScrLk',1.3],['Pause','Pause',1.3]].forEach(([k,l,w])=>pr.appendChild(cellKey(k,l,widthPx(w)))); return pr; };
+  const navArrows=()=>{ const col=document.createElement('div'); col.style.cssText='display:flex;flex-direction:column';
+    if(parts.has('nav')||parts.has('insert')) col.appendChild(navBlock(parts));
+    col.appendChild(arrowsCluster()); return col; };
+  if(spread){   // ── 풀사이즈 배열: [F13 F14 F15]  [F16 F17 F18 F19 (F20)] 를 한 줄로, 아래에 [내비][숫자패드] ──
+    const rw=document.createElement('div'); rw.style.cssText='display:flex;flex-direction:column;align-items:flex-start';
+    const leftUnits=parts.has('nav')?3.7:3;   // 내비 열 폭(단위) — F16이 숫자패드 왼쪽 위에 정렬되도록 F13–F15 뒤 여백 계산
+    const frow=krow();
+    FEXT.slice(0,3).forEach(k=>frow.appendChild(fexKey(k)));   // F13–F15 → 내비 위 (클래식 Apple Extended Keyboard II 배열)
+    const sp=document.createElement('div'); sp.style.cssText=`flex:none;width:${(leftUnits-3)*U+GAP}px`; frow.appendChild(sp);
+    FEXT.slice(3).forEach(k=>frow.appendChild(fexKey(k)));     // F16–F19 → 숫자패드 위, F20은 오른쪽으로 (애플 HW엔 없는 키)
+    rw.appendChild(frow);
+    if(parts.has('prtsc')){ const p=prtscRow(); p.style.marginTop='4px'; rw.appendChild(p); }
+    const brow=document.createElement('div'); brow.style.cssText='display:flex;align-items:flex-start';
+    const g=document.createElement('div'); g.style.cssText=`flex:none;width:${GAP}px`;
+    const np=document.createElement('div'); np.className='kbnum'; np.appendChild(numpadCluster());
+    brow.appendChild(navArrows()); brow.appendChild(g); brow.appendChild(np);
+    rw.appendChild(brow); kb.appendChild(rw);
+  } else {
+    const right=document.createElement('div'); right.className='kbright';
+    if(fext){   // F13–F20을 두 줄(4+4)로 — 가로 공간 절약 (숫자패드가 없어 펼칠 폭이 없을 때)
+      const fex1=krow(); FEXT.slice(0,4).forEach(k=>fex1.appendChild(fexKey(k))); right.appendChild(fex1);
+      const fex2=krow(); FEXT.slice(4).forEach(k=>fex2.appendChild(fexKey(k))); right.appendChild(fex2);
+    }
+    if(parts.has('prtsc')){ const pr=prtscRow(); if(fext) pr.style.marginTop='12px'; right.appendChild(pr); }   // PC/TKL: F13–F20 자리(내비 위)에 PrtSc·ScrLk·Pause
+    if(parts.has('nav')||parts.has('insert')) right.appendChild(navBlock(parts));
+    else if(!fext&&!parts.has('prtsc')){ right.style.alignSelf='stretch'; right.style.justifyContent='flex-end'; }   // 맥북 기본: 화살표만 → 본체 하단에 정렬
+    right.appendChild(arrowsCluster());
+    kb.appendChild(right);
+    if(numpad){ const np=document.createElement('div'); np.className='kbnum'; np.appendChild(numpadCluster()); kb.appendChild(np); }
   }
-  if(parts.has('prtsc')){   // PC/TKL: F13–F20 자리(내비 블록 위)에 PrtSc·ScrLk·Pause
-    const pr=document.createElement('div'); pr.className='krow'; if(parts.has('fext')) pr.style.marginTop='12px';
-    [['PrintScreen','PrtSc',1.1],['ScrollLock','ScrLk',1.3],['Pause','Pause',1.3]].forEach(([k,l,w])=>pr.appendChild(cellKey(k,l,widthPx(w))));
-    right.appendChild(pr);
-  }
-  if(parts.has('nav')||parts.has('insert')) right.appendChild(navBlock(parts));
-  else if(!parts.has('fext')&&!parts.has('prtsc')){ right.style.alignSelf='stretch'; right.style.justifyContent='flex-end'; }   // 맥북 기본: 화살표만 → 본체 하단에 정렬
-  right.appendChild(arrowsCluster());
-  kb.appendChild(right);
-  if(parts.has('numpad')){ const np=document.createElement('div'); np.className='kbnum'; np.appendChild(numpadCluster()); kb.appendChild(np); }   // 숫자 키패드: 세 번째 열(내비/화살표 오른쪽)
   document.getElementById('extras').innerHTML='';
 }
 

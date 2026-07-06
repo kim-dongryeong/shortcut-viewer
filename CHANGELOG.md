@@ -11,6 +11,11 @@ Format loosely follows [Keep a Changelog](https://keepachangelog.com/); versioni
   (Insert + right ⌃) · generic tenkeyless (adds PrtSc·ScrLk·Pause) · **custom** (toggle each block:
   F13–F20 · ⌦/Home/End/PgUp/PgDn · numpad · Insert · PrtSc·ScrLk·Pause · right ⌃).
   Replaces the single 🔢 numpad toggle; the old setting migrates automatically.
+- **Numpad matches the real Apple layout** — `KeypadEnter` (⌤) is now the tall two-row key at the
+  bottom-right (was a stray single key beside `3`), so Karabiner shortcuts bound to it have a home.
+- When **numpad + F13–F20 are both shown**, F13–F20 spread into one row (F13–F15 above the nav cluster à la
+  Apple Extended Keyboard II, F16–F19 above the numpad) instead of a 4×2 block — matching a full-size board.
+  (F16–F20 never existed on Apple hardware — macOS/Karabiner-only — so F20 sits just past the numpad's edge.)
 
 ## [1.0.0] — first public release
 
