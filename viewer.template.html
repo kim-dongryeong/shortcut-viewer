@@ -384,7 +384,7 @@ function scopeIcon(scope){   // 스코프(앱) 옆 아이콘 — 🖼 앱 아이
   return u ? `<img class="scopeicon" src="${u}" alt="">` : ''; }
 let prefScopeRight = localStorage.getItem('SVscopeRight')!=='0';  // 상세 패널 스코프(global/chrome 등) 위치: 오른쪽 정렬(기본) vs 왼쪽 인라인
 let ovGroup = ['mod','key','source'].includes(localStorage.getItem('SVovGroup')) ? localStorage.getItem('SVovGroup') : 'mod';  // 전체 단축키 치트시트 묶음 기준 (잘못된 저장값은 'mod'로)
-const COLORS = {system:'#3b82f6','app menu':'#9ca3af','app config':'#14b8a6',Karabiner:'#22c55e',BTT:'#f59e0b',Raycast:'#a855f7',web:'#06b6d4',custom:'#ec4899'};
+const COLORS = {system:'#3b82f6','app menu':'#9ca3af','app config':'#14b8a6',Karabiner:'#22c55e',BTT:'#f59e0b',Raycast:'#a855f7',AutoHotKey:'#22c55e',PowerToys:'#f59e0b','.lnk':'#a855f7',web:'#06b6d4',custom:'#ec4899'};
 const IS_WIN = (DB.meta||{}).platform==='windows';   // win/build_win.py 데이터 → Windows 키보드 표기 (Win→cmd·Alt→opt 토큰은 공유, 라벨만 전환)
 const MODS = IS_WIN ? ['cmd','ctrl','opt','shift'] : ['ctrl','opt','shift','cmd'];   // 표기 순서: mac ⌃⌥⇧⌘ · win Win+Ctrl+Alt+Shift
 const MODSYM = IS_WIN ? {ctrl:'Ctrl',opt:'Alt',shift:'Shift',cmd:'Win',fn:'Fn',caps:'⇪'}
@@ -498,7 +498,8 @@ function renderMeta(){
   const c=DB.meta.counts;
   document.getElementById('metaline').textContent =
     `생성 ${DB.meta.generated} · 총 ${DB.meta.total}개 · `+Object.entries(c).map(([k,v])=>`${k} ${v}`).join(' · ');
-  document.getElementById('legend').innerHTML = Object.entries(COLORS)
+  const srcPresent=new Set([...DB.entries.map(e=>e.source),...Object.keys(c||{})]);   // legend는 실제 데이터에 있는 소스만 (win 데이터에 BTT 등 mac 소스 안 뜨게)
+  document.getElementById('legend').innerHTML = Object.entries(COLORS).filter(([k])=>srcPresent.has(k))
     .map(([k,v])=>`<span title="${k==='web'?'제조사 공식문서에서 fetch·파싱 (로컬 스캔 아님)':''}"><span class="dot" style="background:${v}"></span>${k==='web'?'web=공식문서 fetch(스캔 아님)':k}</span>`).join('')
     + `<span><span class="dot" style="background:#ef4444"></span>같은 앱 내 충돌(+N)</span>`;
 }
@@ -515,7 +516,7 @@ function renderChips(){
 function toggleMod(m){ sticky.has(m)?sticky.delete(m):sticky.add(m); sync(); }
 function renderCtx(){
   const customScopes=[...new Set((ANN.custom||[]).map(c=>c.scope).filter(s=>s&&s.toLowerCase()!=='global'&&!DB.meta.apps.includes(s)))];
-  const allCtx=['Global',...DB.meta.apps,...customScopes,'BTT (전체)',...(DB.meta.bttgroups||[])];
+  const allCtx=['Global',...DB.meta.apps,...customScopes,...(DB.entries.some(e=>e.source==='BTT')?['BTT (전체)']:[]),...(DB.meta.bttgroups||[])];   // BTT 칩은 BTT 데이터가 있을 때만(win 등)
   const ICONS=DB.meta.icons||{};
   // 전체/해제/반대 + Global(특별 지위)을 '앱 선택'을 펼치지 않아도 바로 클릭하도록 항상 보이는 바에 둔다
   document.getElementById('ctxbulkbar').innerHTML=`<span class="lbl" style="font-size:11px;color:var(--dim)">선택:</span><button data-bulk="all">전체</button><button data-bulk="none">해제</button><button data-bulk="invert">반대</button><button data-bulk="global">Global</button>`;
