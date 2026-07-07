@@ -309,6 +309,7 @@
     <button id="commonbtn" class="vbtn" title="누구나 아는 흔한 단축키(⌘C·⌘V·⌘Z…) 숨기기">🙈 흔한 키</button>
     <button id="themebtn" class="vbtn" title="밝은/어두운 테마">☾ 테마</button>
     <button id="capturebtn" class="vbtn" title="키 입력을 낚아채 레이아웃에 반영(기본 켬). 끄면 ⌘C 복사·텍스트 편집이 정상 동작합니다.">⌨ 입력 감지</button>
+    <button id="fsbtn" class="vbtn" title="전체화면 + (지원 브라우저) 키보드 잠금 시도 — Windows에서 ⊞Win 키를 눌러도 시작 메뉴가 안 열리도록. F11은 이 API를 안 거쳐 효과 없음.">⛶ 전체화면</button>
     <select id="searchmode" title="검색어 입력 시 키보드 그리드(레이아웃) 표시 방식">
       <option value="highlight">🔍 그리드 강조</option>
       <option value="filter">🔍 그리드 강조+숨김</option>
@@ -1297,14 +1298,22 @@ document.addEventListener('keydown',e=>{ if(e.target.tagName==='INPUT')return;
   if(!captureKeys) return;   // 입력 감지 OFF — ⌘C 복사·텍스트 편집 등 브라우저 기본 동작을 막지 않음
   const h=readHeld(e);   // 실제 입력에 충실 — 브라우저가 받은 그대로(예: caps→⌘Space 리맵이면 ⌘Space가 정확)
   const mp2=MODCODE[e.code]; let stickyChanged=false;
+  if(mp2) e.preventDefault();   // 수식키 '단독' 입력의 브라우저 기본 동작 억제 — 안 하면 크롬/엣지가 Alt 단독 입력을 메뉴 포커스 토글로 가로챔(맵 안 된 키라 기존엔 preventDefault가 전혀 안 걸렸음)
   if(mp2 && !e.repeat && sticky.has(mp2)){ sticky.delete(mp2); h.delete(mp2); stickyChanged=true; }   // 클릭으로 고정(sticky)한 수식키를 물리 수식키로 즉시 해제
   const mapped=codeToKey(e.code);
   const s=[...h].sort().join(); let changed=false;
   if(s!==heldStr || stickyChanged){ heldStr=s; held=h; changed=true; }
   if(mapped){ e.preventDefault(); if(!e.repeat){ selectedKey = (mapped===selectedKey ? null : mapped); changed=true; } }
   if(changed) sync(); });   // 같은 키 다시 누르면 해제(토글)
-document.addEventListener('keyup',e=>{ if(!captureKeys) return; const h=readHeld(e); const s=[...h].sort().join(); if(s!==heldStr){heldStr=s;held=h;sync();} });
+document.addEventListener('keyup',e=>{ if(!captureKeys) return; if(MODCODE[e.code]) e.preventDefault(); const h=readHeld(e); const s=[...h].sort().join(); if(s!==heldStr){heldStr=s;held=h;sync();} });
 window.addEventListener('blur',()=>{ if(heldStr){heldStr='';held=new Set();sync();} });
+// Win(⊞) 키는 OS 셸이 브라우저보다 먼저 가로채 시작 메뉴를 열기 때문에 preventDefault로 못 막는다(Alt와 다름) — 유일한 우회는
+// 전체화면 + Keyboard Lock API(크로미움 전용, 실험적). 전체화면 진입 시 시도, 해제 시 자동 unlock.
+document.addEventListener('fullscreenchange',()=>{
+  if(!(navigator.keyboard&&navigator.keyboard.lock)) return;
+  if(document.fullscreenElement) navigator.keyboard.lock(Object.keys(MODCODE)).catch(()=>{});
+  else try{ navigator.keyboard.unlock(); }catch(e){}
+});
 
 // 쉬는 상태(검색·선택 키 없음)의 상세 영역에 즐겨찾기 홈을 렌더 — 없으면 안내
 // 즐겨찾기 파싱값 → 실제 DB 엔트리 찾기 (잘못 저장된 flat-chord도 진짜 채드로 복구)
@@ -1451,6 +1460,8 @@ if(IS_WIN){   // Win 모드: 프리셋 이름·mac 글리프 툴팁 교체
   renderLayoutParts(); }
 document.getElementById('commonbtn').onclick=()=>{ hideCommon=!hideCommon; localStorage.setItem('SVhideCommon',hideCommon?'1':'0'); document.getElementById('commonbtn').classList.toggle('on',hideCommon); sync(); };
 document.getElementById('capturebtn').onclick=()=>{ captureKeys=!captureKeys; localStorage.setItem('SVcapture',captureKeys?'1':'0'); if(!captureKeys){ held=new Set(); heldStr=''; } sync(); };
+document.getElementById('fsbtn').onclick=()=>{ document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen().catch(()=>{}); };
+document.addEventListener('fullscreenchange',()=>document.getElementById('fsbtn').classList.toggle('on',!!document.fullscreenElement));
 document.getElementById('printbtn').onclick=()=>{ const ov=overview,pm=panelMode; overview=true; panelMode=null; document.getElementById('ovbtn').classList.add('on'); sync(); setTimeout(()=>{ window.print(); overview=ov; panelMode=pm; document.getElementById('ovbtn').classList.toggle('on',overview); sync(); },150); };
 document.getElementById('csvbtn').onclick=()=>exportRows('csv');
 document.getElementById('mdbtn').onclick=()=>exportRows('md');
