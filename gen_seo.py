@@ -9,15 +9,17 @@
 #
 # Why: the interactive viewer is personal (gitignored). These pages are the PUBLIC face —
 # each targets a real search ("photoshop keyboard shortcuts mac") so the project earns reach.
-import json, os, re, glob, shutil, html
+import json, os, re, glob, shutil, html, sys
 from svkeys import KEYPAD_KEY
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "win"))
+from winkeys import parse_keystr   # win/packs/*.json의 "Ctrl+Shift+S" 문자열 파서 (win/build_win.py와 공유)
 
 PROJ = os.path.dirname(os.path.abspath(__file__))
 OUT  = os.path.join(PROJ, "docs")
 BASE_URL = "https://kim-dongryeong.github.io/shortcut-viewer"   # GitHub Pages URL (enable Pages ▸ main /docs)
 REPO_URL = "https://github.com/kim-dongryeong/shortcut-viewer"
 SITE     = "Shortcut Viewer"
-TAGLINE  = "Every Mac keyboard shortcut, on one keyboard grid."
+TAGLINE  = "Every Mac and Windows keyboard shortcut, on one keyboard grid."
 
 # ── key / modifier display ────────────────────────────────────────────────────
 MOD_ORDER = ["fn", "ctrl", "opt", "shift", "cmd"]
@@ -41,6 +43,14 @@ def key_disp(k):
 
 def mods_syms(mods):
     return [MOD_SYM[m] for m in MOD_ORDER if m in (mods or [])]
+
+# Windows 표기 — 뷰어(viewer.template.html의 IS_WIN 분기)와 순서·라벨 일치: Win·Ctrl·Alt·Shift, 텍스트+구분자
+WIN_MOD_ORDER = ["cmd", "ctrl", "opt", "shift"]
+WIN_MOD_LABEL = {"cmd": "Win", "ctrl": "Ctrl", "opt": "Alt", "shift": "Shift"}
+def mods_disp(mods, platform):
+    if platform == "win":
+        return [WIN_MOD_LABEL[m] for m in WIN_MOD_ORDER if m in (mods or [])]
+    return mods_syms(mods)
 
 # ── VS Code raw command-id → friendly label ──────────────────────────────────
 _CAMEL = re.compile(r"([a-z0-9])([A-Z])")
@@ -73,16 +83,26 @@ def vkey(v):
         elif x:         out.append((0, 0, x))
     return out
 
-# ── load structured packs (defaults/<app>/<file>.json) ───────────────────────
-def load_packs():
-    """→ {app_name: {'entries':[...], 'ver':str, 'dirs':set, 'sources':set}} (newest ver per kind)."""
+# ── Windows 앱명 → 맥 corpus와 병합할 canonical 이름 (win/packs·win/defaults의 "app" 필드는
+#    뷰어 컨텍스트 칩용 짧은 이름을 그대로 쓰므로, SEO 병합 시에만 이 별칭을 적용) ─────────
+WIN_ALIAS = {"Excel": "Microsoft Excel", "Word": "Microsoft Word", "PowerPoint": "Microsoft PowerPoint",
+             "Outlook": "Microsoft Outlook", "OneNote": "Microsoft OneNote", "Acrobat": "Adobe Acrobat",
+             "Lightroom Classic": "Adobe Lightroom Classic"}
+def canon(app): return WIN_ALIAS.get(app, app)
+
+# 한글 등 라틴 문자가 전혀 없는 앱명은 슬러그 정규식이 다 지워버려 "app"으로 뭉개짐 → 명시 매핑
+SLUG_OVERRIDE = {"한글": "hangul"}
+
+# ── load structured packs (defaults/<app>/<file>.json 또는 win/defaults/<app>/<file>.json) ───
+def load_packs(base="defaults", platform="mac"):
+    """→ {app_name: {'entries':[...], 'ver':str, 'dirs':set, 'sources':set, 'platforms':set}} (newest ver per kind)."""
     best = {}     # (app, kind) → (vkey, path, data)
-    for path in sorted(glob.glob(os.path.join(PROJ, "defaults", "*", "*.json"))):
-        try: data = json.load(open(path))
+    for path in sorted(glob.glob(os.path.join(PROJ, base, "*", "*.json"))):
+        try: data = json.load(open(path, encoding="utf-8"))
         except Exception: continue
         ents = data.get("entries")
         if not isinstance(ents, list) or not ents: continue
-        app  = data.get("app") or os.path.basename(os.path.dirname(path))
+        app  = canon(data.get("app") or os.path.basename(os.path.dirname(path)))
         kind = "menu" if os.path.basename(path).startswith("menu") else "keymap"
         key  = (app, kind)
         vk   = vkey(data.get("version"))
@@ -90,13 +110,15 @@ def load_packs():
             best[key] = (vk, path, data)
     apps = {}
     for (app, kind), (vk, path, data) in best.items():
-        rec = apps.setdefault(app, {"entries": [], "ver": "", "dirs": set(), "sources": set()})
+        rec = apps.setdefault(app, {"entries": [], "ver": "", "dirs": set(), "sources": set(), "platforms": set()})
         rec["dirs"].add(os.path.basename(os.path.dirname(path)))
+        rec["platforms"].add(platform)
         v = str(data.get("version") or "")
         if v and vkey(v) >= vkey(rec["ver"]): rec["ver"] = v
         for e in data["entries"]:
             for kf in ("key", "ckey"):
                 if e.get(kf) in KEYPAD_KEY: e[kf] = KEYPAD_KEY[e[kf]]
+            e = dict(e, _platform=platform)
             rec["sources"].add(e.get("source", ""))
             rec["entries"].append(e)
     return apps
@@ -122,10 +144,34 @@ def load_web():
     except Exception: return apps
     for name, lst in data.items():
         if name == "_comment" or not isinstance(lst, list): continue
-        rec = apps.setdefault(name, {"entries": [], "ver": "web", "dirs": {name}, "sources": {"web"}})
+        rec = apps.setdefault(name, {"entries": [], "ver": "web", "dirs": {name}, "sources": {"web"}, "platforms": {"mac"}})
         for it in lst:
             k, a = it.get("keys", ""), it.get("action", "")
-            if a: rec["entries"].append(web_entry(k, a))
+            if a: rec["entries"].append(dict(web_entry(k, a), _platform="mac"))
+    return apps
+
+# ── load win/defaults/<app>/<file>.json (VS Code·Adobe 추출기 산출 — mac defaults/의 win판) ──
+def load_win_defaults():
+    return load_packs(base=os.path.join("win", "defaults"), platform="win")
+
+# ── load win/packs/*.json — 공식 문서 팩(리본/커스텀 UI라 스캔 불가한 앱들, mac web_shortcuts.json 대응) ──
+def load_win_docs():
+    apps = {}
+    for path in sorted(glob.glob(os.path.join(PROJ, "win", "packs", "*.json"))):
+        try: data = json.load(open(path, encoding="utf-8"))
+        except Exception: continue
+        app = canon(data.get("app") or "")
+        if not app or data.get("error"): continue
+        rec = apps.setdefault(app, {"entries": [], "ver": "web", "dirs": set(), "sources": {"web"}, "platforms": {"win"}})
+        for row in data.get("shortcuts") or []:
+            if not row: continue
+            pk = parse_keystr(str(row[0]))
+            if not pk: continue
+            act = html.unescape(str(row[1])) if len(row) > 1 else ""
+            if not act: continue
+            ctx = html.unescape(str(row[2])) if len(row) > 2 and row[2] else ""
+            rec["entries"].append({"mods": pk[0], "key": pk[1], "action": act, "source": "web",
+                                    "detail": (ctx + " · " if ctx else "") + "공식 문서", "_platform": "win"})
     return apps
 
 # ── merge structured + web by app display name ───────────────────────────────
@@ -135,8 +181,11 @@ def merge(a, b):
             a[name]["entries"] += rec["entries"]
             a[name]["dirs"]    |= rec["dirs"]
             a[name]["sources"] |= rec["sources"]
+            a[name].setdefault("platforms", set())
+            a[name]["platforms"] |= rec.get("platforms", set())
             if a[name]["ver"] in ("", "web"): a[name]["ver"] = rec["ver"]
         else:
+            rec.setdefault("platforms", set())
             a[name] = rec
     return a
 
@@ -145,27 +194,47 @@ CATEGORY = {
     "VS Code": "Code editors", "Sublime Text": "Code editors", "Codex": "Code editors",
     "Adobe Photoshop 2026": "Design & video", "Adobe Illustrator 2026": "Design & video",
     "Adobe After Effects": "Design & video", "Adobe Premiere Pro": "Design & video",
+    "Adobe Acrobat": "Design & video", "Adobe Lightroom Classic": "Design & video",
     "Microsoft Word": "Office", "Microsoft Excel": "Office", "Microsoft PowerPoint": "Office",
+    "Microsoft Outlook": "Office", "Microsoft OneNote": "Office", "한글": "Office",
     "Google Docs": "Google Workspace", "Google Sheets": "Google Workspace", "Google Drive (웹)": "Google Workspace",
     "Notion": "Notes & productivity", "Notion Calendar": "Notes & productivity",
+    "KakaoTalk": "Messaging",
 }
-CAT_ORDER = ["Code editors", "Design & video", "Office", "Google Workspace", "Notes & productivity", "Apps"]
+CAT_ORDER = ["Code editors", "Design & video", "Office", "Google Workspace", "Notes & productivity", "Messaging", "Apps"]
 
 def slug(name):
+    if name in SLUG_OVERRIDE: return SLUG_OVERRIDE[name]
     s = re.sub(r"\(.*?\)", "", name).strip().lower()
     s = re.sub(r"[^a-z0-9]+", "-", s).strip("-")
     return s or "app"
+
+# 아이콘은 지금도 mac defaults/ 쪽에서만 채워짐(save_icon.py) — win/defaults/도 같이 확인해 두면
+# 나중에 Windows 전용 앱 아이콘을 넣어도 자동으로 잡힌다
+def find_icon(dirs):
+    for d in sorted(dirs):
+        for base in ("defaults", os.path.join("win", "defaults")):
+            p = os.path.join(PROJ, base, d, "icon.png")
+            if os.path.exists(p): return p
+    return None
+
+def plat_suffix(plats):   # 페이지 제목/설명에 쓰는 "어느 OS 단축키인지" — mac 전용/win 전용/둘 다 정확히 표기
+    if plats >= {"mac", "win"}: return "for Mac & Windows"
+    if plats == {"win"}: return "for Windows"
+    return "for Mac"
 
 # ── html helpers ─────────────────────────────────────────────────────────────
 def esc(s): return html.escape(str(s), quote=False)
 def attr(s): return html.escape(str(s), quote=True)
 
 def keys_html(e):
-    caps = mods_syms(e.get("mods")) + ([key_disp(e["key"])] if e.get("key") else [])
-    out = "".join(f'<kbd>{esc(c)}</kbd>' for c in caps) or '<kbd class="none">—</kbd>'
+    plat = e.get("_platform", "mac")
+    sep = '<span class="ksep">+</span>' if plat == "win" else ""   # win은 "Ctrl+Shift+S" 식 구분자, mac은 글리프만 붙여서 표시
+    caps = mods_disp(e.get("mods"), plat) + ([key_disp(e["key"])] if e.get("key") else [])
+    out = sep.join(f'<kbd>{esc(c)}</kbd>' for c in caps) or '<kbd class="none">—</kbd>'
     if e.get("ckey"):
-        chord = mods_syms(e.get("cmods")) + [key_disp(e["ckey"])]
-        out += '<span class="then">then</span>' + "".join(f'<kbd>{esc(c)}</kbd>' for c in chord)
+        chord = mods_disp(e.get("cmods"), plat) + [key_disp(e["ckey"])]
+        out += '<span class="then">then</span>' + sep.join(f'<kbd>{esc(c)}</kbd>' for c in chord)
     if e.get("web_seq"):
         out = f'<span title="{attr(e["web_seq"])}">{out}<span class="then">seq</span></span>'
     return out
@@ -174,6 +243,11 @@ SRC_LABEL = {"app menu": "Menu", "app config": "Keymap", "web": "Web"}
 def src_badge(s):
     lbl = SRC_LABEL.get(s, s or "")
     return f'<span class="src src-{attr((s or "x").replace(" ","-"))}">{esc(lbl)}</span>' if lbl else ""
+
+PLAT_LABEL = {"mac": "Mac", "win": "Windows"}
+def plat_badge(p):
+    lbl = PLAT_LABEL.get(p)
+    return f'<span class="plat plat-{p}">{lbl}</span>' if lbl else ""
 
 HEAD = """<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -203,9 +277,9 @@ def jsonld(obj):
 NAV = f'''<header class="nav"><a class="brand" href="{{home}}"><span class="glyph">⌘</span> {SITE}</a>
 <nav><a href="{{home}}">All apps</a><a href="{REPO_URL}" rel="noopener">★ GitHub</a></nav></header>'''
 
-FOOT = f'''<footer><p><strong>{SITE}</strong> — {TAGLINE} A free, open-source (GPL-3.0) macOS tool that
-aggregates shortcuts from every source (system, app menus, VS Code/Adobe keymaps, Karabiner, BetterTouchTool,
-Raycast) onto one interactive keyboard grid, then finds conflicts and free key combos.</p>
+FOOT = f'''<footer><p><strong>{SITE}</strong> — {TAGLINE} A free, open-source (GPL-3.0) tool for macOS and
+Windows that aggregates shortcuts from every source (system, app menus, VS Code/Adobe keymaps, Karabiner,
+BetterTouchTool, Raycast, PowerToys) onto one interactive keyboard grid, then finds conflicts and free key combos.</p>
 <p><a href="{REPO_URL}" rel="noopener">Get it on GitHub →</a> · Shortcut data shown here is each app's public
 default keymap. No tracking, no personal data.</p></footer>'''
 
@@ -217,7 +291,9 @@ def page(title, desc, url, css, home, body, **kw):
 def dedup(entries):
     seen, out = set(), []
     for e in entries:
-        fp = (tuple(sorted(e.get("mods") or [])), e.get("key", ""),
+        # _platform 포함 — mac ⌘S와 win Ctrl+S는 내부 토큰이 우연히 같아도(둘 다 예: mods=['cmd']) 서로 다른
+        # 실제 단축키이므로 절대 한쪽이 다른 쪽을 지우면 안 됨(플랫폼 없이 합치면 진짜 단축키가 사라지는 버그가 됨)
+        fp = (e.get("_platform", "mac"), tuple(sorted(e.get("mods") or [])), e.get("key", ""),
               e.get("ckey", ""), prettify(e.get("action", "")).lower())
         if fp in seen: continue
         seen.add(fp); out.append(e)
@@ -233,33 +309,33 @@ def sec_key(name, count):
 def render_app(name, rec):
     ents = dedup(rec["entries"])
     n = len(ents)
-    ico = None
-    for d in sorted(rec["dirs"]):
-        p = os.path.join(PROJ, "defaults", d, "icon.png")
-        if os.path.exists(p): ico = d; break
+    icon_path = find_icon(rec["dirs"])
+    plats = rec.get("platforms") or {"mac"}
+    suffix = plat_suffix(plats)             # "for Mac" · "for Windows" · "for Mac & Windows"
+    multi_plat = len(plats) > 1
     ver = rec["ver"] if rec["ver"] not in ("", "web") else ""
     # group
     groups = {}
     for e in ents: groups.setdefault(section_of(e), []).append(e)
     order = sorted(groups, key=lambda g: sec_key(g, len(groups[g])))
     top = [prettify(e["action"]) for e in ents[:6]]
-    desc = (f"Complete list of {n} default {name} keyboard shortcuts for Mac (macOS)"
+    desc = (f"Complete list of {n} default {name} keyboard shortcuts {suffix}"
             + (f", version {ver}" if ver else "") + f". Free, searchable {name} cheat sheet: "
             + ", ".join(top[:4]) + "…")
     url = f"{BASE_URL}/apps/{slug(name)}.html"
     srcs = " ".join(src_badge(s) for s in ("app menu", "app config", "web") if s in rec["sources"])
-    icon_url = f"../icons/{slug(name)}.png" if ico else ""
-    icon_abs = f"{BASE_URL}/icons/{slug(name)}.png" if ico else ""
-    icon_html = f'<img class="appicon" src="{attr(icon_url)}" alt="{attr(name)} icon" width="56" height="56">' if ico else ""
+    icon_url = f"../icons/{slug(name)}.png" if icon_path else ""
+    icon_abs = f"{BASE_URL}/icons/{slug(name)}.png" if icon_path else ""
+    icon_html = f'<img class="appicon" src="{attr(icon_url)}" alt="{attr(name)} icon" width="56" height="56">' if icon_path else ""
 
     ld = jsonld([
         {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
             {"@type": "ListItem", "position": 1, "name": "All apps", "item": BASE_URL + "/"},
             {"@type": "ListItem", "position": 2, "name": name, "item": url}]},
-        {"@context": "https://schema.org", "@type": "ItemList", "name": f"{name} keyboard shortcuts for Mac",
+        {"@context": "https://schema.org", "@type": "ItemList", "name": f"{name} keyboard shortcuts {suffix}",
          "numberOfItems": n, "itemListElement": [
             {"@type": "ListItem", "position": i + 1,
-             "name": prettify(e["action"]) + " — " + "".join(mods_syms(e.get("mods")) + [key_disp(e.get("key",""))])}
+             "name": prettify(e["action"]) + " — " + "".join(mods_disp(e.get("mods"), e.get("_platform","mac")) + [key_disp(e.get("key",""))])}
             for i, e in enumerate(ents[:25])]}])
 
     rows = []
@@ -267,26 +343,29 @@ def render_app(name, rec):
         gid = re.sub(r"[^a-z0-9]+", "-", g.lower()).strip("-") or "g"
         rows.append(f'<section class="grp" data-grp><h2 id="{attr(gid)}">{esc(g)} '
                     f'<span class="gc">{len(groups[g])}</span></h2><table><tbody>')
-        for e in sorted(groups[g], key=lambda x: prettify(x["action"]).lower()):
+        for e in sorted(groups[g], key=lambda x: (x.get("_platform","mac"), prettify(x["action"]).lower())):
             act = prettify(e["action"])
-            q = (act + " " + "".join(mods_syms(e.get("mods"))) + (e.get("key") or "")).lower()
+            q = (act + " " + "".join(mods_disp(e.get("mods"), e.get("_platform","mac"))) + (e.get("key") or "")).lower()
+            badges = (" " + plat_badge(e.get("_platform","mac"))) if multi_plat else ""
+            badges += (" " + src_badge(e.get("source"))) if len(rec["sources"]) > 1 else ""
             rows.append(f'<tr data-q="{attr(q)}"><td class="k">{keys_html(e)}</td>'
-                        f'<td class="a">{esc(act)}{(" " + src_badge(e.get("source"))) if len(rec["sources"])>1 else ""}</td></tr>')
+                        f'<td class="a">{esc(act)}{badges}</td></tr>')
         rows.append("</tbody></table></section>")
 
+    example = "Ctrl+S" if plats == {"win"} else "⌘S"
     body = f'''<nav class="crumb"><a href="../">All apps</a> › <span>{esc(name)}</span></nav>
-<div class="apphdr">{icon_html}<div><h1>{esc(name)} keyboard shortcuts for Mac</h1>
+<div class="apphdr">{icon_html}<div><h1>{esc(name)} keyboard shortcuts {suffix}</h1>
 <p class="sub"><strong>{n}</strong> default shortcuts{f" · v{esc(ver)}" if ver else ""} · {srcs}</p></div></div>
-<p class="intro">Every default {esc(name)} keyboard shortcut on macOS, in one searchable cheat sheet.
+<p class="intro">Every default {esc(name)} keyboard shortcut {suffix}, in one searchable cheat sheet.
 Type below to filter by action or key.</p>
-<input id="q" class="filter" type="search" placeholder="Filter {esc(name)} shortcuts… (e.g. zoom, ⌘S)" autocomplete="off" aria-label="Filter shortcuts">
+<input id="q" class="filter" type="search" placeholder="Filter {esc(name)} shortcuts… (e.g. zoom, {example})" autocomplete="off" aria-label="Filter shortcuts">
 <p id="noresult" class="noresult" hidden>No shortcut matches your filter.</p>
 {''.join(rows)}
 {RELATED}
 <script>{FILTER_JS}</script>'''
-    return url, page(f"{name} Keyboard Shortcuts for Mac — {n} shortcuts | {SITE}",
+    return url, page(f"{name} Keyboard Shortcuts {suffix} — {n} shortcuts | {SITE}",
                      desc, url, "../style.css", "../", body,
-                     ogtype="article", ogimg=icon_abs, jsonld=ld), ico, n
+                     ogtype="article", ogimg=icon_abs, jsonld=ld), icon_path, n
 
 FILTER_JS = ("var q=document.getElementById('q'),rows=[].slice.call(document.querySelectorAll('tr[data-q]')),"
              "grps=[].slice.call(document.querySelectorAll('[data-grp]')),nr=document.getElementById('noresult');"
@@ -309,52 +388,51 @@ def render_index(apps):
         for name, rec in sorted(by[cat], key=lambda x: -x[1]["_n"]):
             icon = (f'<img src="icons/{slug(name)}.png" alt="" width="40" height="40" loading="lazy">'
                     if rec.get("_ico") else '<span class="noico">⌘</span>')
+            plat = plat_suffix(rec.get("platforms") or {"mac"}).replace("for ", "")   # 카드에도 Mac/Windows/Mac & Windows 표시
             cards.append(f'<a class="card" href="apps/{slug(name)}.html">{icon}'
-                         f'<span class="cn">{esc(name)}</span><span class="ct">{rec["_n"]} shortcuts</span></a>')
+                         f'<span class="cn">{esc(name)}</span><span class="ct">{rec["_n"]} shortcuts · {esc(plat)}</span></a>')
         cards.append("</div>")
     napps = len(apps)
-    desc = (f"Free, searchable keyboard-shortcut cheat sheets for Mac: {napps} apps, {total:,} shortcuts — "
+    desc = (f"Free, searchable keyboard-shortcut cheat sheets for Mac & Windows: {napps} apps, {total:,} shortcuts — "
             "VS Code, Photoshop, Illustrator, After Effects, Word, Excel, Notion, Google Docs and more.")
     ld = jsonld({"@context": "https://schema.org", "@type": "WebSite", "name": SITE,
                  "url": BASE_URL + "/", "description": desc})
-    body = f'''<section class="hero"><h1>Mac keyboard shortcut cheat sheets</h1>
+    body = f'''<section class="hero"><h1>Mac &amp; Windows keyboard shortcut cheat sheets</h1>
 <p class="lede">{esc(TAGLINE)} Searchable, always-current default shortcuts for
 <strong>{napps} apps</strong> · <strong>{total:,} shortcuts</strong> — pulled straight from each app's own keymap.</p>
 <p><a class="cta" href="{REPO_URL}" rel="noopener">★ Star / install the full viewer on GitHub</a></p></section>
 {''.join(cards)}
 <section class="about"><h2>What is {esc(SITE)}?</h2>
 <p>The pages above are static cheat sheets for each app's <em>default</em> shortcuts. The real tool is an
-interactive macOS app that merges shortcuts from <strong>every</strong> source on your machine — the system,
-running app menus, VS Code &amp; Adobe keymaps, Karabiner, BetterTouchTool, Raycast and your own globals —
-onto <strong>one keyboard grid</strong>, then flags conflicts and finds free key combos. Open source, GPL-3.0.</p></section>'''
-    return page(f"Mac Keyboard Shortcut Cheat Sheets — {napps} apps, {total:,} shortcuts | {SITE}",
+interactive macOS &amp; Windows app that merges shortcuts from <strong>every</strong> source on your machine —
+the system, running app menus, VS Code &amp; Adobe keymaps, Karabiner/PowerToys, BetterTouchTool, Raycast and
+your own globals — onto <strong>one keyboard grid</strong>, then flags conflicts and finds free key combos.
+Open source, GPL-3.0.</p></section>'''
+    return page(f"Mac & Windows Keyboard Shortcut Cheat Sheets — {napps} apps, {total:,} shortcuts | {SITE}",
                 desc, BASE_URL + "/", "style.css", "./", body, jsonld=ld)
 
 def main():
-    apps = merge(load_packs(), load_web())
+    apps = merge(merge(merge(load_packs(), load_web()), load_win_defaults()), load_win_docs())
     os.makedirs(os.path.join(OUT, "apps"), exist_ok=True)
     os.makedirs(os.path.join(OUT, "icons"), exist_ok=True)
     # first pass: counts + icons (needed for index cards + related links)
     meta = {}
     for name, rec in apps.items():
         ents = dedup(rec["entries"]); rec["_n"] = len(ents)
-        ico = next((d for d in sorted(rec["dirs"])
-                    if os.path.exists(os.path.join(PROJ, "defaults", d, "icon.png"))), None)
-        rec["_ico"] = ico
-        meta[name] = (slug(name), rec["_n"], ico, CATEGORY.get(name, "Apps"))
+        rec["_ico"] = bool(find_icon(rec["dirs"]))
+        meta[name] = (slug(name), rec["_n"], rec["_ico"], CATEGORY.get(name, "Apps"))
     urls = [BASE_URL + "/"]
     for name, rec in apps.items():
         # related = other apps in same category
         cat = CATEGORY.get(name, "Apps")
         sibs = [n for n in apps if n != name and CATEGORY.get(n, "Apps") == cat][:6]
-        rel = ("" if not sibs else '<section class="related"><h2>More Mac shortcut cheat sheets</h2><div class="grid">'
+        rel = ("" if not sibs else '<section class="related"><h2>More shortcut cheat sheets</h2><div class="grid">'
                + "".join(f'<a class="card" href="{slug(n)}.html"><span class="cn">{esc(n)}</span>'
                          f'<span class="ct">{apps[n]["_n"]} shortcuts</span></a>' for n in sibs)
                + '</div></section>')
         global RELATED; RELATED = rel
-        url, htmlpage, ico, n = render_app(name, rec)
-        if ico: shutil.copyfile(os.path.join(PROJ, "defaults", ico, "icon.png"),
-                                os.path.join(OUT, "icons", slug(name) + ".png"))
+        url, htmlpage, icon_path, n = render_app(name, rec)
+        if icon_path: shutil.copyfile(icon_path, os.path.join(OUT, "icons", slug(name) + ".png"))
         open(os.path.join(OUT, "apps", slug(name) + ".html"), "w").write(htmlpage)
         urls.append(url)
     open(os.path.join(OUT, "index.html"), "w").write(render_index(apps))
@@ -398,10 +476,12 @@ kbd{display:inline-block;min-width:1.5em;text-align:center;padding:.12em .45em;m
   font:600 .84rem/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--ink);
   background:var(--kbd);border:1px solid var(--line);border-bottom-width:2px;border-radius:6px}
 kbd.none{color:var(--dim);border-style:dashed;font-weight:400}
+.ksep{color:var(--dim);font-size:.8rem;margin:0 .05em}
 .then{color:var(--dim);font-size:.72rem;margin:0 .35em;text-transform:uppercase;letter-spacing:.03em}
-.src{display:inline-block;font-size:.66rem;font-weight:600;padding:.05em .4em;border-radius:20px;margin-left:.4em;
+.src,.plat{display:inline-block;font-size:.66rem;font-weight:600;padding:.05em .4em;border-radius:20px;margin-left:.4em;
   vertical-align:middle;border:1px solid var(--line);color:var(--dim)}
 .src-app-menu{color:#c8cfe0}.src-app-config{color:#7fe3d0;border-color:#1c4f47}.src-web{color:#7fd0ff;border-color:#1c435f}
+.plat-mac{color:#c8b8ff;border-color:#3a2f5f}.plat-win{color:#8fd4ff;border-color:#1c435f}
 .hero{padding:1.6rem 0 .6rem}.lede{color:var(--dim);font-size:1.08rem;max-width:44rem}.lede strong{color:var(--ink)}
 .cta{display:inline-block;margin-top:.6rem;padding:.6rem 1rem;background:var(--acc);color:#08122b;font-weight:700;border-radius:10px}
 .cta:hover{text-decoration:none;filter:brightness(1.08)}

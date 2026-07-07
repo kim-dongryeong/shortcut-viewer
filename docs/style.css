@@ -28,10 +28,12 @@ kbd{display:inline-block;min-width:1.5em;text-align:center;padding:.12em .45em;m
   font:600 .84rem/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--ink);
   background:var(--kbd);border:1px solid var(--line);border-bottom-width:2px;border-radius:6px}
 kbd.none{color:var(--dim);border-style:dashed;font-weight:400}
+.ksep{color:var(--dim);font-size:.8rem;margin:0 .05em}
 .then{color:var(--dim);font-size:.72rem;margin:0 .35em;text-transform:uppercase;letter-spacing:.03em}
-.src{display:inline-block;font-size:.66rem;font-weight:600;padding:.05em .4em;border-radius:20px;margin-left:.4em;
+.src,.plat{display:inline-block;font-size:.66rem;font-weight:600;padding:.05em .4em;border-radius:20px;margin-left:.4em;
   vertical-align:middle;border:1px solid var(--line);color:var(--dim)}
 .src-app-menu{color:#c8cfe0}.src-app-config{color:#7fe3d0;border-color:#1c4f47}.src-web{color:#7fd0ff;border-color:#1c435f}
+.plat-mac{color:#c8b8ff;border-color:#3a2f5f}.plat-win{color:#8fd4ff;border-color:#1c435f}
 .hero{padding:1.6rem 0 .6rem}.lede{color:var(--dim);font-size:1.08rem;max-width:44rem}.lede strong{color:var(--ink)}
 .cta{display:inline-block;margin-top:.6rem;padding:.6rem 1rem;background:var(--acc);color:#08122b;font-weight:700;border-radius:10px}
 .cta:hover{text-decoration:none;filter:brightness(1.08)}

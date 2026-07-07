@@ -27,6 +27,8 @@ import datetime, glob, json, os, platform, re, struct, sys
 
 PROJ = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(PROJ)   # repo 루트(공유 뷰어 템플릿 위치)
+sys.path.insert(0, PROJ)
+from winkeys import MOD_TOKEN, KEYSTR, SHIFTED_SYM, parse_keystr   # gen_seo.py와 공유하는 키 문자열 파서
 entries = []
 
 def add(mods, key, action, source, scope="global", detail="", group=None, **extra):
@@ -67,49 +69,6 @@ def vk_disp(s):   # 리맵 "대상" 표시용 — "Ctrl+C" (뷰어 win 표기와
     mods, key = vk_seq(s)
     lab = {"cmd":"Win","ctrl":"Ctrl","opt":"Alt","shift":"Shift"}
     return "+".join([lab[m] for m in ("cmd","ctrl","opt","shift") if m in mods] + ([key] if key else []))
-
-# ── "ctrl+shift+t" 문자열 파서 (VS Code·Windows Terminal 공용) ───────────────
-MOD_TOKEN = {"ctrl":"ctrl","control":"ctrl","shift":"shift","alt":"opt","opt":"opt","option":"opt",
-             "win":"cmd","meta":"cmd","cmd":"cmd"}
-KEYSTR = {"enter":"Return","return":"Return","escape":"Escape","esc":"Escape","space":"Space","tab":"Tab",
-          "backspace":"Delete","delete":"ForwardDelete","del":"ForwardDelete","insert":"Insert","ins":"Insert",
-          "home":"Home","end":"End","pageup":"PageUp","pgup":"PageUp","pagedown":"PageDown","pgdn":"PageDown",
-          "up":"Up","down":"Down","left":"Left","right":"Right","capslock":"CapsLock","menu":"Menu","apps":"Menu",
-          "printscreen":"PrintScreen","scrolllock":"ScrollLock","pause":"Pause","plus":"=",
-          "numpad_add":"KeypadPlus","numpad_subtract":"KeypadMinus","numpad_multiply":"KeypadMultiply",
-          "numpad_divide":"KeypadDivide","numpad_decimal":"KeypadDecimal"}
-KEYSTR.update({f"numpad{i}": f"Keypad{i}" for i in range(10)})
-KEYSTR.update({f"numpad_{i}": f"Keypad{i}" for i in range(10)})
-KEYSTR.update({f"num{i}": f"Keypad{i}" for i in range(10)})
-KEYSTR.update({"num+": "KeypadPlus", "num-": "KeypadMinus", "num*": "KeypadMultiply", "num/": "KeypadDivide", "num.": "KeypadDecimal"})
-
-SHIFTED_SYM = {"~":"`","!":"1","@":"2","#":"3","$":"4","%":"5","^":"6","&":"7","*":"8","(":"9",")":"0",
-               "_":"-","+":"=","{":"[","}":"]","|":"\\",":":";","\"":"'","<":",",">":".","?":"/"}   # 시프트 기호 → 물리 키+shift (맥 build.py 최종 정규화 대응)
-
-def parse_keystr(tok):   # "ctrl+shift+t" → (mods, key) · 모르는 키/수식키-단독이면 None
-    parts = [p for p in tok.strip().lower().split("+") if p]
-    if not parts:
-        return None
-    *ms, k = parts
-    mods = []
-    for m in ms:
-        if m not in MOD_TOKEN:
-            return None
-        mods.append(MOD_TOKEN[m])
-    if k in MOD_TOKEN:
-        return None
-    if len(k) == 1:
-        if k in SHIFTED_SYM:
-            key = SHIFTED_SYM[k]
-            if "shift" not in mods:
-                mods = mods + ["shift"]
-        else:
-            key = k.upper()
-    elif re.fullmatch(r"f\d{1,2}", k):
-        key = k.upper()
-    else:
-        key = KEYSTR.get(k)
-    return (mods, key) if key else None
 
 def _jsonc(text):   # JSONC → JSON: 문자열 밖의 //·/*..*/ 주석과 트레일링 콤마 제거
     out, i, instr = [], 0, False
