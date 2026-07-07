@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleName</key>            <string>Shortcut Viewer</string>
+    <key>CFBundleDisplayName</key>     <string>Shortcut Viewer</string>
+    <key>CFBundleIdentifier</key>      <string>com.shortcutviewer.app</string>
+    <key>CFBundleVersion</key>         <string>1</string>
+    <key>CFBundleShortVersionString</key> <string>1.0</string>
+    <key>CFBundleExecutable</key>      <string>ShortcutViewer</string>
+    <key>CFBundlePackageType</key>     <string>APPL</string>
+    <key>LSMinimumSystemVersion</key>  <string>14.0</string>
+    <key>NSHumanReadableCopyright</key><string>Shortcut Viewer · GPL-3.0</string>
+    <!-- 메뉴 스캔(Accessibility API)이 왜 필요한지 권한 대화상자에 뜨는 설명 -->
+    <key>NSAccessibilityUsageDescription</key>
+    <string>다른 앱들의 메뉴에서 단축키를 읽어와 한 화면에 모아 보여주기 위해 필요합니다.</string>
+</dict>
+</plist>

@@ -1,17 +1,19 @@
 # Shortcut Viewer
 
-**A unified keyboard-shortcut viewer for macOS.** See every shortcut from *every* source — macOS
-system shortcuts, each app's menu bar, app keymaps (VS Code, Obsidian), Karabiner-Elements,
-BetterTouchTool (per preset), Raycast — laid out on one interactive **keyboard grid**. Pick a
+**A unified keyboard-shortcut viewer for macOS and Windows.** See every shortcut from *every* source
+— system shortcuts, each app's menu bar, app keymaps (VS Code, Adobe, Obsidian), Karabiner-Elements /
+PowerToys, BetterTouchTool (per preset), Raycast — laid out on one interactive **keyboard grid**. Pick a
 modifier layer (or just hold the keys) and every key lights up with what it's bound to, color-coded
-by source. Find conflicts, and find the **free** combos.
+by source. Find conflicts, and find the **free** combos. Even for apps you don't have installed, it
+ships with **thousands of pre-collected default shortcuts** (VS Code, Adobe, Office, and more).
 
 ![Shortcut Viewer](screenshot.png)
 
-> **🔎 Just want the shortcuts? No install.** Browse searchable cheat sheets for 15+ apps in any browser →
+> **🔎 Just want the shortcuts? No install.** Browse searchable cheat sheets for 20+ apps in any browser →
 > **[kim-dongryeong.github.io/shortcut-viewer](https://kim-dongryeong.github.io/shortcut-viewer/)**
 >
-> **🖥 Want the full tool?** It scans *your own* Mac and merges every source onto one grid — [install below ↓](#download--install).
+> **🖥 Want the full tool?** It scans *your own* machine and merges every source onto one grid, on top
+> of the thousands of shortcuts it already ships with — [download below ↓](#download--install).
 
 ## Why
 
@@ -39,10 +41,24 @@ keyboard grid** — with conflict + free-combo finding, per-app context filterin
 
 ## Download & install
 
-**There's no dmg (yet)** — install from source. The tool has to *scan your machine* (system config,
-app menus, BetterTouchTool's database, Karabiner, …), so it runs on your Mac, not from a download. The
-audience is macOS power users, so source install is the honest fit; a Developer-ID-signed dmg may come
-if it grows. Prerequisites: **macOS 14+**, Xcode command-line tools (`swift`), **Python 3**, and **`jq`**.
+### Option A — download & run (no terminal, no git)
+
+- **Mac**: build `packaging/mac/build_dmg.sh` yourself (see below) → **Shortcut Viewer.dmg** → drag
+  to Applications → double-click. First launch: unsigned (v1, no Apple Developer account yet), so
+  Gatekeeper says "unidentified developer" — right-click ▸ Open once to allow it.
+- **Windows**: build `packaging\win\build_exe.bat` on a Windows machine → **ShortcutViewer.exe** →
+  double-click. Unsigned too — SmartScreen says "Windows protected your PC" → More info ▸ Run anyway.
+
+Either way, on first launch it already shows **thousands of pre-collected default shortcuts** (VS
+Code, Adobe, Office, and more — no scanning needed), then merges in whatever it can read from *your*
+machine (installed apps, BetterTouchTool, Karabiner/PowerToys, …) on top. Re-launch anytime to rescan.
+
+We don't publish pre-built binaries yet (this is a fresh, unsigned v1) — build your own from source
+with the scripts above; see [`packaging/mac/`](packaging/mac/) and [`packaging/win/`](packaging/win/).
+
+### Option B — install from source (power users, or to re-scan without a rebuild)
+
+Prerequisites: **macOS 14+**, Xcode command-line tools (`swift`), **Python 3**, and **`jq`**.
 
 ```sh
 xcode-select --install     # once, if you don't have swift
@@ -59,6 +75,7 @@ open viewer.html           # opens the grid in your default browser
 - `render.py` only re-renders the viewer from existing `shortcuts.json` (no re-scan) — for UI tweaks.
 - **Global hotkeys** (optional, native): `./install_hotkeys.sh` builds & installs **SV Hotkeys.app**
   (menu-bar app, auto-starts at login; no Accessibility needed for ⌘/⌥/⌃ combos).
+- **Windows**: same idea, `win/build_win.py` — see [`win/README.md`](win/README.md).
 
 ### One-time setup for full coverage
 

@@ -10,6 +10,7 @@ macOS의 **SV Hotkeys**(글로벌 핫키 + 마우스 북마크)에 대응하는 
 | 수집기(뷰어 데이터) | `build.py`+`axmenudump` | `build_win.py` — 시스템+탐색기 시드·**Win32 메뉴 스캔**(실행 중 클래식 앱)·AHK·PowerToys 리맵·.lnk 바로 가기 키·Windows Terminal·VS Code(기본 덤프+사용자)·**Adobe 추출기 자동 실행**(AE/PR/PS/AI 전체 키맵) |
 | 공유 corpus | `defaults/`, `web_shortcuts.json` | **`win/defaults/`**(앱 기본값 팩 — VS Code·Adobe, 덤프 없는 기기는 seed) + **`win/packs/`**(공식 문서 팩 — Office 5종·카톡·한글·Acrobat 등 스캔 불가 앱, 형식 `[["Ctrl+N","동작","섹션?"]]`) — 둘 다 tracked, PII 없음 |
 | 뷰어 화면 | `viewer.html` | **공유** — `meta.platform=="windows"`면 뷰어가 자동으로 Windows 키보드로 전환: ⊞Win·Alt·Ctrl 키캡, 104키 하단행(☰메뉴 포함)·Win 넘패드(NumLock), `Ctrl+Shift+S` 표기, win-full/tkl/노트북 프리셋 |
+| 배포 | 소스 설치 | **[`packaging/win/`](../packaging/win/)** — PyInstaller로 `ShortcutViewer.exe` 하나에 얼려 코퍼스까지 통째로 배포(Windows에서만 빌드 가능) |
 
 ## 기능(초안)
 - **글로벌 핫키**: Win32 `RegisterHotKey` + 숨은 message-only 창 → `WM_HOTKEY`.
