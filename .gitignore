@@ -9,6 +9,7 @@ codex_keybindings.json
 raycast_manual.json
 manual_globals.json
 manual_gestures.json
+win/manual_globals_win.json
 annotations.json
 
 # ── Compiled binary (rebuild from axmenudump.swift) ───────────────────

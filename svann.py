@@ -28,7 +28,7 @@ def load_annotations(path):
     if not path or not os.path.exists(path):
         return ann
     try:
-        with open(path) as f:
+        with open(path, encoding="utf-8") as f:   # Windows(cp949 로케일) 대비
             raw = json.load(f)
     except Exception:
         return ann
