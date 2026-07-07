@@ -373,7 +373,7 @@
    "action": "Commit Completion",
    "detail": "sublime default · keypad_enter · commit_completion",
    "group": "Sublime Text",
-   "key": "keypad_enter",
+   "key": "KeypadEnter",
    "mods": [],
    "scope": "Sublime Text",
    "source": "app config"
@@ -382,7 +382,7 @@
    "action": "Find All",
    "detail": "sublime default · keypad_enter · find_all",
    "group": "Sublime Text",
-   "key": "keypad_enter",
+   "key": "KeypadEnter",
    "mods": [],
    "scope": "Sublime Text",
    "source": "app config"
@@ -391,7 +391,7 @@
    "action": "Find Next",
    "detail": "sublime default · keypad_enter · find_next",
    "group": "Sublime Text",
-   "key": "keypad_enter",
+   "key": "KeypadEnter",
    "mods": [],
    "scope": "Sublime Text",
    "source": "app config"
@@ -400,7 +400,7 @@
    "action": "Hide Panel",
    "detail": "sublime default · keypad_enter · hide_panel",
    "group": "Sublime Text",
-   "key": "keypad_enter",
+   "key": "KeypadEnter",
    "mods": [],
    "scope": "Sublime Text",
    "source": "app config"
@@ -409,7 +409,7 @@
    "action": "Select",
    "detail": "sublime default · keypad_enter · select",
    "group": "Sublime Text",
-   "key": "keypad_enter",
+   "key": "KeypadEnter",
    "mods": [],
    "scope": "Sublime Text",
    "source": "app config"
@@ -2304,7 +2304,7 @@
    "action": "Chain",
    "detail": "sublime default · shift+keypad_enter · chain",
    "group": "Sublime Text",
-   "key": "keypad_enter",
+   "key": "KeypadEnter",
    "mods": [
     "shift"
    ],
@@ -2315,7 +2315,7 @@
    "action": "Find All",
    "detail": "sublime default · alt+keypad_enter · find_all",
    "group": "Sublime Text",
-   "key": "keypad_enter",
+   "key": "KeypadEnter",
    "mods": [
     "opt"
    ],
@@ -2326,7 +2326,7 @@
    "action": "Find Prev",
    "detail": "sublime default · shift+keypad_enter · find_prev",
    "group": "Sublime Text",
-   "key": "keypad_enter",
+   "key": "KeypadEnter",
    "mods": [
     "shift"
    ],
@@ -2337,7 +2337,7 @@
    "action": "Run Macro File (Add Line)",
    "detail": "sublime default · super+keypad_enter · run_macro_file",
    "group": "Sublime Text",
-   "key": "keypad_enter",
+   "key": "KeypadEnter",
    "mods": [
     "cmd"
    ],
@@ -2348,7 +2348,7 @@
    "action": "Select",
    "detail": "sublime default · super+keypad_enter · select",
    "group": "Sublime Text",
-   "key": "keypad_enter",
+   "key": "KeypadEnter",
    "mods": [
     "cmd"
    ],
@@ -2359,7 +2359,7 @@
    "action": "Select",
    "detail": "sublime default · shift+keypad_enter · select",
    "group": "Sublime Text",
-   "key": "keypad_enter",
+   "key": "KeypadEnter",
    "mods": [
     "shift"
    ],
@@ -2370,7 +2370,7 @@
    "action": "Select",
    "detail": "sublime default · alt+keypad_enter · select",
    "group": "Sublime Text",
-   "key": "keypad_enter",
+   "key": "KeypadEnter",
    "mods": [
     "opt"
    ],
@@ -2381,7 +2381,7 @@
    "action": "Decrease Font Size",
    "detail": "sublime default · super+keypad_minus · decrease_font_size",
    "group": "Sublime Text",
-   "key": "keypad_minus",
+   "key": "KeypadMinus",
    "mods": [
     "cmd"
    ],
@@ -2392,7 +2392,7 @@
    "action": "Jump Back",
    "detail": "sublime default · ctrl+keypad_minus · jump_back",
    "group": "Sublime Text",
-   "key": "keypad_minus",
+   "key": "KeypadMinus",
    "mods": [
     "ctrl"
    ],
@@ -2403,7 +2403,7 @@
    "action": "Increase Font Size",
    "detail": "sublime default · super+keypad_plus · increase_font_size",
    "group": "Sublime Text",
-   "key": "keypad_plus",
+   "key": "KeypadPlus",
    "mods": [
     "cmd"
    ],
@@ -3470,7 +3470,7 @@
    "action": "Replace All",
    "detail": "sublime default · ctrl+alt+keypad_enter · replace_all",
    "group": "Sublime Text",
-   "key": "keypad_enter",
+   "key": "KeypadEnter",
    "mods": [
     "ctrl",
     "opt"
@@ -3482,7 +3482,7 @@
    "action": "Run Macro File (Add Line Before)",
    "detail": "sublime default · super+shift+keypad_enter · run_macro_file",
    "group": "Sublime Text",
-   "key": "keypad_enter",
+   "key": "KeypadEnter",
    "mods": [
     "shift",
     "cmd"
@@ -3494,7 +3494,7 @@
    "action": "Jump Forward",
    "detail": "sublime default · ctrl+shift+keypad_minus · jump_forward",
    "group": "Sublime Text",
-   "key": "keypad_minus",
+   "key": "KeypadMinus",
    "mods": [
     "ctrl",
     "shift"

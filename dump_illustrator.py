@@ -9,6 +9,7 @@
 #   usage:  python3 dump_illustrator.py [path/to/Illustrator Defaults.kys] [version]
 import os, re, sys, glob, json
 PROJ = os.path.dirname(os.path.abspath(__file__))
+OUTBASE = os.path.join(PROJ, "win", "defaults") if os.name == "nt" else os.path.join(PROJ, "defaults")   # 플랫폼별 조합이 달라 corpus 분리
 APPNAME = "Adobe Illustrator 2026"   # must match the AX-scan scope
 
 def decode_key(k):
@@ -22,11 +23,17 @@ def decode_key(k):
 
 def decode_mods(m):
     out = []
-    if m & 16: out.append("ctrl")
-    if m & 128: out.append("opt")
-    if m & 32: out.append("shift")
-    if m & 64: out.append("cmd")
-    unknown = m & ~(16 | 32 | 64 | 128)
+    if os.name == "nt":   # Windows .kys: 64 = 주 수식키 슬롯(Ctrl — mac에선 Cmd), 128 = Alt
+        if m & 64: out.append("ctrl")
+        if m & 128: out.append("opt")
+        if m & 32: out.append("shift")
+        unknown = m & ~(32 | 64 | 128)
+    else:
+        if m & 16: out.append("ctrl")
+        if m & 128: out.append("opt")
+        if m & 32: out.append("shift")
+        if m & 64: out.append("cmd")
+        unknown = m & ~(16 | 32 | 64 | 128)
     return out, unknown
 
 def humanize(raw):
@@ -38,8 +45,12 @@ def humanize(raw):
     return (s[:1].upper() + s[1:]) if s else raw
 
 def find_kys():
-    g = glob.glob("/Applications/Adobe Illustrator */Presets.localized/*/Keyboard Shortcuts/Illustrator Defaults.kys")
-    return g[0] if g else None
+    pats = ["/Applications/Adobe Illustrator */Presets.localized/*/Keyboard Shortcuts/Illustrator Defaults.kys",
+            os.path.expandvars(r"%ProgramFiles%\Adobe\Adobe Illustrator *\Presets*\*\Keyboard Shortcuts\Illustrator Defaults.kys")]
+    for p in pats:
+        g = glob.glob(p)
+        if g: return g[0]
+    return None
 
 def main():
     path = sys.argv[1] if len(sys.argv) > 1 else find_kys()
@@ -61,12 +72,12 @@ def main():
         if unk: det += f" · ⚠️mod+{unk}"
         ents.append({"mods": mods, "key": k, "action": humanize(raw), "source": "app config", "scope": APPNAME,
                      "detail": det, "group": APPNAME})
-    d = os.path.join(PROJ, "defaults", APPNAME); os.makedirs(d, exist_ok=True)
+    d = os.path.join(OUTBASE, APPNAME); os.makedirs(d, exist_ok=True)
     payload = {"app": APPNAME, "version": str(ver), "scope": APPNAME,
                "provenance": {"kind": "app-bundle", "file": os.path.basename(path)},
                "entries": sorted(ents, key=lambda x: (len(x["mods"]), x["key"], x["action"]))}
     out = os.path.join(d, f"keymap-{ver}.json")
-    open(out, "w").write(json.dumps(payload, ensure_ascii=False, indent=1, sort_keys=True))
+    open(out, "w", encoding="utf-8").write(json.dumps(payload, ensure_ascii=False, indent=1, sort_keys=True))
     print(f"  → {os.path.relpath(out, PROJ)}  ({len(ents)}건 · menus+tools)")
     if warn:
         print(f"  ⚠️ 미지 Key 코드 {len(warn)}종:")

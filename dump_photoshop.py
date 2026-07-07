@@ -10,8 +10,9 @@
 import os, re, sys, glob, json, html as htmllib
 import xml.etree.ElementTree as ET
 PROJ = os.path.dirname(os.path.abspath(__file__))
+OUTBASE = os.path.join(PROJ, "win", "defaults") if os.name == "nt" else os.path.join(PROJ, "defaults")   # 플랫폼별 조합이 달라 corpus 분리
 APPNAME = "Adobe Photoshop 2026"   # must match the AX-scan scope so packs merge into one context
-MODS = {"Cmd": "cmd", "Opt": "opt", "Shift": "shift", "Control": "ctrl"}
+MODS = {"Cmd": "cmd", "Opt": "opt", "Shift": "shift", "Control": "ctrl", "Ctrl": "ctrl", "Alt": "opt"}   # Ctrl/Alt = Windows .kys 토큰
 
 def parse_combo(text):
     mods, key = [], None
@@ -25,8 +26,12 @@ def parse_combo(text):
     return mods, key
 
 def find_kys():
-    g = glob.glob("/Applications/Adobe Photoshop */Locales/*/Support Files/Shortcuts/Mac/Default Keyboard Shortcuts.kys")
-    return g[0] if g else None
+    pats = ["/Applications/Adobe Photoshop */Locales/*/Support Files/Shortcuts/Mac/Default Keyboard Shortcuts.kys",
+            os.path.expandvars(r"%ProgramFiles%\Adobe\Adobe Photoshop *\Locales\*\Support Files\Shortcuts\Win\Default Keyboard Shortcuts.kys")]
+    for p in pats:
+        g = glob.glob(p)
+        if g: return g[0]
+    return None
 
 def _clean(t):
     return htmllib.unescape(re.sub(r"<[^>]+>", "", t)).replace("\xa0", " ").strip()
@@ -95,13 +100,13 @@ def main():
             ents.append({"mods": mods, "key": key, "action": leaf, "source": "app config", "scope": APPNAME,
                          "detail": f"photoshop summarize · {section} · {pathname} · {combo}", "group": APPNAME})
         print(f"  summarize에서 +{len(ents) - n0}건 (Tools/Panel/Taskspace)")
-    d = os.path.join(PROJ, "defaults", APPNAME); os.makedirs(d, exist_ok=True)
+    d = os.path.join(OUTBASE, APPNAME); os.makedirs(d, exist_ok=True)
     prov = {"kind": "app-bundle", "file": os.path.basename(path)}
     if htm and os.path.exists(htm): prov["summarize"] = os.path.basename(htm)   # 도구/패널 키는 Summarize 내보내기에서
     payload = {"app": APPNAME, "version": str(ver), "scope": APPNAME, "provenance": prov,
                "entries": sorted(ents, key=lambda x: (len(x["mods"]), x["key"], x["action"]))}
     out = os.path.join(d, f"keymap-{ver}.json")
-    open(out, "w").write(json.dumps(payload, ensure_ascii=False, indent=1, sort_keys=True))
+    open(out, "w", encoding="utf-8").write(json.dumps(payload, ensure_ascii=False, indent=1, sort_keys=True))
     print(f"  → {os.path.relpath(out, PROJ)}  ({len(ents)}건 · 대안 바인딩 포함)")
     print("검토:  python3 normalize_packs.py && git diff -- defaults/")
 

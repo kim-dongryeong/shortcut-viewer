@@ -11158,7 +11158,7 @@
    "action": "workbench.action.zoomIn",
    "detail": "vscode default · cmd+numpad_add",
    "group": "app config",
-   "key": "numpad_add",
+   "key": "KeypadPlus",
    "mods": [
     "cmd"
    ],
@@ -11192,7 +11192,7 @@
    "action": "workbench.action.zoomOut",
    "detail": "vscode default · cmd+numpad_subtract",
    "group": "app config",
-   "key": "numpad_subtract",
+   "key": "KeypadMinus",
    "mods": [
     "cmd"
    ],
@@ -11226,7 +11226,7 @@
    "action": "workbench.action.zoomReset",
    "detail": "vscode default · cmd+numpad0",
    "group": "app config",
-   "key": "numpad0",
+   "key": "Keypad0",
    "mods": [
     "cmd"
    ],
@@ -13061,7 +13061,7 @@
    "action": "workbench.action.browser.resetZoom",
    "detail": "vscode default · cmd+numpad0 · when: browserFocused && browserHasUrl && !browserHasError && activeEditor == 'workbench.editor.browser'",
    "group": "app config",
-   "key": "numpad0",
+   "key": "Keypad0",
    "mods": [
     "cmd"
    ],
@@ -13072,7 +13072,7 @@
    "action": "workbench.action.browser.zoomIn",
    "detail": "vscode default · cmd+numpad_add · when: browserFocused && browserHasUrl && !browserHasError && activeEditor == 'workbench.editor.browser'",
    "group": "app config",
-   "key": "numpad_add",
+   "key": "KeypadPlus",
    "mods": [
     "cmd"
    ],
@@ -13106,7 +13106,7 @@
    "action": "workbench.action.browser.zoomOut",
    "detail": "vscode default · cmd+numpad_subtract · when: browserFocused && browserHasUrl && !browserHasError && activeEditor == 'workbench.editor.browser'",
    "group": "app config",
-   "key": "numpad_subtract",
+   "key": "KeypadMinus",
    "mods": [
     "cmd"
    ],
