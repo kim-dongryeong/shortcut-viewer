@@ -50,7 +50,11 @@
   body{margin:0;background:var(--bg);color:var(--txt);font:14px/1.4 -apple-system,BlinkMacSystemFont,"SF Pro",Segoe UI,sans-serif}
   header{padding:14px 20px;border-bottom:1px solid var(--line);display:flex;gap:18px;align-items:baseline;flex-wrap:wrap}
   html.standalone-mode header h1 { display: none !important; }
-  html.standalone-mode header { border-bottom: none !important; padding-bottom: 0 !important; padding-top: 14px !important; padding-left: max(env(titlebar-area-x, 80px), 80px) !important; }
+  .titlebar{display:none}
+  @media(display-mode:window-controls-overlay){
+    .titlebar{display:flex;align-items:center;justify-content:center;position:fixed;left:0;top:0;width:100%;height:env(titlebar-area-height,36px);z-index:60;-webkit-app-region:drag;color:var(--txt);font-size:12px;font-weight:600;letter-spacing:.02em;background:var(--bg);border-bottom:1px solid var(--line)}
+    body{padding-top:env(titlebar-area-height,36px)}
+  }
   h1{font-size:16px;margin:0;font-weight:600}
   .meta{color:var(--dim);font-size:12px}
   .wrap{padding:18px 20px;max-width:1480px}
@@ -362,6 +366,7 @@ linear-gradient(158deg,#20369b 0%,#132468 46%,#064e72 100%)}
 </style>
 </head>
 <body>
+<div class="titlebar">Shortcut Viewer</div>
 <div class="modal-ov">
   <div class="modal" role="dialog" aria-modal="true">
     <h2 class="modal-h">Almost done!</h2>
