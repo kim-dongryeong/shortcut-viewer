@@ -49,6 +49,8 @@
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--txt);font:14px/1.4 -apple-system,BlinkMacSystemFont,"SF Pro",Segoe UI,sans-serif}
   header{padding:14px 20px;border-bottom:1px solid var(--line);display:flex;gap:18px;align-items:baseline;flex-wrap:wrap}
+  html.standalone-mode header { display: none !important; }
+  html.standalone-mode .wrap { padding-top: max(env(titlebar-area-height, 36px), 36px); }
   h1{font-size:16px;margin:0;font-weight:600}
   .meta{color:var(--dim);font-size:12px}
   .wrap{padding:18px 20px;max-width:1480px}
