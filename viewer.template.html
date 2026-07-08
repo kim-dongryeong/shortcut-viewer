@@ -3,7 +3,47 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/favicon.svg">
+<meta name="theme-color" content="#2563eb">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Shortcut Viewer">
 <title>Ultimate Shortcut Viewer</title>
+<script>
+(function() {
+  const mm = function(q) { return window.matchMedia && window.matchMedia(q).matches; };
+  let installed = false;
+  try { 
+    if (window.location.search.includes('reset=1')) localStorage.removeItem('sv:installed');
+    installed = localStorage.getItem('sv:installed') === '1'; 
+  } catch(_) {}
+
+  const checkPWA = function() {
+    const standalone = mm('(display-mode: standalone)') || mm('(display-mode: window-controls-overlay)')
+                   || mm('(display-mode: minimal-ui)') || mm('(display-mode: fullscreen)') || navigator.standalone === true;
+    const isPWA = window.location.search.includes('pwa=1') || standalone;
+    if (isPWA || installed) {
+      document.documentElement.classList.add('standalone-mode');
+      document.documentElement.classList.remove('not-installed');
+      return true;
+    }
+    return false;
+  };
+
+  if (!checkPWA()) {
+    document.documentElement.classList.add('not-installed');
+    // Fallback: Check every 50ms for 2 seconds to catch late-resolving media queries in Chrome Apps
+    let checks = 0;
+    const interval = setInterval(function() {
+      if (checkPWA() || ++checks > 40) clearInterval(interval);
+    }, 50);
+    // Also listen to media query changes
+    const mql = window.matchMedia('(display-mode: standalone)');
+    if (mql.addEventListener) mql.addEventListener('change', checkPWA);
+  }
+})();
+</script>
 <style>
   :root{ --bg:#0f1115; --panel:#171a21; --line:#262b36; --txt:#e6e9ef; --dim:#8b93a3; --U:62px; }
   *{box-sizing:border-box}
@@ -265,9 +305,111 @@
     .cs{break-inside:avoid} .ovgrp{break-inside:avoid}
     .cs .csa{white-space:normal}
   }
+  /* PWA Install welcome styles */
+  .modal-ov{display:none;position:fixed;inset:0;z-index:9999;overflow:hidden;color:#fff;align-items:center;justify-content:center;padding:30px 20px;background:
+radial-gradient(1600px 1100px at 6% -18%,rgba(255,96,210,.4),rgba(255,96,210,0) 64%),
+radial-gradient(1700px 1200px at 110% 115%,rgba(56,224,255,.4),rgba(56,224,255,0) 64%),
+radial-gradient(1400px 950px at 102% -12%,rgba(255,150,80,.34),rgba(255,150,80,0) 64%),
+radial-gradient(1500px 1050px at -12% 112%,rgba(150,110,255,.45),rgba(150,110,255,0) 65%),
+radial-gradient(1100px 750px at 46% -22%,rgba(124,58,237,.3),rgba(124,58,237,0) 62%),
+radial-gradient(1100px 700px at 58% 122%,rgba(110,255,200,.18),rgba(110,255,200,0) 62%),
+linear-gradient(158deg,#20369b 0%,#132468 46%,#064e72 100%)}
+  
+  /* Show welcome screen only in browser tab mode (not standalone) */
+  html.not-installed .modal-ov{display:flex}
+  /* Hide the actual app-wrapper when in browser tab mode */
+  html.not-installed body > :not(.modal-ov){display:none!important}
+  
+  .modal{position:relative;z-index:1;background:transparent;max-width:1020px;width:100%;padding:12px 8px;max-height:100%;overflow:auto;text-align:center}
+  .modal-h{margin:0 0 12px;font-size:34px;font-weight:700;letter-spacing:-.02em;text-shadow:0 2px 14px rgba(10,25,80,.25)}
+  .modal-sub{margin:0 0 42px;color:rgba(255,255,255,.8);font-size:16px}
+  .modal-ills{display:flex;gap:48px;justify-content:center;align-items:stretch;flex-wrap:wrap}
+  .modal-ill{flex:1 1 380px;max-width:460px;display:flex;flex-direction:column}
+  .ill-stage{flex:1;min-height:236px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px}
+  .modal-cap{font-size:14px;color:rgba(255,255,255,.92);margin-top:18px;text-align:center}
+  .modal-actions{display:flex;justify-content:center;margin-top:46px}
+  .modal-primary{padding:16px 58px;border:0;border-radius:999px;background:#fff;color:#1c49cf;font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 12px 34px rgba(6,18,64,.35);transition:transform .15s,box-shadow .15s}
+  .modal-primary:hover{transform:translateY(-1px);box-shadow:0 16px 40px rgba(6,18,64,.42)}
+  .modal-note{font-size:12px;color:rgba(255,255,255,.75);margin:18px 0 0;line-height:1.6}
+  
+  /* -- install screen: liquid-glass ⌘-Tab strap -- */
+  .ct-strap{display:inline-flex;flex-direction:column;align-items:center;gap:12px;padding:20px 24px 14px;border-radius:30px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.4);box-shadow:0 18px 50px rgba(8,20,70,.35),inset 0 1px 0 rgba(255,255,255,.55);-webkit-backdrop-filter:blur(22px) saturate(1.7);backdrop-filter:blur(22px) saturate(1.7);color:#fff}
+  .ct-row{display:flex;align-items:center;gap:16px}
+  .ct-ic{width:52px;height:52px;flex:none;filter:drop-shadow(0 5px 10px rgba(8,20,70,.28))}
+  .ct-ic svg,.ct-ic img{display:block;width:100%;height:100%}
+  .ct-sel{display:flex;padding:8px;border-radius:19px;background:rgba(255,255,255,0.34);border:1px solid rgba(255,255,255,.65);box-shadow:inset 0 1px 0 rgba(255,255,255,.6)}
+  .ct-name{font-size:12px;font-weight:600;color:#fff;letter-spacing:.01em;text-shadow:0 1px 6px rgba(10,30,90,.5)}
+  .ct-keys{display:flex;gap:10px;justify-content:center}
+  .ct-keys kbd{min-width:34px;padding:6px 13px;border-radius:9px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.42);box-shadow:inset 0 1px 0 rgba(255,255,255,.5);color:#fff;font-size:12.5px;font-family:inherit;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+  
+  /* -- install screen: floating mini browser window -- */
+  .ext-win{width:100%;max-width:410px;border:3px solid transparent;border-radius:16px;background:linear-gradient(#fff,#fff) padding-box,linear-gradient(18deg,#ff38b6 0%,#ff0000 46%,#8869f7 100%) border-box;box-shadow:0 26px 60px rgba(6,16,60,.42);overflow:hidden;text-align:left;color:#3a3f47}
+  .ext-top{display:flex;align-items:center;gap:7px;padding:11px 13px;background:linear-gradient(18deg,#ff38b6 0%,#ff0000 46%,#8869f7 100%)}
+  .ext-dot{width:11px;height:11px;border-radius:50%;flex:none;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}
+  .ext-title{flex:1;text-align:center;font-size:11.5px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;margin:0 6px;text-shadow:0 1px 5px rgba(8,25,80,.45)}
+  .ext-puz{position:relative;width:26px;height:26px;border-radius:8px;background:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.6);display:flex;align-items:center;justify-content:center;font-size:13px;flex:none}
+  .ext-puz i{position:absolute;top:-3px;right:-3px;width:9px;height:9px;border-radius:50%;background:#22c55e;border:1.5px solid #fff}
+  .ext-body{position:relative;padding:44px 16px 18px;background:#fff}
+  .ext-find{position:absolute;top:9px;right:12px;display:flex;align-items:center;gap:9px;background:#fff;border:1px solid #e0e4eb;border-radius:10px;padding:6px 11px;font-size:11px;color:#4a505a;box-shadow:0 8px 22px rgba(15,25,60,.14)}
+  .ext-find b{color:#2563eb;font-weight:600}
+  .ext-find span{color:#9aa1ab}
+  .ext-row{display:flex;align-items:center;gap:9px;margin:12px 0}
+  .ext-av{width:20px;height:20px;border-radius:6px;flex:none}
+  .ext-bar{height:9px;border-radius:5px;background:#e9edf2;flex:1}
+  .ext-bar.hit{flex:none;width:54px;background:#ffe08a}
 </style>
 </head>
 <body>
+<div class="modal-ov">
+  <div class="modal" role="dialog" aria-modal="true">
+    <h2 class="modal-h">Almost done!</h2>
+    <p class="modal-sub">One last step — click Confirm to finish setting up the app.</p>
+    <div class="modal-ills">
+      <div class="modal-ill">
+        <div class="ill-stage">
+          <div class="ct-strap">
+            <div class="ct-row">
+              <span class="ct-ic"><svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="icfb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5ea6ff"/><stop offset="1" stop-color="#2a6fe0"/></linearGradient><linearGradient id="icff" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e6f0ff"/></linearGradient></defs><rect width="56" height="56" rx="13" fill="url(#icfb)"/><path d="M13 21c0-1.7 1.3-3 3-3h7.2c.9 0 1.7.4 2.3 1.1l1.6 1.9H40c1.7 0 3 1.3 3 3v11c0 1.7-1.3 3-3 3H16c-1.7 0-3-1.3-3-3V21Z" fill="url(#icff)"/><path d="M13 24.5h30V35c0 1.7-1.3 3-3 3H16c-1.7 0-3-1.3-3-3V24.5Z" fill="#cfe1ff"/></svg></span>
+              <span class="ct-ic"><svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="icsb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fdfeff"/><stop offset="1" stop-color="#e3ecf9"/></linearGradient><linearGradient id="ics" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4fb0ff"/><stop offset="1" stop-color="#1d6ced"/></linearGradient></defs><rect width="56" height="56" rx="13" fill="url(#icsb)"/><circle cx="28" cy="28" r="17.5" fill="url(#ics)"/><g stroke="#ffffff" stroke-opacity="0.75" stroke-width="1.1"><path d="M28 12.5v3M28 40.5v3M12.5 28h3M40.5 28h3"/></g><path d="M37.5 18.5 30.3 30.3 25.7 25.7 Z" fill="#ff4b4b"/><path d="M18.5 37.5 25.7 25.7 30.3 30.3 Z" fill="#ffffff"/></svg></span>
+              <span class="ct-sel"><span class="ct-ic"><img src="/favicon.svg" alt="Shortcut Viewer"></span></span>
+              <span class="ct-ic"><svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="icm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5ce27a"/><stop offset="1" stop-color="#12a94b"/></linearGradient></defs><rect width="56" height="56" rx="13" fill="url(#icm)"/><path d="M28 13.5c8.8 0 16 5.7 16 12.7S36.8 38.9 28 38.9c-1.9 0-3.7-.2-5.4-.7L15 41.8l2.7-6.3c-3.5-2.3-5.7-5.6-5.7-9.3 0-7 7.2-12.7 16-12.7Z" fill="#ffffff"/></svg></span>
+              <span class="ct-ic"><svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="ica" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#31b3ff"/><stop offset="1" stop-color="#0a6ff0"/></linearGradient></defs><rect width="56" height="56" rx="13" fill="url(#ica)"/><path d="M28 16.5 20 39.5 M28 16.5 36 39.5 M22.8 32.5h10.4" stroke="#ffffff" stroke-width="3.1" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </div>
+            <div class="ct-name">Shortcut Viewer</div>
+          </div>
+          <div class="ct-keys"><kbd>⌘</kbd><kbd>tab ⇥</kbd></div>
+        </div>
+        <div class="modal-cap">✓ Shows up in ⌘-Tab and the Dock as its own app.</div>
+      </div>
+      <div class="modal-ill">
+        <div class="ill-stage">
+          <div class="ext-win">
+            <div class="ext-top">
+              <span class="ext-dot" style="background:#ff5f57"></span>
+              <span class="ext-dot" style="background:#febc2e"></span>
+              <span class="ext-dot" style="background:#28c840"></span>
+              <span class="ext-title">Shortcut Viewer</span>
+              <span class="ext-puz">🧩<i></i></span>
+            </div>
+            <div class="ext-body">
+              <div class="ext-find">⌘F <b>excel</b><span>2/5</span></div>
+              <div class="ext-row"><span class="ext-av" style="background:#22c55e"></span><span class="ext-bar" style="max-width:58%"></span></div>
+              <div class="ext-row"><span class="ext-av" style="background:#2563eb"></span><span class="ext-bar" style="max-width:34%"></span><span class="ext-bar hit"></span></div>
+              <div class="ext-row"><span class="ext-av" style="background:#f59e0b"></span><span class="ext-bar" style="max-width:66%"></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-cap">✓ It is still Chrome inside — ⌘-F Find and your extensions keep working.</div>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button id="installnow" class="modal-primary">Confirm</button>
+    </div>
+    <p class="modal-note" id="installhow" style="display:none">
+      If it does not prompt, use the Chrome ⋮ menu → “Cast, save & share” → “Install page as app” (or “Install Shortcut Viewer”).
+    </p>
+  </div>
+</div>
 <header>
   <h1>⌨️ Ultimate Shortcut Viewer</h1>
   <span class="meta" id="metaline"></span>
@@ -1468,6 +1610,66 @@ document.getElementById('mdbtn').onclick=()=>exportRows('md');
 document.getElementById('scopepos').onclick=()=>{ prefScopeRight=!prefScopeRight; localStorage.setItem('SVscopeRight',prefScopeRight?'1':'0'); if(selectedKey)showDetail(selectedKey); };
 document.getElementById('annexport').onclick=()=>{ const b=new Blob([JSON.stringify(ANN,null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download='shortcut-annotations.json'; a.click(); };
 document.getElementById('annimport').onchange=e=>{ const f=e.target.files[0]; if(!f)return; const rd=new FileReader(); rd.onload=()=>{ try{ const j=JSON.parse(rd.result); Object.assign(ANN.fav,j.fav||{}); Object.assign(ANN.note,j.note||{}); Object.assign(ANN.enote,j.enote||{}); if(Array.isArray(j.custom)) ANN.custom=j.custom; if(Array.isArray(j.ghk)) ANN.ghk=j.ghk; mergeCustom(); normalizeFavs(); saveAnn(); sync(); alert('가져왔습니다 ✓ (즐겨찾기·노트·엔트리노트·내단축키·글로벌핫키)'); }catch(_){ alert('JSON 파싱 실패'); } }; rd.readAsText(f); };
+
+// Service Worker Registration for PWA Criteria
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js').then(function() {
+    console.log('SW registered');
+  }).catch(function(err) {
+    console.log('SW registration failed:', err);
+  });
+}
+
+// PWA Install prompt handling
+var deferredPrompt = null;
+var inow = document.getElementById('installnow');
+window.addEventListener('beforeinstallprompt', function(e) {
+  e.preventDefault();
+  deferredPrompt = e;
+  if (inow) {
+    inow.style.display = '';
+  }
+});
+
+if (inow) {
+  inow.addEventListener('click', function() {
+    if (deferredPrompt) {
+      var dp = deferredPrompt;
+      deferredPrompt = null;
+      dp.prompt();
+      if (dp.userChoice && dp.userChoice.then) {
+        dp.userChoice.then(function(res) {
+          if (res && res.outcome === 'accepted') {
+            try { localStorage.setItem('sv:installed', '1'); } catch(_) {}
+          }
+        });
+      }
+    } else {
+      var h = document.getElementById('installhow');
+      if (h) h.style.display = '';
+    }
+  });
+}
+
+window.addEventListener('appinstalled', function() {
+  try { localStorage.setItem('sv:installed', '1'); } catch(_) {}
+});
+
+// Re-check standalone mode after DOM load to handle race conditions / cache
+(function() {
+  const mm = function(q) { return window.matchMedia && window.matchMedia(q).matches; };
+  const standalone = mm('(display-mode: standalone)') || mm('(display-mode: window-controls-overlay)')
+                 || mm('(display-mode: minimal-ui)') || mm('(display-mode: fullscreen)') || navigator.standalone === true;
+  let installed = false;
+  try { 
+    if (window.location.search.includes('reset=1')) localStorage.removeItem('sv:installed');
+    installed = localStorage.getItem('sv:installed') === '1'; 
+  } catch(_) {}
+  if (standalone || window.location.search.includes('pwa=1') || installed) {
+    document.documentElement.classList.add('standalone-mode');
+    document.documentElement.classList.remove('not-installed');
+  }
+})();
 </script>
 </body>
 </html>
