@@ -50,7 +50,11 @@ cd "$(dirname "$0")/../Resources"
 
 # If already running, just open and exit
 if curl -s -o /dev/null "$URL" 2>/dev/null; then 
-  open -b com.google.Chrome "$URL" || open "$URL"
+  if [ -d "$HOME/Applications/Chrome Apps.localized/Shortcut Viewer.app" ]; then
+    open -a "$HOME/Applications/Chrome Apps.localized/Shortcut Viewer.app"
+  else
+    open -b com.google.Chrome "$URL" || open "$URL"
+  fi
   exit 0
 fi
 
@@ -63,7 +67,11 @@ fi
 # without a Dock icon, and stays alive as long as the user wants.
 python3 app.py --port="$PORT" &
 sleep 1
-open -b com.google.Chrome "$URL" || open "$URL"
+if [ -d "$HOME/Applications/Chrome Apps.localized/Shortcut Viewer.app" ]; then
+  open -a "$HOME/Applications/Chrome Apps.localized/Shortcut Viewer.app"
+else
+  open -b com.google.Chrome "$URL" || open "$URL"
+fi
 wait
 LAUNCH
 
