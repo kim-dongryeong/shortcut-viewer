@@ -751,26 +751,29 @@ def _is_window_mgmt(action):
 # 메뉴 스캔 신선도(staleness) — 이번 실행이 실제 스캔인지, 이전 스캔 재사용인지 기록(코덱스 리뷰).
 MENU_SCAN = {"no_access": False, "reused": 0, "kept_apps": 0, "as_of": None}
 
+def _reuse_prev_menus(why):
+    # No scan possible this run (no Accessibility / no binary) — preserve the previous scan's
+    # menu entries so a rebuild (e.g. for a template/code change) doesn't wipe the last good scan.
+    prev = os.path.join(PROJ, "shortcuts.json")
+    if os.path.exists(prev):
+        try:
+            _prev = json.load(open(prev))
+            old = [e for e in _prev.get("entries", [])
+                   if e.get("source") == "app menu" and "공유" not in e.get("detail", "")   # don't re-absorb community seeds (collect_community re-adds them fresh)
+                   and not (not e.get("mods") and _is_globe_item(e.get("action")))]
+            for e in old:
+                e["group"] = e.get("group") or "app menu"; entries.append(e)
+            MENU_SCAN.update(no_access=True, reused=len(old), as_of=(_prev.get("meta") or {}).get("generated"))
+            print(f"  app menus: {why} — reused {len(old)} from last scan"); return len(old)
+        except Exception: pass
+    print(f"  app menus: {why}, no previous scan to reuse"); return 0
+
 def collect_menus():
     binp = os.path.join(PROJ, "axmenudump")
-    if not os.path.exists(binp): print("  app menus: axmenudump not compiled"); return 0
+    if not os.path.exists(binp): return _reuse_prev_menus("axmenudump not compiled")
     r = subprocess.run([binp], capture_output=True, text=True)
     if r.returncode == 2:
-        # No Accessibility permission this run — preserve the previous scan's menu entries so a
-        # rebuild (e.g. for a template/code change) doesn't wipe the last good menu scan.
-        prev = os.path.join(PROJ, "shortcuts.json")
-        if os.path.exists(prev):
-            try:
-                _prev = json.load(open(prev))
-                old = [e for e in _prev.get("entries", [])
-                       if e.get("source") == "app menu" and "공유" not in e.get("detail", "")   # don't re-absorb community seeds (collect_community re-adds them fresh)
-                       and not (not e.get("mods") and _is_globe_item(e.get("action")))]
-                for e in old:
-                    e["group"] = e.get("group") or "app menu"; entries.append(e)
-                MENU_SCAN.update(no_access=True, reused=len(old), as_of=(_prev.get("meta") or {}).get("generated"))
-                print(f"  app menus: no Accessibility this run — reused {len(old)} from last scan"); return len(old)
-            except Exception: pass
-        print("  app menus: Accessibility not granted, no previous scan to reuse"); return 0
+        return _reuse_prev_menus("no Accessibility this run")
     try:
         arr = json.loads(r.stdout or "[]")
     except Exception as e:

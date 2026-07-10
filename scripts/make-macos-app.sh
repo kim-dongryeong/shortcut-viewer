@@ -18,7 +18,10 @@ rm -rf "$APP"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
 
 # Copy all essential files into the app bundle so it is fully self-contained!
-cp -R app.py build.py render.py viewer.template.html assets scripts shortcuts.json "$APP/Contents/Resources/"
+cp -R app.py build.py render.py svkeys.py svann.py viewer.template.html web_shortcuts.json defaults assets scripts shortcuts.json "$APP/Contents/Resources/"
+# App-menu scanner: bundle it if compiled so the app can rescan (needs Accessibility);
+# without it build.py falls back to reusing the bundled shortcuts.json's menu entries.
+[ -x axmenudump ] && cp axmenudump "$APP/Contents/Resources/"
 
 # We already generated this icns using sips
 cp assets/icon.icns "$APP/Contents/Resources/icon.icns"
@@ -58,21 +61,24 @@ if curl -s -o /dev/null "$URL" 2>/dev/null; then
   exit 0
 fi
 
-# Build viewer.html if missing
+# Build viewer.html if missing; if the scan fails, fall back to rendering the
+# bundled shortcuts.json so the viewer still opens instead of a server 404.
 if [ ! -f viewer.html ]; then
-  python3 build.py
+  python3 build.py || python3 render.py
 fi
 
-# Run the python server directly. Since LSUIElement=true, it runs in the background
-# without a Dock icon, and stays alive as long as the user wants.
-python3 app.py --port="$PORT" &
+# Detach the server and exit: if this script stayed alive (wait), a second
+# double-click would send a reopen Apple Event to a process that can't answer it
+# → "application is not responding". Detached, every double-click re-runs this
+# script and hits the already-running branch above.
+nohup python3 app.py --port="$PORT" >/dev/null 2>&1 &
+disown
 sleep 1
 if [ -d "$HOME/Applications/Chrome Apps.localized/Shortcut Viewer.app" ]; then
   open -a "$HOME/Applications/Chrome Apps.localized/Shortcut Viewer.app"
 else
   open -b com.google.Chrome "$URL" || open "$URL"
 fi
-wait
 LAUNCH
 
 chmod +x "$APP/Contents/MacOS/launch"
