@@ -17,8 +17,16 @@ APP="dist/Shortcut Viewer.app"
 rm -rf "$APP"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
 
-# Copy all essential files into the app bundle so it is fully self-contained!
-cp -R app.py build.py render.py svkeys.py svann.py viewer.template.html web_shortcuts.json defaults assets scripts shortcuts.json "$APP/Contents/Resources/"
+# Copy all essential files into the app bundle so it is fully self-contained.
+# NOTE: personal scan data (shortcuts.json — BTT/Raycast/Karabiner, window titles…) is NOT
+# bundled by default: this dmg may be published. The end user's first launch runs build.py,
+# which fills in their own data on top of the PII-free corpus (defaults/ + web_shortcuts.json).
+# For your own /Applications install, pass --with-my-data to bundle your current scan.
+cp -R app.py build.py render.py svkeys.py svann.py viewer.template.html web_shortcuts.json defaults assets scripts "$APP/Contents/Resources/"
+if [ "${1:-}" = "--with-my-data" ] || [ "${2:-}" = "--with-my-data" ]; then
+  cp shortcuts.json "$APP/Contents/Resources/"
+  echo "⚠ personal shortcuts.json bundled — do NOT publish this build"
+fi
 # App-menu scanner: bundle it if compiled so the app can rescan (needs Accessibility);
 # without it build.py falls back to reusing the bundled shortcuts.json's menu entries.
 [ -x axmenudump ] && cp axmenudump "$APP/Contents/Resources/"
@@ -87,7 +95,7 @@ chmod +x "$APP/Contents/MacOS/launch"
 touch "$APP"
 echo "built: $APP"
 
-if [ "${1:-}" = "--dmg" ]; then
+if [ "${1:-}" = "--dmg" ] || [ "${2:-}" = "--dmg" ]; then
   DMG="dist/Shortcut-Viewer.dmg"
   rm -f "$DMG"
   STAGE="$(mktemp -d)"
