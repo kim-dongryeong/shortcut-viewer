@@ -91,6 +91,12 @@ LAUNCH
 
 chmod +x "$APP/Contents/MacOS/launch"
 
+# Ad-hoc sign the bundle (nested axmenudump too). Apple Silicon refuses wholly unsigned
+# Mach-O binaries, and an unsigned bundle fails Gatekeeper with "no usable signature".
+# NOT notarized (no paid Developer ID): a downloaded copy still shows "Apple could not
+# verify…" once — the user approves via System Settings ▸ Privacy & Security ▸ Open Anyway.
+codesign --force --deep -s - "$APP"
+
 # Refresh icon cache
 touch "$APP"
 echo "built: $APP"
