@@ -55,9 +55,22 @@ cat > "$APP/Contents/MacOS/launch" <<'LAUNCH'
 #!/bin/bash
 PORT=8787
 URL="http://127.0.0.1:$PORT"
+RES="$(cd "$(dirname "$0")/../Resources" && pwd)"
 
-# Move to the embedded Resources directory so python finds the files
-cd "$(dirname "$0")/../Resources"
+# Work in a writable data dir, NEVER inside the .app: generated files
+# (shortcuts.json, viewer.html, seed jsons) written into a signed bundle break the
+# code-signature seal, and macOS App Management blocks the write outright on a
+# notarized app (PermissionError) — the server then 404s forever.
+DATA="$HOME/Library/Application Support/Shortcut Viewer"
+mkdir -p "$DATA"
+# Refresh the code payload every launch (cheap, keeps app updates effective);
+# personal data files in $DATA persist untouched.
+cp -Rf "$RES/app.py" "$RES/build.py" "$RES/render.py" "$RES/svkeys.py" "$RES/svann.py" \
+       "$RES/viewer.template.html" "$RES/web_shortcuts.json" "$RES/defaults" "$RES/assets" "$DATA/"
+[ -x "$RES/axmenudump" ] && cp -f "$RES/axmenudump" "$DATA/"
+# --with-my-data builds ship a starter scan; seed it only if the user has none yet.
+[ -f "$RES/shortcuts.json" ] && [ ! -f "$DATA/shortcuts.json" ] && cp "$RES/shortcuts.json" "$DATA/"
+cd "$DATA"
 
 # If already running, just open and exit
 if curl -s -o /dev/null "$URL" 2>/dev/null; then 
@@ -91,11 +104,21 @@ LAUNCH
 
 chmod +x "$APP/Contents/MacOS/launch"
 
-# Ad-hoc sign the bundle (nested axmenudump too). Apple Silicon refuses wholly unsigned
-# Mach-O binaries, and an unsigned bundle fails Gatekeeper with "no usable signature".
-# NOT notarized (no paid Developer ID): a downloaded copy still shows "Apple could not
-# verify…" once — the user approves via System Settings ▸ Privacy & Security ▸ Open Anyway.
-codesign --force --deep -s - "$APP"
+# Sign the bundle. Prefer the Developer ID Application identity (notarizable — no
+# Gatekeeper warning after notarize+staple); fall back to ad-hoc when absent.
+# Inner Mach-O (axmenudump) is signed FIRST with hardened runtime + secure timestamp —
+# both are notarization requirements for every Mach-O in the bundle.
+SIGN_ID="${SV_SIGN_ID:-$(security find-identity -v -p codesigning 2>/dev/null \
+  | sed -n 's/.*"\(Developer ID Application: [^"]*\)".*/\1/p' | head -1)}"
+if [ -n "$SIGN_ID" ]; then
+  echo "signing with: $SIGN_ID"
+  [ -x "$APP/Contents/Resources/axmenudump" ] && \
+    codesign --force --options runtime --timestamp --sign "$SIGN_ID" "$APP/Contents/Resources/axmenudump"
+  codesign --force --options runtime --timestamp --sign "$SIGN_ID" "$APP"
+else
+  echo "no Developer ID identity — ad-hoc signing (downloaded copies hit Gatekeeper: Settings ▸ Privacy & Security ▸ Open Anyway)"
+  codesign --force --deep -s - "$APP"
+fi
 
 # Refresh icon cache
 touch "$APP"
@@ -109,5 +132,13 @@ if [ "${1:-}" = "--dmg" ] || [ "${2:-}" = "--dmg" ]; then
   ln -s /Applications "$STAGE/Applications"
   hdiutil create -volname "Shortcut Viewer" -srcfolder "$STAGE" -ov -format UDZO "$DMG" >/dev/null
   rm -rf "$STAGE"
+  # Notarize + staple (SV_NOTARIZE=1; needs the Developer ID signing above and a
+  # notarytool keychain profile — default "AC_PASSWORD"). Submit the DMG: its
+  # contents are scanned too, and the ticket is stapled to the DMG for offline
+  # first-launch verification. Apple review usually takes a few minutes.
+  if [ "${SV_NOTARIZE:-0}" = "1" ]; then
+    xcrun notarytool submit "$DMG" --keychain-profile "${SV_NOTARY_PROFILE:-AC_PASSWORD}" --wait
+    xcrun stapler staple "$DMG"
+  fi
   echo "built: $DMG  (drag the app onto Applications)"
 fi
