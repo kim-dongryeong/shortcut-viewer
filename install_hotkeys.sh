@@ -6,7 +6,7 @@
 #   usage:  ./install_hotkeys.sh          (uninstall:  ./install_hotkeys.sh uninstall)
 set -e
 cd "${0:A:h}"
-LABEL="com.shortcutviewer.hotkeys"
+LABEL="kr.kdr.shortcut-viewer-hotkeys"
 AGENT="$HOME/Library/LaunchAgents/$LABEL.plist"
 APPDIR="$HOME/Applications"
 APP="$APPDIR/SV Hotkeys.app"

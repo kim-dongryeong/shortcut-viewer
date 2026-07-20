@@ -40,7 +40,7 @@ cat > "$APP/Contents/Info.plist" <<PLIST
 <plist version="1.0"><dict>
   <key>CFBundleName</key><string>Shortcut Viewer</string>
   <key>CFBundleDisplayName</key><string>Shortcut Viewer</string>
-  <key>CFBundleIdentifier</key><string>com.kimdongryeong.shortcut-viewer</string>
+  <key>CFBundleIdentifier</key><string>kr.kdr.shortcut-viewer</string>
   <key>CFBundleVersion</key><string>1.0.0</string>
   <key>CFBundleShortVersionString</key><string>1.0.0</string>
   <key>CFBundlePackageType</key><string>APPL</string>
