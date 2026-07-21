@@ -151,16 +151,17 @@ struct Hotkey: Codable, Identifiable {
     var app: String?           // NEW: 이 앱이 최전면일 때만 (bundle id 또는 이름) · nil=모든 앱
     var trigger: HKTrigger?    // NEW: 제스처 트리거(더블탭/홀드/멀티탭) — 있으면 mods/key 대신 사용
     var sequence: [Combo]?     // NEW: 시퀀스/리더 (예: ⌘K ⌘I) — 첫 조합이 진입, 나머지가 후속
+    var preset: String         // v2: 이 핫키가 속한 프리셋(레이어) id. 기본 "base" (v1 파일은 전부 base로 정규화)
 
     init(id: String? = nil, title: String = "", mods: [String] = [], key: String = "",
          action: HKAction = HKAction(type: "open_app", value: ""), enabled: Bool = true, anyCombo: Bool = false,
-         app: String? = nil, trigger: HKTrigger? = nil, sequence: [Combo]? = nil) {
+         app: String? = nil, trigger: HKTrigger? = nil, sequence: [Combo]? = nil, preset: String = "base") {
         self.id = id ?? "h" + String(UInt32.random(in: 0..<0xFFFFFF), radix: 16)
         self.title = title; self.mods = mods; self.key = key
         self.action = action; self.enabled = enabled; self.anyCombo = anyCombo
-        self.app = app; self.trigger = trigger; self.sequence = sequence
+        self.app = app; self.trigger = trigger; self.sequence = sequence; self.preset = preset
     }
-    enum CK: String, CodingKey { case id, title, mods, key, action, enabled, anyCombo, app, trigger, sequence }
+    enum CK: String, CodingKey { case id, title, mods, key, action, enabled, anyCombo, app, trigger, sequence, preset }
     init(from d: Decoder) throws {   // tolerant: missing fields get defaults
         let c = try d.container(keyedBy: CK.self)
         id = (try? c.decode(String.self, forKey: .id)) ?? ("h" + String(UInt32.random(in: 0..<0xFFFFFF), radix: 16))
@@ -173,33 +174,59 @@ struct Hotkey: Codable, Identifiable {
         app = try? c.decodeIfPresent(String.self, forKey: .app)
         trigger = try? c.decodeIfPresent(HKTrigger.self, forKey: .trigger)
         sequence = try? c.decodeIfPresent([Combo].self, forKey: .sequence)
+        preset = (try? c.decode(String.self, forKey: .preset)) ?? "base"   // v1 하위호환: 없으면 base
     }
     // 이 핫키가 EventTap(Accessibility)을 필요로 하나 — Carbon으로 안 되는 것들
     var needsTap: Bool { anyCombo || app != nil || trigger != nil || sequence != nil || key == "CapsLock" || mods.contains { modSide($0) != nil } }
 }
-struct ConfigFile: Codable { var version: Int; var hotkeys: [Hotkey] }
+// v2: 프리셋(레이어) — BTT 마스터+서브프리셋 모델. "master"는 always_on(끌 수 없음), 나머지는 enabled로 켬/끔.
+struct Preset: Codable {
+    var title: String
+    var enabled: Bool?
+    var always_on: Bool?
+    init(title: String, enabled: Bool? = nil, always_on: Bool? = nil) { self.title = title; self.enabled = enabled; self.always_on = always_on }
+}
+struct ConfigFile: Codable { var version: Int; var hotkeys: [Hotkey]; var presets: [String: Preset]? }
 
 let CONFIG_PATH = ("~/.config/shortcut-viewer/hotkeys.json" as NSString).expandingTildeInPath
 
 final class Store: ObservableObject {
     static let shared = Store()
     @Published var hotkeys: [Hotkey] = []
+    @Published var presets: [String: Preset] = [:]
     var onChange: () -> Void = {}   // AppDelegate hooks re-registration here
 
     func load() {
-        guard let data = FileManager.default.contents(atPath: CONFIG_PATH) else { hotkeys = []; return }
-        do { hotkeys = try JSONDecoder().decode(ConfigFile.self, from: data).hotkeys }
-        catch { NSLog("hotkeys.json parse failed: \(error)"); hotkeys = [] }
+        guard let data = FileManager.default.contents(atPath: CONFIG_PATH) else { hotkeys = []; presets = [:]; normalize(); return }
+        do {
+            let cfg = try JSONDecoder().decode(ConfigFile.self, from: data)
+            hotkeys = cfg.hotkeys; presets = cfg.presets ?? [:]
+        } catch { NSLog("hotkeys.json parse failed: \(error)"); hotkeys = []; presets = [:] }
+        normalize()
+    }
+    // v1→v2 정규화: master(always_on) 보장 + 핫키가 참조하는데 맵에 없는 프리셋은 {enabled:true}로 자동 생성.
+    func normalize() {
+        if presets["master"] == nil { presets["master"] = Preset(title: "마스터 — 항상 켜짐 (프리셋 전환 키)", always_on: true) }
+        else { presets["master"]?.always_on = true }
+        if presets["base"] == nil { presets["base"] = Preset(title: "기본", enabled: true) }
+        for hk in hotkeys where presets[hk.preset] == nil { presets[hk.preset] = Preset(title: hk.preset, enabled: true) }
     }
     func saveToDisk() {
         let dir = (CONFIG_PATH as NSString).deletingLastPathComponent
         try? FileManager.default.createDirectory(atPath: dir, withIntermediateDirectories: true)
         let enc = JSONEncoder(); enc.outputFormatting = [.prettyPrinted, .withoutEscapingSlashes]
-        if let data = try? enc.encode(ConfigFile(version: 1, hotkeys: hotkeys)) {
+        if let data = try? enc.encode(ConfigFile(version: 2, hotkeys: hotkeys, presets: presets)) {
             try? data.write(to: URL(fileURLWithPath: CONFIG_PATH), options: .atomic)
         }
     }
-    func commit() { saveToDisk(); onChange() }   // persist + re-register live
+    func commit() { normalize(); saveToDisk(); onChange() }   // persist + re-register live
+}
+// 발화(등록) 조건: master는 항상 켜짐, 나머지는 always_on 아니면 enabled(기본 true)를 따름.
+func presetOn(_ name: String) -> Bool {
+    if name == "master" { return true }
+    guard let p = Store.shared.presets[name] else { return true }
+    if p.always_on == true { return true }
+    return p.enabled ?? true
 }
 
 // Conflict awareness: read the Shortcut Viewer's scanned dataset (shortcuts.json) so the editor
@@ -252,8 +279,36 @@ enum Runner {
         case "mouse_save":  Mouse.saveSlot(a.value.isEmpty ? "1" : a.value)   // 마우스 북마크 (BTT/AHK식)
         case "mouse_goto":  Mouse.goto(a.value.isEmpty ? "1" : a.value)
         case "mouse_click": Mouse.clickBookmark(a.value.isEmpty ? "1" : a.value)
+        case "preset_toggle": presetToggle(a.value)
+        case "preset_activate": presetActivate(a.value)
+        case "insert_datetime":
+            let df = DateFormatter(); df.locale = Locale.current
+            df.dateFormat = a.value.isEmpty ? "yyyy-MM-dd" : a.value
+            paste(df.string(from: Date()))
         default: NSLog("unknown action type: \(a.type)")
         }
+    }
+    // preset_toggle: 지정 프리셋 enabled 플립. master/always_on은 no-op(끌 수 없음).
+    static func presetToggle(_ name: String) {
+        if name == "master" || Store.shared.presets[name]?.always_on == true {
+            HUD.show("🎛 마스터 프리셋은 항상 켜져 있어요", icon: "", autoHide: 1.4); return
+        }
+        var p = Store.shared.presets[name] ?? Preset(title: name)
+        p.enabled = !(p.enabled ?? true)
+        Store.shared.presets[name] = p; Store.shared.commit()
+        HUD.show("🎛 프리셋 '\(p.title)' \(p.enabled == true ? "켜짐" : "꺼짐")", icon: "", autoHide: 1.4)
+    }
+    // preset_activate: 라디오 선택 — value만 켜고, master/always_on 제외 나머지 서브프리셋은 모두 끔.
+    static func presetActivate(_ name: String) {
+        guard name != "master", Store.shared.presets[name]?.always_on != true else {
+            HUD.show("🎛 마스터 프리셋은 항상 켜져 있어요", icon: "", autoHide: 1.4); return
+        }
+        if Store.shared.presets[name] == nil { Store.shared.presets[name] = Preset(title: name) }
+        for k in Store.shared.presets.keys where k != "master" && Store.shared.presets[k]?.always_on != true {
+            Store.shared.presets[k]?.enabled = (k == name)
+        }
+        Store.shared.commit()
+        HUD.show("🎛 프리셋 '\(Store.shared.presets[name]?.title ?? name)' 선택", icon: "", autoHide: 1.4)
     }
     static func q(_ s: String) -> String { "'" + s.replacingOccurrences(of: "'", with: "'\\''") + "'" }
     static func shell(_ cmd: String) {
@@ -987,7 +1042,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         HotKeyCenter.shared.unregisterAll(); Engine.shared.disable()
         registered = 0; failed = []
         var combos: [Engine.ComboBind] = []; var gestures: [Engine.GestBind] = []
-        for hk in Store.shared.hotkeys where hk.enabled {
+        for hk in Store.shared.hotkeys where hk.enabled && presetOn(hk.preset) {
             let act: () -> Void = { Runner.run(hk.action) }
             let title = hk.title.isEmpty ? (hk.action.value.isEmpty ? actionLabel(hk.action.type) : hk.action.value) : hk.title
             // ── gesture (double-tap / hold / multi-tap of a modifier) ──
@@ -1063,6 +1118,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         menu.addItem(.separator())
         let diag = mk(diagnosticOn ? "🔎 진단 모드 끄기" : "🔎 진단 모드 (누가 이 키 쓰나)", #selector(toggleDiag))
         if diagnosticOn { diag.state = .on }; menu.addItem(diag)
+        menu.addItem(presetsMenuItem())
         if !Accessibility.isTrusted { menu.addItem(mk("any-combo·고급 트리거 켜기 (손쉬운 사용…)", #selector(enableAX))) }
         menu.addItem(mk("설정 파일 열기 (hotkeys.json)", #selector(openConfig)))
         menu.addItem(mk("Shortcut Viewer 열기", #selector(openViewer)))
@@ -1072,6 +1128,23 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         status.menu = menu
     }
     func mk(_ t: String, _ s: Selector) -> NSMenuItem { let m = NSMenuItem(title: t, action: s, keyEquivalent: ""); m.target = self; return m }
+    // v2: 프리셋(레이어) 서브메뉴 — 체크마크로 켬/끔(클릭=preset_toggle). master는 고정 표시.
+    func presetsMenuItem() -> NSMenuItem {
+        let item = NSMenuItem(title: "🎛 프리셋", action: nil, keyEquivalent: "")
+        let sub = NSMenu()
+        let order = ["master"] + Store.shared.presets.keys.filter { $0 != "master" }.sorted()
+        for name in order {
+            guard let p = Store.shared.presets[name] else { continue }
+            let m = NSMenuItem(title: p.title, action: #selector(togglePresetMenu(_:)), keyEquivalent: "")
+            m.state = presetOn(name) ? .on : .off
+            m.isEnabled = (name != "master" && p.always_on != true)
+            m.representedObject = name; m.target = self
+            sub.addItem(m)
+        }
+        item.submenu = sub
+        return item
+    }
+    @objc func togglePresetMenu(_ s: NSMenuItem) { guard let name = s.representedObject as? String else { return }; Runner.presetToggle(name) }
     @objc func quitApp() { NSApp.terminate(nil) }   // 종료가 회색이던 버그 수정 — target=self(AppDelegate)가 terminate:에 응답 못 해 비활성됐음
 
     @objc func fireNow(_ s: NSMenuItem) { if let a = s.representedObject as? HKAction { Runner.run(a) } }

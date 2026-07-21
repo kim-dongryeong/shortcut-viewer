@@ -62,6 +62,14 @@ TOOLS = [
      "description": "핫키 활성/비활성 토글.",
      "inputSchema": {"type": "object", "properties": {
          "id": {"type": "string"}, "enabled": {"type": "boolean"}}, "required": ["id", "enabled"]}},
+    {"name": "hotkey_preset",
+     "description": "프리셋(레이어) 관리 — list(목록)/on/off(마스터는 거부)/solo(라디오 선택, "
+                    "master 제외 나머지 다 끔)/assign(핫키를 다른 프리셋으로 이동).",
+     "inputSchema": {"type": "object", "properties": {
+         "op": {"type": "string", "enum": ["list", "on", "off", "solo", "assign"]},
+         "name": {"type": "string", "description": "프리셋 id (on/off/solo/assign 대상)"},
+         "hotkey_id": {"type": "string", "description": "assign일 때 옮길 핫키 id"}},
+         "required": ["op"]}},
 ]
 
 
@@ -83,6 +91,17 @@ def call_tool(name, a):
         return sv_hotkeys.remove(a["id"])
     if name == "hotkey_set_enabled":
         return sv_hotkeys.set_enabled(a["id"], a["enabled"])
+    if name == "hotkey_preset":
+        op = a["op"]
+        if op == "list":
+            return sv_hotkeys.presets_list()
+        if op in ("on", "off"):
+            return sv_hotkeys.preset_set(a["name"], op == "on")
+        if op == "solo":
+            return sv_hotkeys.preset_solo(a["name"])
+        if op == "assign":
+            return sv_hotkeys.assign(a["hotkey_id"], a["name"])
+        raise ValueError(f"unknown preset op {op}")
     raise ValueError(f"unknown tool {name}")
 
 
