@@ -186,7 +186,22 @@ struct Preset: Codable {
     var always_on: Bool?
     init(title: String, enabled: Bool? = nil, always_on: Bool? = nil) { self.title = title; self.enabled = enabled; self.always_on = always_on }
 }
-struct ConfigFile: Codable { var version: Int; var hotkeys: [Hotkey]; var presets: [String: Preset]? }
+// window_drag: CapsLock(또는 fn)을 누른 채 마우스 드래그로 창 이동/리사이즈 (AltDrag·frogcontrol식). §1 참고.
+struct WindowDrag: Codable {
+    var enabled: Bool
+    var modifier: String   // "caps"(기본) | "fn" — Karabiner가 맨 CapsLock을 리맵한 환경의 대안(§0)
+    init(enabled: Bool = false, modifier: String = "caps") { self.enabled = enabled; self.modifier = modifier }
+    enum CK: String, CodingKey { case enabled, modifier }
+    init(from d: Decoder) throws {   // tolerant: 필드 없으면 비활성
+        let c = try d.container(keyedBy: CK.self)
+        enabled = (try? c.decode(Bool.self, forKey: .enabled)) ?? false
+        modifier = (try? c.decode(String.self, forKey: .modifier)) ?? "caps"
+    }
+}
+struct ConfigFile: Codable {
+    var version: Int; var hotkeys: [Hotkey]; var presets: [String: Preset]?; var windowDrag: WindowDrag?
+    enum CodingKeys: String, CodingKey { case version, hotkeys, presets, windowDrag = "window_drag" }
+}
 
 let CONFIG_PATH = ("~/.config/shortcut-viewer/hotkeys.json" as NSString).expandingTildeInPath
 
@@ -194,14 +209,15 @@ final class Store: ObservableObject {
     static let shared = Store()
     @Published var hotkeys: [Hotkey] = []
     @Published var presets: [String: Preset] = [:]
+    @Published var windowDrag: WindowDrag = WindowDrag()   // window_drag — 없으면 비활성 기본값
     var onChange: () -> Void = {}   // AppDelegate hooks re-registration here
 
     func load() {
-        guard let data = FileManager.default.contents(atPath: CONFIG_PATH) else { hotkeys = []; presets = [:]; normalize(); return }
+        guard let data = FileManager.default.contents(atPath: CONFIG_PATH) else { hotkeys = []; presets = [:]; windowDrag = WindowDrag(); normalize(); return }
         do {
             let cfg = try JSONDecoder().decode(ConfigFile.self, from: data)
-            hotkeys = cfg.hotkeys; presets = cfg.presets ?? [:]
-        } catch { NSLog("hotkeys.json parse failed: \(error)"); hotkeys = []; presets = [:] }
+            hotkeys = cfg.hotkeys; presets = cfg.presets ?? [:]; windowDrag = cfg.windowDrag ?? WindowDrag()
+        } catch { NSLog("hotkeys.json parse failed: \(error)"); hotkeys = []; presets = [:]; windowDrag = WindowDrag() }
         normalize()
     }
     // v1→v2 정규화: master(always_on) 보장 + 핫키가 참조하는데 맵에 없는 프리셋은 {enabled:true}로 자동 생성.
@@ -215,7 +231,7 @@ final class Store: ObservableObject {
         let dir = (CONFIG_PATH as NSString).deletingLastPathComponent
         try? FileManager.default.createDirectory(atPath: dir, withIntermediateDirectories: true)
         let enc = JSONEncoder(); enc.outputFormatting = [.prettyPrinted, .withoutEscapingSlashes]
-        if let data = try? enc.encode(ConfigFile(version: 2, hotkeys: hotkeys, presets: presets)) {
+        if let data = try? enc.encode(ConfigFile(version: 2, hotkeys: hotkeys, presets: presets, windowDrag: windowDrag)) {
             try? data.write(to: URL(fileURLWithPath: CONFIG_PATH), options: .atomic)
         }
     }
@@ -406,6 +422,51 @@ final class HotKeyCenter {
     func unregisterAll() { for r in refs { if let r { UnregisterEventHotKey(r) } }; refs = []; actions = [:]; nextID = 1 }
 }
 
+// ══════════════════════ window-drag AX helpers (§4) ══════════════════════
+func axGetPoint(_ el: AXUIElement, _ attr: CFString) -> CGPoint? {
+    var ref: CFTypeRef?
+    guard AXUIElementCopyAttributeValue(el, attr, &ref) == .success, let v = ref else { return nil }
+    var pt = CGPoint.zero
+    guard AXValueGetValue(v as! AXValue, .cgPoint, &pt) else { return nil }
+    return pt
+}
+func axGetSize(_ el: AXUIElement, _ attr: CFString) -> CGSize? {
+    var ref: CFTypeRef?
+    guard AXUIElementCopyAttributeValue(el, attr, &ref) == .success, let v = ref else { return nil }
+    var sz = CGSize.zero
+    guard AXValueGetValue(v as! AXValue, .cgSize, &sz) else { return nil }
+    return sz
+}
+@discardableResult func axSetPoint(_ el: AXUIElement, _ attr: CFString, _ p: CGPoint) -> Bool {
+    var pt = p
+    guard let v = AXValueCreate(.cgPoint, &pt) else { return false }
+    return AXUIElementSetAttributeValue(el, attr, v) == .success
+}
+@discardableResult func axSetSize(_ el: AXUIElement, _ attr: CFString, _ s: CGSize) -> Bool {
+    var sz = s
+    guard let v = AXValueCreate(.cgSize, &sz) else { return false }
+    return AXUIElementSetAttributeValue(el, attr, v) == .success
+}
+// 화면 좌표(top-left 기준) 아래의 창(kAXWindowRole) 요소를 부모로 걸어 올라가며 찾는다. 우리 HUD는 제외.
+func axWindowAt(_ p: CGPoint) -> AXUIElement? {
+    let sys = AXUIElementCreateSystemWide()
+    var elRef: AXUIElement?
+    guard AXUIElementCopyElementAtPosition(sys, Float(p.x), Float(p.y), &elRef) == .success, var el = elRef else { return nil }
+    for _ in 0..<8 {   // 부모 체인 안전 상한
+        var roleRef: CFTypeRef?
+        if AXUIElementCopyAttributeValue(el, kAXRoleAttribute as CFString, &roleRef) == .success,
+           let role = roleRef as? String, role == (kAXWindowRole as String) {
+            var pid: pid_t = 0; AXUIElementGetPid(el, &pid)
+            return pid == getpid() ? nil : el   // 우리 자신(HUD)은 창 드래그 대상에서 제외
+        }
+        var parentRef: CFTypeRef?
+        guard AXUIElementCopyAttributeValue(el, kAXParentAttribute as CFString, &parentRef) == .success,
+              let parent = parentRef else { return nil }
+        el = parent as! AXUIElement
+    }
+    return nil
+}
+
 // ══════════════════════ advanced trigger engine (CGEventTap; needs Accessibility) ══════════════════════
 // Handles what Carbon can't: app-scoped combos, left/right-specific modifiers, modifier
 // gestures (double-tap / hold / multi-tap), sequences/leader keys (⌘K ⌘I), and a diagnostic mode.
@@ -421,8 +482,28 @@ final class Engine {
         let action: () -> Void
     }
     struct GestBind { let base: String; let side: String; let kind: String; let count: Int; let ms: Double; let title: String; let action: () -> Void }
+    // §4: 창 드래그 세션 — mouseDown에 시작, mouseDragged마다 AX position/size 갱신, mouseUp/desync에 종료.
+    private struct DragSession {
+        enum Mode { case move, resize }
+        let axWindow: AXUIElement; let mode: Mode
+        let startCursor: CGPoint; let startPos: CGPoint; let startSize: CGSize
+        let clickedRightHalf: Bool   // x축: 클릭이 오른쪽 절반이면 오른쪽 변이 움직임(x는 고정)
+        let clickedBottomHalf: Bool  // y축: 아래쪽 절반이면 아래쪽 변이 움직임(y는 고정)
+        var lastApply: CFAbsoluteTime; var failCount: Int
+        // §1 축별 독립 리사이즈 규칙(반대쪽 변 고정) + 최소 크기 120×80 clamp(반전 방지)
+        func resized(dx: CGFloat, dy: CGFloat) -> (pos: CGPoint, size: CGSize) {
+            var w = startSize.width, x = startPos.x
+            if clickedRightHalf { w = max(120, startSize.width + dx) }
+            else { w = max(120, startSize.width - dx); x = startPos.x + startSize.width - w }
+            var h = startSize.height, y = startPos.y
+            if clickedBottomHalf { h = max(80, startSize.height + dy) }
+            else { h = max(80, startSize.height - dy); y = startPos.y + startSize.height - h }
+            return (CGPoint(x: x, y: y), CGSize(width: w, height: h))
+        }
+    }
     private(set) var combos: [ComboBind] = []
     private(set) var gestures: [GestBind] = []
+    private(set) var windowDrag: WindowDrag = WindowDrag()
     var diagnostic: (([String], String) -> Void)? = nil    // observe-only report of pressed combos
     private var tap: CFMachPort?; private var source: CFRunLoopSource?
     private var pendingCands: [ComboBind] = []; private var pendingStep = 0; private var pendingDeadline: CFAbsoluteTime = 0   // 리더 진입 후 남은 후보들(같은 리더 공유 = 분기)
@@ -430,14 +511,23 @@ final class Engine {
     private var holdTimers: [Int: DispatchWorkItem] = [:]
     private var otherKeySincePress = false
     private var lastCapsFire: CFAbsoluteTime = 0   // opt/cmd/ctrl+CapsLock 디바운스 (CapsLock은 짧게 두 번 튀거나 리셋이 재-트리거될 수 있음)
+    // §3 CapsLock 홀드 상태머신(modifier:"caps"용) — flagsChanged가 콤보로 소비돼도 항상 갱신
+    private var capsPhysicallyDown = false
+    private var capsWasOn = false                  // 이 홀드를 만든 press 직전의 원래 caps 상태(뗄 때 복구용)
+    private var dragSessionStartedThisHold = false // 이 홀드 중 드래그 세션이 1회라도 시작됐는지(토글 복구 여부 판단)
+    private var dragSession: DragSession? = nil
 
-    func set(combos: [ComboBind], gestures: [GestBind]) { self.combos = combos; self.gestures = gestures }
-    var hasWork: Bool { !combos.isEmpty || !gestures.isEmpty || diagnostic != nil }
+    func set(combos: [ComboBind], gestures: [GestBind], windowDrag: WindowDrag) {
+        self.combos = combos; self.gestures = gestures; self.windowDrag = windowDrag
+    }
+    var hasWork: Bool { !combos.isEmpty || !gestures.isEmpty || diagnostic != nil || windowDrag.enabled }
 
     @discardableResult
     func enable() -> Bool {
         if tap != nil { return true }
         let mask: CGEventMask = (1 << CGEventType.keyDown.rawValue) | (1 << CGEventType.flagsChanged.rawValue) | (1 << CGEventType.tapDisabledByTimeout.rawValue)
+            | (1 << CGEventType.leftMouseDown.rawValue) | (1 << CGEventType.leftMouseDragged.rawValue) | (1 << CGEventType.leftMouseUp.rawValue)
+            | (1 << CGEventType.rightMouseDown.rawValue) | (1 << CGEventType.rightMouseDragged.rawValue) | (1 << CGEventType.rightMouseUp.rawValue)   // §5: 창 드래그용
         let info = Unmanaged.passUnretained(self).toOpaque()
         guard let t = CGEvent.tapCreate(tap: .cgSessionEventTap, place: .headInsertEventTap, options: .defaultTap,
               eventsOfInterest: mask, callback: { _, type, event, refcon in
@@ -452,6 +542,7 @@ final class Engine {
         if let tap { CGEvent.tapEnable(tap: tap, enable: false) }
         if let source { CFRunLoopRemoveSource(CFRunLoopGetMain(), source, .commonModes) }
         tap = nil; source = nil; clearPending(); cancelHolds()
+        dragSession = nil; capsPhysicallyDown = false   // 재등록 시 드래그/캡스 홀드 상태 리셋
     }
     private func genericFlags(_ e: CGEvent) -> NSEvent.ModifierFlags {
         var f: NSEvent.ModifierFlags = []; let cg = e.flags
@@ -467,8 +558,13 @@ final class Engine {
             if let tap { CGEvent.tapEnable(tap: tap, enable: true) }; return Unmanaged.passUnretained(event)
         }
         if type == .flagsChanged {
+            if Int(event.getIntegerValueField(.keyboardEventKeycode)) == kVK_CapsLock { updateCapsPhysicalState(event) }   // §3: 콤보로 소비되든 안 되든 항상 갱신
             if handleCapsCombo(event) { return nil }   // opt/cmd/ctrl+CapsLock 매치 → 발동하고 이벤트 소비
             handleFlags(event); return Unmanaged.passUnretained(event)
+        }
+        if type == .leftMouseDown || type == .leftMouseDragged || type == .leftMouseUp
+            || type == .rightMouseDown || type == .rightMouseDragged || type == .rightMouseUp {
+            return handleMouse(type, event)   // §5: 창 드래그(활성 조건 불충족이면 즉시 passthrough)
         }
         guard type == .keyDown else { return Unmanaged.passUnretained(event) }
         otherKeySincePress = true; cancelHolds(); tapTimes = [:]
@@ -521,6 +617,62 @@ final class Engine {
         let toggledOn = event.flags.contains(.maskAlphaShift)   // 이 press가 만든 새 caps 상태 → 되돌린다
         DispatchQueue.main.async { setCapsLockState(!toggledOn) }
         return true
+    }
+    // §3: CapsLock 물리 상태머신 — 57 이벤트마다 반전. handleCapsCombo가 이벤트를 소비하는 경우에도 호출된다.
+    private func updateCapsPhysicalState(_ event: CGEvent) {
+        capsPhysicallyDown.toggle()
+        if capsPhysicallyDown {
+            capsWasOn = !event.flags.contains(.maskAlphaShift)   // 이 press 직후 상태의 반대 = 원래 상태
+            dragSessionStartedThisHold = false
+        } else {
+            if dragSessionStartedThisHold { DispatchQueue.main.async { setCapsLockState(self.capsWasOn) } }   // 토글 오염 방지
+            dragSession = nil   // desync 안전장치: 홀드가 풀리면 세션 즉시 종료
+        }
+    }
+    // §5: 창 드래그 마우스 분기 — 활성 조건 불충족이면 최상단에서 가장 싸게 passthrough.
+    private func handleMouse(_ type: CGEventType, _ event: CGEvent) -> Unmanaged<CGEvent>? {
+        guard windowDrag.enabled else { return Unmanaged.passUnretained(event) }
+        let active = windowDrag.modifier == "fn" ? event.flags.contains(.maskSecondaryFn) : capsPhysicallyDown
+        if dragSession == nil {
+            guard active, type == .leftMouseDown || type == .rightMouseDown else { return Unmanaged.passUnretained(event) }
+            return beginDrag(type, event)
+        }
+        switch type {
+        case .leftMouseDragged, .rightMouseDragged: return continueDrag(event)
+        case .leftMouseUp, .rightMouseUp: dragSession = nil; return nil
+        default: return nil   // 세션 도중 다른 마우스 이벤트는 소비(밑 앱에 전달 금지)
+        }
+    }
+    private func beginDrag(_ type: CGEventType, _ event: CGEvent) -> Unmanaged<CGEvent>? {
+        let cursor = event.location
+        guard let win = axWindowAt(cursor) else { return Unmanaged.passUnretained(event) }   // 창을 못 잡으면 통과(§4)
+        var settable: DarwinBoolean = false
+        guard AXUIElementIsAttributeSettable(win, kAXPositionAttribute as CFString, &settable) == .success, settable.boolValue,
+              let pos = axGetPoint(win, kAXPositionAttribute as CFString), let size = axGetSize(win, kAXSizeAttribute as CFString)
+        else { return Unmanaged.passUnretained(event) }
+        dragSession = DragSession(axWindow: win, mode: type == .leftMouseDown ? .move : .resize,
+            startCursor: cursor, startPos: pos, startSize: size,
+            clickedRightHalf: cursor.x > pos.x + size.width / 2, clickedBottomHalf: cursor.y > pos.y + size.height / 2,
+            lastApply: 0, failCount: 0)
+        if windowDrag.modifier == "caps" { dragSessionStartedThisHold = true }   // §3 토글 복구 대상으로 표시
+        return nil
+    }
+    private func continueDrag(_ event: CGEvent) -> Unmanaged<CGEvent>? {
+        guard var s = dragSession else { return Unmanaged.passUnretained(event) }
+        let now = CFAbsoluteTimeGetCurrent()
+        guard now - s.lastApply >= 1.0 / 60.0 else { return nil }   // 스로틀(일부 앱 AX set이 느림) — 소비는 계속
+        let cur = event.location
+        let dx = cur.x - s.startCursor.x, dy = cur.y - s.startCursor.y
+        var ok: Bool
+        if s.mode == .move {
+            ok = axSetPoint(s.axWindow, kAXPositionAttribute as CFString, CGPoint(x: s.startPos.x + dx, y: s.startPos.y + dy))
+        } else {
+            let (pos, size) = s.resized(dx: dx, dy: dy)
+            ok = axSetSize(s.axWindow, kAXSizeAttribute as CFString, size) && axSetPoint(s.axWindow, kAXPositionAttribute as CFString, pos)
+        }
+        s.lastApply = now; s.failCount = ok ? 0 : s.failCount + 1
+        dragSession = s.failCount >= 3 ? nil : s   // 연속 3회 실패 → 세션 포기(통과 모드로 복귀)
+        return nil
     }
     private func handleFlags(_ event: CGEvent) {
         let kc = Int(event.getIntegerValueField(.keyboardEventKeycode))
@@ -1067,9 +1219,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             } else if HotKeyCenter.shared.register(keyCode: kc, mods: carbonMods(hk.mods), action: act) { registered += 1 }
             else { failed.append("\(comboLabel(hk.mods, hk.key)) (예약됨/사용중)") }
         }
-        Engine.shared.set(combos: combos, gestures: gestures)
+        Engine.shared.set(combos: combos, gestures: gestures, windowDrag: Store.shared.windowDrag)
         if Engine.shared.hasWork, !Engine.shared.enable() {
-            failed.append("고급 트리거(앱별·L/R·제스처·시퀀스) — 손쉬운 사용 권한 필요")
+            failed.append("고급 트리거(앱별·L/R·제스처·시퀀스·창 드래그) — 손쉬운 사용 권한 필요")
         }
         rebuildMenu()
     }
@@ -1119,6 +1271,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         let diag = mk(diagnosticOn ? "🔎 진단 모드 끄기" : "🔎 진단 모드 (누가 이 키 쓰나)", #selector(toggleDiag))
         if diagnosticOn { diag.state = .on }; menu.addItem(diag)
         menu.addItem(presetsMenuItem())
+        menu.addItem(windowDragMenuItem())
         if !Accessibility.isTrusted { menu.addItem(mk("any-combo·고급 트리거 켜기 (손쉬운 사용…)", #selector(enableAX))) }
         menu.addItem(mk("설정 파일 열기 (hotkeys.json)", #selector(openConfig)))
         menu.addItem(mk("Shortcut Viewer 열기", #selector(openViewer)))
@@ -1145,6 +1298,19 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         return item
     }
     @objc func togglePresetMenu(_ s: NSMenuItem) { guard let name = s.representedObject as? String else { return }; Runner.presetToggle(name) }
+    // §2: 창 드래그 켬/끔 — 체크마크 토글 1개(modifier는 여기서 안 바꿈, config로만 "fn" 지정).
+    func windowDragMenuItem() -> NSMenuItem {
+        let m = NSMenuItem(title: "🪟 CapsLock 창 드래그 (이동·리사이즈)", action: #selector(toggleWindowDrag), keyEquivalent: "")
+        m.state = Store.shared.windowDrag.enabled ? .on : .off
+        m.target = self
+        return m
+    }
+    @objc func toggleWindowDrag() {
+        var wd = Store.shared.windowDrag; wd.enabled.toggle()
+        Store.shared.windowDrag = wd; Store.shared.commit()
+        if wd.enabled, !Accessibility.isTrusted { Accessibility.requestTrust(); Accessibility.openSettings() }   // anyCombo와 같은 권한 프롬프트 경로
+        HUD.show(wd.enabled ? "🪟 창 드래그 켜짐" : "🪟 창 드래그 꺼짐", icon: "", autoHide: 1.4)
+    }
     @objc func quitApp() { NSApp.terminate(nil) }   // 종료가 회색이던 버그 수정 — target=self(AppDelegate)가 terminate:에 응답 못 해 비활성됐음
 
     @objc func fireNow(_ s: NSMenuItem) { if let a = s.representedObject as? HKAction { Runner.run(a) } }

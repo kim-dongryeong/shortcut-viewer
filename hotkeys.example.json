@@ -2,7 +2,9 @@
   "_readme": "SV Hotkeys 설정. 이 파일을 ~/.config/shortcut-viewer/hotkeys.json 으로 복사하면 데몬이 읽습니다(뷰어에서 '글로벌 핫키' 내보내기로 자동 생성 가능). mods=[cmd,opt,ctrl,shift], key=뷰어와 같은 이름(A~Z,0~9,Space,Return,F1…,Left…). anyCombo=true면 다른 앱도 잡는 조합까지 가로챔(Accessibility 필요). 초보자는 ⌥ 또는 ⌃⌥ 레이어를 추천 — 시스템·앱과 안 겹칩니다.",
   "_action_types": "open_app(앱이름/경로/번들id) · open_url · open_folder(폴더경로) · open_file · run_shell(zsh 명령) · applescript · paste_text(클립보드+⌘V, Accessibility 필요) · show_viewer(Shortcut Viewer 열기) · mouse_save(value=슬롯, 현재 마우스 위치 저장) · mouse_goto(슬롯 위치로 커서 이동) · mouse_click(슬롯으로 이동→클릭→커서 복귀, Accessibility 필요) · preset_toggle(value=프리셋id, 켬/끔) · preset_activate(value=프리셋id, 그 프리셋만 켜고 나머지 서브프리셋은 끔 — 라디오) · insert_datetime(value=DateFormatter 패턴, 예 yyyy-MM-dd — strftime 아님)",
   "_presets": "v2: BTT 마스터+서브프리셋 모델. master는 always_on(항상 발화), 나머지는 enabled로 켬/끔. 항상 쓰고 싶은 키는 master에 두세요 — preset_activate는 서브프리셋을 라디오처럼 하나만 남기고 나머지를 끕니다.",
+  "_window_drag": "CapsLock(또는 fn)을 누른 채 마우스로 창을 드래그(좌클릭=이동, 우클릭=리사이즈) — AltDrag·frogcontrol식. modifier:\"caps\"가 기본, Karabiner가 맨 CapsLock을 리맵한 환경이면 \"fn\"으로. 메뉴바 ▸ 🪟 창 드래그 토글로도 켬/끔 가능(손쉬운 사용 권한 필요).",
   "version": 2,
+  "window_drag": {"enabled": false, "modifier": "caps"},
   "presets": {
     "master":   {"title": "마스터 — 항상 켜짐 (프리셋 전환 키)", "always_on": true},
     "base":     {"title": "기본 (앱·폴더·URL)", "enabled": true},
